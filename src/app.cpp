@@ -14,8 +14,12 @@ App::App() : defaultProgram{}, fontProgram{}, atlas{"atlas"} {
   defaultProgram.create();
   fontProgram.create();
 
-  atlas.initTexture();
-  consolas.initAtlas();
+  try {
+    atlas.initTexture();
+    consolas.initAtlas();
+  } catch (const FailedTextureLoadException &e) {
+    catchException(e);
+  }
 
   std::cout << "app finished constructing\n";
 }
@@ -52,7 +56,7 @@ void App::createWindow() {
   window = glfwCreateWindow(WIDTH, HEIGHT, "Test", NULL, NULL);
   if (window == NULL) {
     glfwTerminate();
-    throw FailedWindowCreationException{"window failed to be created"};
+    throw FailedWindowCreationException{"WINDOW FAILED TO BE CREATED"};
   }
   glfwMakeContextCurrent(window);
 
@@ -64,7 +68,7 @@ void App::createWindow() {
   glViewport(0, 0, WIDTH, HEIGHT);
 }
 
-void App::throwException(const std::runtime_error &e) {
+void App::catchException(const std::runtime_error &e) {
   std::cout << e.what();
   glfwSetWindowShouldClose(app.window, GL_TRUE);
 }
@@ -74,7 +78,6 @@ void App::processInput() {
     glfwSetWindowShouldClose(window, GL_TRUE);
 
   {
-
     scene.camera.velocity = {};
     const float magnitude = (float)(app.updateCycle.delta * scene.camera.speed);
     if (glfwGetKey(window, GLFW_KEY_W))

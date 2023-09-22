@@ -15,7 +15,7 @@ BaseProgram::~BaseProgram() { deleteProgram(); }
 void BaseProgram::useProgram() {
   if (!allocated)
     throw UnallocatedGLObjectUsageException{
-        std::format("program {} was binded before initialization\n", ID)
+        std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", ID)
             .c_str()};
   glUseProgram(ID);
 }
@@ -39,7 +39,7 @@ void BaseProgram::create(const std::string vertex, const std::string fragment) {
     createShader(GL_FRAGMENT_SHADER, fragmentID,
                  std::format("assets/shader/{}.frag", fragment), infoLog);
   } catch (const FailedShaderCompilationException &e) {
-    app.throwException(e);
+    app.catchException(e);
   }
 
   ID = glCreateProgram();
@@ -64,6 +64,6 @@ void BaseProgram::createShader(const GLenum type, GLuint &ID,
   if (!success) {
     glGetShaderInfoLog(ID, 512, NULL, log);
     throw FailedShaderCompilationException{
-        std::format("{} failed to compile\n{}\n", source, log).c_str()};
+        std::format("{} FAILED TO COMPILE\n{}\n", source, log).c_str()};
   }
 }

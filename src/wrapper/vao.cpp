@@ -9,7 +9,7 @@ VAO::~VAO() {
 void VAO::bindVBO(const VBO &vbo) {
   if (!vbo.allocated)
     throw UnallocatedGLObjectUsageException{
-        "vbo {} was binded before allocation\n"};
+        "VBO {} WAS BINDED BEFORE ALLOCATION\n"};
   glVertexArrayVertexBuffer(ID, 0, vbo.ID, 0, stride);
   boundedVBO = vbo;
   // std::cout << std::format("vbo {} binded to vao {}\n", ID, this->ID);
@@ -17,7 +17,7 @@ void VAO::bindVBO(const VBO &vbo) {
 void VAO::bindEBO(const EBO &ebo) {
   if (!ebo.allocated)
     throw UnallocatedGLObjectUsageException{
-        "ebo {} was binded before allocation\n"};
+        "EBO {} WAS BINDED BEFORE ALLOCATION\n"};
   glVertexArrayElementBuffer(ID, ebo.ID);
   boundedEBO = ebo;
   // std::cout << std::format("ebo {} binded to vao {}\n", ID, this->ID);
@@ -26,6 +26,6 @@ void VAO::bindEBO(const EBO &ebo) {
 void VAO::bindVertexArray() {
   if (!allocated)
     throw UnallocatedGLObjectUsageException{
-        "vao {} was binded before allocation\n"};
+        "VAO {} WAS BINDED BEFORE ALLOCATION\n"};
   glBindVertexArray(ID);
 }

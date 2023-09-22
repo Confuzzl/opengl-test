@@ -61,7 +61,7 @@ int main() {
         app.frameCycle.pushCount();
       }
     } catch (const std::runtime_error &e) {
-      app.throwException(e);
+      app.catchException(e);
     }
   }
   std::cout << std::format("app terminated at {:.2f}s\n", glfwGetTime());
