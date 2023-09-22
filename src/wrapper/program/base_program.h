@@ -1,7 +1,7 @@
 #pragma once
 #include "util/gl_utils.h"
 #include "util/glm_utils.h"
-#include "wrapper/gl_object.h";
+#include "wrapper/gl_object.h"
 #include "wrapper/vao.h"
 
 class BaseProgram : public GLObject {

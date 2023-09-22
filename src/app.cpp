@@ -31,12 +31,13 @@ static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
     app.prevY = ypos;
     app.cursorSnap = true;
   }
-  const float dx = app.prevX - xpos;
-  const float dy = app.prevY - ypos;
+  const float dx = (float)(app.prevX - xpos);
+  const float dy = (float)(app.prevY - ypos);
   app.prevX = xpos;
   app.prevY = ypos;
 
-  const float magnitude = app.updateCycle.delta * app.scene.camera.sensitivity;
+  const float magnitude =
+      (float)(app.updateCycle.delta * app.scene.camera.sensitivity);
   app.scene.camera.rotate(dx * magnitude, dy * magnitude);
 }
 static void keyCallback(GLFWwindow *window, int key, int scancode, int action,
@@ -70,7 +71,7 @@ void App::processInput() {
   {
 
     scene.camera.velocity = {};
-    const float magnitude = app.updateCycle.delta * scene.camera.speed;
+    const float magnitude = (float)(app.updateCycle.delta * scene.camera.speed);
     if (glfwGetKey(window, GLFW_KEY_W))
       scene.camera.velocity += scene.camera.forward * magnitude;
     if (glfwGetKey(window, GLFW_KEY_A))
@@ -86,7 +87,8 @@ void App::processInput() {
   }
 
   {
-    const float magnitude = app.updateCycle.delta * scene.camera.sensitivity;
+    const float magnitude =
+        (float)(app.updateCycle.delta * scene.camera.sensitivity);
     if (glfwGetKey(window, GLFW_KEY_UP))
       scene.camera.rotate(0, magnitude);
     if (glfwGetKey(window, GLFW_KEY_LEFT))
@@ -111,7 +113,7 @@ void App::drawScene() {
 
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
-    glDrawElements(GL_TRIANGLES, defaultProgram.vao.boundedEBO.size,
+    glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
                    GL_UNSIGNED_INT, 0);
   }
 }
@@ -166,8 +168,8 @@ void App::drawTextBottomLeft(const float x, const float y, const float scale,
   // fontAtlas.bindTextureUnit();
   consolas.atlas.bindTextureUnit();
   fontProgram.vao.bindVertexArray();
-  glDrawElements(GL_TRIANGLES, fontProgram.vao.boundedEBO.size, GL_UNSIGNED_INT,
-                 0);
+  glDrawElements(GL_TRIANGLES, (GLsizei)fontProgram.vao.boundedEBO.size,
+                 GL_UNSIGNED_INT, 0);
 }
 void App::drawTextTopLeft(const float x, const float y, const float scale,
                           const std::string msg) {
