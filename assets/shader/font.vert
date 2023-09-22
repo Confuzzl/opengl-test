@@ -6,7 +6,7 @@ out vec2 vertex_uv_out;
 
 uniform mat4 projection;
 
-const uniform int TEXEL_RANGE = 1 << 15;
+const int TEXEL_RANGE = 1 << 15;
 
 vec2 normalizeUV() {
 	vec2 copy = vertex_uv_in;
@@ -15,6 +15,6 @@ vec2 normalizeUV() {
 }
 
 void main() {
-	gl_Position = projection * vec4(pos, 0f, 1f);
+	gl_Position = projection * vec4(pos, 0.0, 1.0);
 	vertex_uv_out = normalizeUV();
 }

@@ -64,6 +64,11 @@ void App::createWindow() {
   glViewport(0, 0, WIDTH, HEIGHT);
 }
 
+void App::throwException(const std::runtime_error &e) {
+  std::cout << e.what();
+  glfwSetWindowShouldClose(app.window, GL_TRUE);
+}
+
 void App::processInput() {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE))
     glfwSetWindowShouldClose(window, GL_TRUE);

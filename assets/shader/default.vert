@@ -10,7 +10,7 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-const uniform int TEXEL_RANGE = 1 << 15;
+const int TEXEL_RANGE = 1 << 15;
 
 vec2 normalizeUV() {
 	vec2 copy = vertex_uv_in;
@@ -19,8 +19,8 @@ vec2 normalizeUV() {
 }
 
 void main() {
-	gl_Position = projection * view * model * vec4(pos, 1f);
-	vertex_color_out = vec4(vertex_color_in, 1f);
+	gl_Position = projection * view * model * vec4(pos, 1.0);
+	vertex_color_out = vec4(vertex_color_in, 1.0);
 	vertex_uv_out = normalizeUV();
 }
 

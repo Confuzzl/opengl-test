@@ -1,4 +1,5 @@
 #include "base_program.h"
+#include "app.h"
 #include "util/debug_utils.h"
 #include <fstream>
 
@@ -32,10 +33,14 @@ void BaseProgram::setMat4(const char *name, const glm::mat4 matrix) {
 
 void BaseProgram::create(const std::string vertex, const std::string fragment) {
   GLuint vertexID = 0, fragmentID = 0;
-  createShader(GL_VERTEX_SHADER, vertexID,
-               std::format("assets/shader/{}.vert", vertex), infoLog);
-  createShader(GL_FRAGMENT_SHADER, fragmentID,
-               std::format("assets/shader/{}.frag", fragment), infoLog);
+  try {
+    createShader(GL_VERTEX_SHADER, vertexID,
+                 std::format("assets/shader/{}.vert", vertex), infoLog);
+    createShader(GL_FRAGMENT_SHADER, fragmentID,
+                 std::format("assets/shader/{}.frag", fragment), infoLog);
+  } catch (const FailedShaderCompilationException &e) {
+    app.throwException(e);
+  }
 
   ID = glCreateProgram();
   glAttachShader(ID, vertexID);

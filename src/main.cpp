@@ -61,8 +61,7 @@ int main() {
         app.frameCycle.pushCount();
       }
     } catch (const std::runtime_error &e) {
-      std::cout << e.what();
-      glfwSetWindowShouldClose(app.window, GL_TRUE);
+      app.throwException(e);
     }
   }
   std::cout << std::format("app terminated at {:.2f}s\n", glfwGetTime());

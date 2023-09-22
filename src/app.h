@@ -40,6 +40,7 @@ struct App {
                           const std::string msg);
   void drawTextTopLeft(const float x, const float y, const float scale,
                        const std::string msg);
+  void throwException(const std::runtime_error &e);
 
 private:
   void createWindow();
