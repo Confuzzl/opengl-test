@@ -1,8 +1,11 @@
 #pragma once
 #include "feature.h"
+#include "face.h"
 
-template <typename T> class Vertex : public Feature<T> {
+class Vertex : public Feature {
+  //Edge *neighbors[];
+  const std::vector<Edge *> neighbors;
   vec3 localCoordinate;
 
-  Vertex(T &parent, unsigned short ID, vec3 pos);
+  Vertex(Polyhedron &parent, const unsigned short ID, const vec3 pos);
 };

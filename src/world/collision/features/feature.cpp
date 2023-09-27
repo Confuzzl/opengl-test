@@ -1,4 +1,4 @@
 #include "feature.h"
 
-template <IsPolyhedron T>
+template <typename T>
 Feature<T>::Feature(T &parent, unsigned short ID) : parent{parent}, ID{ID} {};

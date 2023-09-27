@@ -173,7 +173,6 @@ void App::drawTextBottomLeft(const float x, const float y, const float scale,
   fontProgram.useProgram();
   fontProgram.setMat4("projection", UI_MAT);
 
-  // fontAtlas.bindTextureUnit();
   consolas.atlas.bindTextureUnit();
   fontProgram.vao.bindVertexArray();
   glDrawElements(GL_TRIANGLES, (GLsizei)fontProgram.vao.boundedEBO.size,
