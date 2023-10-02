@@ -2,7 +2,7 @@
 #include "world/collision/polyhedron.h"
 
 class Feature {
-  Polyhedron &parent;
+  const Polyhedron &parent;
   const unsigned short ID;
 
   Feature(const Feature &f) = delete;
