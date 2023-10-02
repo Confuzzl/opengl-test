@@ -1,10 +1,13 @@
 #pragma once
 #include "world/collision/polyhedron.h"
 
-//template <typename T>
 class Feature {
   Polyhedron &parent;
-  unsigned short ID;
+  const unsigned short ID;
 
+  Feature(const Feature &f) = delete;
+  Feature(Feature &&f) = delete;
+
+protected:
   Feature(Polyhedron &parent, const unsigned short ID);
 };

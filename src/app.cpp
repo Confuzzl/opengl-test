@@ -150,7 +150,7 @@ void App::drawTextBottomLeft(const float x, const float y, const float scale,
                        y + height * quadUV[tri][vertex][1]};
         const glm::lowp_u16vec2 uv{tex.coordinates +
                                    tex.dimensions * quadUV[tri][vertex]};
-        vertices.push_back({{pos[0], pos[1]}, {uv[0], uv[1]}});
+        vertices.emplace_back(vec2{pos[0], pos[1]}, vec2{uv[0], uv[1]});
       }
     }
 

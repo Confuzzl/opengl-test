@@ -1,5 +1,6 @@
 #include "vertex.h"
 
-template <typename T>
-Vertex<T>::Vertex(T &parent, unsigned short ID, vec3 pos)
-    : Feature<T>(parent, ID), localCoordinate{pos} {}
+Vertex::Vertex(Polyhedron &parent, const unsigned short ID, const vec3 pos)
+    : Feature(parent, ID), localCoordinate{pos} {}
+
+Vertex::operator vec3() const { return {localCoordinate}; }
