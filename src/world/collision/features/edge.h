@@ -7,7 +7,7 @@ class Vertex;
 
 class Edge : public Feature {
   const Vertex &tail, &head;
-  std::unique_ptr<Face> cw, ccw;
+  std::shared_ptr<Face> cw, ccw;
 
 public:
   Edge(Polyhedron &parent, const unsigned short ID, const Vertex &tail,

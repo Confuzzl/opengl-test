@@ -153,6 +153,7 @@
     <ClCompile Include="src\util\glm_utils.cpp" />
     <ClCompile Include="src\util\gl_utils.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\world\collision\box.cpp" />
     <ClCompile Include="src\world\collision\features\edge.cpp" />
     <ClCompile Include="src\world\collision\features\face.cpp" />
     <ClCompile Include="src\world\collision\features\feature.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="src\font.h" />
     <ClInclude Include="src\util\glm_utils.h" />
     <ClInclude Include="src\util\gl_utils.h" />
+    <ClInclude Include="src\world\collision\box.h" />
     <ClInclude Include="src\world\collision\features\edge.h" />
     <ClInclude Include="src\world\collision\features\face.h" />
     <ClInclude Include="src\world\collision\features\feature.h" />

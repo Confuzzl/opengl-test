@@ -89,6 +89,24 @@
     <ClCompile Include="src\world\render\renderable.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\world\collision\features\edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\features\face.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\features\feature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\features\vertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\render\renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\world\camera.h">
@@ -158,6 +176,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\world\collision\features\vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\collision\features\edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\collision\features\face.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\collision\features\feature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\collision\box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

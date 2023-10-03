@@ -1,25 +1,29 @@
 #pragma once
-//#include "features/feature.h"
-//#include "features/edge.h"
-//#include "features/face.h"
-//#include "features/vertex.h"
 class Vertex;
 class Edge;
 class Face;
 
 #include "transformable.h"
+#include "wrapper/program/vertex_formats.h"
 #include <memory>
 #include <vector>
 
 // template <typename T>
-// concept IsPolyhedron = requires(T t) { t.createFeatures(); };
+// concept IsPolyhedron = requires(T p) { p.triCount(); };
 
 class Polyhedron : public Transformable {
   const std::vector<vec3> coordinates;
-   std::vector<std::unique_ptr<Vertex>> vertices;
-   std::vector<std::unique_ptr<Edge>> edges;
-   std::vector<std::unique_ptr<Face>> faces;
+  std::vector<std::shared_ptr<Vertex>> vertices;
+  std::vector<std::shared_ptr<Edge>> edges;
+  std::vector<std::shared_ptr<Face>> faces;
 
+protected:
   Polyhedron(const std::vector<vec3> &coordinates);
-   ~Polyhedron();
+  ~Polyhedron();
+
+  void createFeatures();
+  void setupNeighbors();
+
+  consteval virtual unsigned short triCount() = 0;
+  DefaultVertex vertexInfo[*3];
 };

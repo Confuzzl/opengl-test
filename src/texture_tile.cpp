@@ -1,5 +1,6 @@
 #include "texture_tile.h"
-#include "util/debug_utils.h";
+#include "util/debug_utils.h"
+
 const std::map<std::string, glm::lowp_u16vec4> TexTile::textureDict{
     {"error", {0, 0, 16, 16}},         {"debug_1", {16, 0, 16, 16}},
     {"debug_2", {32, 0, 16, 16}},      {"grass", {0, 16, 16, 16}},
@@ -8,7 +9,7 @@ const std::map<std::string, glm::lowp_u16vec4> TexTile::textureDict{
     {"test", {112, 112, 16, 16}}};
 
 TexTile TexTile::getTile(const std::string name, const TexObject &texObject) {
-  float width = texObject.width, height = texObject.height;
+  float width = (float)texObject.width, height = (float)texObject.height;
   vec4 info = {textureDict.at(textureDict.contains(name) ? name : "error")};
   info[1] = height - info[1] - info[3]; // flip y values
   info /= vec4{width, height, width, height};

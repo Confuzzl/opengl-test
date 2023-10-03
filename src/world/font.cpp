@@ -1,5 +1,5 @@
 #include "font.h"
-#include "util/debug_utils.h";
+#include "util/debug_utils.h"
 
 const char *Font::TEST_STRING = " !\"#$%&'()*+,-./"
                                 "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ["

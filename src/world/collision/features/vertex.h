@@ -5,7 +5,7 @@ class Edge;
 #include <vector>
 
 class Vertex : public Feature {
-  std::vector<std::unique_ptr<Edge>> neighbors;
+  std::vector<std::shared_ptr<Edge>> neighbors;
   vec3 localCoordinate;
 
 public:

@@ -2,7 +2,7 @@
 #include "edge.h"
 
 Face::Face(Polyhedron &parent, const unsigned short ID,
-           const std::vector<std::unique_ptr<Edge>> &edges)
+           const std::vector<std::shared_ptr<Edge>> &edges)
     : Feature(parent, ID), edges{edges}, normal{calculateNormal()} {}
 Face::~Face() = default;
 
