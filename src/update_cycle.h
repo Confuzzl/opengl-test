@@ -4,9 +4,9 @@ struct UpdateCycle {
   double prevTime = 0, currTime = 0, delta = 0;
   unsigned long long prevCount = 0, currCount = 0;
 
-  UpdateCycle(double length);
+  UpdateCycle(const double length);
 
-  bool pastLength(double time);
-  void pushNewTime(double newCurrTime);
+  bool pastLength(const double time);
+  void pushNewTime(const double newCurrTime);
   void pushCount();
 };

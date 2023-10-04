@@ -9,4 +9,7 @@ FailedWindowCreationException::FailedWindowCreationException(
     : std::runtime_error(message) {}
 UnallocatedGLObjectUsageException::UnallocatedGLObjectUsageException(
     const char *message)
-    : std::runtime_error(message){};
+    : std::runtime_error(message) {}
+InvalidFaceTextureListException::InvalidFaceTextureListException(
+    const char *message)
+    : std::runtime_error(message) {}

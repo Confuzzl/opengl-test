@@ -15,3 +15,6 @@ struct FailedWindowCreationException : public std::runtime_error {
 struct UnallocatedGLObjectUsageException : public std::runtime_error {
   UnallocatedGLObjectUsageException(const char *message);
 };
+struct InvalidFaceTextureListException : public std::runtime_error {
+  InvalidFaceTextureListException(const char *message);
+};
