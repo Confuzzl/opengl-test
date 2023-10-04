@@ -15,7 +15,11 @@ class Polyhedron : public Transformable {
   const std::vector<vec3> coordinates;
   std::vector<std::shared_ptr<Vertex>> vertices;
   std::vector<std::shared_ptr<Edge>> edges;
+  std::vector<glm::u8vec2> edgeVertexIndices, edgeFaceIndices;
   std::vector<std::shared_ptr<Face>> faces;
+  std::vector<std::vector<unsigned char>> faceVertexIndices, faceEdgeIndices;
+
+  std::vector<DefaultVertex> vertexInfo;
 
 protected:
   Polyhedron(const std::vector<vec3> &coordinates);
@@ -25,5 +29,4 @@ protected:
   void setupNeighbors();
 
   consteval virtual unsigned short triCount() = 0;
-  DefaultVertex vertexInfo[*3];
 };
