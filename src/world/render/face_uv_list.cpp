@@ -2,8 +2,7 @@
 #include "texture_tile.h"
 #include "util/debug_utils.h"
 
-FaceUVList FaceUVList::generateFromPixels(
-    const std::vector<std::vector<glm::lowp_u16vec2>> &facePixels) {
+FaceUVList FaceUVList::generateFromPixels(const UVList &facePixels) {
   for (const auto &face : facePixels) {
     for (const auto &vertex : face)
       std::cout << glm::to_string(vertex) << " ";
@@ -12,9 +11,8 @@ FaceUVList FaceUVList::generateFromPixels(
   return {facePixels};
 }
 
-FaceUVList
-FaceUVList::generateFromUVs(const std::vector<std::vector<vec2>> &faceUVs) {
-  std::vector<std::vector<glm::lowp_u16vec2>> pixels;
+FaceUVList FaceUVList::generateFromUVs(const Vector2D<vec2> &faceUVs) {
+  UVList pixels;
   for (const auto &face : faceUVs) {
     std::vector<glm::lowp_u16vec2> vertices;
     for (const auto &vertex : face) {

@@ -1,18 +1,13 @@
 #pragma once
 #include "util/glm_utils.h"
-#include <vector>
+#include "util/vector_utils.h"
 
 struct FaceUVList {
-  std::vector<std::vector<glm::lowp_u16vec2>> faceUVs;
+  using UVList = Vector2D<glm::lowp_u16vec2>;
 
-  // private:
-  //   FaceTextureList(std::vector<std::vector<glm::lowp_u16vec2>> faceUVs);
-  //   FaceTextureList(const FaceTextureList &f) = default;
-  //   FaceTextureList(FaceTextureList &&f) = default;
+  UVList faceUVs;
 
 public:
-  static FaceUVList generateFromPixels(
-      const std::vector<std::vector<glm::lowp_u16vec2>> &facePixels);
-  static FaceUVList
-  generateFromUVs(const std::vector<std::vector<vec2>> &faceUVs);
+  static FaceUVList generateFromPixels(const UVList &facePixels);
+  static FaceUVList generateFromUVs(const Vector2D<vec2> &faceUVs);
 };

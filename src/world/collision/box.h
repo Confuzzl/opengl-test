@@ -3,6 +3,6 @@
 
 class Box : public Polyhedron {
 public:
-  Box(const std::vector<vec3> &coordinates);
+  Box(const Vec3List &coordinates);
   static consteval unsigned short triCount();
 };

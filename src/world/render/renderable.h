@@ -3,13 +3,13 @@
 #include "world/base_polyhedron.h"
 #include "wrapper/program/vertex_formats.h"
 #include <memory>
-#include <vector>
 
 class Renderable : public BasePolyhedron {
-  typedef std::vector<std::vector<unsigned char>> FaceVertexIndexList;
+  using FaceVertexIndexList = Vector2D<unsigned char>;
+
   const FaceVertexIndexList faceVertexIndices;
   FaceUVList faceTextureList;
-  std::vector<DefaultVertex> vertexInfo;
+  Vector<DefaultVertex> vertexInfo;
 
   Renderable(const Vec3List &coordinates,
              const FaceVertexIndexList &faceVertexIndices);
