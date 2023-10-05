@@ -1,14 +1,18 @@
 #pragma once
-#include "util/gl_utils.h"
-#include "util/glm_utils.h"
-
 #include "font.h"
 #include "update_cycle.h"
+#include "util/gl_utils.h"
+#include "util/glm_utils.h"
 #include "world/scene.h"
 #include "wrapper/program/programs.h"
 #include "wrapper/tex_object.h"
+#include <stdexcept>
 
 struct App {
+  struct FailedWindowCreationException : public std::runtime_error {
+    using std::runtime_error::runtime_error;
+  };
+
   static const int WIDTH = 1280, HEIGHT = 720;
   static const mat4 UI_MAT;
 

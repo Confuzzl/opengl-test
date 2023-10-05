@@ -1,6 +1,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "tex_object.h"
 #include "util/debug_utils.h"
+
 TexObject::TexObject(const std::string name) : name{name} {}
 TexObject::~TexObject() {
   glDeleteTextures(1, &ID);

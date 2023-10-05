@@ -6,6 +6,10 @@
 
 class BaseProgram : public GLObject {
 public:
+  struct FailedShaderCompilationException : public std::runtime_error {
+    using std::runtime_error::runtime_error;
+  };
+
   GLchar infoLog[512]{};
   VAO vao;
   std::string vertexSource, fragmentSource;
