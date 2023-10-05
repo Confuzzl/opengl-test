@@ -16,7 +16,8 @@ void Font::initAtlas() {
 }
 TexTile Font::getTile(const char c) {
   vec4 info{atlas.width - charWidth, atlas.height - charHeight, charWidth,
-            charHeight}; // error char
+            charHeight};
+  // error char
   if (!(c < 32 || c >= 127)) {
     const char id = c - 32;
     unsigned char row = id / columns, column = id % columns;

@@ -3,28 +3,26 @@ class Vertex;
 class Edge;
 class Face;
 
-#include "transformable.h"
-#include "wrapper/program/vertex_formats.h"
+#include "world/base_polyhedron.h"
 #include <memory>
 #include <vector>
 
-// template <typename T>
-// concept IsPolyhedron = requires(T p) { p.triCount(); };
-
-class Polyhedron : public Transformable {
-  const std::vector<vec3> coordinates;
+class Polyhedron : public BasePolyhedron {
   std::vector<std::shared_ptr<Vertex>> vertices;
   std::vector<std::shared_ptr<Edge>> edges;
-  std::vector<glm::u8vec2> edgeVertexIndices, edgeFaceIndices;
+  std::vector<glm::u8vec2> edgeFaceIndices;
   std::vector<std::shared_ptr<Face>> faces;
-  std::vector<std::vector<unsigned char>> faceVertexIndices, faceEdgeIndices;
+  std::vector<std::vector<unsigned char>> faceEdgeIndices;
 
-  std::vector<DefaultVertex> vertexInfo;
-
-protected:
-  Polyhedron(const std::vector<vec3> &coordinates);
+public:
+  Polyhedron(const Vec3List &coordinates);
   ~Polyhedron();
 
+  void verifyVertices();
+  void verifyEdges();
+  void verifyFaces();
+
+protected:
   void createFeatures();
   void setupNeighbors();
 

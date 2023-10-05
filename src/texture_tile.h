@@ -3,8 +3,9 @@
 #include "wrapper/tex_object.h"
 #include <map>
 #include <string>
+
 struct TexTile {
-  static const unsigned short TEXEL_RANGE = 1 << 15;
+  static const unsigned short TEXEL_RANGE = SHRT_MAX;
   static const std::map<std::string, glm::lowp_u16vec4> textureDict;
 
   glm::lowp_u16vec2 coordinates;

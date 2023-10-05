@@ -1,9 +1,9 @@
 #include "transformable.h"
-mat4 Transformable::getTransform() { return {pos * rot}; }
-vec3 Transformable::getPosition() { return {pos[3]}; }
-vec3 Transformable::getForward() { return {forward}; }
-vec3 Transformable::getUp() { return {up}; }
-vec3 Transformable::getRight() { return {right}; }
+mat4 Transformable::getTransform() const { return pos * rot; }
+vec3 Transformable::getPosition() const { return pos[3]; }
+vec3 Transformable::getForward() const { return forward; }
+vec3 Transformable::getUp() const { return up; }
+vec3 Transformable::getRight() const { return right; }
 
 void Transformable::setPosition(const vec3 v) { translate(v - getPosition()); }
 void Transformable::translate(const vec3 v) { pos = glm::translate(pos, v); }

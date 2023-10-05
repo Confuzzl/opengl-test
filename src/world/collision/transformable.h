@@ -2,11 +2,11 @@
 #include "util/glm_utils.h"
 class Transformable {
 public:
-  mat4 getTransform();
-  vec3 getPosition();
-  vec3 getForward();
-  vec3 getUp();
-  vec3 getRight();
+  mat4 getTransform() const;
+  vec3 getPosition() const;
+  vec3 getForward() const;
+  vec3 getUp() const;
+  vec3 getRight() const;
 
   virtual void setPosition(const vec3 v);
   virtual void translate(const vec3 v);
