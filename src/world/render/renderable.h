@@ -2,7 +2,6 @@
 #include "face_uv_list.h"
 #include "world/base_polyhedron.h"
 #include "wrapper/program/vertex_formats.h"
-#include <memory>
 
 class Renderable : public BasePolyhedron {
   using FaceVertexIndexList = Vector2D<unsigned char>;

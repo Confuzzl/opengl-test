@@ -1,16 +1,16 @@
 #pragma once
 class Edge;
 #include "feature.h"
-#include <memory>
-#include <vector>
+#include "util/memory_utils.h"
+#include "util/vector_utils.h"
 
 class Vertex : public Feature {
-  std::vector<std::shared_ptr<Edge>> neighbors;
-  vec3 localCoordinate;
+  Vector<SPtr<Edge>> neighbors;
+  Vec3 localCoordinate;
 
 public:
-  Vertex(Polyhedron &parent, const unsigned short ID, const vec3 pos);
-  ~Vertex();
+  Vertex(Polyhedron &parent, const unsigned short ID, const Vec3 pos);
+  //~Vertex();
 
-  operator vec3() const;
+  operator Vec3() const;
 };

@@ -27,9 +27,9 @@ private:
   static unsigned int COUNT;
 
   static const GLuint indices[36];
-  static const vec3 maps[6][2][3];
+  static const Vec3 maps[6][2][3];
 
-  vec3 halfsize;
+  Vec3 halfsize;
 
   static void initializeBuffers();
   static void initializeEBO();

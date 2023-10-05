@@ -42,7 +42,7 @@ void Prism::writeToVBO() {
 const GLuint Prism::indices[36] = {
     0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14, 15, 16, 17,
     18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35};
-const vec3 Prism::maps[6][2][3]{{{{-1, -1, +1}, {+1, -1, +1}, {+1, +1, +1}},
+const Vec3 Prism::maps[6][2][3]{{{{-1, -1, +1}, {+1, -1, +1}, {+1, +1, +1}},
                                  {{-1, -1, +1}, {+1, +1, +1}, {-1, +1, +1}}},
                                 {{{+1, -1, +1}, {+1, -1, -1}, {+1, +1, -1}},
                                  {{+1, -1, +1}, {+1, +1, -1}, {+1, +1, +1}}},
@@ -95,7 +95,7 @@ void Prism::setTri(const Direction direction, const int tri) {
 void Prism::setVertexInfo(const Direction direction, const int tri,
                           const int vertex) {
   const int absolute = direction * 6 + tri * 3 + vertex;
-  const vec3 pos = maps[direction][tri][vertex] * halfsize;
+  const Vec3 pos = maps[direction][tri][vertex] * halfsize;
 
   const TexTile tex = TexTile::getTile("cobblestone", app.atlas);
   const glm::lowp_u16vec2 coordinate{tex.coordinates +

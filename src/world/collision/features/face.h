@@ -1,17 +1,16 @@
 #pragma once
 class Edge;
 #include "feature.h"
-#include <memory>
-#include <vector>
+#include "util/memory_utils.h"
+#include "util/vector_utils.h"
 
 class Face : public Feature {
-  const std::vector<std::shared_ptr<Edge>> edges;
-  vec3 normal;
+  const Vector<Edge> edges;
+  Vec3 normal;
 
-  vec3 calculateNormal();
+  Vec3 calculateNormal();
 
 public:
-  Face(Polyhedron &parent, const unsigned short ID,
-       const std::vector<std::shared_ptr<Edge>> &edges);
-  ~Face();
+  Face(Polyhedron &parent, const unsigned short ID, const Vector<Edge> &edges);
+  //~Face();
 };

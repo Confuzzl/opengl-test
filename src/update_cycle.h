@@ -1,10 +1,13 @@
 #pragma once
 struct UpdateCycle {
-  const double length;
+  unsigned short rate;
+  double length;
   double prevTime = 0, currTime = 0, delta = 0;
   unsigned long long prevCount = 0, currCount = 0;
 
-  UpdateCycle(const double length);
+  UpdateCycle(const unsigned short rate);
+
+  void setRate(const unsigned short rate);
 
   bool pastLength(const double time);
   void pushNewTime(const double newCurrTime);

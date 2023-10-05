@@ -23,7 +23,7 @@ void BaseProgram::deleteProgram() {
   glDeleteProgram(ID);
   std::cout << "shader program deleted\n";
 }
-void BaseProgram::setVec3(const char *name, const vec3 vec) {
+void BaseProgram::setVec3(const char *name, const Vec3 vec) {
   glUniform3fv(glGetUniformLocation(ID, name), 1, glm::value_ptr(vec));
 }
 void BaseProgram::setMat4(const char *name, const glm::mat4 matrix) {

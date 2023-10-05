@@ -161,6 +161,7 @@
     <ClCompile Include="src\world\collision\features\vertex.cpp" />
     <ClCompile Include="src\world\collision\polyhedron.cpp" />
     <ClCompile Include="src\font.cpp" />
+    <ClCompile Include="src\world\game_object.cpp" />
     <ClCompile Include="src\world\render\face_uv_list.cpp" />
     <ClCompile Include="src\world\render\renderable.cpp" />
     <ClCompile Include="src\world\render\renderable.h" />
@@ -183,6 +184,8 @@
     <ClInclude Include="src\font.h" />
     <ClInclude Include="src\util\glm_utils.h" />
     <ClInclude Include="src\util\gl_utils.h" />
+    <ClInclude Include="src\util\memory_utils.h" />
+    <ClInclude Include="src\util\vector_utils.h" />
     <ClInclude Include="src\world\base_polyhedron.h" />
     <ClInclude Include="src\world\collision\box.h" />
     <ClInclude Include="src\world\collision\features\edge.h" />
@@ -190,7 +193,7 @@
     <ClInclude Include="src\world\collision\features\feature.h" />
     <ClInclude Include="src\world\collision\features\vertex.h" />
     <ClInclude Include="src\world\collision\polyhedron.h" />
-    <ClInclude Include="src\world\gameobject.h" />
+    <ClInclude Include="src\world\game_object.h" />
     <ClInclude Include="src\world\render\face_uv_list.h" />
     <ClInclude Include="src\wrapper\base_buffer_object.h" />
     <ClInclude Include="src\wrapper\buffer_objects.h" />

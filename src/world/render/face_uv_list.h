@@ -9,5 +9,5 @@ struct FaceUVList {
 
 public:
   static FaceUVList generateFromPixels(const UVList &facePixels);
-  static FaceUVList generateFromUVs(const Vector2D<vec2> &faceUVs);
+  static FaceUVList generateFromUVs(const Vector2D<Vec2> &faceUVs);
 };

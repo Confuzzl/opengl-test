@@ -14,13 +14,13 @@ struct App {
   };
 
   static const int WIDTH = 1280, HEIGHT = 720;
-  static const mat4 UI_MAT;
+  static const Mat4 UI_MAT;
 
   GLFWwindow *window;
 
-  UpdateCycle loopCycle{0};
-  UpdateCycle updateCycle{1.0 / 120};
-  UpdateCycle frameCycle{1.0 / 60};
+  UpdateCycle loopCycle;
+  UpdateCycle updateCycle;
+  UpdateCycle frameCycle;
   unsigned int seconds = 0;
 
   bool cursorSnap = false;

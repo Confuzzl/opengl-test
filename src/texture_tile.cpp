@@ -10,10 +10,10 @@ const std::map<std::string, glm::lowp_u16vec4> TexTile::textureDict{
 
 TexTile TexTile::getTile(const std::string name, const TexObject &texObject) {
   float width = (float)texObject.width, height = (float)texObject.height;
-  vec4 info = {textureDict.at(textureDict.contains(name) ? name : "error")};
+  Vec4 info = {textureDict.at(textureDict.contains(name) ? name : "error")};
   info[1] = height - info[1] - info[3]; // flip y values
-  info /= vec4{width, height, width, height};
-  info *= vec4{TEXEL_RANGE};
+  info /= Vec4{width, height, width, height};
+  info *= Vec4{TEXEL_RANGE};
   return {info};
 }
 

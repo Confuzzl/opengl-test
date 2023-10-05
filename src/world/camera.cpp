@@ -14,11 +14,11 @@ void Camera::update() {
   move(velocity);
 }
 
-void Camera::move(vec3 t) {
+void Camera::move(Vec3 t) {
   pos += t;
   view = glm::translate(view, -t);
 }
-void Camera::setPosition(vec3 t) { move(t - pos); }
+void Camera::setPosition(Vec3 t) { move(t - pos); }
 
 void Camera::rotate(float yaw, float pitch) {
   setRotate(this->yaw + yaw, this->pitch + pitch);

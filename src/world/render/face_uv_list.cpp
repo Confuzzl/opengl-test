@@ -11,7 +11,7 @@ FaceUVList FaceUVList::generateFromPixels(const UVList &facePixels) {
   return {facePixels};
 }
 
-FaceUVList FaceUVList::generateFromUVs(const Vector2D<vec2> &faceUVs) {
+FaceUVList FaceUVList::generateFromUVs(const Vector2D<Vec2> &faceUVs) {
   UVList pixels;
   for (const auto &face : faceUVs) {
     std::vector<glm::lowp_u16vec2> vertices;

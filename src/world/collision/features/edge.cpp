@@ -1,10 +1,10 @@
 #include "edge.h"
-#include "vertex.h"
 #include "face.h"
+#include "vertex.h"
 
 Edge::Edge(Polyhedron &parent, const unsigned short ID, const Vertex &tail,
            const Vertex &head)
     : Feature(parent, ID), tail{tail}, head{head} {}
-Edge::~Edge() = default;
+// Edge::~Edge() = default;
 
-Edge::operator vec3() const { return (vec3)head - (vec3)tail; }
+Edge::operator Vec3() const { return (Vec3)head - (Vec3)tail; }

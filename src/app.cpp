@@ -4,11 +4,17 @@
 #include "wrapper/program/vertex_formats.h"
 #include <numeric>
 
-const mat4 App::UI_MAT{glm::ortho(0.0f, (float)WIDTH, 0.0f, (float)HEIGHT)};
+const Mat4 App::UI_MAT{glm::ortho(0.0f, (float)WIDTH, 0.0f, (float)HEIGHT)};
 
-App::App() : defaultProgram{}, fontProgram{}, atlas{"atlas"} {
+App::App()
+    : loopCycle{0}, updateCycle{120}, frameCycle{60}, defaultProgram{},
+      fontProgram{}, atlas{"atlas"} {
   std::cout << "app constructing\n";
   glfwInit();
+  frameCycle.setRate(std::min(
+      frameCycle.rate,
+      (unsigned short)glfwGetVideoMode(glfwGetPrimaryMonitor())->refreshRate));
+
   createWindow();
 
   defaultProgram.create();
@@ -51,9 +57,10 @@ void App::createWindow() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_SAMPLES, 4);
+  // glfwWindowHint(GLFW_SAMPLES, 4);
 
   window = glfwCreateWindow(WIDTH, HEIGHT, "Test", NULL, NULL);
+
   if (window == NULL) {
     glfwTerminate();
     throw FailedWindowCreationException{"WINDOW FAILED TO BE CREATED"};
@@ -146,12 +153,12 @@ void App::drawTextBottomLeft(const float x, const float y, const float scale,
     TexTile tex = consolas.getTile(c);
     for (int tri = 0; tri < 2; tri++) {
       for (int vertex = 0; vertex < 3; vertex++) {
-        const vec2 pos{xOffset + width * quadUV[tri][vertex][0],
+        const Vec2 pos{xOffset + width * quadUV[tri][vertex][0],
                        y + height * quadUV[tri][vertex][1]};
         const glm::lowp_u16vec2 uv{tex.coordinates +
                                    tex.dimensions * quadUV[tri][vertex]};
         vertices.push_back({{pos[0], pos[1]}, {uv[0], uv[1]}});
-        // vertices.emplace_back(vec2{pos[0], pos[1]}, vec2{uv[0], uv[1]});
+        // vertices.emplace_back(pos[0], pos[1], uv[0], uv[1]);
       }
     }
 

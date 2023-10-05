@@ -113,6 +113,9 @@
     <ClCompile Include="src\world\render\face_uv_list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\world\game_object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\world\camera.h">
@@ -196,10 +199,16 @@
     <ClInclude Include="src\world\collision\box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\world\gameobject.h">
+    <ClInclude Include="src\world\game_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\world\base_polyhedron.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\vector_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\memory_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,14 +2,14 @@
 #include "util/glm_utils.h"
 class Camera {
 public:
-  mat4 projection;
-  mat4 view{1.0f};
+  Mat4 projection;
+  Mat4 view{1.0f};
 
-  vec3 pos{};
+  Vec3 pos{};
   float speed = 2;
-  vec3 velocity{};
+  Vec3 velocity{};
 
-  vec3 forward{X_PLUS}, up{Y_PLUS}, right{Z_PLUS};
+  Vec3 forward{X_PLUS}, up{Y_PLUS}, right{Z_PLUS};
   float sensitivity = 30;
   float yaw = 0, pitch = 0;
 
@@ -17,8 +17,8 @@ public:
 
   void update();
 
-  void move(vec3 t);
-  void setPosition(vec3 t);
+  void move(Vec3 t);
+  void setPosition(Vec3 t);
 
   void rotate(float yaw, float pitch);
   void setRotate(float yaw, float pitch);

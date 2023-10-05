@@ -4,14 +4,14 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
 
-typedef glm::vec2 vec2;
-typedef glm::vec3 vec3;
-typedef glm::vec4 vec4;
-typedef glm::mat3 mat3;
-typedef glm::mat4 mat4;
+using Vec2 = glm::vec2;
+using Vec3 = glm::vec3;
+using Vec4 = glm::vec4;
+using Mat3 = glm::mat3;
+using Mat4 = glm::mat4;
 
-inline vec3 X_PLUS{1, 0, 0}, Y_PLUS{0, 1, 0}, Z_PLUS{0, 0, 1};
+inline Vec3 X_PLUS{1, 0, 0}, Y_PLUS{0, 1, 0}, Z_PLUS{0, 0, 1};
 inline const glm::lowp_u16vec2 quadUV[2][3]{{{0, 0}, {1, 0}, {1, 1}},
                                             {{0, 0}, {1, 1}, {0, 1}}};
 
-vec3 rotateAroundAxis(vec3 v, vec3 axis, float deg);
+Vec3 rotateAroundAxis(Vec3 v, Vec3 axis, float deg);

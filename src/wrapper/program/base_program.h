@@ -19,8 +19,8 @@ public:
   void useProgram();
   void deleteProgram();
 
-  void setVec3(const char *name, const vec3 vec);
-  void setMat4(const char *name, const mat4 matrix);
+  void setVec3(const char *name, const Vec3 vec);
+  void setMat4(const char *name, const Mat4 matrix);
 
   virtual void defineVAO() = 0;
   virtual void create() = 0;

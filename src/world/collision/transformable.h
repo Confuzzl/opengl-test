@@ -2,16 +2,16 @@
 #include "util/glm_utils.h"
 class Transformable {
 public:
-  mat4 getTransform() const;
-  vec3 getPosition() const;
-  vec3 getForward() const;
-  vec3 getUp() const;
-  vec3 getRight() const;
+  Mat4 getTransform() const;
+  Vec3 getPosition() const;
+  Vec3 getForward() const;
+  Vec3 getUp() const;
+  Vec3 getRight() const;
 
-  virtual void setPosition(const vec3 v);
-  virtual void translate(const vec3 v);
+  virtual void setPosition(const Vec3 v);
+  virtual void translate(const Vec3 v);
 
-  virtual void rotate(const vec3 axis, const float deg);
+  virtual void rotate(const Vec3 axis, const float deg);
   virtual void resetRotate();
 
   virtual void rotateX(const float deg);
@@ -23,7 +23,7 @@ public:
   virtual void rotateRight(const float deg);
 
 protected:
-  mat4 rot{1.0f};
-  mat4 pos{1.0f};
-  vec3 forward{X_PLUS}, up{Y_PLUS}, right{Z_PLUS};
+  Mat4 rot{1.0f};
+  Mat4 pos{1.0f};
+  Vec3 forward{X_PLUS}, up{Y_PLUS}, right{Z_PLUS};
 };
