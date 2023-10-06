@@ -161,6 +161,7 @@
     <ClCompile Include="src\world\collision\features\vertex.cpp" />
     <ClCompile Include="src\world\collision\polyhedron.cpp" />
     <ClCompile Include="src\font.cpp" />
+    <ClCompile Include="src\world\collision\simplex.cpp" />
     <ClCompile Include="src\world\game_object.cpp" />
     <ClCompile Include="src\world\render\face_uv_list.cpp" />
     <ClCompile Include="src\world\render\renderable.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="src\world\collision\features\feature.h" />
     <ClInclude Include="src\world\collision\features\vertex.h" />
     <ClInclude Include="src\world\collision\polyhedron.h" />
+    <ClInclude Include="src\world\collision\simplex.h" />
     <ClInclude Include="src\world\game_object.h" />
     <ClInclude Include="src\world\render\face_uv_list.h" />
     <ClInclude Include="src\wrapper\base_buffer_object.h" />

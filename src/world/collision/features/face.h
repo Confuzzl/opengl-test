@@ -10,7 +10,7 @@ class Face : public Feature {
 
 public:
   Face(Polyhedron &parent, const unsigned short ID,
-       const unsigned char edgeCount);
+       const unsigned short edgeCount);
   void addEdge(SPtr<Edge> &edge);
   void finishCreation();
 };

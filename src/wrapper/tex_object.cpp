@@ -20,7 +20,7 @@ void TexObject::initTexture() {
   if (!data) {
     stbi_image_free(data);
     throw FailedTextureLoadException{
-        std::format("TEXTURE {} FAILED TO LOAD\n", name).c_str()};
+        std::format("TEXTURE {} FAILED TO LOAD\n", name)};
   }
   glTextureStorage2D(ID, 1, GL_RGBA8, width, height);
   glTextureSubImage2D(ID, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE,

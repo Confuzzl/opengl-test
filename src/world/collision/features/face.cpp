@@ -3,15 +3,19 @@
 #include "util/debug_utils.h"
 
 Face::Face(Polyhedron &parent, const unsigned short ID,
-           const unsigned char edgeCount)
+           const unsigned short edgeCount)
     : Feature(parent, ID) {
   edges.reserve(edgeCount);
 }
 
 void Face::addEdge(SPtr<Edge> &edge) {
   edges.emplace_back(edge);
-  std::cout << std::format("edge {} : {}\n", (*edge).ID, edge.use_count());
+  std::cout << std::format("FACE ADDING edge {} : {}\n", (*edge).ID,
+                           edge.use_count());
 }
 void Face::finishCreation() {
-  normal = glm::normalize(glm::cross((Vec3)*edges[0], (Vec3)*edges[1]));
+  normal =
+      glm::normalize(glm::cross((*edges[0]).getProperDirectionFrom(*this),
+                                (*edges[1]).getProperDirectionFrom(*this)));
+  std::cout << std::format("normal: {}\n", glm::to_string(normal));
 }

@@ -15,8 +15,7 @@ BaseProgram::~BaseProgram() { deleteProgram(); }
 void BaseProgram::useProgram() {
   if (!allocated)
     throw UnallocatedGLObjectUsageException{
-        std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", ID)
-            .c_str()};
+        std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", ID)};
   glUseProgram(ID);
 }
 void BaseProgram::deleteProgram() {
@@ -64,6 +63,6 @@ void BaseProgram::createShader(const GLenum type, GLuint &ID,
   if (!success) {
     glGetShaderInfoLog(ID, 512, NULL, log);
     throw FailedShaderCompilationException{
-        std::format("{} FAILED TO COMPILE\n{}\n", source, log).c_str()};
+        std::format("{} FAILED TO COMPILE\n{}\n", source, log)};
   }
 }

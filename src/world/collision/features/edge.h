@@ -7,12 +7,14 @@ class Vertex;
 
 class Edge : public Feature {
   SPtr<Vertex> tail, head;
-  SPtr<Face> cw, ccw;
+  SPtr<Face> left, right;
 
 public:
   Edge(Polyhedron &parent, const unsigned short ID, SPtr<Vertex> &tail,
        SPtr<Vertex> &head);
   //~Edge();
+
+  Vec3 getProperDirectionFrom(const Face &face);
 
   operator Vec3() const;
 };
