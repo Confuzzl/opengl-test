@@ -6,12 +6,12 @@ class Vertex;
 #include "util/vector_utils.h"
 
 class Edge : public Feature {
-  const Vertex &tail, &head;
+  SPtr<Vertex> tail, head;
   SPtr<Face> cw, ccw;
 
 public:
-  Edge(Polyhedron &parent, const unsigned short ID, const Vertex &tail,
-       const Vertex &head);
+  Edge(Polyhedron &parent, const unsigned short ID, SPtr<Vertex> &tail,
+       SPtr<Vertex> &head);
   //~Edge();
 
   operator Vec3() const;

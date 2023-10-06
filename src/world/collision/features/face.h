@@ -5,12 +5,12 @@ class Edge;
 #include "util/vector_utils.h"
 
 class Face : public Feature {
-  const Vector<Edge> edges;
-  Vec3 normal;
-
-  Vec3 calculateNormal();
+  Vector<SPtr<Edge>> edges;
+  Vec3 normal{};
 
 public:
-  Face(Polyhedron &parent, const unsigned short ID, const Vector<Edge> &edges);
-  //~Face();
+  Face(Polyhedron &parent, const unsigned short ID,
+       const unsigned char edgeCount);
+  void addEdge(SPtr<Edge> &edge);
+  void finishCreation();
 };

@@ -2,6 +2,7 @@
 #include "world/collision/polyhedron.h"
 
 class Feature {
+public:
   const Polyhedron &parent;
   const unsigned short ID;
 
