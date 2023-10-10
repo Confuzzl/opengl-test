@@ -1,13 +1,16 @@
-#include "app.h"
+#include "app/app.h"
 #include "util/debug_utils.h"
 #include "world/collision/prism.h"
 #include <chrono>
 
 // #include "world/render/face_uv_list.h"
-#include "world/collision/simplex.h"
+#include "world/collision/simplex_factory.h"
 
 int main() {
-  Simplex s{{{-1, -1, 1}, {1, -1, -1}, {1, 1, 1}, {-1, 1, -1}}};
+  try {
+  } catch (const std::runtime_error &e) {
+    std::cout << e.what();
+  }
 
   // Prism a{1, 1, 1};
   // a.rotateZ(45);

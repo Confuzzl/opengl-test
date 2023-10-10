@@ -11,9 +11,8 @@ Polyhedron::Polyhedron(const unsigned short vertexCount,
                        const VertexNeighborList &vertexEdgeIndices,
                        const EdgeNeighborList &edgeVertexIndices,
                        const EdgeNeighborList &edgeFaceIndices,
-                       const FaceEdgeIndexList &faceEdgeIndices)
-    : BasePolyhedron(coordinates), vertexCount{vertexCount},
-      vertexEdgeIndices{vertexEdgeIndices},
+                       const FaceNeighborList &faceEdgeIndices)
+    : BasePolyhedron(coordinates), vertexEdgeIndices{vertexEdgeIndices},
       edgeVertexIndices{edgeVertexIndices}, edgeFaceIndices{edgeFaceIndices},
       faceEdgeIndices{faceEdgeIndices}, ID{count++} {
   if (vertexCount > 256)
@@ -46,41 +45,52 @@ Polyhedron::Polyhedron(const unsigned short vertexCount,
   faces.reserve(faceEdgeIndices.size());
 
   createFeatures();
+  setupNeighbors();
 }
 Polyhedron::~Polyhedron() = default;
 
 SPtr<Vertex> &Polyhedron::addVertex(SPtr<Vertex> &&v) {
-  std::cout << std::format("ADDING vertex {} count: {}\n", (*v).ID,
-                           v.use_count());
+  // std::cout << std::format("ADDING vertex {} count: {}\n", (*v).ID,
+  //                          v.use_count());
   return vertices.emplace_back(v);
 }
 SPtr<Edge> &Polyhedron::addEdge(SPtr<Edge> &&e) {
-  std::cout << std::format("ADDING edge {} count: {}\n", (*e).ID,
-                           e.use_count());
+  // std::cout << std::format("ADDING edge {} count: {}\n", (*e).ID,
+  //                          e.use_count());
   return edges.emplace_back(e);
 }
 SPtr<Face> &Polyhedron::addFace(SPtr<Face> &&f) {
-  std::cout << std::format("ADDING face {} count: {}\n", (*f).ID,
-                           f.use_count());
+  // std::cout << std::format("ADDING face {} count: {}\n", (*f).ID,
+  //                          f.use_count());
   return faces.emplace_back(f);
 }
 
 void Polyhedron::createFeatures() {
-  for (unsigned short i = 0; const Vec3 &v : coordinates) {
+  for (unsigned char i = 0; const Vec3 &v : coordinates) {
     addVertex(std::make_shared<Vertex>(*this, i++, v));
   }
-  for (unsigned short i = 0; const auto &pair : edgeVertexIndices) {
+  for (unsigned char i = 0; const auto &pair : edgeVertexIndices) {
     unsigned char tailIndex = pair[0], headIndex = pair[1];
     addEdge(std::make_shared<Edge>(*this, i++, vertices[tailIndex],
                                    vertices[headIndex]));
   }
-  for (unsigned short i = 0; const auto &face : faceEdgeIndices) {
+  for (unsigned char i = 0; const auto &face : faceEdgeIndices) {
     SPtr<Face> &f = addFace(
         std::make_shared<Face>(*this, i++, (unsigned short)face.size()));
-    for (const unsigned char &index : face) {
+    for (const unsigned char &index : face)
       (*f).addEdge(edges[index]);
-    }
-    (*f).finishCreation();
   }
 }
-void Polyhedron::setupNeighbors() {}
+void Polyhedron::setupNeighbors() {
+  for (unsigned char i = 0; const auto &indices : vertexEdgeIndices) {
+    for (const unsigned char index : indices)
+      (*vertices[i]).addNeighbor(edges[index]);
+    i++;
+  }
+
+  for (unsigned char i = 0; const auto &pair : edgeFaceIndices)
+    (*edges[i++]).setNeighbors(faces[pair[0]], faces[pair[1]]);
+
+  for (const auto &face : faces)
+    (*face).finishCreation();
+}

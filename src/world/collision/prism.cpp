@@ -1,5 +1,5 @@
 #include "prism.h"
-#include "app.h"
+#include "app/app.h"
 #include "util/debug_utils.h"
 
 bool Prism::buffersInitialized = false;

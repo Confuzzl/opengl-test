@@ -86,6 +86,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ShowIncludes>false</ShowIncludes>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,6 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,6 +119,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ShowIncludes>false</ShowIncludes>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,9 +151,9 @@
     <Image Include="assets\test.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\app.cpp" />
+    <ClCompile Include="src\app\app.cpp" />
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\update_cycle.cpp" />
+    <ClCompile Include="src\app\update_cycle.cpp" />
     <ClCompile Include="src\util\glm_utils.cpp" />
     <ClCompile Include="src\util\gl_utils.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -160,7 +164,7 @@
     <ClCompile Include="src\world\collision\features\feature.cpp" />
     <ClCompile Include="src\world\collision\features\vertex.cpp" />
     <ClCompile Include="src\world\collision\polyhedron.cpp" />
-    <ClCompile Include="src\font.cpp" />
+    <ClCompile Include="src\app\font.cpp" />
     <ClCompile Include="src\world\collision\simplex.cpp" />
     <ClCompile Include="src\world\game_object.cpp" />
     <ClCompile Include="src\world\render\face_uv_list.cpp" />
@@ -171,7 +175,7 @@
     <ClCompile Include="src\wrapper\tex_object.cpp" />
     <ClCompile Include="src\wrapper\program\programs.cpp" />
     <ClCompile Include="src\wrapper\program\base_program.cpp" />
-    <ClCompile Include="src\texture_tile.cpp" />
+    <ClCompile Include="src\app\texture_tile.cpp" />
     <ClCompile Include="src\world\camera.cpp" />
     <ClCompile Include="src\world\collision\prism.cpp" />
     <ClCompile Include="src\world\collision\transformable.cpp" />
@@ -179,10 +183,10 @@
     <ClCompile Include="src\wrapper\vao.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\app.h" />
-    <ClInclude Include="src\update_cycle.h" />
+    <ClInclude Include="src\app\app.h" />
+    <ClInclude Include="src\app\update_cycle.h" />
     <ClInclude Include="src\util\debug_utils.h" />
-    <ClInclude Include="src\font.h" />
+    <ClInclude Include="src\app\font.h" />
     <ClInclude Include="src\util\glm_utils.h" />
     <ClInclude Include="src\util\gl_utils.h" />
     <ClInclude Include="src\util\memory_utils.h" />
@@ -202,7 +206,7 @@
     <ClInclude Include="src\wrapper\gl_object.h" />
     <ClInclude Include="src\wrapper\program\programs.h" />
     <ClInclude Include="src\wrapper\program\base_program.h" />
-    <ClInclude Include="src\texture_tile.h" />
+    <ClInclude Include="src\app\texture_tile.h" />
     <ClInclude Include="src\world\camera.h" />
     <ClInclude Include="src\world\collision\game_object.h" />
     <ClInclude Include="src\world\collision\transformable.h" />

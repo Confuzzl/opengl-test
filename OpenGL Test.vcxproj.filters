@@ -38,7 +38,7 @@
     <ClCompile Include="src\world\scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app.cpp">
+    <ClCompile Include="src\app\app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\glad.c">
@@ -59,7 +59,7 @@
     <ClCompile Include="src\wrapper\program\programs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\texture_tile.cpp">
+    <ClCompile Include="src\app\texture_tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\wrapper\vao.cpp">
@@ -77,10 +77,10 @@
     <ClCompile Include="src\wrapper\gl_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\font.cpp">
+    <ClCompile Include="src\app\font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\update_cycle.cpp">
+    <ClCompile Include="src\app\update_cycle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\collision\polyhedron.cpp">
@@ -130,7 +130,7 @@
     <ClInclude Include="src\world\scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\app.h">
+    <ClInclude Include="src\app\app.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\util\debug_utils.h">
@@ -154,7 +154,7 @@
     <ClInclude Include="src\wrapper\program\programs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\texture_tile.h">
+    <ClInclude Include="src\app\texture_tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\wrapper\vao.h">
@@ -175,10 +175,10 @@
     <ClInclude Include="src\wrapper\program\vertex_formats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\font.h">
+    <ClInclude Include="src\app\font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\update_cycle.h">
+    <ClInclude Include="src\app\update_cycle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\world\render\face_uv_list.h">

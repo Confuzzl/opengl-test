@@ -1,5 +1,5 @@
 #include "face_uv_list.h"
-#include "texture_tile.h"
+#include "app/texture_tile.h"
 #include "util/debug_utils.h"
 
 FaceUVList FaceUVList::generateFromPixels(const UVList &facePixels) {

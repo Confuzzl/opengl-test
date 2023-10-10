@@ -13,6 +13,7 @@ public:
   Edge(Polyhedron &parent, const unsigned short ID, SPtr<Vertex> &tail,
        SPtr<Vertex> &head);
   //~Edge();
+  void setNeighbors(SPtr<Face> &left, SPtr<Face> &right);
 
   Vec3 getProperDirectionFrom(const Face &face);
 

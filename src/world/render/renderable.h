@@ -4,14 +4,13 @@
 #include "wrapper/program/vertex_formats.h"
 
 class Renderable : public BasePolyhedron {
-  using FaceVertexIndexList = Vector2D<unsigned char>;
-
-  const FaceVertexIndexList faceVertexIndices;
+  const FaceVertexList &faceVertexIndices;
   FaceUVList faceTextureList;
   Vector<DefaultVertex> vertexInfo;
 
   Renderable(const Vec3List &coordinates,
-             const FaceVertexIndexList &faceVertexIndices);
+             const FaceVertexList &faceVertexIndices,
+             const FaceUVList &faceTextureList);
 
   void initializeVertexInfo();
 };

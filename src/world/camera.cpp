@@ -1,5 +1,5 @@
 #include "world/camera.h"
-#include "app.h"
+#include "app/app.h"
 #include "util/debug_utils.h"
 
 Camera::Camera(float fov)

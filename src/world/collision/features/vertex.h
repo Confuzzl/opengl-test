@@ -12,5 +12,7 @@ public:
   Vertex(Polyhedron &parent, const unsigned short ID, const Vec3 pos);
   //~Vertex();
 
+  void addNeighbor(SPtr<Edge> &neighbor);
+
   operator Vec3() const;
 };
