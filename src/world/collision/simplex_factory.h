@@ -16,8 +16,6 @@ class SimplexFactory {
   SimplexFactory(SimplexFactory &&) = delete;
 
 public:
-  static UPtr<Polyhedron> &&
-  createCollidableSimplex(const Vec3List &coordinates);
-  static UPtr<Renderable> &&
-  createRenderableSimplex(const Vec3List &coordinates);
+  static UPtr<Polyhedron> createCollidableSimplex(const Vec3List &coordinates);
+  static UPtr<Renderable> createRenderableSimplex(const Vec3List &coordinates);
 };

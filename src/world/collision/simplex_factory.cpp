@@ -14,13 +14,18 @@ const FaceNeighborList SimplexFactory::feIndices{
 const FaceVertexList SimplexFactory::fvIndices{
     {0, 1, 2}, {0, 2, 3}, {1, 0, 3}, {2, 1, 3}};
 
-UPtr<Polyhedron> &&
+UPtr<Polyhedron>
 SimplexFactory::createCollidableSimplex(const Vec3List &coordinates) {
   return std::make_unique<Polyhedron>(4, coordinates, veIndices, evIndices,
                                       efIndices, feIndices);
 }
 
-UPtr<Renderable> &&
+UPtr<Renderable>
 SimplexFactory::createRenderableSimplex(const Vec3List &coordinates) {
-  //return std::make_unique<Renderable>(coordinates, fvIndices);
+  return std::make_unique<Renderable>(
+      coordinates, fvIndices,
+      UVListFactory::generateFromUVs({{{0, 0}, {1, 0}, {0.5, 1}},
+                                      {{0, 0}, {1, 0}, {0.5, 1}},
+                                      {{0, 0}, {1, 0}, {0.5, 1}},
+                                      {{0, 0}, {1, 0}, {0.5, 1}}}));
 }

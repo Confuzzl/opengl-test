@@ -110,13 +110,13 @@
     <ClCompile Include="src\world\base_polyhedron.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\render\face_uv_list.cpp">
+    <ClCompile Include="src\world\render\uv_list_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\game_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\simplex.cpp">
+    <ClCompile Include="src\world\collision\simplex_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -181,7 +181,7 @@
     <ClInclude Include="src\app\update_cycle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\world\render\face_uv_list.h">
+    <ClInclude Include="src\world\render\uv_list_factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\world\collision\polyhedron.h">
@@ -217,6 +217,12 @@
     <ClInclude Include="src\world\collision\simplex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\polyhedron_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\collision\simplex_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\cube.txt" />
@@ -227,5 +233,8 @@
     <None Include="assets\shader\font.vert" />
     <None Include="assets\shader\default.frag" />
     <None Include="assets\shader\font.frag" />
+    <None Include="assets\simplex.pdn" />
+    <None Include="assets\untitled.blend" />
+    <None Include="assets\untitled.pdn" />
   </ItemGroup>
 </Project>

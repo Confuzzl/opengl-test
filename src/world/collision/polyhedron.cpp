@@ -47,7 +47,7 @@ Polyhedron::Polyhedron(const unsigned short vertexCount,
   createFeatures();
   setupNeighbors();
 }
-Polyhedron::~Polyhedron() = default;
+// Polyhedron::~Polyhedron() = default;
 
 SPtr<Vertex> &Polyhedron::addVertex(SPtr<Vertex> &&v) {
   // std::cout << std::format("ADDING vertex {} count: {}\n", (*v).ID,

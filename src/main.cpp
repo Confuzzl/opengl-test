@@ -5,9 +5,14 @@
 
 // #include "world/render/face_uv_list.h"
 #include "world/collision/simplex_factory.h"
+#include "world/game_object.h"
 
 int main() {
   try {
+    Vec3List coordinates{
+        {-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
+    GameObject go{SimplexFactory::createCollidableSimplex(coordinates),
+                  SimplexFactory::createRenderableSimplex(coordinates)};
   } catch (const std::runtime_error &e) {
     std::cout << e.what();
   }

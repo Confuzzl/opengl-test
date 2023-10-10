@@ -165,9 +165,9 @@
     <ClCompile Include="src\world\collision\features\vertex.cpp" />
     <ClCompile Include="src\world\collision\polyhedron.cpp" />
     <ClCompile Include="src\app\font.cpp" />
-    <ClCompile Include="src\world\collision\simplex.cpp" />
+    <ClCompile Include="src\world\collision\simplex_factory.cpp" />
     <ClCompile Include="src\world\game_object.cpp" />
-    <ClCompile Include="src\world\render\face_uv_list.cpp" />
+    <ClCompile Include="src\world\render\uv_list_factory.cpp" />
     <ClCompile Include="src\world\render\renderable.cpp" />
     <ClCompile Include="src\world\render\renderable.h" />
     <ClCompile Include="src\wrapper\base_buffer_object.cpp" />
@@ -190,6 +190,7 @@
     <ClInclude Include="src\util\glm_utils.h" />
     <ClInclude Include="src\util\gl_utils.h" />
     <ClInclude Include="src\util\memory_utils.h" />
+    <ClInclude Include="src\util\polyhedron_utils.h" />
     <ClInclude Include="src\util\vector_utils.h" />
     <ClInclude Include="src\world\base_polyhedron.h" />
     <ClInclude Include="src\world\collision\box.h" />
@@ -199,8 +200,9 @@
     <ClInclude Include="src\world\collision\features\vertex.h" />
     <ClInclude Include="src\world\collision\polyhedron.h" />
     <ClInclude Include="src\world\collision\simplex.h" />
+    <ClInclude Include="src\world\collision\simplex_factory.h" />
     <ClInclude Include="src\world\game_object.h" />
-    <ClInclude Include="src\world\render\face_uv_list.h" />
+    <ClInclude Include="src\world\render\uv_list_factory.h" />
     <ClInclude Include="src\wrapper\base_buffer_object.h" />
     <ClInclude Include="src\wrapper\buffer_objects.h" />
     <ClInclude Include="src\wrapper\gl_object.h" />
@@ -222,6 +224,9 @@
   <ItemGroup>
     <None Include="assets\shader\default.frag" />
     <None Include="assets\shader\font.frag" />
+    <None Include="assets\simplex.pdn" />
+    <None Include="assets\untitled.blend" />
+    <None Include="assets\untitled.pdn" />
     <None Include="OpenGL Test.aps" />
     <None Include="assets\shader\font.vert" />
     <None Include="assets\shader\default.vert" />
