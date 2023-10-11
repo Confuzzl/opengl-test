@@ -1,7 +1,7 @@
 #pragma once
+#include "util/polyhedron_utils.h"
 class Polyhedron;
 class Renderable;
-#include "util/polyhedron_utils.h"
 
 class SimplexFactory {
   const static VertexNeighborList veIndices;

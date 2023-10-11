@@ -10,6 +10,10 @@ class GameObject : public Transformable {
 
 public:
   GameObject(UPtr<Polyhedron> collider, UPtr<Renderable> render);
+  GameObject(const GameObject &) = delete;
+  GameObject(GameObject &&) = delete;
+  ~GameObject();
+
   const UPtr<Polyhedron> &getCollider();
   const UPtr<Renderable> &getRender();
 };

@@ -38,7 +38,6 @@ public:
              const EdgeNeighborList &edgeVertexIndices,
              const EdgeNeighborList &edgeFaceIndices,
              const FaceNeighborList &faceEdgeIndices);
-  //~Polyhedron();
 
 protected:
   void createFeatures();
