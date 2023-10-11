@@ -25,7 +25,7 @@ UVListFactory::generateFromUVs(const Vector2D<Vec2> &faceUVs) {
       vertices.emplace_back((unsigned short)(vertex[0] * TexTile::TEXEL_RANGE),
                             (unsigned short)(vertex[1] * TexTile::TEXEL_RANGE));
     }
-    std::cout << "\n";
+    // std::cout << "\n";
 
     pixels.emplace_back(std::move(vertices));
   }

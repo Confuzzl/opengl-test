@@ -1,6 +1,6 @@
 #include "simplex_factory.h"
-#include "polyhedron.h"
-#include "world/render/renderable.h"
+
+class Test {};
 
 const VertexNeighborList SimplexFactory::veIndices{
     {0, 2, 4}, {0, 1, 5}, {1, 2, 3}, {3, 4, 5}};
@@ -16,7 +16,7 @@ const FaceVertexList SimplexFactory::fvIndices{
 
 UPtr<Polyhedron>
 SimplexFactory::createCollidableSimplex(const Vec3List &coordinates) {
-  return std::make_unique<Polyhedron>(4, coordinates, veIndices, evIndices,
+  return std::make_unique<Polyhedron>(4, 4, coordinates, veIndices, evIndices,
                                       efIndices, feIndices);
 }
 

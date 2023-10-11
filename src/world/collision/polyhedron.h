@@ -7,9 +7,6 @@ class Face;
 #include <stdexcept>
 
 class Polyhedron : public BasePolyhedron {
-  struct VerticesSizeException : public std::runtime_error {
-    using std::runtime_error::runtime_error;
-  };
   struct FeatureRelatedException : public std::runtime_error {
     using std::runtime_error::runtime_error;
   };
@@ -33,7 +30,8 @@ public:
   static unsigned int count;
   unsigned int ID;
 
-  Polyhedron(const unsigned short vertexCount, const Vec3List &coordinates,
+  Polyhedron(const unsigned short vertexCount, const unsigned short faceCount,
+             const Vec3List &coordinates,
              const VertexNeighborList &vertexEdgeIndices,
              const EdgeNeighborList &edgeVertexIndices,
              const EdgeNeighborList &edgeFaceIndices,

@@ -7,6 +7,7 @@
 unsigned int Polyhedron::count = 0;
 
 Polyhedron::Polyhedron(const unsigned short vertexCount,
+                       const unsigned short faceCount,
                        const Vec3List &coordinates,
                        const VertexNeighborList &vertexEdgeIndices,
                        const EdgeNeighborList &edgeVertexIndices,
@@ -16,29 +17,41 @@ Polyhedron::Polyhedron(const unsigned short vertexCount,
       edgeVertexIndices{edgeVertexIndices}, edgeFaceIndices{edgeFaceIndices},
       faceEdgeIndices{faceEdgeIndices}, ID{count++} {
   if (vertexCount > 256)
-    throw VerticesSizeException("VERTEX COUNT EXCEEDS 256");
+    throw FeatureRelatedException{
+        std::format("VERTEX COUNT ({}) EXCEEDS 256\n", vertexCount)};
   if (coordinates.size() != vertexCount)
-    throw VerticesSizeException{std::format(
-        "COORDINATE SIZE DOES NOT EQUAL POLYHEDRON VERTEX COUNT ({})",
-        vertexCount)};
+    throw FeatureRelatedException{std::format(
+        "COORDINATE SIZE DOES NOT EQUAL POLYHEDRON VERTEX COUNT ({} != {})\n",
+        coordinates.size(), vertexCount)};
   if (vertexEdgeIndices.size() != vertexCount)
     throw FeatureRelatedException{std::format(
-        "VERTEX-EDGE INDICES COUNT DOES NOT EQUAL VERTEX COUNT ({})",
-        vertexCount)};
+        "VERTEX-EDGE INDICES COUNT DOES NOT EQUAL VERTEX COUNT ({} != {})\n",
+        vertexEdgeIndices.size(), vertexCount)};
 
   if (edgeVertexIndices.size() != edgeFaceIndices.size())
     throw FeatureRelatedException{
-        "EDGE-VERTEX INDICES COUNT DOES NOT EQUAL EDGE-FACE INDICES COUNT"};
+        std::format("EDGE-VERTEX INDICES COUNT DOES NOT EQUAL EDGE-FACE "
+                    "INDICES COUNT ({} != {})\n",
+                    edgeVertexIndices.size(), edgeFaceIndices.size())};
   if (edgeVertexIndices.size() > 256)
     throw FeatureRelatedException{
-        "EDGE COUNT OF EDGE-VERTEX INDICES EXCEEDS EDGE INDEX RANGE (256)"};
+        std::format("EDGE COUNT OF EDGE-VERTEX INDICES ({}) EXCEEDS EDGE INDEX "
+                    "RANGE (256)\n",
+                    edgeVertexIndices.size())};
   if (edgeFaceIndices.size() > 256)
-    throw FeatureRelatedException{
-        "EDGE COUNT OF EDGE-FACE INDICES EXCEEDS EDGE INDEX RANGE (256)"};
+    throw FeatureRelatedException{std::format(
+        "EDGE COUNT OF EDGE-FACE INDICES ({}) EXCEEDS EDGE INDEX RANGE (256)\n",
+        edgeFaceIndices.size())};
 
   if (faceEdgeIndices.size() > 256)
+    throw FeatureRelatedException{std::format(
+        "FACE COUNT OF FACE-EDGE INDICES ({}) EXCEEDS FACE INDEX RANGE (256)\n",
+        faceEdgeIndices.size())};
+  if (faceEdgeIndices.size() != faceCount)
     throw FeatureRelatedException{
-        "FACE COUNT OF FACE-EDGE INDICES EXCEEDS FACE INDEX RANGE (256)"};
+        std::format("FACE COUNT OF FACE-EDGE INDICES DOES NOT EQUAL FACE COUNT "
+                    "({} != {})\n",
+                    faceEdgeIndices.size(), faceCount)};
 
   vertices.reserve(coordinates.size());
   edges.reserve(edgeVertexIndices.size());

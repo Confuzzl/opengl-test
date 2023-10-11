@@ -8,7 +8,7 @@ Renderable::Renderable(const Vec3List &coordinates,
       faceTextureList{faceTextureList} {
   if (faceVertexIndices.size() != faceTextureList.size())
     throw FaceUVMismatchException{
-        std::format("TEXTURE LIST SIZE DOES NOT MATCH FACE COUNT ({}!={})",
+        std::format("UV LIST SIZE DOES NOT MATCH FACE COUNT ({} != {})\n",
                     faceVertexIndices.size(), faceTextureList.size())};
 }
 
