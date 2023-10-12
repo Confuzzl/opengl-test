@@ -1,7 +1,5 @@
 #include "simplex_factory.h"
 
-class Test {};
-
 const VertexNeighborList SimplexFactory::veIndices{
     {0, 2, 4}, {0, 1, 5}, {1, 2, 3}, {3, 4, 5}};
 const EdgeNeighborList SimplexFactory::evIndices{{0, 1}, {1, 2}, {2, 0},

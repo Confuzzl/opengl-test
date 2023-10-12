@@ -3,8 +3,6 @@
 #include "util/polyhedron_utils.h"
 #include "world/render/renderable.h"
 
-class Test;
-
 class SimplexFactory {
   const static VertexNeighborList veIndices;
   const static EdgeNeighborList evIndices;
