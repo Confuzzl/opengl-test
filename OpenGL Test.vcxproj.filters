@@ -122,9 +122,6 @@
     <ClCompile Include="src\util\debug.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\gl_utils.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\glm.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -159,6 +156,54 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\app_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\gl_object.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\vao.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\tex_object.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\buffer_object.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\gl_object_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\buffer_object_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\vao_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\tex_object_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\vertex_formats.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\base_program.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\base_program_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\programs.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\programs-simple.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\programs-font.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\programs-simple_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\programs-font_imp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -169,7 +169,6 @@
     <ClCompile Include="src\util\glm_utils.cpp" />
     <ClCompile Include="src\util\gl.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\util\gl_utils.ixx" />
     <ClCompile Include="src\util\memory.ixx" />
     <ClCompile Include="src\util\polyhedron.ixx" />
     <ClCompile Include="src\util\vector.ixx" />
@@ -187,7 +186,22 @@
     <ClCompile Include="src\world\render\renderable.cpp" />
     <ClCompile Include="src\world\render\renderable.h" />
     <ClCompile Include="src\wrapper\base_buffer_object.cpp" />
+    <ClCompile Include="src\wrapper\buffer_object.ixx" />
+    <ClCompile Include="src\wrapper\buffer_object_imp.cpp" />
+    <ClCompile Include="src\wrapper\program\base_program.ixx" />
+    <ClCompile Include="src\wrapper\program\base_program_imp.cpp" />
+    <ClCompile Include="src\wrapper\program\programs-font.ixx" />
+    <ClCompile Include="src\wrapper\program\programs-font_imp.cpp" />
+    <ClCompile Include="src\wrapper\program\programs-simple.ixx" />
+    <ClCompile Include="src\wrapper\program\programs-simple_imp.cpp" />
+    <ClCompile Include="src\wrapper\program\programs.ixx" />
+    <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />
+    <ClCompile Include="src\wrapper\tex_object.ixx" />
+    <ClCompile Include="src\wrapper\tex_object_imp.cpp" />
+    <ClCompile Include="src\wrapper\vao.ixx" />
     <ClCompile Include="src\wrapper\gl_object.cpp" />
+    <ClCompile Include="src\wrapper\gl_object.ixx" />
+    <ClCompile Include="src\wrapper\gl_object_imp.cpp" />
     <ClCompile Include="src\wrapper\tex_object.cpp" />
     <ClCompile Include="src\wrapper\program\programs.cpp" />
     <ClCompile Include="src\wrapper\program\base_program.cpp" />
@@ -197,6 +211,7 @@
     <ClCompile Include="src\world\collision\transformable.cpp" />
     <ClCompile Include="src\world\scene.cpp" />
     <ClCompile Include="src\wrapper\vao.cpp" />
+    <ClCompile Include="src\wrapper\vao_imp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\app.h" />

@@ -1,13 +1,14 @@
-#pragma once
-#include "util/gl_utils.h"
-#include <stdexcept>
+export module wrapper.gl_object;
 
-struct GLObject {
+import "util/gl_utils.h";
+import <stdexcept>;
+
+export struct GLObject {
   struct UnallocatedGLObjectUsageException : public std::runtime_error {
     using std::runtime_error::runtime_error;
   };
 
-  GLuint ID = 0;
+  GLuint ID;
   bool allocated = false;
   void markAsAllocated();
 };

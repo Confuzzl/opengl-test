@@ -5,7 +5,6 @@ public:
   DefaultProgram();
 
   void defineVAO() override;
-  void create() override;
 };
 class FontProgram : public BaseProgram {
 public:
@@ -13,5 +12,4 @@ public:
   FontProgram();
 
   void defineVAO() override;
-  void create() override;
 };

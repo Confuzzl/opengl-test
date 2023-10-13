@@ -1,7 +1,12 @@
-#include "base_program.h"
-#include "app/app.h"
-#include "util/debug_utils.h"
+module;
+
+#include "util/gl_utils.h"
 #include <fstream>
+
+module wrapper.program.base_program;
+
+import util.debug;
+import app.app;
 
 static std::string sourceToString(const std::string name) {
   std::ifstream in{name};
@@ -46,7 +51,7 @@ void BaseProgram::createShaders(const std::string vertex,
     createShader(GL_FRAGMENT_SHADER, fragmentID,
                  std::format("assets/shader/{}.frag", fragment), infoLog);
   } catch (const FailedShaderCompilationException &e) {
-    app.catchException(e);
+    appModule.catchException(e);
   }
 
   ID = glCreateProgram();

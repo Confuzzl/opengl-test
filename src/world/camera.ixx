@@ -1,7 +1,8 @@
-#pragma once
-#include "util/glm_utils.h"
+export module world.camera;
 
-class Camera {
+import util.glm;
+
+export class Camera {
 public:
   Mat4 projection;
   Mat4 view{1.0f};
@@ -10,7 +11,7 @@ public:
   float speed = 2;
   Vec3 velocity{};
 
-  Vec3 forward{X_PLUS}, up{Y_PLUS}, right{Z_PLUS};
+  Vec3 forward{X_PLUS_MODULE}, up{Y_PLUS_MODULE}, right{Z_PLUS_MODULE};
   float sensitivity = 30;
   float yaw = 0, pitch = 0;
 

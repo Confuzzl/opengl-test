@@ -1,10 +1,10 @@
-#pragma once
-#include "util/gl_utils.h"
-#include "util/glm_utils.h"
-#include "wrapper/gl_object.h"
-#include "wrapper/vao.h"
+export module wrapper.program.base_program;
 
-class BaseProgram : public GLObject {
+import util.glm;
+import wrapper.gl_object;
+import wrapper.vao;
+
+export class BaseProgram : public GLObject {
 public:
   struct FailedShaderCompilationException : public std::runtime_error {
     using std::runtime_error::runtime_error;

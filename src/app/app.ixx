@@ -1,12 +1,11 @@
 export module app.app;
 
-export import app.font;
-export import app.update_cycle;
-export import util.gl;
-export import util.glm;
-export import "world/scene.h";
-export import "wrapper/program/programs.h";
-export import <stdexcept>;
+import app.font;
+import app.update_cycle;
+import util.glm;
+import world.scene;
+import wrapper.program.programs;
+import <stdexcept>;
 
 export struct App {
   struct FailedWindowCreationException : public std::runtime_error {
