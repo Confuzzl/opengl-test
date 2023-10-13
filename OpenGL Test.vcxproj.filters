@@ -71,7 +71,7 @@
     <ClCompile Include="src\wrapper\tex_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\gl_utils.cpp">
+    <ClCompile Include="src\util\gl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\wrapper\gl_object.cpp">
@@ -117,6 +117,48 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\collision\simplex_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\debug.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\gl_utils.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\glm.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\memory.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\polyhedron.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\vector.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\app.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\update_cycle.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\update_cycle_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\font.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\texture_tile.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\font_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\texture_tile_imp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\app_imp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -228,7 +270,6 @@
     <Text Include="assets\cube.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OpenGL Test.aps" />
     <None Include="assets\shader\default.vert" />
     <None Include="assets\shader\font.vert" />
     <None Include="assets\shader\default.frag" />
@@ -236,5 +277,7 @@
     <None Include="assets\simplex.pdn" />
     <None Include="assets\untitled.blend" />
     <None Include="assets\untitled.pdn" />
+    <None Include=".gitignore" />
+    <None Include="OpenGL Test.aps" />
   </ItemGroup>
 </Project>

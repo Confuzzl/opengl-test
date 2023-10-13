@@ -154,11 +154,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\app\app.cpp" />
+    <ClCompile Include="src\app\app.ixx" />
+    <ClCompile Include="src\app\app_imp.cpp" />
+    <ClCompile Include="src\app\font.ixx" />
+    <ClCompile Include="src\app\font_imp.cpp" />
+    <ClCompile Include="src\app\texture_tile.ixx" />
+    <ClCompile Include="src\app\texture_tile_imp.cpp" />
+    <ClCompile Include="src\app\update_cycle.ixx" />
+    <ClCompile Include="src\app\update_cycle_imp.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\app\update_cycle.cpp" />
+    <ClCompile Include="src\util\debug.ixx" />
+    <ClCompile Include="src\util\glm.ixx" />
     <ClCompile Include="src\util\glm_utils.cpp" />
-    <ClCompile Include="src\util\gl_utils.cpp" />
+    <ClCompile Include="src\util\gl.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\util\gl_utils.ixx" />
+    <ClCompile Include="src\util\memory.ixx" />
+    <ClCompile Include="src\util\polyhedron.ixx" />
+    <ClCompile Include="src\util\vector.ixx" />
     <ClCompile Include="src\world\base_polyhedron.cpp" />
     <ClCompile Include="src\world\collision\box.cpp" />
     <ClCompile Include="src\world\collision\features\edge.cpp" />
@@ -224,14 +238,15 @@
     <Text Include="assets\cube.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="assets\shader\default.frag" />
     <None Include="assets\shader\font.frag" />
     <None Include="assets\simplex.pdn" />
     <None Include="assets\untitled.blend" />
     <None Include="assets\untitled.pdn" />
-    <None Include="OpenGL Test.aps" />
     <None Include="assets\shader\font.vert" />
     <None Include="assets\shader\default.vert" />
+    <None Include="OpenGL Test.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

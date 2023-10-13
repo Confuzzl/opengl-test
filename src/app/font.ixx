@@ -1,8 +1,8 @@
-#pragma once
-#include "texture_tile.h"
-#include "wrapper/tex_object.h"
+export module app.font;
 
-struct Font {
+export import app.texture_tile;
+
+export struct Font {
   static const char *TEST_STRING;
   TexObject atlas;
   const unsigned short charWidth, charHeight;

@@ -1,5 +1,6 @@
 #include "glm_utils.h"
 
+extern const Vec3 X_PLUS{1, 0, 0}, Y_PLUS{0, 1, 0}, Z_PLUS{0, 0, 1};
 extern const glm::lowp_u16vec2 quadUV[2][3] = {{{0, 0}, {1, 0}, {1, 1}},
                                                {{0, 0}, {1, 1}, {0, 1}}};
 
