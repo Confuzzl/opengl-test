@@ -1,6 +1,8 @@
-export module wrapper.program.vertex_formats;
+module;
 
-import "util/gl_utils.h";
+#include "util/gl_utils.h"
+
+export module wrapper.program.vertex_formats;
 
 export struct DefaultVertex {
   static const GLsizeiptr POS_WIDTH = 3 * sizeof(GLfloat);

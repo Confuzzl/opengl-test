@@ -104,6 +104,7 @@
       <ConformanceMode>true</ConformanceMode>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <ShowIncludes>false</ShowIncludes>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +139,7 @@
       <ConformanceMode>true</ConformanceMode>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <ShowIncludes>false</ShowIncludes>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,101 +155,69 @@
     <Image Include="assets\test.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\app\app.cpp" />
-    <ClCompile Include="src\app\app.ixx" />
-    <ClCompile Include="src\app\app_imp.cpp" />
-    <ClCompile Include="src\app\font.ixx" />
-    <ClCompile Include="src\app\font_imp.cpp" />
-    <ClCompile Include="src\app\texture_tile.ixx" />
-    <ClCompile Include="src\app\texture_tile_imp.cpp" />
-    <ClCompile Include="src\app\update_cycle.ixx" />
-    <ClCompile Include="src\app\update_cycle_imp.cpp" />
+    <ClCompile Include="src\app\app.app.ixx" />
+    <ClCompile Include="src\app\app.app.cpp" />
+    <ClCompile Include="src\app\app.font.ixx" />
+    <ClCompile Include="src\app\app.font.cpp" />
+    <ClCompile Include="src\app\app.texture_tile.ixx" />
+    <ClCompile Include="src\app\app.texture_tile.cpp" />
+    <ClCompile Include="src\app\app.update_cycle.ixx" />
+    <ClCompile Include="src\app\app.update_cycle.cpp" />
     <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\app\update_cycle.cpp" />
-    <ClCompile Include="src\util\debug.ixx" />
-    <ClCompile Include="src\util\glm.ixx" />
-    <ClCompile Include="src\util\glm_utils.cpp" />
-    <ClCompile Include="src\util\gl.cpp" />
+    <ClCompile Include="src\util\util.debug.ixx" />
+    <ClCompile Include="src\util\util.glm.ixx" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\util\memory.ixx" />
-    <ClCompile Include="src\util\polyhedron.ixx" />
-    <ClCompile Include="src\util\vector.ixx" />
-    <ClCompile Include="src\world\base_polyhedron.cpp" />
-    <ClCompile Include="src\world\collision\box.cpp" />
-    <ClCompile Include="src\world\collision\features\edge.cpp" />
-    <ClCompile Include="src\world\collision\features\face.cpp" />
-    <ClCompile Include="src\world\collision\features\feature.cpp" />
-    <ClCompile Include="src\world\collision\features\vertex.cpp" />
-    <ClCompile Include="src\world\collision\polyhedron.cpp" />
-    <ClCompile Include="src\app\font.cpp" />
-    <ClCompile Include="src\world\collision\simplex_factory.cpp" />
-    <ClCompile Include="src\world\game_object.cpp" />
-    <ClCompile Include="src\world\render\uv_list_factory.cpp" />
-    <ClCompile Include="src\world\render\renderable.cpp" />
-    <ClCompile Include="src\world\render\renderable.h" />
-    <ClCompile Include="src\wrapper\base_buffer_object.cpp" />
-    <ClCompile Include="src\wrapper\buffer_object.ixx" />
-    <ClCompile Include="src\wrapper\buffer_object_imp.cpp" />
-    <ClCompile Include="src\wrapper\program\base_program.ixx" />
-    <ClCompile Include="src\wrapper\program\base_program_imp.cpp" />
-    <ClCompile Include="src\wrapper\program\programs-font.ixx" />
-    <ClCompile Include="src\wrapper\program\programs-font_imp.cpp" />
-    <ClCompile Include="src\wrapper\program\programs-simple.ixx" />
-    <ClCompile Include="src\wrapper\program\programs-simple_imp.cpp" />
-    <ClCompile Include="src\wrapper\program\programs.ixx" />
+    <ClCompile Include="src\util\util.memory.ixx" />
+    <ClCompile Include="src\util\util.polyhedron.ixx" />
+    <ClCompile Include="src\util\util.vector.ixx" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.edge.cpp" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.edge.ixx" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.face.cpp" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.face.ixx" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.feature.cpp" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.feature.ixx" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.vertex.cpp" />
+    <ClCompile Include="src\world\collision\features\world.collision.features.vertex.ixx" />
+    <ClCompile Include="src\world\collision\world.collision.polyhedron.cpp" />
+    <ClCompile Include="src\world\collision\world.collision.prism.cpp" />
+    <ClCompile Include="src\world\collision\world.collision.prism.ixx" />
+    <ClCompile Include="src\world\collision\world.collision.simplex_factory.cpp" />
+    <ClCompile Include="src\world\collision\world.collision.simplex_factory.ixx" />
+    <ClCompile Include="src\world\render\world.render.renderable.cpp" />
+    <ClCompile Include="src\world\render\world.render.renderable.ixx" />
+    <ClCompile Include="src\world\render\world.render.uv_list_factory.cpp" />
+    <ClCompile Include="src\world\render\world.render.uv_list_factory.ixx" />
+    <ClCompile Include="src\world\world.base_polyhedron.cpp" />
+    <ClCompile Include="src\world\world.base_polyhedron.ixx" />
+    <ClCompile Include="src\world\world.camera.ixx" />
+    <ClCompile Include="src\world\world.camera.cpp" />
+    <ClCompile Include="src\world\collision\world.collision.polyhedron.ixx" />
+    <ClCompile Include="src\world\world.game_object.ixx" />
+    <ClCompile Include="src\world\world.game_object.cpp" />
+    <ClCompile Include="src\world\world.scene.ixx" />
+    <ClCompile Include="src\world\world.scene.cpp" />
+    <ClCompile Include="src\world\world.transformable.cpp" />
+    <ClCompile Include="src\world\world.transformable.ixx" />
+    <ClCompile Include="src\wrapper\wrapper.buffer_object.ixx" />
+    <ClCompile Include="src\wrapper\wrapper.buffer_object.cpp" />
+    <ClCompile Include="src\wrapper\program\wrapper.program.base_program.ixx" />
+    <ClCompile Include="src\wrapper\program\wrapper.program.base_program.cpp" />
+    <ClCompile Include="src\wrapper\program\wrapper.program.programs-font.ixx" />
+    <ClCompile Include="src\wrapper\program\wrapper.program.programs-font.cpp" />
+    <ClCompile Include="src\wrapper\program\wrapper.program.programs-simple.ixx" />
+    <ClCompile Include="src\wrapper\program\wrapper.program.programs-simple.cpp" />
+    <ClCompile Include="src\wrapper\program\wrapper.program.programs.ixx" />
     <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />
-    <ClCompile Include="src\wrapper\tex_object.ixx" />
-    <ClCompile Include="src\wrapper\tex_object_imp.cpp" />
-    <ClCompile Include="src\wrapper\vao.ixx" />
-    <ClCompile Include="src\wrapper\gl_object.cpp" />
-    <ClCompile Include="src\wrapper\gl_object.ixx" />
-    <ClCompile Include="src\wrapper\gl_object_imp.cpp" />
-    <ClCompile Include="src\wrapper\tex_object.cpp" />
-    <ClCompile Include="src\wrapper\program\programs.cpp" />
-    <ClCompile Include="src\wrapper\program\base_program.cpp" />
-    <ClCompile Include="src\app\texture_tile.cpp" />
-    <ClCompile Include="src\world\camera.cpp" />
-    <ClCompile Include="src\world\collision\prism.cpp" />
-    <ClCompile Include="src\world\collision\transformable.cpp" />
-    <ClCompile Include="src\world\scene.cpp" />
-    <ClCompile Include="src\wrapper\vao.cpp" />
-    <ClCompile Include="src\wrapper\vao_imp.cpp" />
+    <ClCompile Include="src\wrapper\wrapper.tex_object.ixx" />
+    <ClCompile Include="src\wrapper\wrapper.tex_object.cpp" />
+    <ClCompile Include="src\wrapper\wrapper.vao.ixx" />
+    <ClCompile Include="src\wrapper\wrapper.gl_object.ixx" />
+    <ClCompile Include="src\wrapper\wrapper.gl_object.cpp" />
+    <ClCompile Include="src\wrapper\wrapper.vao.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\app\app.h" />
-    <ClInclude Include="src\app\update_cycle.h" />
-    <ClInclude Include="src\util\debug_utils.h" />
-    <ClInclude Include="src\app\font.h" />
-    <ClInclude Include="src\util\glm_utils.h" />
     <ClInclude Include="src\util\gl_utils.h" />
-    <ClInclude Include="src\util\memory_utils.h" />
-    <ClInclude Include="src\util\polyhedron_utils.h" />
-    <ClInclude Include="src\util\vector_utils.h" />
-    <ClInclude Include="src\world\base_polyhedron.h" />
-    <ClInclude Include="src\world\collision\box.h" />
-    <ClInclude Include="src\world\collision\features\edge.h" />
-    <ClInclude Include="src\world\collision\features\face.h" />
-    <ClInclude Include="src\world\collision\features\feature.h" />
-    <ClInclude Include="src\world\collision\features\vertex.h" />
-    <ClInclude Include="src\world\collision\polyhedron.h" />
     <ClInclude Include="src\world\collision\simplex.h" />
-    <ClInclude Include="src\world\collision\simplex_factory.h" />
-    <ClInclude Include="src\world\game_object.h" />
-    <ClInclude Include="src\world\render\uv_list_factory.h" />
-    <ClInclude Include="src\wrapper\base_buffer_object.h" />
-    <ClInclude Include="src\wrapper\buffer_objects.h" />
-    <ClInclude Include="src\wrapper\gl_object.h" />
-    <ClInclude Include="src\wrapper\program\programs.h" />
-    <ClInclude Include="src\wrapper\program\base_program.h" />
-    <ClInclude Include="src\app\texture_tile.h" />
-    <ClInclude Include="src\world\camera.h" />
-    <ClInclude Include="src\world\collision\game_object.h" />
-    <ClInclude Include="src\world\collision\transformable.h" />
-    <ClInclude Include="src\world\collision\prism.h" />
-    <ClInclude Include="src\world\scene.h" />
-    <ClInclude Include="src\wrapper\program\vertex_formats.h" />
-    <ClInclude Include="src\wrapper\tex_object.h" />
-    <ClInclude Include="src\wrapper\vao.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\cube.txt" />
