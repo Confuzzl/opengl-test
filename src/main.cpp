@@ -5,45 +5,47 @@
 // #include "world/collision/simplex_factory.h"
 // #include "world/game_object.h"
 
-#include "util/gl_utils.h"
+#include "util/gl_utils.hpp"
 
 import app.app;
 import util.debug;
 import world.collision.prism;
-import world.collision.simplex_factory;
+import world.factory.simplex_factory;
 import world.game_object;
 import util.polyhedron;
 
 int main() {
   // try {
-  //   Vec3List coordinates{
-  //       {-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
-  //   GameObject go{SimplexFactory::createCollidableSimplex(coordinates),
-  //                 SimplexFactory::createRenderableSimplex(coordinates)};
+  Vec3List coordinates{{-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
+  GameObject go{SimplexFactory::createCollidableSimplex(coordinates),
+                SimplexFactory::createRenderableSimplex(coordinates)};
+  app.scene.gameObjects.insert(&go);
   // } catch (const std::runtime_error &e) {
   //   std::cout << e.what();
   // }
 
   Prism a{1, 1, 1};
-  a.rotateZ(45);
-  a.translate({0, 0, -3});
+  // a.rotateZ(45);
+  // a.translate({0, 0, -3});
 
-  Prism b{1, 1, 1};
-  b.translate({5, 0, 0});
+  // Prism b{1, 1, 1};
+  // b.translate({5, 0, 0});
 
-  Prism c{1, 2, 1};
-  c.translate({0, 0, 3});
+  // Prism c{1, 2, 1};
+  // c.translate({0, 0, 3});
 
-  Prism d{3, 1, 2};
-  d.translate({0, 2, 0});
+  // Prism d{3, 1, 2};
+  // d.translate({0, 2, 0});
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_DEPTH_TEST);
-  glEnable(GL_CULL_FACE);
-  app.defaultProgram.vao.bindVBO(Prism::sharedVBO);
-  app.defaultProgram.vao.bindEBO(Prism::ebo);
+  // glEnable(GL_CULL_FACE);
+  //  app.defaultProgram.vao.bindVBO(Prism::sharedVBO);
+  //  app.defaultProgram.vao.bindEBO(Prism::ebo);
+  // app.defaultProgram.vao.bindVBO(SimplexFactory::sharedVBO);
+  // app.defaultProgram.vao.bindEBO(SimplexFactory::ebo);
 
   glfwSwapInterval(0);
   while (!glfwWindowShouldClose(app.window)) {

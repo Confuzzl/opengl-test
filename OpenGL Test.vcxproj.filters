@@ -35,180 +35,189 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\util.debug.ixx">
+    <ClCompile Include="src\util\debug.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\util.glm.ixx">
+    <ClCompile Include="src\util\glm.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\util.memory.ixx">
+    <ClCompile Include="src\util\memory.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\util.polyhedron.ixx">
+    <ClCompile Include="src\util\polyhedron.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\util.vector.ixx">
+    <ClCompile Include="src\util\vector.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.app.ixx">
+    <ClCompile Include="src\app\app.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.update_cycle.ixx">
+    <ClCompile Include="src\app\update_cycle.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.update_cycle.cpp">
+    <ClCompile Include="src\app\update_cycle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.font.ixx">
+    <ClCompile Include="src\app\font.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.texture_tile.ixx">
+    <ClCompile Include="src\app\texture_tile.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.font.cpp">
+    <ClCompile Include="src\app\font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.texture_tile.cpp">
+    <ClCompile Include="src\app\texture_tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\app.app.cpp">
+    <ClCompile Include="src\app\app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.gl_object.ixx">
+    <ClCompile Include="src\wrapper\gl_object.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.vao.ixx">
+    <ClCompile Include="src\wrapper\vao.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.tex_object.ixx">
+    <ClCompile Include="src\wrapper\tex_object.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.buffer_object.ixx">
+    <ClCompile Include="src\wrapper\buffer_object.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.gl_object.cpp">
+    <ClCompile Include="src\wrapper\gl_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.buffer_object.cpp">
+    <ClCompile Include="src\wrapper\buffer_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.vao.cpp">
+    <ClCompile Include="src\wrapper\vao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\wrapper.tex_object.cpp">
+    <ClCompile Include="src\wrapper\tex_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\wrapper\program\vertex_formats.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\wrapper.program.base_program.ixx">
+    <ClCompile Include="src\wrapper\program\base_program.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\wrapper.program.base_program.cpp">
+    <ClCompile Include="src\wrapper\program\base_program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\wrapper.program.programs.ixx">
+    <ClCompile Include="src\wrapper\program\programs.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\wrapper.program.programs-simple.ixx">
+    <ClCompile Include="src\wrapper\program\programs-simple.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\wrapper.program.programs-font.ixx">
+    <ClCompile Include="src\wrapper\program\programs-font.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\wrapper.program.programs-simple.cpp">
+    <ClCompile Include="src\wrapper\program\programs-simple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\wrapper.program.programs-font.cpp">
+    <ClCompile Include="src\wrapper\program\programs-font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.scene.cpp">
+    <ClCompile Include="src\world\scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.scene.ixx">
+    <ClCompile Include="src\world\scene.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.camera.cpp">
+    <ClCompile Include="src\world\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.camera.ixx">
+    <ClCompile Include="src\world\camera.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.game_object.ixx">
+    <ClCompile Include="src\world\game_object.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.transformable.ixx">
+    <ClCompile Include="src\world\transformable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.game_object.cpp">
+    <ClCompile Include="src\world\game_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.base_polyhedron.ixx">
+    <ClCompile Include="src\world\base_polyhedron.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\world.collision.polyhedron.ixx">
+    <ClCompile Include="src\world\collision\collider.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\render\world.render.uv_list_factory.ixx">
+    <ClCompile Include="src\world\factory\simplex.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\world.collision.simplex_factory.ixx">
+    <ClCompile Include="src\world\base_polyhedron.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.base_polyhedron.cpp">
+    <ClCompile Include="src\world\render\renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\render\world.render.renderable.cpp">
+    <ClCompile Include="src\world\factory\simplex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\render\world.render.uv_list_factory.cpp">
+    <ClCompile Include="src\world\collision\collider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\world.collision.simplex_factory.cpp">
+    <ClCompile Include="src\world\collision\features\feature.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\world.collision.polyhedron.cpp">
+    <ClCompile Include="src\world\collision\features\vertex.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.feature.ixx">
+    <ClCompile Include="src\world\collision\features\edge.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.vertex.ixx">
+    <ClCompile Include="src\world\collision\features\face.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.edge.ixx">
+    <ClCompile Include="src\world\collision\features\feature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.face.ixx">
+    <ClCompile Include="src\world\collision\features\vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.feature.cpp">
+    <ClCompile Include="src\world\collision\features\edge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.vertex.cpp">
+    <ClCompile Include="src\world\collision\features\face.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.edge.cpp">
+    <ClCompile Include="src\world\render\renderable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\features\world.collision.features.face.cpp">
+    <ClCompile Include="src\world\collision\prism.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\render\world.render.renderable.ixx">
+    <ClCompile Include="src\world\collision\prism.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\world.collision.prism.cpp">
+    <ClCompile Include="src\world\transformable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\world.collision.prism.ixx">
+    <ClCompile Include="src\wrapper\program\vertex_formats-simple.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\world.transformable.cpp">
+    <ClCompile Include="src\wrapper\program\vertex_formats-font.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\vertex_formats-font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\wrapper\program\vertex_formats-simple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\math.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\util\gl_utils.h">
+    <ClInclude Include="src\util\gl_utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\world\collision\simplex.h">
