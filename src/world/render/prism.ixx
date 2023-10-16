@@ -12,8 +12,6 @@ public:
   static EBO ebo;
   static VBO sharedVBO;
 
-  const unsigned int ID;
-
   SimpleVertex vertexInfo[6 * 2 * 3]{};
 
   Prism(const float width, const float height, const float depth);
@@ -27,6 +25,7 @@ private:
   enum Direction { Z_PLUS, X_PLUS, Z_MINUS, X_MINUS, Y_PLUS, Y_MINUS };
 
   static unsigned int COUNT;
+  const unsigned int ID;
 
   static const GLuint indices[36];
   static const Vec3 maps[6][2][3];

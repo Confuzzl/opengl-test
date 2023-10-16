@@ -70,8 +70,7 @@ Prism::Prism(const float width, const float height, const float depth)
     initializeBuffers();
 
   for (int i = 0; i < 6; i++)
-    setFace(Direction(i), TexTile::textureKeys[(unsigned int)random(
-                              0, (double)TexTile::textureDict.size())]);
+    setFace(Direction(i), TexTile::getRandomTexture());
 
   app.scene.objects.insert(this);
 }

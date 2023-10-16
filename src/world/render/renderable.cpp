@@ -24,10 +24,11 @@ Renderable::Renderable(EBO &ebo, VBO &sharedVBO, const Vec3List &coordinates,
 }
 
 void Renderable::initializeVertexInfo() {
-  for (unsigned char faceIndex = 0; const auto &face : faceVertexIndices) {
+  for (unsigned char faceIndex = 0, coordinateIndex = 0;
+       const auto &face : faceVertexIndices) {
     const auto &texture = TexTile::getRandomTexture();
     for (unsigned char vertexIndex = 0; const auto &vertex : face) {
-      const Vec3 &pos = coordinates[vertexIndex];
+      const Vec3 &pos = coordinates[coordinateIndex];
 
       const auto &uvLocal = faceTextureList[faceIndex][vertexIndex];
       const TexTile tex = TexTile::getTile(texture, app.atlas);
@@ -40,6 +41,17 @@ void Renderable::initializeVertexInfo() {
                                            uvGlobal[1])
                 << "\n";
       vertexIndex++;
+      coordinateIndex++;
+    }
+    faceIndex++;
+  }
+
+  for (unsigned short faceIndex = 0; const RFace &face : UVs) {
+    for (unsigned short triIndex = 0; const RTri &tri : face.tris) {
+      for (unsigned char vertexIndex = 0; vertexIndex < 3; vertexIndex++) {
+        const auto &uvLocal = tri[vertexIndex];
+      }
+      triIndex++;
     }
     faceIndex++;
   }

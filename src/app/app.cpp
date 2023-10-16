@@ -138,6 +138,7 @@ void App::drawScene() {
 
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
+    // std::cout << defaultProgram.vao.boundedEBO.size << "\n";
     glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
                    GL_UNSIGNED_INT, 0);
   }
@@ -153,6 +154,7 @@ void App::drawScene() {
 
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
+    // std::cout << defaultProgram.vao.boundedEBO.size << "\n";
     glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
                    GL_UNSIGNED_INT, 0);
   }

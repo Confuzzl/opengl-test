@@ -7,6 +7,9 @@ import world.transformable;
 import util.memory;
 
 export class GameObject : public Transformable {
+  static unsigned int COUNT;
+  const unsigned int ID;
+
   UPtr<Collider> collider;
   UPtr<Renderable> render;
 

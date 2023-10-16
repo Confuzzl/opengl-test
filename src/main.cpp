@@ -1,10 +1,3 @@
-// #include "app/app.h"
-// #include "util/debug_utils.h"
-// #include "world/collision/prism.h"
-//
-// #include "world/collision/simplex_factory.h"
-// #include "world/game_object.h"
-
 #include "util/gl_utils.hpp"
 
 import app.app;
@@ -19,7 +12,6 @@ int main() {
   Vec3List coordinates{{-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
   GameObject go{SimplexFactory::createCollidableSimplex(coordinates),
                 SimplexFactory::createRenderableSimplex(coordinates)};
-  app.scene.gameObjects.insert(&go);
   // } catch (const std::runtime_error &e) {
   //   std::cout << e.what();
   // }
@@ -28,14 +20,14 @@ int main() {
   // a.rotateZ(45);
   // a.translate({0, 0, -3});
 
-  // Prism b{1, 1, 1};
-  // b.translate({5, 0, 0});
+  Prism b{1, 1, 1};
+  b.translate({5, 0, 0});
 
-  // Prism c{1, 2, 1};
-  // c.translate({0, 0, 3});
+  Prism c{1, 2, 1};
+  c.translate({0, 0, 3});
 
-  // Prism d{3, 1, 2};
-  // d.translate({0, 2, 0});
+  Prism d{3, 1, 2};
+  d.translate({0, 2, 0});
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   glEnable(GL_BLEND);
