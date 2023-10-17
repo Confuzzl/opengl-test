@@ -16,7 +16,7 @@ export class SimplexFactory {
   const static EdgeNeighborList efIndices;
   const static FaceNeighborList feIndices;
 
-  const static FaceVertexList fvIndices;
+  const static RFaceCoordinateIndexList fvIndices;
 
   SimplexFactory() = delete;
   SimplexFactory(const SimplexFactory &) = delete;

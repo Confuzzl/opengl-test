@@ -16,8 +16,8 @@ const EdgeNeighborList SimplexFactory::efIndices{{0, 2}, {0, 3}, {0, 1},
 const FaceNeighborList SimplexFactory::feIndices{
     {0, 1, 2}, {2, 3, 4}, {0, 4, 5}, {1, 5, 3}};
 
-const FaceVertexList SimplexFactory::fvIndices{
-    {0, 1, 2}, {0, 2, 3}, {1, 0, 3}, {2, 1, 3}};
+const RFaceCoordinateIndexList SimplexFactory::fvIndices{
+    {{0, 1, 2}}, {{0, 2, 3}}, {{1, 0, 3}}, {{2, 1, 3}}};
 
 UPtr<Collider>
 SimplexFactory::createCollidableSimplex(const Vec3List &coordinates) {
@@ -32,10 +32,10 @@ SimplexFactory::createRenderableSimplex(const Vec3List &coordinates) {
 
   return std::make_unique<Renderable>(
       ebo, sharedVBO, coordinates, fvIndices,
-      Renderable::UVList{{{0, 0}, {1, 0}, {0.5, 1}},
-                         {{0, 0}, {1, 0}, {0.5, 1}},
-                         {{0, 0}, {1, 0}, {0.5, 1}},
-                         {{0, 0}, {1, 0}, {0.5, 1}}});
+      RFaceUVList{{{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
+                  {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
+                  {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
+                  {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}}});
 }
 
 GLuint SimplexFactory::eboIndices[RVERTEX_COUNT]{};

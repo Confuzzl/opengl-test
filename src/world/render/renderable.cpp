@@ -11,45 +11,46 @@ import util.math;
 import util.debug;
 
 Renderable::Renderable(EBO &ebo, VBO &sharedVBO, const Vec3List &coordinates,
-                       const FaceVertexList &faceVertexIndices,
-                       const UVList &faceTextureList)
+                       const RFaceCoordinateIndexList &faceVertexIndices,
+                       const RFaceUVList &UVs)
     : BasePolyhedron(coordinates), ebo{ebo}, sharedVBO{sharedVBO},
-      faceVertexIndices{faceVertexIndices}, faceTextureList{faceTextureList} {
-  if (faceVertexIndices.size() != faceTextureList.size())
+      faceVertexIndices{faceVertexIndices}, UVs{UVs} {
+  if (faceVertexIndices.size() != UVs.size())
     throw FaceUVMismatchException{
         std::format("UV LIST SIZE DOES NOT MATCH FACE COUNT ({} != {})\n",
-                    faceVertexIndices.size(), faceTextureList.size())};
+                    faceVertexIndices.size(), UVs.size())};
 
   initializeVertexInfo();
 }
 
 void Renderable::initializeVertexInfo() {
-  for (unsigned char faceIndex = 0, coordinateIndex = 0;
-       const auto &face : faceVertexIndices) {
-    const auto &texture = TexTile::getRandomTexture();
-    for (unsigned char vertexIndex = 0; const auto &vertex : face) {
-      const Vec3 &pos = coordinates[coordinateIndex];
+  //for (unsigned char faceIndex = 0; const auto &face : faceVertexIndices) {
+  //  const auto &texture = TexTile::getRandomTexture();
+  //  for (unsigned char vertexIndex = 0; const auto &vertex : face) {
+  //    const Vec3 &pos = coordinates[vertex];
 
-      const auto &uvLocal = faceTextureList[faceIndex][vertexIndex];
-      const TexTile tex = TexTile::getTile(texture, app.atlas);
-      const glm::lowp_u16vec2 uvGlobal = {
-          tex.coordinates +
-          (glm::lowp_u16vec2)((Vec2)tex.dimensions * uvLocal)};
+  //    const auto &uvLocal = UVs[faceIndex][vertexIndex];
+  //    const TexTile tex = TexTile::getTile(texture, app.atlas);
+  //    const glm::lowp_u16vec2 uvGlobal = {
+  //        tex.coordinates +
+  //        (glm::lowp_u16vec2)((Vec2)tex.dimensions * uvLocal)};
 
-      std::cout << vertexInfo.emplace_back(pos[0], pos[1], pos[2], UCHAR_MAX,
-                                           UCHAR_MAX, UCHAR_MAX, uvGlobal[0],
-                                           uvGlobal[1])
-                << "\n";
-      vertexIndex++;
-      coordinateIndex++;
-    }
-    faceIndex++;
-  }
+  //    std::cout << vertexInfo.emplace_back(pos[0], pos[1], pos[2], UCHAR_MAX,
+  //                                         UCHAR_MAX, UCHAR_MAX, uvGlobal[0],
+  //                                         uvGlobal[1])
+  //              << "\n";
+  //    vertexIndex++;
+  //  }
+  //  faceIndex++;
+  //}
 
-  for (unsigned short faceIndex = 0; const RFace &face : UVs) {
-    for (unsigned short triIndex = 0; const RTri &tri : face.tris) {
-      for (unsigned char vertexIndex = 0; vertexIndex < 3; vertexIndex++) {
-        const auto &uvLocal = tri[vertexIndex];
+  for (unsigned short faceIndex = 0; const auto &face : UVs) {
+    for (unsigned short triIndex = 0; const auto &tri : face.tris) {
+      for (unsigned char triVertexIndex = 0; triVertexIndex < 3;
+           triVertexIndex++) {
+        /*const Vec3 &pos = coordinates[faceVertexIndices[faceIndex]]*/
+
+        const auto &uvLocal = tri[triVertexIndex];
       }
       triIndex++;
     }
