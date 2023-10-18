@@ -24,26 +24,6 @@ Renderable::Renderable(EBO &ebo, VBO &sharedVBO, const Vec3List &coordinates,
 }
 
 void Renderable::initializeVertexInfo() {
-  // for (unsigned char f = 0; const auto &face : faceVertexIndices) {
-  //   const auto &texture = TexTile::getRandomTexture();
-  //   for (unsigned char v = 0; const auto &vertex : face) {
-  //     const Vec3 &pos = coordinates[vertex];
-
-  //    const auto &uvLocal = UVs[f][v];
-  //    const TexTile tex = TexTile::getTile(texture, app.atlas);
-  //    const glm::lowp_u16vec2 uvGlobal = {
-  //        tex.coordinates +
-  //        (glm::lowp_u16vec2)((Vec2)tex.dimensions * uvLocal)};
-
-  //    std::cout << vertexInfo.emplace_back(pos[0], pos[1], pos[2], UCHAR_MAX,
-  //                                         UCHAR_MAX, UCHAR_MAX, uvGlobal[0],
-  //                                         uvGlobal[1])
-  //              << "\n";
-  //    v++;
-  //  }
-  //  f++;
-  //}
-
   for (unsigned short f = 0; f < UVs.size(); f++) {
     const auto &indexFace = faceVertexIndices[f];
     const auto &uvFace = UVs[f];

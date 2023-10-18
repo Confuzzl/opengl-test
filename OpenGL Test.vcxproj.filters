@@ -215,6 +215,18 @@
     <ClCompile Include="src\util\math.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\world\player\player.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\factory\abstract_factory.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\factory\factories.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\factory\abstract_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\gl_utils.hpp">
