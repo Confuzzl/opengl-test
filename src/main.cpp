@@ -10,15 +10,18 @@ import util.polyhedron;
 int main() {
   // try {
   Vec3List coordinates{{-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
+  for (auto &v : coordinates)
+    v /= 2;
+
   GameObject go{SimplexFactory::createCollidableSimplex(coordinates),
                 SimplexFactory::createRenderableSimplex(coordinates)};
   // } catch (const std::runtime_error &e) {
   //   std::cout << e.what();
   // }
 
-  Prism a{1, 1, 1};
-  // a.rotateZ(45);
-  // a.translate({0, 0, -3});
+  // Prism a{1, 1, 1};
+  //  a.rotateZ(45);
+  //  a.translate({0, 0, -3});
 
   Prism b{1, 1, 1};
   b.translate({5, 0, 0});
@@ -29,11 +32,12 @@ int main() {
   Prism d{3, 1, 2};
   d.translate({0, 2, 0});
 
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+  glLineWidth(5);
+  glPolygonMode(GL_FRONT, GL_FILL);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_DEPTH_TEST);
-  // glEnable(GL_CULL_FACE);
+  glEnable(GL_CULL_FACE);
   //  app.defaultProgram.vao.bindVBO(Prism::sharedVBO);
   //  app.defaultProgram.vao.bindEBO(Prism::ebo);
   // app.defaultProgram.vao.bindVBO(SimplexFactory::sharedVBO);
@@ -64,6 +68,11 @@ int main() {
                             std::format("UPS: {}", app.updateCycle.prevCount));
         app.drawTextTopLeft(16, 112, 1,
                             std::format("FPS: {}", app.frameCycle.prevCount));
+
+        const auto &pos = app.scene.camera.getPosition();
+        app.drawTextTopLeft(16, 144, 1, std::format("X: {:+.3f}", pos[0]));
+        app.drawTextTopLeft(16, 176, 1, std::format("Y: {:+.3f}", pos[1]));
+        app.drawTextTopLeft(16, 208, 1, std::format("Z: {:+.3f}", pos[2]));
 
         glfwSwapBuffers(app.window);
       }

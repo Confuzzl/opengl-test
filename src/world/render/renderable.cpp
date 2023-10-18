@@ -24,12 +24,12 @@ Renderable::Renderable(EBO &ebo, VBO &sharedVBO, const Vec3List &coordinates,
 }
 
 void Renderable::initializeVertexInfo() {
-  //for (unsigned char faceIndex = 0; const auto &face : faceVertexIndices) {
-  //  const auto &texture = TexTile::getRandomTexture();
-  //  for (unsigned char vertexIndex = 0; const auto &vertex : face) {
-  //    const Vec3 &pos = coordinates[vertex];
+  // for (unsigned char f = 0; const auto &face : faceVertexIndices) {
+  //   const auto &texture = TexTile::getRandomTexture();
+  //   for (unsigned char v = 0; const auto &vertex : face) {
+  //     const Vec3 &pos = coordinates[vertex];
 
-  //    const auto &uvLocal = UVs[faceIndex][vertexIndex];
+  //    const auto &uvLocal = UVs[f][v];
   //    const TexTile tex = TexTile::getTile(texture, app.atlas);
   //    const glm::lowp_u16vec2 uvGlobal = {
   //        tex.coordinates +
@@ -39,22 +39,33 @@ void Renderable::initializeVertexInfo() {
   //                                         UCHAR_MAX, UCHAR_MAX, uvGlobal[0],
   //                                         uvGlobal[1])
   //              << "\n";
-  //    vertexIndex++;
+  //    v++;
   //  }
-  //  faceIndex++;
+  //  f++;
   //}
 
-  for (unsigned short faceIndex = 0; const auto &face : UVs) {
-    for (unsigned short triIndex = 0; const auto &tri : face.tris) {
-      for (unsigned char triVertexIndex = 0; triVertexIndex < 3;
-           triVertexIndex++) {
-        /*const Vec3 &pos = coordinates[faceVertexIndices[faceIndex]]*/
+  for (unsigned short f = 0; f < UVs.size(); f++) {
+    const auto &indexFace = faceVertexIndices[f];
+    const auto &uvFace = UVs[f];
 
-        const auto &uvLocal = tri[triVertexIndex];
+    const auto &texture = TexTile::getRandomTexture();
+    for (unsigned short t = 0; t < UVs[f].size(); t++) {
+      const auto &indexTri = faceVertexIndices[f][t];
+      const auto &uvTri = UVs[f][t];
+      for (unsigned short v = 0; v < UVs[f][t].size(); v++) {
+        const unsigned short &indexVertex = faceVertexIndices[f][t][v];
+        const Vec2 &uvVertex = UVs[f][t][v];
+
+        const Vec3 &pos = coordinates[indexVertex];
+        const TexTile tex = TexTile::getTile(texture, app.atlas);
+        const glm::lowp_u16vec2 uvGlobal =
+            tex.coordinates + static_cast<glm::lowp_u16vec2>(
+                                  static_cast<Vec2>(tex.dimensions) * uvVertex);
+
+        vertexInfo.emplace_back(pos[0], pos[1], pos[2], UCHAR_MAX, UCHAR_MAX,
+                                UCHAR_MAX, uvGlobal[0], uvGlobal[1]);
       }
-      triIndex++;
     }
-    faceIndex++;
   }
 }
 

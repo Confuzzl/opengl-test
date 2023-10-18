@@ -10,10 +10,10 @@ public:
   Vec3 getUp() const;
   Vec3 getRight() const;
 
-  void setPosition(const Vec3 v);
-  void translate(const Vec3 v);
+  void setPosition(const Vec3 &v);
+  void translate(const Vec3 &v);
 
-  void rotate(const Vec3 axis, const float deg);
+  void rotate(const Vec3 &axis, const float deg);
   void resetRotate();
 
   void rotateX(const float deg);

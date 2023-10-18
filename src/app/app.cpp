@@ -55,8 +55,8 @@ static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
   app.prevX = xpos;
   app.prevY = ypos;
 
-  const float magnitude =
-      (float)(app.updateCycle.delta * app.scene.camera.sensitivity);
+  const float magnitude = static_cast<float>(app.updateCycle.delta *
+                                             app.scene.camera.getSensitivity());
   app.scene.camera.rotate(dx * magnitude, dy * magnitude);
 }
 static void keyCallback(GLFWwindow *window, int key, int scancode, int action,
@@ -94,24 +94,25 @@ void App::processInput() {
     glfwSetWindowShouldClose(window, GL_TRUE);
 
   {
-    scene.camera.velocity = {};
-    const float magnitude = (float)(updateCycle.delta * scene.camera.speed);
+    scene.camera.resetVelocity();
+    const float magnitude =
+        static_cast<float>(updateCycle.delta * scene.camera.getSpeed());
     if (glfwGetKey(window, GLFW_KEY_W))
-      scene.camera.velocity += scene.camera.forward * magnitude;
+      scene.camera.addVelocity(scene.camera.getForward() * magnitude);
     if (glfwGetKey(window, GLFW_KEY_A))
-      scene.camera.velocity += scene.camera.right * -magnitude;
+      scene.camera.addVelocity(scene.camera.getRight() * -magnitude);
     if (glfwGetKey(window, GLFW_KEY_S))
-      scene.camera.velocity += scene.camera.forward * -magnitude;
+      scene.camera.addVelocity(scene.camera.getForward() * -magnitude);
     if (glfwGetKey(window, GLFW_KEY_D))
-      scene.camera.velocity += scene.camera.right * magnitude;
+      scene.camera.addVelocity(scene.camera.getRight() * magnitude);
     if (glfwGetKey(window, GLFW_KEY_SPACE))
-      scene.camera.velocity += Y_PLUS * magnitude;
+      scene.camera.addVelocity(Y_PLUS * magnitude);
     if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL))
-      scene.camera.velocity += Y_PLUS * -magnitude;
+      scene.camera.addVelocity(Y_PLUS * -magnitude);
   }
   {
     const float magnitude =
-        (float)(updateCycle.delta * scene.camera.sensitivity);
+        static_cast<float>(updateCycle.delta * scene.camera.getSensitivity());
     if (glfwGetKey(window, GLFW_KEY_UP))
       scene.camera.rotate(0, magnitude);
     if (glfwGetKey(window, GLFW_KEY_LEFT))
@@ -127,18 +128,17 @@ void App::processInput() {
 
 void App::drawScene() {
   defaultProgram.useProgram();
-  defaultProgram.setMat4("projection", scene.camera.projection);
+  defaultProgram.setMat4("projection", scene.camera.getProjection());
   for (const auto &obj : scene.objects) {
     defaultProgram.vao.bindEBO(Prism::ebo);
     defaultProgram.vao.bindVBO(Prism::sharedVBO);
     defaultProgram.setMat4("model", obj->getTransform());
-    defaultProgram.setMat4("view", scene.camera.view);
+    defaultProgram.setMat4("view", scene.camera.getView());
 
     obj->writeToVBO();
 
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
-    // std::cout << defaultProgram.vao.boundedEBO.size << "\n";
     glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
                    GL_UNSIGNED_INT, 0);
   }
@@ -148,14 +148,13 @@ void App::drawScene() {
     defaultProgram.vao.bindVBO(r.sharedVBO);
 
     defaultProgram.setMat4("model", obj->getTransform());
-    defaultProgram.setMat4("view", scene.camera.view);
+    defaultProgram.setMat4("view", scene.camera.getView());
 
     r.writeToSharedVBO();
 
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
-    // std::cout << defaultProgram.vao.boundedEBO.size << "\n";
-    glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
+    glDrawElements(GL_LINE_STRIP, (GLsizei)defaultProgram.vao.boundedEBO.size,
                    GL_UNSIGNED_INT, 0);
   }
 }

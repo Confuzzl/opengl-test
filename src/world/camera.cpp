@@ -14,11 +14,21 @@ void Camera::update() {
   move(velocity);
 }
 
-void Camera::move(const Vec3 t) {
+const Mat4 &Camera::getProjection() { return projection; }
+const Mat4 &Camera::getView() { return view; }
+const Vec3 &Camera::getPosition() { return pos; }
+const float Camera::getSpeed() { return speed; }
+const Vec3 &Camera::getVelocity() { return velocity; }
+const Vec3 &Camera::getForward() { return forward; }
+const Vec3 &Camera::getUp() { return up; }
+const Vec3 &Camera::getRight() { return right; }
+const float Camera::getSensitivity() { return sensitivity; }
+
+void Camera::move(const Vec3 &t) {
   pos += t;
   view = glm::translate(view, -t);
 }
-void Camera::setPosition(const Vec3 t) { move(t - pos); }
+void Camera::setPosition(const Vec3 &t) { move(t - pos); }
 
 void Camera::rotate(const float yaw, const float pitch) {
   setRotate(this->yaw + yaw, this->pitch + pitch);
@@ -37,3 +47,6 @@ void Camera::setRotate(const float yaw, const float pitch) {
 
   view = glm::lookAt(pos, pos + forward, Y_PLUS);
 }
+
+void Camera::resetVelocity() { velocity = {}; }
+void Camera::addVelocity(const Vec3 &v) { velocity += v; }

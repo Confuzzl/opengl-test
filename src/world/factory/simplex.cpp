@@ -6,6 +6,7 @@ module;
 module world.factory.simplex_factory;
 
 import util.debug;
+import wrapper.program.vertex_formats;
 
 const VertexNeighborList SimplexFactory::veIndices{
     {0, 2, 4}, {0, 1, 5}, {1, 2, 3}, {3, 4, 5}};

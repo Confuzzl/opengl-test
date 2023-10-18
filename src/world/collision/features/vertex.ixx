@@ -10,7 +10,7 @@ export class Vertex : public Feature {
   Vec3 localCoordinate;
 
 public:
-  Vertex(Collider &parent, const unsigned short ID, const Vec3 pos);
+  Vertex(Collider &parent, const unsigned short ID, const Vec3 &pos);
   //~Vertex();
 
   void addNeighbor(SPtr<Edge> &neighbor);

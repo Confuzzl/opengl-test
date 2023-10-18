@@ -6,10 +6,10 @@ Vec3 Transformable::getForward() const { return forward; }
 Vec3 Transformable::getUp() const { return up; }
 Vec3 Transformable::getRight() const { return right; }
 
-void Transformable::setPosition(const Vec3 v) { translate(v - getPosition()); }
-void Transformable::translate(const Vec3 v) { pos = glm::translate(pos, v); }
+void Transformable::setPosition(const Vec3 &v) { translate(v - getPosition()); }
+void Transformable::translate(const Vec3 &v) { pos = glm::translate(pos, v); }
 
-void Transformable::rotate(const Vec3 axis, const float deg) {
+void Transformable::rotate(const Vec3 &axis, const float deg) {
   rot = glm::rotate(rot, glm::radians(deg), axis);
   forward = rotateAroundAxis(forward, axis, deg);
   up = rotateAroundAxis(up, axis, deg);
