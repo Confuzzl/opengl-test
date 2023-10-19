@@ -3,10 +3,10 @@ export module world.factory.factories:simplex;
 import world.factory.base_factory;
 import util.polyhedron;
 
-export class SimplexFactory : public AbstractFactory {
+export class SimplexFactory : public BaseFactory {
 public:
   SimplexFactory()
-      : AbstractFactory(
+      : BaseFactory(
             4, 4,
             VertexNeighborList{{0, 2, 4}, {0, 1, 5}, {1, 2, 3}, {3, 4, 5}},
             EdgeNeighborList{{0, 1}, {1, 2}, {2, 0}, {2, 3}, {0, 3}, {1, 3}},

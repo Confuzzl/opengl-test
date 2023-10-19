@@ -10,7 +10,7 @@ import util.polyhedron;
 import util.memory;
 import wrapper.buffer_object;
 
-export class AbstractFactory {
+export class BaseFactory {
   const unsigned short vertexCount;
   const unsigned short faceCount;
 
@@ -28,16 +28,17 @@ export class AbstractFactory {
   void initializeEBO();
   void allocateVBO();
 
-  AbstractFactory(const AbstractFactory &) = delete;
-  AbstractFactory(AbstractFactory &&) = delete;
+  BaseFactory(const BaseFactory &) = delete;
+  BaseFactory(BaseFactory &&) = delete;
 
 protected:
-  constexpr AbstractFactory(
-      const unsigned short vertexCount, const unsigned short faceCount,
-      const VertexNeighborList &veIndices, const EdgeNeighborList &evIndices,
-      const EdgeNeighborList &efIndices, const FaceNeighborList &feIndices,
-      const RFaceCoordinateIndexList &fvIndices, const RFaceUVList &defaultUVs,
-      const unsigned int rVertexCount);
+  BaseFactory(const unsigned short vertexCount, const unsigned short faceCount,
+              const VertexNeighborList &veIndices,
+              const EdgeNeighborList &evIndices,
+              const EdgeNeighborList &efIndices,
+              const FaceNeighborList &feIndices,
+              const RFaceCoordinateIndexList &fvIndices,
+              const RFaceUVList &defaultUVs, const unsigned int rVertexCount);
 
 public:
   EBO ebo{};

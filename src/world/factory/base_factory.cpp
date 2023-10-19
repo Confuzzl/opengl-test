@@ -8,7 +8,7 @@ module world.factory.base_factory;
 import wrapper.program.vertex_formats;
 import util.debug;
 
-AbstractFactory::AbstractFactory(
+BaseFactory::BaseFactory(
     const unsigned short vertexCount, const unsigned short faceCount,
     const VertexNeighborList &veIndices, const EdgeNeighborList &evIndices,
     const EdgeNeighborList &efIndices, const FaceNeighborList &feIndices,
@@ -21,7 +21,7 @@ AbstractFactory::AbstractFactory(
   allocateVBO();
 }
 
-void AbstractFactory::initializeEBO() {
+void BaseFactory::initializeEBO() {
   eboIndices.resize(rVertexCount);
   std::iota(eboIndices.begin(), eboIndices.end(), 0);
   ebo.allocateBufferObject(sizeof(eboIndices));
@@ -29,23 +29,23 @@ void AbstractFactory::initializeEBO() {
   std::cout << std::format("ebo {} for factory allocated and initialized\n",
                            ebo.ID);
 }
-void AbstractFactory::allocateVBO() {
+void BaseFactory::allocateVBO() {
   sharedVBO.allocateBufferObject(rVertexCount * SimpleVertex::WIDTH);
   std::cout << std::format("shared vbo {} for factory simplex allocated\n",
                            sharedVBO.ID);
 }
 
 UPtr<Collider>
-AbstractFactory::createCollidable(const Vec3List &coordinates) const {
+BaseFactory::createCollidable(const Vec3List &coordinates) const {
   return std::make_unique<Collider>(vertexCount, faceCount, coordinates,
                                     veIndices, evIndices, efIndices, feIndices);
 }
 UPtr<Renderable>
-AbstractFactory::createRenderable(const Vec3List &coordinates) const {
+BaseFactory::createRenderable(const Vec3List &coordinates) const {
   return createRenderable(coordinates, defaultUVs);
 }
 UPtr<Renderable>
-AbstractFactory::createRenderable(const Vec3List &coordinates,
+BaseFactory::createRenderable(const Vec3List &coordinates,
                                   const RFaceUVList &UVs) const {
   return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,
                                       UVs);

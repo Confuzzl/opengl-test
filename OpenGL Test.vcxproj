@@ -180,8 +180,9 @@
     <ClCompile Include="src\world\collision\features\vertex.cpp" />
     <ClCompile Include="src\world\collision\features\vertex.ixx" />
     <ClCompile Include="src\world\collision\collider.cpp" />
-    <ClCompile Include="src\world\factory\abstract_factory.cpp" />
-    <ClCompile Include="src\world\factory\abstract_factory.ixx" />
+    <ClCompile Include="src\world\factory\base_factory.cpp" />
+    <ClCompile Include="src\world\factory\base_factory.ixx" />
+    <ClCompile Include="src\world\factory\factories-prism.ixx" />
     <ClCompile Include="src\world\factory\factories-simplex.ixx" />
     <ClCompile Include="src\world\factory\factories.ixx" />
     <ClCompile Include="src\world\player\player.ixx" />
