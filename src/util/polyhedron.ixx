@@ -16,7 +16,6 @@ export using FaceNeighborList = Vector2D<unsigned char>;
 
 // export using FaceVertexList = Vector2D<unsigned char>;
 
-export template <typename T>
-using RFaceTriVertexList = Vector2D<std::array<T, 3>>;
+export template <typename T> using RFaceTriVertexList = Vector2D<Array<T, 3>>;
 export using RFaceUVList = RFaceTriVertexList<Vec2>;
 export using RFaceCoordinateIndexList = RFaceTriVertexList<unsigned short>;

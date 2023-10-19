@@ -21,9 +21,9 @@ private:
   void initializeVertexInfo();
 
 public:
-  EBO &ebo;
-  VBO &sharedVBO;
-  Renderable(EBO &ebo, VBO &sharedVBO, const Vec3List &coordinates,
+  const EBO &ebo;
+  const VBO &sharedVBO;
+  Renderable(const EBO &ebo, const VBO &sharedVBO, const Vec3List &coordinates,
              const RFaceCoordinateIndexList &faceVertexIndices,
              const RFaceUVList &UVs);
 

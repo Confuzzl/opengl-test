@@ -3,7 +3,7 @@ module;
 #include "util/gl_utils.hpp"
 #include <numeric>
 
-module world.factory.abstract_factory;
+module world.factory.base_factory;
 
 import wrapper.program.vertex_formats;
 import util.debug;
@@ -42,11 +42,11 @@ AbstractFactory::createCollidable(const Vec3List &coordinates) const {
 }
 UPtr<Renderable>
 AbstractFactory::createRenderable(const Vec3List &coordinates) const {
-  // return createRenderable(coordinates, defaultUVs);
+  return createRenderable(coordinates, defaultUVs);
 }
-// UPtr<Renderable>
-// AbstractFactory::createRenderable(const Vec3List &coordinates,
-//                                   const RFaceUVList &UVs) const {
-//   return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,
-//                                       UVs);
-// }
+UPtr<Renderable>
+AbstractFactory::createRenderable(const Vec3List &coordinates,
+                                  const RFaceUVList &UVs) const {
+  return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,
+                                      UVs);
+}

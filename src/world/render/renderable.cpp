@@ -10,7 +10,8 @@ import app.texture_tile;
 import util.math;
 import util.debug;
 
-Renderable::Renderable(EBO &ebo, VBO &sharedVBO, const Vec3List &coordinates,
+Renderable::Renderable(const EBO &ebo, const VBO &sharedVBO,
+                       const Vec3List &coordinates,
                        const RFaceCoordinateIndexList &faceVertexIndices,
                        const RFaceUVList &UVs)
     : BasePolyhedron(coordinates), ebo{ebo}, sharedVBO{sharedVBO},

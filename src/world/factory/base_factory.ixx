@@ -2,7 +2,7 @@ module;
 
 #include "util/gl_utils.hpp"
 
-export module world.factory.abstract_factory;
+export module world.factory.base_factory;
 
 import world.collision.polyhedron;
 import world.render.renderable;
@@ -23,7 +23,7 @@ export class AbstractFactory {
   const RFaceUVList defaultUVs;
 
   const unsigned int rVertexCount;
-  Vector<GLuint> eboIndices;
+  Vector<GLuint> eboIndices{};
 
   void initializeEBO();
   void allocateVBO();
@@ -32,7 +32,7 @@ export class AbstractFactory {
   AbstractFactory(AbstractFactory &&) = delete;
 
 protected:
-  AbstractFactory(
+  constexpr AbstractFactory(
       const unsigned short vertexCount, const unsigned short faceCount,
       const VertexNeighborList &veIndices, const EdgeNeighborList &evIndices,
       const EdgeNeighborList &efIndices, const FaceNeighborList &feIndices,
@@ -45,6 +45,6 @@ public:
 
   UPtr<Collider> createCollidable(const Vec3List &coordinates) const;
   UPtr<Renderable> createRenderable(const Vec3List &coordinates) const;
-  // UPtr<Renderable> createRenderable(const Vec3List &coordinates,
-  //                                   const RFaceUVList &UVs) const;
+  UPtr<Renderable> createRenderable(const Vec3List &coordinates,
+                                    const RFaceUVList &UVs) const;
 };
