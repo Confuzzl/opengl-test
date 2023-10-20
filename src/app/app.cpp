@@ -154,8 +154,9 @@ void App::drawScene() {
 
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
-    glDrawElements(GL_LINE_STRIP, (GLsizei)defaultProgram.vao.boundedEBO.size,
-                   GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_LINE_STRIP /*GL_TRIANGLES*/,
+                   (GLsizei)defaultProgram.vao.boundedEBO.size, GL_UNSIGNED_INT,
+                   0);
   }
 }
 void App::drawTextBottomLeft(const float x, const float y, const float scale,

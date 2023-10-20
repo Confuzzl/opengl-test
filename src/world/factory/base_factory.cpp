@@ -17,6 +17,10 @@ BaseFactory::BaseFactory(
     : vertexCount{vertexCount}, faceCount{faceCount}, veIndices{veIndices},
       evIndices{evIndices}, efIndices{efIndices}, feIndices{feIndices},
       fvIndices{fvIndices}, defaultUVs{defaultUVs}, rVertexCount{rVertexCount} {
+}
+
+void BaseFactory::initializeBuffers() {
+  buffersInitialized = true;
   initializeEBO();
   allocateVBO();
 }
@@ -35,17 +39,17 @@ void BaseFactory::allocateVBO() {
                            sharedVBO.ID);
 }
 
-UPtr<Collider>
-BaseFactory::createCollidable(const Vec3List &coordinates) const {
+UPtr<Collider> BaseFactory::createCollidable(const Vec3List &coordinates) {
   return std::make_unique<Collider>(vertexCount, faceCount, coordinates,
                                     veIndices, evIndices, efIndices, feIndices);
 }
-UPtr<Renderable>
-BaseFactory::createRenderable(const Vec3List &coordinates) const {
+UPtr<Renderable> BaseFactory::createRenderable(const Vec3List &coordinates) {
   return createRenderable(coordinates, defaultUVs);
 }
 UPtr<Renderable> BaseFactory::createRenderable(const Vec3List &coordinates,
-                                               const UVList &UVs) const {
+                                               const UVList &UVs) {
+  if (not buffersInitialized)
+    initializeBuffers();
   return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,
                                       UVs);
 }

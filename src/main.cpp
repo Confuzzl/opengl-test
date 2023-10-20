@@ -4,20 +4,31 @@ import app.app;
 import util.debug;
 import world.collision.prism;
 import world.factory.simplex_factory;
+import world.factory.factories;
 import world.game_object;
 import util.polyhedron;
 
 int main() {
   // try {
-  Vec3List coordinates{{-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
-  for (auto &v : coordinates)
+  Vec3List coordinates1{{-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
+  for (auto &v : coordinates1)
     v /= 2;
 
-  GameObject go{SimplexFactory::createCollidableSimplex(coordinates),
-                SimplexFactory::createRenderableSimplex(coordinates)};
-  // } catch (const std::runtime_error &e) {
-  //   std::cout << e.what();
-  // }
+  Vec3List coordinates2{{-1, -1, 1},  {+1, -1, +1}, {+1, +1, +1}, {-1, +1, +1},
+                        {-1, +1, -1}, {+1, +1, -1}, {+1, -1, -1}, {-1, -1, -1}};
+  for (auto &v : coordinates2)
+    v /= 2;
+
+  GameObject go1{SIMPLEX_FACTORY.createCollidable(coordinates1),
+                 SIMPLEX_FACTORY.createRenderable(coordinates1)};
+
+  GameObject go2{SimplexFactoryA::createCollidableSimplex(coordinates1),
+                 SimplexFactoryA::createRenderableSimplex(coordinates1)};
+  go2.translate({0, 2, 0});
+
+  GameObject go3{PRISM_FACTORY.createCollidable(coordinates2),
+                 PRISM_FACTORY.createRenderable(coordinates2)};
+  go3.translate({0, -2, 0});
 
   // Prism a{1, 1, 1};
   //  a.rotateZ(45);
@@ -29,19 +40,19 @@ int main() {
   Prism c{1, 2, 1};
   c.translate({0, 0, 3});
 
-  Prism d{3, 1, 2};
-  d.translate({0, 2, 0});
+  // Prism d{3, 1, 2};
+  // d.translate({0, 2, 0});
 
   glLineWidth(5);
   glPolygonMode(GL_FRONT, GL_FILL);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_DEPTH_TEST);
-  glEnable(GL_CULL_FACE);
-  //  app.defaultProgram.vao.bindVBO(Prism::sharedVBO);
-  //  app.defaultProgram.vao.bindEBO(Prism::ebo);
-  // app.defaultProgram.vao.bindVBO(SimplexFactory::sharedVBO);
-  // app.defaultProgram.vao.bindEBO(SimplexFactory::ebo);
+  // glEnable(GL_CULL_FACE);
+  //   app.defaultProgram.vao.bindVBO(Prism::sharedVBO);
+  //   app.defaultProgram.vao.bindEBO(Prism::ebo);
+  //  app.defaultProgram.vao.bindVBO(SimplexFactory::sharedVBO);
+  //  app.defaultProgram.vao.bindEBO(SimplexFactory::ebo);
 
   glfwSwapInterval(0);
   while (!glfwWindowShouldClose(app.window)) {

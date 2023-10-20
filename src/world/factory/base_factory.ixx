@@ -23,8 +23,10 @@ export class BaseFactory {
   const UVList defaultUVs;
 
   const unsigned int rVertexCount;
+  bool buffersInitialized = false;
   Vector<GLuint> eboIndices{};
 
+  void initializeBuffers();
   void initializeEBO();
   void allocateVBO();
 
@@ -42,8 +44,8 @@ public:
   EBO ebo{};
   VBO sharedVBO{};
 
-  UPtr<Collider> createCollidable(const Vec3List &coordinates) const;
-  UPtr<Renderable> createRenderable(const Vec3List &coordinates) const;
+  UPtr<Collider> createCollidable(const Vec3List &coordinates);
+  UPtr<Renderable> createRenderable(const Vec3List &coordinates);
   UPtr<Renderable> createRenderable(const Vec3List &coordinates,
-                                    const UVList &UVs) const;
+                                    const UVList &UVs);
 };

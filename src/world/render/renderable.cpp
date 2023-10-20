@@ -30,6 +30,8 @@ void Renderable::initializeVertexInfo() {
     const auto &uvFace = UVs[f];
 
     const auto &texture = TexTile::getRandomTexture();
+    const TexTile tex{TexTile::getTile(texture, app.atlas)};
+
     for (unsigned short t = 0; t < UVs[f].size(); t++) {
       const auto &indexTri = faceVertexIndices[f][t];
       const auto &uvTri = UVs[f][t];
@@ -38,7 +40,7 @@ void Renderable::initializeVertexInfo() {
         const Vec2 &uvVertex = UVs[f][t][v];
 
         const Vec3 &pos = coordinates[indexVertex];
-        const TexTile tex{TexTile::getTile(texture, app.atlas)};
+
         const glm::lowp_u16vec2 uvGlobal{
             tex.coordinates +
             static_cast<glm::lowp_u16vec2>(static_cast<Vec2>(tex.dimensions) *

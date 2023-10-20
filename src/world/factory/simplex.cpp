@@ -8,26 +8,26 @@ module world.factory.simplex_factory;
 import util.debug;
 import wrapper.program.vertex_formats;
 
-const VEIndexList SimplexFactory::veIndices{
+const VEIndexList SimplexFactoryA::veIndices{
     {0, 2, 4}, {0, 1, 5}, {1, 2, 3}, {3, 4, 5}};
-const EVIndexList SimplexFactory::evIndices{{0, 1}, {1, 2}, {2, 0},
-                                            {2, 3}, {0, 3}, {1, 3}};
-const EFIndexList SimplexFactory::efIndices{{0, 2}, {0, 3}, {0, 1},
-                                            {1, 3}, {2, 1}, {3, 2}};
-const FEIndexList SimplexFactory::feIndices{
+const EVIndexList SimplexFactoryA::evIndices{{0, 1}, {1, 2}, {2, 0},
+                                             {2, 3}, {0, 3}, {1, 3}};
+const EFIndexList SimplexFactoryA::efIndices{{0, 2}, {0, 3}, {0, 1},
+                                             {1, 3}, {2, 1}, {3, 2}};
+const FEIndexList SimplexFactoryA::feIndices{
     {0, 1, 2}, {2, 3, 4}, {0, 4, 5}, {1, 5, 3}};
 
-const RenCoordinateIndexList SimplexFactory::fvIndices{
+const RenCoordinateIndexList SimplexFactoryA::fvIndices{
     {{0, 1, 2}}, {{0, 2, 3}}, {{1, 0, 3}}, {{2, 1, 3}}};
 
 UPtr<Collider>
-SimplexFactory::createCollidableSimplex(const Vec3List &coordinates) {
+SimplexFactoryA::createCollidableSimplex(const Vec3List &coordinates) {
   return std::make_unique<Collider>(4, 4, coordinates, veIndices, evIndices,
                                     efIndices, feIndices);
 }
 
 UPtr<Renderable>
-SimplexFactory::createRenderableSimplex(const Vec3List &coordinates) {
+SimplexFactoryA::createRenderableSimplex(const Vec3List &coordinates) {
   if (not buffersInitialized)
     initializeBuffers();
 
@@ -39,24 +39,24 @@ SimplexFactory::createRenderableSimplex(const Vec3List &coordinates) {
              {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}}});
 }
 
-GLuint SimplexFactory::eboIndices[RVERTEX_COUNT]{};
-bool SimplexFactory::buffersInitialized = false;
-EBO SimplexFactory::ebo{};
-VBO SimplexFactory::sharedVBO{};
+GLuint SimplexFactoryA::eboIndices[RVERTEX_COUNT]{};
+bool SimplexFactoryA::buffersInitialized = false;
+EBO SimplexFactoryA::ebo{};
+VBO SimplexFactoryA::sharedVBO{};
 
-void SimplexFactory::initializeBuffers() {
+void SimplexFactoryA::initializeBuffers() {
   buffersInitialized = true;
   initializeEBO();
   allocateVBO();
 }
-void SimplexFactory::initializeEBO() {
+void SimplexFactoryA::initializeEBO() {
   std::iota(eboIndices, eboIndices + RVERTEX_COUNT, 0);
   ebo.allocateBufferObject(sizeof(eboIndices));
   glNamedBufferSubData(ebo.ID, 0, ebo.size, eboIndices);
   std::cout << std::format("ebo {} for simplex allocated and initialized\n",
                            ebo.ID);
 }
-void SimplexFactory::allocateVBO() {
+void SimplexFactoryA::allocateVBO() {
   sharedVBO.allocateBufferObject(RVERTEX_COUNT * SimpleVertex::WIDTH);
   std::cout << std::format("shared vbo {} for simplex allocated\n",
                            sharedVBO.ID);

@@ -10,7 +10,7 @@ import util.polyhedron;
 import util.memory;
 import wrapper.buffer_object;
 
-export class SimplexFactory {
+export class SimplexFactoryA {
   const static VEIndexList veIndices;
   const static EVIndexList evIndices;
   const static EFIndexList efIndices;
@@ -18,9 +18,9 @@ export class SimplexFactory {
 
   const static RenCoordinateIndexList fvIndices;
 
-  SimplexFactory() = delete;
-  SimplexFactory(const SimplexFactory &) = delete;
-  SimplexFactory(SimplexFactory &&) = delete;
+  SimplexFactoryA() = delete;
+  SimplexFactoryA(const SimplexFactoryA &) = delete;
+  SimplexFactoryA(SimplexFactoryA &&) = delete;
 
   const static unsigned int RVERTEX_COUNT = 12;
   static GLuint eboIndices[RVERTEX_COUNT];
