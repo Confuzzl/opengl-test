@@ -38,10 +38,11 @@ void Renderable::initializeVertexInfo() {
         const Vec2 &uvVertex = UVs[f][t][v];
 
         const Vec3 &pos = coordinates[indexVertex];
-        const TexTile tex = TexTile::getTile(texture, app.atlas);
-        const glm::lowp_u16vec2 uvGlobal =
-            tex.coordinates + static_cast<glm::lowp_u16vec2>(
-                                  static_cast<Vec2>(tex.dimensions) * uvVertex);
+        const TexTile tex{TexTile::getTile(texture, app.atlas)};
+        const glm::lowp_u16vec2 uvGlobal{
+            tex.coordinates +
+            static_cast<glm::lowp_u16vec2>(static_cast<Vec2>(tex.dimensions) *
+                                           uvVertex)};
 
         vertexInfo.emplace_back(pos[0], pos[1], pos[2], UCHAR_MAX, UCHAR_MAX,
                                 UCHAR_MAX, uvGlobal[0], uvGlobal[1]);

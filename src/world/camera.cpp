@@ -3,8 +3,9 @@ module world.camera;
 import app.app;
 
 Camera::Camera(const float fov)
-    : projection{glm::perspectiveFov(glm::radians(fov), (float)app.WIDTH,
-                                     (float)app.HEIGHT, 0.1f, 100.0f)} {
+    : projection{
+          glm::perspectiveFov(glm::radians(fov), static_cast<float>(app.WIDTH),
+                              static_cast<float>(app.HEIGHT), 0.1f, 100.0f)} {
   setRotate(0, 0);
 }
 

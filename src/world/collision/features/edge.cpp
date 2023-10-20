@@ -9,7 +9,7 @@ Edge::Edge(Collider &parent, const unsigned short ID, SPtr<Vertex> &tail,
   // std::cout << std::format("CREATING tail {} count: {} head {} count: {}\n",
   //                          (*tail).ID, tail.use_count(), (*head).ID,
   //                          head.use_count());
-} // Edge::~Edge() = default;
+}
 
 void Edge::setNeighbors(SPtr<Face> &left, SPtr<Face> &right) {
   this->left = left;
@@ -21,9 +21,11 @@ Vec3 Edge::getProperDirectionFrom(const Face &face) {
     return *this;
   }
   if (face == *right) {
-    return -(Vec3)(*this);
+    return -static_cast<Vec3>(*this);
   }
   return {};
 }
 
-Edge::operator Vec3() const { return (Vec3)*head - (Vec3)*tail; }
+Edge::operator Vec3() const {
+  return static_cast<Vec3>(*head) - static_cast<Vec3>(*tail);
+}

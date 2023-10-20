@@ -11,7 +11,6 @@ export class Vertex : public Feature {
 
 public:
   Vertex(Collider &parent, const unsigned short ID, const Vec3 &pos);
-  //~Vertex();
 
   void addNeighbor(SPtr<Edge> &neighbor);
 

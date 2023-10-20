@@ -7,7 +7,7 @@ export class Camera {
   Mat4 view{1.0f};
 
   Vec3 pos{};
-  float speed = 2;
+  float speed{2};
   Vec3 velocity{};
 
   Vec3 forward{X_PLUS}, up{Y_PLUS}, right{Z_PLUS};
