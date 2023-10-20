@@ -8,12 +8,11 @@ import util.debug;
 unsigned int Collider::count = 0;
 
 Collider::Collider(const unsigned short vertexCount,
-                       const unsigned short faceCount,
-                       const Vec3List &coordinates,
-                       const VertexNeighborList &vertexEdgeIndices,
-                       const EdgeNeighborList &edgeVertexIndices,
-                       const EdgeNeighborList &edgeFaceIndices,
-                       const FaceNeighborList &faceEdgeIndices)
+                   const unsigned short faceCount, const Vec3List &coordinates,
+                   const VEIndexList &vertexEdgeIndices,
+                   const EVIndexList &edgeVertexIndices,
+                   const EFIndexList &edgeFaceIndices,
+                   const FEIndexList &faceEdgeIndices)
     : BasePolyhedron(coordinates), vertexEdgeIndices{vertexEdgeIndices},
       edgeVertexIndices{edgeVertexIndices}, edgeFaceIndices{edgeFaceIndices},
       faceEdgeIndices{faceEdgeIndices}, ID{count++} {

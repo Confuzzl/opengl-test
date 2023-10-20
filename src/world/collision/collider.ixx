@@ -15,14 +15,14 @@ export class Collider : public BasePolyhedron {
 
 private:
   SPtrVector<Vertex> vertices;
-  const VertexNeighborList &vertexEdgeIndices; // only 256 indices for edges
+  const VEIndexList &vertexEdgeIndices; // only 256 indices for edges
 
   SPtrVector<Edge> edges;
-  const EdgeNeighborList &edgeVertexIndices; // only 256 indices for vertices
-  const EdgeNeighborList &edgeFaceIndices;   // only 256 indices for faces
+  const EVIndexList &edgeVertexIndices; // only 256 indices for vertices
+  const EFIndexList &edgeFaceIndices;   // only 256 indices for faces
 
   SPtrVector<Face> faces;
-  const FaceNeighborList &faceEdgeIndices; // only 256 indices for edges
+  const FEIndexList &faceEdgeIndices; // only 256 indices for edges
 
   SPtr<Vertex> &addVertex(SPtr<Vertex> &&v);
   SPtr<Edge> &addEdge(SPtr<Edge> &&e);
@@ -33,11 +33,10 @@ public:
   unsigned int ID;
 
   Collider(const unsigned short vertexCount, const unsigned short faceCount,
-           const Vec3List &coordinates,
-           const VertexNeighborList &vertexEdgeIndices,
-           const EdgeNeighborList &edgeVertexIndices,
-           const EdgeNeighborList &edgeFaceIndices,
-           const FaceNeighborList &faceEdgeIndices);
+           const Vec3List &coordinates, const VEIndexList &vertexEdgeIndices,
+           const EVIndexList &edgeVertexIndices,
+           const EFIndexList &edgeFaceIndices,
+           const FEIndexList &faceEdgeIndices);
 
 protected:
   void createFeatures();

@@ -8,16 +8,16 @@ module world.factory.simplex_factory;
 import util.debug;
 import wrapper.program.vertex_formats;
 
-const VertexNeighborList SimplexFactory::veIndices{
+const VEIndexList SimplexFactory::veIndices{
     {0, 2, 4}, {0, 1, 5}, {1, 2, 3}, {3, 4, 5}};
-const EdgeNeighborList SimplexFactory::evIndices{{0, 1}, {1, 2}, {2, 0},
-                                                 {2, 3}, {0, 3}, {1, 3}};
-const EdgeNeighborList SimplexFactory::efIndices{{0, 2}, {0, 3}, {0, 1},
-                                                 {1, 3}, {2, 1}, {3, 2}};
-const FaceNeighborList SimplexFactory::feIndices{
+const EVIndexList SimplexFactory::evIndices{{0, 1}, {1, 2}, {2, 0},
+                                            {2, 3}, {0, 3}, {1, 3}};
+const EFIndexList SimplexFactory::efIndices{{0, 2}, {0, 3}, {0, 1},
+                                            {1, 3}, {2, 1}, {3, 2}};
+const FEIndexList SimplexFactory::feIndices{
     {0, 1, 2}, {2, 3, 4}, {0, 4, 5}, {1, 5, 3}};
 
-const RFaceCoordinateIndexList SimplexFactory::fvIndices{
+const RenCoordinateIndexList SimplexFactory::fvIndices{
     {{0, 1, 2}}, {{0, 2, 3}}, {{1, 0, 3}}, {{2, 1, 3}}};
 
 UPtr<Collider>
@@ -33,10 +33,10 @@ SimplexFactory::createRenderableSimplex(const Vec3List &coordinates) {
 
   return std::make_unique<Renderable>(
       ebo, sharedVBO, coordinates, fvIndices,
-      RFaceUVList{{{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
-                  {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
-                  {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
-                  {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}}});
+      UVList{{{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
+             {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
+             {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
+             {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}}});
 }
 
 GLuint SimplexFactory::eboIndices[RVERTEX_COUNT]{};

@@ -10,9 +10,9 @@ import util.debug;
 
 BaseFactory::BaseFactory(
     const unsigned short vertexCount, const unsigned short faceCount,
-    const VertexNeighborList &veIndices, const EdgeNeighborList &evIndices,
-    const EdgeNeighborList &efIndices, const FaceNeighborList &feIndices,
-    const RFaceCoordinateIndexList &fvIndices, const RFaceUVList &defaultUVs,
+    const VEIndexList &veIndices, const EVIndexList &evIndices,
+    const EFIndexList &efIndices, const FEIndexList &feIndices,
+    const RenCoordinateIndexList &fvIndices, const UVList &defaultUVs,
     const unsigned int rVertexCount)
     : vertexCount{vertexCount}, faceCount{faceCount}, veIndices{veIndices},
       evIndices{evIndices}, efIndices{efIndices}, feIndices{feIndices},
@@ -44,9 +44,8 @@ UPtr<Renderable>
 BaseFactory::createRenderable(const Vec3List &coordinates) const {
   return createRenderable(coordinates, defaultUVs);
 }
-UPtr<Renderable>
-BaseFactory::createRenderable(const Vec3List &coordinates,
-                                  const RFaceUVList &UVs) const {
+UPtr<Renderable> BaseFactory::createRenderable(const Vec3List &coordinates,
+                                               const UVList &UVs) const {
   return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,
                                       UVs);
 }

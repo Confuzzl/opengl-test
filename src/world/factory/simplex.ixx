@@ -11,12 +11,12 @@ import util.memory;
 import wrapper.buffer_object;
 
 export class SimplexFactory {
-  const static VertexNeighborList veIndices;
-  const static EdgeNeighborList evIndices;
-  const static EdgeNeighborList efIndices;
-  const static FaceNeighborList feIndices;
+  const static VEIndexList veIndices;
+  const static EVIndexList evIndices;
+  const static EFIndexList efIndices;
+  const static FEIndexList feIndices;
 
-  const static RFaceCoordinateIndexList fvIndices;
+  const static RenCoordinateIndexList fvIndices;
 
   SimplexFactory() = delete;
   SimplexFactory(const SimplexFactory &) = delete;

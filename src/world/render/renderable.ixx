@@ -13,8 +13,8 @@ public:
   };
 
 private:
-  const RFaceCoordinateIndexList &faceVertexIndices;
-  const RFaceUVList UVs;
+  const RenCoordinateIndexList &faceVertexIndices;
+  const UVList UVs;
 
   Vector<SimpleVertex> vertexInfo;
 
@@ -24,8 +24,8 @@ public:
   const EBO &ebo;
   const VBO &sharedVBO;
   Renderable(const EBO &ebo, const VBO &sharedVBO, const Vec3List &coordinates,
-             const RFaceCoordinateIndexList &faceVertexIndices,
-             const RFaceUVList &UVs);
+             const RenCoordinateIndexList &faceVertexIndices,
+             const UVList &UVs);
 
   void writeToSharedVBO();
 };

@@ -14,13 +14,13 @@ export class BaseFactory {
   const unsigned short vertexCount;
   const unsigned short faceCount;
 
-  const VertexNeighborList veIndices;
-  const EdgeNeighborList evIndices;
-  const EdgeNeighborList efIndices;
-  const FaceNeighborList feIndices;
+  const VEIndexList veIndices;
+  const EVIndexList evIndices;
+  const EFIndexList efIndices;
+  const FEIndexList feIndices;
 
-  const RFaceCoordinateIndexList fvIndices;
-  const RFaceUVList defaultUVs;
+  const RenCoordinateIndexList fvIndices;
+  const UVList defaultUVs;
 
   const unsigned int rVertexCount;
   Vector<GLuint> eboIndices{};
@@ -33,12 +33,10 @@ export class BaseFactory {
 
 protected:
   BaseFactory(const unsigned short vertexCount, const unsigned short faceCount,
-              const VertexNeighborList &veIndices,
-              const EdgeNeighborList &evIndices,
-              const EdgeNeighborList &efIndices,
-              const FaceNeighborList &feIndices,
-              const RFaceCoordinateIndexList &fvIndices,
-              const RFaceUVList &defaultUVs, const unsigned int rVertexCount);
+              const VEIndexList &veIndices, const EVIndexList &evIndices,
+              const EFIndexList &efIndices, const FEIndexList &feIndices,
+              const RenCoordinateIndexList &fvIndices, const UVList &defaultUVs,
+              const unsigned int rVertexCount);
 
 public:
   EBO ebo{};
@@ -47,5 +45,5 @@ public:
   UPtr<Collider> createCollidable(const Vec3List &coordinates) const;
   UPtr<Renderable> createRenderable(const Vec3List &coordinates) const;
   UPtr<Renderable> createRenderable(const Vec3List &coordinates,
-                                    const RFaceUVList &UVs) const;
+                                    const UVList &UVs) const;
 };
