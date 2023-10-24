@@ -1,4 +1,4 @@
-export module app.font;
+export module app.text.font;
 
 import app.texture_tile;
 import wrapper.tex_object;

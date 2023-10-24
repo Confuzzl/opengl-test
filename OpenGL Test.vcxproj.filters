@@ -59,13 +59,13 @@
     <ClCompile Include="src\app\update_cycle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\font.ixx">
+    <ClCompile Include="src\app\text\font.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\texture_tile.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\app\font.cpp">
+    <ClCompile Include="src\app\text\font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\texture_tile.cpp">
@@ -218,16 +218,28 @@
     <ClCompile Include="src\world\player\player.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\factory\abstract_factory.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\world\factory\factories.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\factory\abstract_factory.cpp">
+    <ClCompile Include="src\world\factory\factories-simplex.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\factory\factories-simplex.ixx">
+    <ClCompile Include="src\world\factory\base_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\factory\base_factory.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\factory\factories-prism.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\text\base_text_corner.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\text\base_text_corner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\text\text_corners.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -252,5 +264,6 @@
     <None Include="assets\untitled.pdn" />
     <None Include=".gitignore" />
     <None Include="OpenGL Test.aps" />
+    <None Include="assets\prism.pdn" />
   </ItemGroup>
 </Project>

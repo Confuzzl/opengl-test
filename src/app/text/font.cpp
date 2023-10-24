@@ -1,6 +1,6 @@
 module;
 
-module app.font;
+module app.text.font;
 
 import util.glm;
 

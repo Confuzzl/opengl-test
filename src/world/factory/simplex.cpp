@@ -31,12 +31,11 @@ SimplexFactoryA::createRenderableSimplex(const Vec3List &coordinates) {
   if (not buffersInitialized)
     initializeBuffers();
 
-  return std::make_unique<Renderable>(
-      ebo, sharedVBO, coordinates, fvIndices,
-      UVList{{{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
-             {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
-             {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}},
-             {{Vec2{0, 0}, Vec2{1, 0}, Vec2{0.5, 1}}}});
+  return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,
+                                      UVList{{{{{0, 0}, {1, 0}, {0.5, 1}}}},
+                                             {{{{0, 0}, {1, 0}, {0.5, 1}}}},
+                                             {{{{0, 0}, {1, 0}, {0.5, 1}}}},
+                                             {{{{0, 0}, {1, 0}, {0.5, 1}}}}});
 }
 
 GLuint SimplexFactoryA::eboIndices[RVERTEX_COUNT]{};

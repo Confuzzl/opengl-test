@@ -4,7 +4,7 @@ module;
 
 export module app.app;
 
-import app.font;
+import app.text.font;
 import wrapper.tex_object;
 import app.update_cycle;
 import util.glm;

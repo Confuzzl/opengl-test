@@ -154,14 +154,14 @@ void App::drawScene() {
 
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
-    glDrawElements(GL_LINE_STRIP /*GL_TRIANGLES*/,
+    glDrawElements(/*GL_LINE_STRIP*/ GL_TRIANGLES,
                    (GLsizei)defaultProgram.vao.boundedEBO.size, GL_UNSIGNED_INT,
                    0);
   }
 }
 void App::drawTextBottomLeft(const float x, const float y, const float scale,
                              const std::string msg) {
-  const auto vertexCount = 6 * msg.size();
+  const size_t vertexCount = 6 * msg.size();
 
   Vector<GLuint> indices{};
   indices.resize(vertexCount);
@@ -184,7 +184,6 @@ void App::drawTextBottomLeft(const float x, const float y, const float scale,
                        y + height * QUAD_UVS[tri][vertex][1]};
         const glm::lowp_u16vec2 uv{tex.coordinates +
                                    tex.dimensions * QUAD_UVS[tri][vertex]};
-        // vertices.push_back({{pos[0], pos[1]}, {uv[0], uv[1]}});
         vertices.emplace_back(pos[0], pos[1], uv[0], uv[1]);
       }
     }
@@ -215,5 +214,6 @@ void App::drawTextBottomLeft(const float x, const float y, const float scale,
 }
 void App::drawTextTopLeft(const float x, const float y, const float scale,
                           const std::string msg) {
-  drawTextBottomLeft(x, App::HEIGHT - FontProgram::CHAR_HEIGHT - y, scale, msg);
+  drawTextBottomLeft(x, App::HEIGHT - FontProgram::CHAR_HEIGHT * scale - y,
+                     scale, msg);
 }

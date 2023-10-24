@@ -28,7 +28,7 @@ void BaseFactory::initializeBuffers() {
 void BaseFactory::initializeEBO() {
   eboIndices.resize(rVertexCount);
   std::iota(eboIndices.begin(), eboIndices.end(), 0);
-  ebo.allocateBufferObject(sizeof(eboIndices));
+  ebo.allocateBufferObject(rVertexCount * sizeof(GLuint));
   glNamedBufferSubData(ebo.ID, 0, ebo.size, eboIndices.data());
   std::cout << std::format("ebo {} for factory allocated and initialized\n",
                            ebo.ID);
