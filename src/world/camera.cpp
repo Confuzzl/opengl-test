@@ -15,15 +15,17 @@ void Camera::update() {
   move(velocity);
 }
 
-const Mat4 &Camera::getProjection() { return projection; }
-const Mat4 &Camera::getView() { return view; }
-const Vec3 &Camera::getPosition() { return pos; }
-const float Camera::getSpeed() { return speed; }
-const Vec3 &Camera::getVelocity() { return velocity; }
-const Vec3 &Camera::getForward() { return forward; }
-const Vec3 &Camera::getUp() { return up; }
-const Vec3 &Camera::getRight() { return right; }
-const float Camera::getSensitivity() { return sensitivity; }
+const Mat4 &Camera::getProjection() const { return projection; }
+const Mat4 &Camera::getView() const { return view; }
+const Vec3 &Camera::getPosition() const { return pos; }
+float Camera::getSpeed() const { return speed; }
+const Vec3 &Camera::getVelocity() const { return velocity; }
+const Vec3 &Camera::getForward() const { return forward; }
+const Vec3 &Camera::getUp() const { return up; }
+const Vec3 &Camera::getRight() const { return right; }
+float Camera::getSensitivity() const { return sensitivity; }
+float Camera::getYaw() const { return yaw; }
+float Camera::getPitch() const { return pitch; }
 
 void Camera::move(const Vec3 &t) {
   pos += t;

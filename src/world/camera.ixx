@@ -19,15 +19,17 @@ public:
 
   void update();
 
-  const Mat4 &getProjection();
-  const Mat4 &getView();
-  const Vec3 &getPosition();
-  const float getSpeed();
-  const Vec3 &getVelocity();
-  const Vec3 &getForward();
-  const Vec3 &getUp();
-  const Vec3 &getRight();
-  const float getSensitivity();
+  const Mat4 &getProjection() const;
+  const Mat4 &getView() const;
+  const Vec3 &getPosition() const;
+  float getSpeed() const;
+  const Vec3 &getVelocity() const;
+  const Vec3 &getForward() const;
+  const Vec3 &getUp() const;
+  const Vec3 &getRight() const;
+  float getSensitivity() const;
+  float getYaw() const;
+  float getPitch() const;
 
   void move(const Vec3 &t);
   void setPosition(const Vec3 &t);

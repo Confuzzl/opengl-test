@@ -13,18 +13,22 @@ protected:
   static const OffsetEquation xShift;
   static const OffsetEquation yNormal;
   static const OffsetEquation yShift;
+
   BaseTextCorner(const OffsetEquation &xEquation,
                  const OffsetEquation &yEquation);
 
 private:
   const OffsetEquation &xEquation;
   const OffsetEquation &yEquation;
-  float textOffset;
+  float textOffsetY;
 
 public:
-  void drawTextRelative(const float scale, const std::string msg);
-  void drawTextRelative(const float xOffset, const float yOffset,
-                        const float scale, const std::string msg);
+  void drawText(const std::string &msg);
+  void drawText(const float scale, const std::string &msg);
+  void drawText(const float x, const float y, const float scale,
+                const std::string &msg);
+  void drawText(const float x, const float y, const float scale,
+                const std::string &msg, bool followOffset, bool addToOffset);
 
   void resetTextOffset();
 };

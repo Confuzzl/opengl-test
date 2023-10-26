@@ -9,4 +9,8 @@ void Vertex::addNeighbor(SPtr<Edge> &neighbor) {
   neighbors.emplace_back(neighbor);
 }
 
+Collision::VClip::DPrimeState Vertex::signDPrime(const Edge &e, double l) {
+  return Collision::VClip::DPrimeState::ZERO;
+}
+
 Vertex::operator Vec3() const { return localCoordinate; }

@@ -149,16 +149,10 @@
     <ClCompile Include="src\world\collision\collider.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\factory\simplex.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\world\base_polyhedron.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\render\renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\world\factory\simplex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\collision\collider.cpp">
@@ -240,6 +234,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\text\text_corners.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\algorithms.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\features\differential_feature.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

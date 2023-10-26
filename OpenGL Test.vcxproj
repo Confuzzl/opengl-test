@@ -174,6 +174,8 @@
     <ClCompile Include="src\util\polyhedron.ixx" />
     <ClCompile Include="src\util\math.ixx" />
     <ClCompile Include="src\util\vector.ixx" />
+    <ClCompile Include="src\world\collision\algorithms.ixx" />
+    <ClCompile Include="src\world\collision\features\differential_feature.ixx" />
     <ClCompile Include="src\world\collision\features\edge.cpp" />
     <ClCompile Include="src\world\collision\features\edge.ixx" />
     <ClCompile Include="src\world\collision\features\face.cpp" />
@@ -191,8 +193,6 @@
     <ClCompile Include="src\world\player\player.ixx" />
     <ClCompile Include="src\world\render\prism.cpp" />
     <ClCompile Include="src\world\render\prism.ixx" />
-    <ClCompile Include="src\world\factory\simplex.cpp" />
-    <ClCompile Include="src\world\factory\simplex.ixx" />
     <ClCompile Include="src\world\render\renderable.cpp" />
     <ClCompile Include="src\world\render\renderable.ixx" />
     <ClCompile Include="src\world\base_polyhedron.cpp" />

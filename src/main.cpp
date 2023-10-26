@@ -8,6 +8,9 @@ import world.game_object;
 import util.polyhedron;
 
 int main() {
+  Vec3 a{1, 1, 1};
+  a *= 2;
+
   Vec3List coordinates1{{-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
   for (auto &v : coordinates1)
     v /= 2;
@@ -49,34 +52,21 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         app.drawScene();
-        // unsigned short y = 16;
-        // app.drawTextTopLeft(16, y += 16, 1,
-        //                     std::format("Time: {:.2f}s", currTime));
-        // app.drawTextTopLeft(16, 48, 1,
-        //                     std::format("LPS: {}", app.loopCycle.prevCount));
-        // app.drawTextTopLeft(16, 80, 1,
-        //                     std::format("UPS: {}",
-        //                     app.updateCycle.prevCount));
-        // app.drawTextTopLeft(16, 112, 1,
-        //                     std::format("FPS: {}",
-        //                     app.frameCycle.prevCount));
-        BOTTOM_LEFT.resetTextOffset();
-        BOTTOM_LEFT.drawTextRelative(0, 0, 1, "bottom left");
-        BOTTOM_LEFT.drawTextRelative(0, 0, 1, "bottom left");
-        TOP_LEFT.resetTextOffset();
-        TOP_LEFT.drawTextRelative(0, 0, 1, "top left");
-        TOP_LEFT.drawTextRelative(0, 0, 1, "top left");
-        BOTTOM_RIGHT.resetTextOffset();
-        BOTTOM_RIGHT.drawTextRelative(0, 0, 1, "bottom right");
-        BOTTOM_RIGHT.drawTextRelative(0, 0, 1, "bottom right");
-        TOP_RIGHT.resetTextOffset();
-        TOP_RIGHT.drawTextRelative(0, 0, 1, "top right");
-        TOP_RIGHT.drawTextRelative(0, 0, 1, "top right");
 
-        const auto &pos = app.scene.camera.getPosition();
-        // app.drawTextTopLeft(16, 144, 1, std::format("X: {:+.3f}", pos[0]));
-        // app.drawTextTopLeft(16, 176, 1, std::format("Y: {:+.3f}", pos[1]));
-        // app.drawTextTopLeft(16, 208, 1, std::format("Z: {:+.3f}", pos[2]));
+        Text::resetAllTextOffsets();
+
+        const auto &cam = app.scene.camera;
+        const auto &pos = cam.getPosition();
+        Text::TOP_LT.drawText(std::format("POS: {:+.3f} {:+.3f} {:+.3f}",
+                                          pos[0], pos[1], pos[2]));
+        Text::TOP_LT.drawText(
+            std::format("CAM: {:+.3f} {:+.3f}", cam.getYaw(), cam.getPitch()));
+
+        Text::TOP_RT.drawText(std::format("FPS: {}", app.frameCycle.prevCount));
+        Text::TOP_RT.drawText(std::format("Time: {:.2f}s", currTime));
+        Text::TOP_RT.drawText(std::format("LPS: {}", app.loopCycle.prevCount));
+        Text::TOP_RT.drawText(
+            std::format("UPS: {}", app.updateCycle.prevCount));
 
         glfwSwapBuffers(app.window);
       }

@@ -18,5 +18,7 @@ public:
 
   Vec3 getProperDirectionFrom(const Face &face);
 
+  Vec3 evalAt(double l);
+
   operator Vec3() const;
 };

@@ -34,7 +34,7 @@ export struct App {
   FontProgram fontProgram;
 
   TexObject atlas;
-  Font consolas{"consolas", 16, 32};
+  Font consolas;
 
   Scene scene{};
 

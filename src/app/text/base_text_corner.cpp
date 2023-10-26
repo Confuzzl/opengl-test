@@ -29,15 +29,21 @@ BaseTextCorner::BaseTextCorner(const OffsetEquation &xEquation,
                                const OffsetEquation &yEquation)
     : xEquation{xEquation}, yEquation{yEquation} {}
 
-void BaseTextCorner::drawTextRelative(const float scale,
-                                      const std::string msg) {
-  drawTextRelative(0, 0, scale, msg);
+void BaseTextCorner::drawText(const std::string &msg) { drawText(1, msg); }
+
+void BaseTextCorner::drawText(const float scale, const std::string &msg) {
+  drawText(0, 0, scale, msg);
 }
-void BaseTextCorner::drawTextRelative(const float x, const float y,
-                                      const float scale,
-                                      const std::string msg) {
+void BaseTextCorner::drawText(const float x, const float y, const float scale,
+                              const std::string &msg) {
+  drawText(x, y, scale, msg, true, true);
+}
+
+void BaseTextCorner::drawText(const float x, const float y, const float scale,
+                              const std::string &msg, bool followOffset,
+                              bool addToOffset) {
   const float x2 = xEquation(x, scale, msg),
-              y2 = yEquation(textOffset + y, scale, msg);
+              y2 = yEquation(y + textOffsetY, scale, msg);
   float xOffset = x2;
   const size_t vertexCount = 6 * msg.size();
 
@@ -90,7 +96,8 @@ void BaseTextCorner::drawTextRelative(const float x, const float y,
   glDrawElements(GL_TRIANGLES, (GLsizei)app.fontProgram.vao.boundedEBO.size,
                  GL_UNSIGNED_INT, 0);
 
-  textOffset += FontProgram::CHAR_HEIGHT;
+  if (addToOffset)
+    textOffsetY += height;
 }
 
-void BaseTextCorner::resetTextOffset() { textOffset = 0; }
+void BaseTextCorner::resetTextOffset() { textOffsetY = 0; }

@@ -26,6 +26,12 @@ Vec3 Edge::getProperDirectionFrom(const Face &face) {
   return {};
 }
 
+Vec3 Edge::evalAt(double l) {
+  const Vec3 temp = *this;
+  temp *= l;
+  return static_cast<Vec3>(*tail) + temp;
+}
+
 Edge::operator Vec3() const {
   return static_cast<Vec3>(*head) - static_cast<Vec3>(*tail);
 }

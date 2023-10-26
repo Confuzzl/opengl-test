@@ -17,7 +17,7 @@ const Mat4 App::UI_MAT{
 
 App::App()
     : loopCycle{0}, updateCycle{120}, frameCycle{60}, defaultProgram{},
-      fontProgram{}, atlas{"atlas"} {
+      fontProgram{}, atlas{"atlas"}, consolas{"consolas1024", 64, 128} {
   std::cout << "app constructing\n";
   glfwInit();
   frameCycle.setRate(std::min(
