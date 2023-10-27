@@ -1,17 +1,26 @@
 export module world.collision.feature.face;
 
+import world.collision.feature.differentiable_feature;
 import world.collision.feature.feature;
 import util.polyhedron;
 
 export class Edge;
+export class FaceRegion;
 
-export class Face : public Feature {
+export class Face : public Feature, DifferentiableFeature {
+  SPtr<FaceRegion> region;
+
   SPtrVector<Edge> edges;
   Vec3 normal{};
 
 public:
   Face(Collider &parent, const unsigned short ID,
        const unsigned short edgeCount);
-  void addEdge(SPtr<Edge> &edge);
+  ~Face();
+
+  void addEdge(const SPtr<Edge> &edge);
   void finishCreation();
+
+  Collision::VClip::DPrimeState signDPrime(const Edge &e,
+                                           double l) const override;
 };

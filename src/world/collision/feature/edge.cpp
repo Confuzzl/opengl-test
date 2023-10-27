@@ -2,6 +2,7 @@ module world.collision.feature.edge;
 
 import world.collision.feature.vertex;
 import world.collision.feature.face;
+import world.collision.vclip.region.regions;
 
 Edge::Edge(Collider &parent, const unsigned short ID, SPtr<Vertex> &tail,
            SPtr<Vertex> &head)
@@ -10,6 +11,7 @@ Edge::Edge(Collider &parent, const unsigned short ID, SPtr<Vertex> &tail,
   //                          (*tail).ID, tail.use_count(), (*head).ID,
   //                          head.use_count());
 }
+Edge::~Edge() = default;
 
 void Edge::setNeighbors(SPtr<Face> &left, SPtr<Face> &right) {
   this->left = left;

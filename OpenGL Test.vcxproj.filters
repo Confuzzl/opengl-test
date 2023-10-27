@@ -242,7 +242,7 @@
     <ClCompile Include="src\world\collision\algorithms.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\feature\differential_feature.ixx">
+    <ClCompile Include="src\world\collision\feature\differentiable_feature.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\collision\vclip\region\voronoi_region.ixx">
@@ -255,6 +255,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\collision\vclip\plane\planes.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\vclip\plane\planes-fe.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\vclip\plane\planes-ve.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\vclip\region\regions-vertex.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\vclip\region\regions-edge.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\vclip\region\regions-face.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\vclip\plane\planes-support.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\collision\vclip\plane\feature_plane.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -278,7 +299,6 @@
     <None Include="assets\untitled.blend" />
     <None Include="assets\untitled.pdn" />
     <None Include=".gitignore" />
-    <None Include="OpenGL Test.aps" />
     <None Include="assets\prism.pdn" />
   </ItemGroup>
 </Project>

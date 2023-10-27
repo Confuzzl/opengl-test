@@ -1,3 +1,5 @@
 export module world.collision.vclip.plane.planes;
 
-export void MyFunc();
+export import :ve;
+export import :fe;
+export import :support;

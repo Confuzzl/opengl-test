@@ -176,7 +176,7 @@
     <ClCompile Include="src\util\math.ixx" />
     <ClCompile Include="src\util\vector.ixx" />
     <ClCompile Include="src\world\collision\algorithms.ixx" />
-    <ClCompile Include="src\world\collision\feature\differential_feature.ixx" />
+    <ClCompile Include="src\world\collision\feature\differentiable_feature.ixx" />
     <ClCompile Include="src\world\collision\feature\edge.cpp" />
     <ClCompile Include="src\world\collision\feature\edge.ixx" />
     <ClCompile Include="src\world\collision\feature\face.cpp" />
@@ -186,8 +186,15 @@
     <ClCompile Include="src\world\collision\feature\vertex.cpp" />
     <ClCompile Include="src\world\collision\feature\vertex.ixx" />
     <ClCompile Include="src\world\collision\collider.cpp" />
+    <ClCompile Include="src\world\collision\vclip\plane\feature_plane.ixx" />
+    <ClCompile Include="src\world\collision\vclip\plane\planes-fe.ixx" />
+    <ClCompile Include="src\world\collision\vclip\plane\planes-support.ixx" />
+    <ClCompile Include="src\world\collision\vclip\plane\planes-ve.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\planes.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\voronoi_plane.ixx" />
+    <ClCompile Include="src\world\collision\vclip\region\regions-edge.ixx" />
+    <ClCompile Include="src\world\collision\vclip\region\regions-face.ixx" />
+    <ClCompile Include="src\world\collision\vclip\region\regions-vertex.ixx" />
     <ClCompile Include="src\world\collision\vclip\region\regions.ixx" />
     <ClCompile Include="src\world\collision\vclip\region\voronoi_region.ixx" />
     <ClCompile Include="src\world\factory\base_factory.cpp" />
@@ -249,7 +256,6 @@
     <None Include="assets\untitled.pdn" />
     <None Include="assets\shader\font.vert" />
     <None Include="assets\shader\default.vert" />
-    <None Include="OpenGL Test.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
