@@ -1,6 +1,6 @@
-export module world.collision.features.face;
+export module world.collision.feature.face;
 
-import world.collision.features.feature;
+import world.collision.feature.feature;
 import util.polyhedron;
 
 export class Edge;

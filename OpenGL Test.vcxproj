@@ -151,6 +151,7 @@
   <ItemGroup>
     <Image Include="assets\atlas.png" />
     <Image Include="assets\consolas.png" />
+    <Image Include="assets\consolas1024.png" />
     <Image Include="assets\oak_log_top.png" />
     <Image Include="assets\test.png" />
   </ItemGroup>
@@ -175,16 +176,20 @@
     <ClCompile Include="src\util\math.ixx" />
     <ClCompile Include="src\util\vector.ixx" />
     <ClCompile Include="src\world\collision\algorithms.ixx" />
-    <ClCompile Include="src\world\collision\features\differential_feature.ixx" />
-    <ClCompile Include="src\world\collision\features\edge.cpp" />
-    <ClCompile Include="src\world\collision\features\edge.ixx" />
-    <ClCompile Include="src\world\collision\features\face.cpp" />
-    <ClCompile Include="src\world\collision\features\face.ixx" />
-    <ClCompile Include="src\world\collision\features\feature.cpp" />
-    <ClCompile Include="src\world\collision\features\feature.ixx" />
-    <ClCompile Include="src\world\collision\features\vertex.cpp" />
-    <ClCompile Include="src\world\collision\features\vertex.ixx" />
+    <ClCompile Include="src\world\collision\feature\differential_feature.ixx" />
+    <ClCompile Include="src\world\collision\feature\edge.cpp" />
+    <ClCompile Include="src\world\collision\feature\edge.ixx" />
+    <ClCompile Include="src\world\collision\feature\face.cpp" />
+    <ClCompile Include="src\world\collision\feature\face.ixx" />
+    <ClCompile Include="src\world\collision\feature\feature.cpp" />
+    <ClCompile Include="src\world\collision\feature\feature.ixx" />
+    <ClCompile Include="src\world\collision\feature\vertex.cpp" />
+    <ClCompile Include="src\world\collision\feature\vertex.ixx" />
     <ClCompile Include="src\world\collision\collider.cpp" />
+    <ClCompile Include="src\world\collision\vclip\plane\planes.ixx" />
+    <ClCompile Include="src\world\collision\vclip\plane\voronoi_plane.ixx" />
+    <ClCompile Include="src\world\collision\vclip\region\regions.ixx" />
+    <ClCompile Include="src\world\collision\vclip\region\voronoi_region.ixx" />
     <ClCompile Include="src\world\factory\base_factory.cpp" />
     <ClCompile Include="src\world\factory\base_factory.ixx" />
     <ClCompile Include="src\world\factory\factories-prism.ixx" />

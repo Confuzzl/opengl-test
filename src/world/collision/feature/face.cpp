@@ -1,6 +1,6 @@
-module world.collision.features.face;
+module world.collision.feature.face;
 
-import world.collision.features.edge;
+import world.collision.feature.edge;
 
 Face::Face(Collider &parent, const unsigned short ID,
            const unsigned short edgeCount)

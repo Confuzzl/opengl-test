@@ -1,7 +1,7 @@
-module world.collision.features.edge;
+module world.collision.feature.edge;
 
-import world.collision.features.vertex;
-import world.collision.features.face;
+import world.collision.feature.vertex;
+import world.collision.feature.face;
 
 Edge::Edge(Collider &parent, const unsigned short ID, SPtr<Vertex> &tail,
            SPtr<Vertex> &head)
@@ -16,7 +16,7 @@ void Edge::setNeighbors(SPtr<Face> &left, SPtr<Face> &right) {
   this->right = right;
 }
 
-Vec3 Edge::getProperDirectionFrom(const Face &face) {
+Vec3 Edge::getProperDirectionFrom(const Face &face) const {
   if (face == *left) {
     return *this;
   }
@@ -26,12 +26,11 @@ Vec3 Edge::getProperDirectionFrom(const Face &face) {
   return {};
 }
 
-Vec3 Edge::evalAt(double l) {
-  const Vec3 temp = *this;
-  temp *= l;
-  return static_cast<Vec3>(*tail) + temp;
+Vec3 Edge::evalAt(double l) const {
+  return tail->asGlobalCoordinate() +
+         static_cast<Vec3>(*this) * static_cast<float>(l);
 }
 
 Edge::operator Vec3() const {
-  return static_cast<Vec3>(*head) - static_cast<Vec3>(*tail);
+  return head->getLocalCoordinate() - tail->getLocalCoordinate();
 }

@@ -1,8 +1,8 @@
 module world.collision.polyhedron;
 
-import world.collision.features.vertex;
-import world.collision.features.edge;
-import world.collision.features.face;
+import world.collision.feature.vertex;
+import world.collision.feature.edge;
+import world.collision.feature.face;
 import util.debug;
 
 unsigned int Collider::count = 0;

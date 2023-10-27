@@ -1,6 +1,6 @@
-export module world.collision.features.edge;
+export module world.collision.feature.edge;
 
-import world.collision.features.feature;
+import world.collision.feature.feature;
 import util.polyhedron;
 
 export class Vertex;
@@ -16,9 +16,9 @@ public:
 
   void setNeighbors(SPtr<Face> &left, SPtr<Face> &right);
 
-  Vec3 getProperDirectionFrom(const Face &face);
+  Vec3 getProperDirectionFrom(const Face &face) const;
 
-  Vec3 evalAt(double l);
+  Vec3 evalAt(double l) const;
 
   operator Vec3() const;
 };

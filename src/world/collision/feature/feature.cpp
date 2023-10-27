@@ -1,4 +1,4 @@
-module world.collision.features.feature;
+module world.collision.feature.feature;
 
 Feature::Feature(Collider &parent, unsigned short ID)
     : parent{parent}, ID{ID} {};
