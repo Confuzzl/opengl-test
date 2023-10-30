@@ -16,11 +16,11 @@ int main() {
   for (auto &v : coordinates2)
     v /= 2;
 
-  auto go1{GameObject::createGameObject(
+  auto &go1{GameObject::createGameObject2(
       SIMPLEX_FACTORY.createCollidable(coordinates1),
       SIMPLEX_FACTORY.createRenderable(coordinates1))};
 
-  auto go2{GameObject::createGameObject(
+  auto &go2{GameObject::createGameObject2(
       PRISM_FACTORY.createCollidable(coordinates2),
       PRISM_FACTORY.createRenderable(coordinates2))};
   go2->translate({0, -2, 0});

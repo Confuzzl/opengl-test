@@ -34,8 +34,6 @@ UPtr<GameObject> &GameObject::createGameObject2(UPtr<Collider> collider,
       std::make_unique<GameObject>(std::forward<UPtr<Collider>>(collider),
                                    std::forward<UPtr<Renderable>>(render))};
   unsigned short ID = ptr->ID;
-  auto pair = appScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
-  auto &element = appScene.objectMap[ID];
-  Scene::ObjectMap::iterator iterator = appScene.objectMap.find(ID);
-  return iterator->second;
+  appScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
+  return appScene.objectMap.at(ID);
 }

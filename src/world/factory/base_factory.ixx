@@ -9,6 +9,7 @@ import world.render.renderable;
 import util.polyhedron;
 import util.memory;
 import wrapper.buffer_object;
+import util.game;
 
 export class BaseFactory {
   const unsigned short vertexCount;
@@ -43,10 +44,12 @@ protected:
               const unsigned int rVertexCount);
 
 public:
+  ~BaseFactory();
+
   EBO ebo{};
   VBO sharedVBO{};
 
-  UPtr<Collider> createCollidable(const Vec3List &coordinates);
+  CollPtr createCollidable(const Vec3List &coordinates);
   UPtr<Renderable> createRenderable(const Vec3List &coordinates);
   UPtr<Renderable> createRenderable(const Vec3List &coordinates,
                                     const UVList &UVs);

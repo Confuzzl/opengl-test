@@ -192,7 +192,23 @@ void App::drawScene() {
   //  glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
   //                 GL_UNSIGNED_INT, 0);
   //}
-  for (const auto &obj : scene.gameObjects) {
+  // for (const auto &obj : scene.gameObjects) {
+  //  auto &r = *(obj->getRender());
+  //  defaultProgram.vao.bindEBO(r.ebo);
+  //  defaultProgram.vao.bindVBO(r.sharedVBO);
+
+  //  defaultProgram.setMat4("model", obj->getTransform());
+  //  defaultProgram.setMat4("view", scene.camera.getView());
+
+  //  r.writeToSharedVBO();
+
+  //  atlas.bindTextureUnit();
+  //  defaultProgram.vao.bindVertexArray();
+  //  glDrawElements(/*GL_LINE_STRIP*/ GL_TRIANGLES,
+  //                 (GLsizei)defaultProgram.vao.boundedEBO.size,
+  //                 GL_UNSIGNED_INT, 0);
+  //}
+  for (const auto &[ID, obj] : scene.objectMap) {
     auto &r = *(obj->getRender());
     defaultProgram.vao.bindEBO(r.ebo);
     defaultProgram.vao.bindVBO(r.sharedVBO);

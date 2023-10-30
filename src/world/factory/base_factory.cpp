@@ -18,6 +18,7 @@ BaseFactory::BaseFactory(
       evIndices{evIndices}, efIndices{efIndices}, feIndices{feIndices},
       fvIndices{fvIndices}, defaultUVs{defaultUVs}, rVertexCount{rVertexCount} {
 }
+BaseFactory::~BaseFactory() = default;
 
 void BaseFactory::initializeBuffers() {
   buffersInitialized = true;
