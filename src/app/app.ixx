@@ -41,6 +41,8 @@ export struct App {
   App();
   ~App();
 
+  void start();
+
   void processInput();
 
   void drawScene();
@@ -51,8 +53,8 @@ export struct App {
 
   void catchException(const std::runtime_error &e);
 
-private:
   void createWindow();
 };
 
 export App app{};
+export Scene &appScene = app.scene;

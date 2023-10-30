@@ -188,12 +188,6 @@
     <ClCompile Include="src\world\render\renderable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\render\prism.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\world\render\prism.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\world\transformable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -276,6 +270,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\collision\vclip\plane\feature_plane.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="voronoi_plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

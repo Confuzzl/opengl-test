@@ -32,6 +32,8 @@ export class BaseFactory {
 
   BaseFactory(const BaseFactory &) = delete;
   BaseFactory(BaseFactory &&) = delete;
+  BaseFactory &operator=(const BaseFactory &) = delete;
+  BaseFactory &operator=(BaseFactory &&) = delete;
 
 protected:
   BaseFactory(const unsigned short vertexCount, const unsigned short faceCount,

@@ -1,3 +1,7 @@
+module;
+
+#include <utility>
+
 module world.game_object;
 
 import app.app;
@@ -9,12 +13,29 @@ unsigned int GameObject::COUNT = 0;
 
 GameObject::GameObject(UPtr<Collider> collider, UPtr<Renderable> render)
     : collider{std::move(collider)}, render{std::move(render)}, ID{COUNT++} {
-  app.scene.gameObjects.insert(this);
+  appScene.gameObjects.insert(this);
 }
 GameObject::~GameObject() {
-  app.scene.gameObjects.erase(this);
+  appScene.gameObjects.erase(this);
   std::cout << std::format("gameobject {} destroyed\n", ID);
 }
 
 const UPtr<Collider> &GameObject::getCollider() { return collider; }
 const UPtr<Renderable> &GameObject::getRender() { return render; }
+
+UPtr<GameObject> GameObject::createGameObject(UPtr<Collider> collider,
+                                              UPtr<Renderable> render) {
+  return std::make_unique<GameObject>(std::forward<UPtr<Collider>>(collider),
+                                      std::forward<UPtr<Renderable>>(render));
+}
+UPtr<GameObject> &GameObject::createGameObject2(UPtr<Collider> collider,
+                                                UPtr<Renderable> render) {
+  UPtr<GameObject> ptr{
+      std::make_unique<GameObject>(std::forward<UPtr<Collider>>(collider),
+                                   std::forward<UPtr<Renderable>>(render))};
+  unsigned short ID = ptr->ID;
+  auto pair = appScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
+  auto &element = appScene.objectMap[ID];
+  Scene::ObjectMap::iterator iterator = appScene.objectMap.find(ID);
+  return iterator->second;
+}

@@ -203,8 +203,6 @@
     <ClCompile Include="src\world\factory\factories-simplex.ixx" />
     <ClCompile Include="src\world\factory\factories.ixx" />
     <ClCompile Include="src\world\player\player.ixx" />
-    <ClCompile Include="src\world\render\prism.cpp" />
-    <ClCompile Include="src\world\render\prism.ixx" />
     <ClCompile Include="src\world\render\renderable.cpp" />
     <ClCompile Include="src\world\render\renderable.ixx" />
     <ClCompile Include="src\world\base_polyhedron.cpp" />
@@ -238,6 +236,7 @@
     <ClCompile Include="src\wrapper\gl_object.ixx" />
     <ClCompile Include="src\wrapper\gl_object.cpp" />
     <ClCompile Include="src\wrapper\vao.cpp" />
+    <ClCompile Include="voronoi_plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\gl_utils.hpp" />

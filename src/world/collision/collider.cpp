@@ -87,22 +87,22 @@ void Collider::createFeatures() {
                                    vertices[headIndex]));
   }
   for (unsigned char i = 0; const auto &face : faceEdgeIndices) {
-    SPtr<Face> &f = addFace(
-        std::make_shared<Face>(*this, i++, (unsigned short)face.size()));
+    SPtr<Face> &f = addFace(std::make_shared<Face>(
+        *this, i++, static_cast<unsigned short>(face.size())));
     for (const unsigned char &index : face)
-      (*f).addEdge(edges[index]);
+      f->addEdge(edges[index]);
   }
 }
 void Collider::setupNeighbors() {
   for (unsigned char i = 0; const auto &indices : vertexEdgeIndices) {
     for (const unsigned char index : indices)
-      (*vertices[i]).addNeighbor(edges[index]);
+      vertices[i]->addNeighbor(edges[index]);
     i++;
   }
 
   for (unsigned char i = 0; const auto &pair : edgeFaceIndices)
-    (*edges[i++]).setNeighbors(faces[pair[0]], faces[pair[1]]);
+    edges[i++]->setNeighbors(faces[pair[0]], faces[pair[1]]);
 
   for (const auto &face : faces)
-    (*face).finishCreation();
+    face->finishCreation();
 }

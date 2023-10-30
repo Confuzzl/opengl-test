@@ -11,6 +11,7 @@ import util.glm;
 import util.vector;
 import util.debug;
 import world.render.renderable;
+import app.text.text_corners;
 
 const Mat4 App::UI_MAT{
     glm::ortho(0.0f, (float)App::WIDTH, 0.0f, (float)App::HEIGHT)};
@@ -42,6 +43,54 @@ App::~App() {
   glfwDestroyWindow(window);
   glfwTerminate();
   std::cout << "app terminated\n";
+  std::cout << std::format("app terminated at {:.2f}s\n", glfwGetTime());
+}
+
+void App::start() {
+  while (!glfwWindowShouldClose(window)) {
+    try {
+      double currTime = glfwGetTime();
+
+      loopCycle.pushNewTime(currTime);
+      if (updateCycle.pastLength(currTime)) {
+        updateCycle.pushNewTime(currTime);
+        glfwPollEvents();
+        processInput();
+      }
+      if (frameCycle.pastLength(currTime)) {
+        frameCycle.pushNewTime(currTime);
+
+        glClearColor(0.5, 0.5, 0.5, 1);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        drawScene();
+
+        Text::resetAllTextOffsets();
+
+        const auto &cam = scene.camera;
+        const auto &pos = cam.getPosition();
+        Text::TOP_LT.drawText(std::format("POS: {:+.3f} {:+.3f} {:+.3f}",
+                                          pos[0], pos[1], pos[2]));
+        Text::TOP_LT.drawText(
+            std::format("CAM: {:+.3f} {:+.3f}", cam.getYaw(), cam.getPitch()));
+
+        Text::TOP_RT.drawText(std::format("FPS: {}", frameCycle.prevCount));
+        Text::TOP_RT.drawText(std::format("Time: {:.2f}s", currTime));
+        Text::TOP_RT.drawText(std::format("LPS: {}", loopCycle.prevCount));
+        Text::TOP_RT.drawText(std::format("UPS: {}", updateCycle.prevCount));
+
+        glfwSwapBuffers(window);
+      }
+      if (currTime - seconds >= 1) {
+        seconds++;
+        loopCycle.pushCount();
+        updateCycle.pushCount();
+        frameCycle.pushCount();
+      }
+    } catch (const std::runtime_error &e) {
+      catchException(e);
+    }
+  }
 }
 
 static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
@@ -56,11 +105,12 @@ static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
   app.prevY = ypos;
 
   const float magnitude = static_cast<float>(app.updateCycle.delta *
-                                             app.scene.camera.getSensitivity());
-  app.scene.camera.rotate(dx * magnitude, dy * magnitude);
+                                             appScene.camera.getSensitivity());
+  appScene.camera.rotate(dx * magnitude, dy * magnitude);
 }
-static void keyCallback(GLFWwindow *window, int key, int scancode, int action,
-                        int mods) {}
+// static void keyCallback(GLFWwindow *window, int key, int scancode, int
+// action,
+//                         int mods) {}
 
 void App::createWindow() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -78,7 +128,7 @@ void App::createWindow() {
 
   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   glfwSetCursorPosCallback(window, mouseCallback);
-  glfwSetKeyCallback(window, keyCallback);
+  // glfwSetKeyCallback(window, keyCallback);
 
   gladLoadGL();
   glViewport(0, 0, WIDTH, HEIGHT);
@@ -129,19 +179,19 @@ void App::processInput() {
 void App::drawScene() {
   defaultProgram.useProgram();
   defaultProgram.setMat4("projection", scene.camera.getProjection());
-  for (const auto &obj : scene.objects) {
-    defaultProgram.vao.bindEBO(Prism::ebo);
-    defaultProgram.vao.bindVBO(Prism::sharedVBO);
-    defaultProgram.setMat4("model", obj->getTransform());
-    defaultProgram.setMat4("view", scene.camera.getView());
+  // for (const auto &obj : scene.objects) {
+  //   defaultProgram.vao.bindEBO(Prism::ebo);
+  //   defaultProgram.vao.bindVBO(Prism::sharedVBO);
+  //   defaultProgram.setMat4("model", obj->getTransform());
+  //   defaultProgram.setMat4("view", scene.camera.getView());
 
-    obj->writeToVBO();
+  //  obj->writeToVBO();
 
-    atlas.bindTextureUnit();
-    defaultProgram.vao.bindVertexArray();
-    glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
-                   GL_UNSIGNED_INT, 0);
-  }
+  //  atlas.bindTextureUnit();
+  //  defaultProgram.vao.bindVertexArray();
+  //  glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
+  //                 GL_UNSIGNED_INT, 0);
+  //}
   for (const auto &obj : scene.gameObjects) {
     auto &r = *(obj->getRender());
     defaultProgram.vao.bindEBO(r.ebo);

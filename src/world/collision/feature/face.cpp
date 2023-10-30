@@ -16,9 +16,8 @@ void Face::addEdge(const SPtr<Edge> &edge) {
   //                          edge.use_count());
 }
 void Face::finishCreation() {
-  normal =
-      glm::normalize(glm::cross((*edges[0]).getProperDirectionFrom(*this),
-                                (*edges[1]).getProperDirectionFrom(*this)));
+  normal = glm::normalize(glm::cross(edges[0]->getProperDirectionFrom(*this),
+                                     edges[1]->getProperDirectionFrom(*this)));
   // std::cout << std::format("normal: {}\n", glm::to_string(normal));
 }
 
