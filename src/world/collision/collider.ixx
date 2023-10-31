@@ -1,4 +1,4 @@
-export module world.collision.polyhedron;
+export module world.collision.collider;
 
 import world.base_polyhedron;
 import util.polyhedron;

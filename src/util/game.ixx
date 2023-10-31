@@ -2,9 +2,9 @@ export module util.game;
 
 import util.memory;
 
-class Renderable;
-class Collider;
-class GameObject;
+export class Renderable;
+export class Collider;
+export class GameObject;
 
 export using RendPtr = UPtr<Renderable>;
 export using CollPtr = UPtr<Collider>;

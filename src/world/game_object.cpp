@@ -5,7 +5,7 @@ module;
 module world.game_object;
 
 import app.app;
-import world.collision.polyhedron;
+import world.collision.collider;
 import world.render.renderable;
 import util.debug;
 

@@ -4,8 +4,6 @@ module;
 
 export module world.factory.base_factory;
 
-import world.collision.polyhedron;
-import world.render.renderable;
 import util.polyhedron;
 import util.memory;
 import wrapper.buffer_object;
@@ -50,7 +48,6 @@ public:
   VBO sharedVBO{};
 
   CollPtr createCollidable(const Vec3List &coordinates);
-  UPtr<Renderable> createRenderable(const Vec3List &coordinates);
-  UPtr<Renderable> createRenderable(const Vec3List &coordinates,
-                                    const UVList &UVs);
+  RendPtr createRenderable(const Vec3List &coordinates);
+  RendPtr createRenderable(const Vec3List &coordinates, const UVList &UVs);
 };

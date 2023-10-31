@@ -1,4 +1,4 @@
-module world.collision.polyhedron;
+module world.collision.collider;
 
 import world.collision.feature.vertex;
 import world.collision.feature.edge;

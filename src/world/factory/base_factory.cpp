@@ -5,6 +5,8 @@ module;
 
 module world.factory.base_factory;
 
+import world.collision.collider;
+import world.render.renderable;
 import wrapper.program.vertex_formats;
 import util.debug;
 
@@ -40,15 +42,15 @@ void BaseFactory::allocateVBO() {
                            sharedVBO.ID);
 }
 
-UPtr<Collider> BaseFactory::createCollidable(const Vec3List &coordinates) {
+CollPtr BaseFactory::createCollidable(const Vec3List &coordinates) {
   return std::make_unique<Collider>(vertexCount, faceCount, coordinates,
                                     veIndices, evIndices, efIndices, feIndices);
 }
-UPtr<Renderable> BaseFactory::createRenderable(const Vec3List &coordinates) {
+RendPtr BaseFactory::createRenderable(const Vec3List &coordinates) {
   return createRenderable(coordinates, defaultUVs);
 }
-UPtr<Renderable> BaseFactory::createRenderable(const Vec3List &coordinates,
-                                               const UVList &UVs) {
+RendPtr BaseFactory::createRenderable(const Vec3List &coordinates,
+                                      const UVList &UVs) {
   if (not buffersInitialized)
     initializeBuffers();
   return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,

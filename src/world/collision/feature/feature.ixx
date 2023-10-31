@@ -1,7 +1,7 @@
 export module world.collision.feature.feature;
 
 import <concepts>;
-import world.collision.polyhedron;
+import world.collision.collider;
 
 export template <typename T>
 concept IsFeature = requires(T t) {
