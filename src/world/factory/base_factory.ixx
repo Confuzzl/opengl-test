@@ -4,6 +4,9 @@ module;
 
 export module world.factory.base_factory;
 
+export class Collider;
+export class Renderable;
+
 import util.polyhedron;
 import util.memory;
 import wrapper.buffer_object;

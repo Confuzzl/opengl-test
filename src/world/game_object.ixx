@@ -1,7 +1,8 @@
 export module world.game_object;
 
-// export class Collider;
-// export class Renderable;
+export class Collider;
+export class Renderable;
+export class GameObject;
 
 import world.transformable;
 import util.memory;
