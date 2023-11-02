@@ -29,3 +29,5 @@ public:
 
   void writeToSharedVBO();
 };
+
+export using RendPtr = UPtr<Renderable>;

@@ -8,8 +8,6 @@ export import util.memory;
 
 export using Vec3List = Vector<Vec3>;
 
-export template <typename T> using SPtrVector = Vector<SPtr<T>>;
-
 export using VEIndexList = Vector2D<unsigned char>;
 export using EVIndexList = Vector<glm::u8vec2>;
 export using EFIndexList = Vector<glm::u8vec2>;

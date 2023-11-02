@@ -7,7 +7,9 @@ export module world.factory.base_factory;
 import util.polyhedron;
 import util.memory;
 import wrapper.buffer_object;
-import util.game;
+import world.game_object;
+import world.collision.collider;
+import world.render.renderable;
 
 export class BaseFactory {
   const unsigned short vertexCount;

@@ -42,3 +42,5 @@ protected:
   void createFeatures();
   void setupNeighbors();
 };
+
+export using CollPtr = UPtr<Collider>;

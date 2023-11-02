@@ -1,7 +1,5 @@
 export module world.factory.factories;
 
-import world.factory.base_factory;
-
 export import :simplex;
 export import :prism;
 

@@ -1,11 +1,13 @@
 export module world.game_object;
 
-// export class Collider;
-// export class Renderable;
-
 import world.transformable;
+import world.collision.collider;
+import world.render.renderable;
 import util.memory;
-import util.game;
+
+class GameObject;
+
+export using GObjPtr = UPtr<GameObject>;
 
 export class GameObject : public Transformable {
   static unsigned int COUNT;

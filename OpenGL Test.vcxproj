@@ -169,7 +169,6 @@
     <ClCompile Include="src\app\update_cycle.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\util\debug.ixx" />
-    <ClCompile Include="src\util\game.ixx" />
     <ClCompile Include="src\util\glm.ixx" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\util\memory.ixx" />
