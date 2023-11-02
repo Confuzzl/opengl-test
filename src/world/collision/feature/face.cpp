@@ -21,6 +21,8 @@ void Face::finishCreation() {
   // std::cout << std::format("normal: {}\n", glm::to_string(normal));
 }
 
+Vec3 Face::getNormal() { return normal; }
+
 Collision::VClip::DPrimeState Face::signDPrime(const Edge &e, double l) const {
   return Collision::VClip::DPrimeState::ZERO;
 }

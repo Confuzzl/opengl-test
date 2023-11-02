@@ -8,4 +8,6 @@ import world.collision.vclip.region.voronoi_region;
 export template <IsFeature NeighborType, IsVoronoiRegion RegionType>
 class FeaturePlane : public VoronoiPlane<RegionType> {
   SPtr<NeighborType> neighbor;
+
+  SPtr<NeighborType> getNeighbor();
 };

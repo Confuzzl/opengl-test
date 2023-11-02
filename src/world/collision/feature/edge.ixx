@@ -22,6 +22,9 @@ public:
 
   Vec3 getProperDirectionFrom(const Face &face) const;
 
+  SPtr<Vertex> getTail();
+  SPtr<Vertex> getHead();
+
   Vec3 evalAt(double l) const;
 
   operator Vec3() const;

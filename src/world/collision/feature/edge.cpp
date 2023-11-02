@@ -28,6 +28,9 @@ Vec3 Edge::getProperDirectionFrom(const Face &face) const {
   return {};
 }
 
+SPtr<Vertex> Edge::getTail() { return tail; }
+SPtr<Vertex> Edge::getHead() { return head; }
+
 Vec3 Edge::evalAt(double l) const {
   return tail->asGlobalCoordinate() +
          static_cast<Vec3>(*this) * static_cast<float>(l);

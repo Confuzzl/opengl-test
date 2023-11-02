@@ -21,6 +21,8 @@ public:
   void addEdge(const SPtr<Edge> &edge);
   void finishCreation();
 
+  Vec3 getNormal();
+
   Collision::VClip::DPrimeState signDPrime(const Edge &e,
                                            double l) const override;
 };
