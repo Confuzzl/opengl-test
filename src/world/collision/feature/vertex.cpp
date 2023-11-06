@@ -11,9 +11,10 @@ void Vertex::addNeighbor(SPtr<Edge> &neighbor) {
   neighbors.emplace_back(neighbor);
 }
 
-Collision::VClip::DPrimeState Vertex::signDPrime(const Edge &e,
-                                                 double l) const {
-  const Vec3 el = e.evalAt(l);
+const SPtrVector<Edge> &Vertex::getNeighbors() const { return neighbors; }
+
+Collision::VClip::DPrimeState Vertex::signDPrime(const Edge &e, float l) const {
+  const Vec3 el{e.evalAt(l)};
   if (el == asGlobalCoordinate())
     return Collision::VClip::DPrimeState::DEGENERATE;
   double s = glm::dot(static_cast<Vec3>(e), el - asGlobalCoordinate());

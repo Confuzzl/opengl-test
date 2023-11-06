@@ -21,14 +21,21 @@ GameObject::~GameObject() {
 const CollPtr &GameObject::getCollider() { return collider; }
 const RendPtr &GameObject::getRender() { return render; }
 
-GObjPtr GameObject::createGameObject(CollPtr collider, RendPtr render) {
-  return std::make_unique<GameObject>(std::forward<CollPtr>(collider),
-                                      std::forward<RendPtr>(render));
-}
+Collider &GameObject::getCollider2() { return *collider; }
+Renderable &GameObject::getRenderable2() { return *render; }
+
 GObjPtr &GameObject::createGameObject2(CollPtr collider, RendPtr render) {
   GObjPtr ptr{std::make_unique<GameObject>(std::forward<CollPtr>(collider),
                                            std::forward<RendPtr>(render))};
   unsigned short ID = ptr->ID;
   appScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
   return appScene.objectMap.at(ID);
+}
+
+GameObject &GameObject::createGameObject3(CollPtr collider, RendPtr render) {
+  GObjPtr ptr{std::make_unique<GameObject>(std::forward<CollPtr>(collider),
+                                           std::forward<RendPtr>(render))};
+  unsigned short ID = ptr->ID;
+  appScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
+  return *appScene.objectMap.at(ID);
 }

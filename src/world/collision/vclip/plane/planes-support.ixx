@@ -6,9 +6,11 @@ import world.collision.feature.face;
 import world.collision.vclip.region.regions;
 
 export class SupportPlane : public VoronoiPlane<FaceRegion> {
-  SPtr<Face> face;
+  const Face &face;
 
-  SPtr<Face> getFace();
+public:
+  SupportPlane(const FaceRegion &region, const Vertex &referencePoint,
+               const Face &face);
 
-  Vec3 getNormal() override;
+  Vec3 getNormal() const override;
 };

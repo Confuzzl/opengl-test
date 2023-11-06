@@ -83,8 +83,8 @@ void Collider::createFeatures() {
   }
   for (unsigned char i = 0; const auto &pair : edgeVertexIndices) {
     unsigned char tailIndex = pair[0], headIndex = pair[1];
-    addEdge(std::make_shared<Edge>(*this, i++, vertices[tailIndex],
-                                   vertices[headIndex]));
+    addEdge(std::make_shared<Edge>(*this, i++, *(vertices[tailIndex]),
+                                   *(vertices[headIndex])));
   }
   for (unsigned char i = 0; const auto &face : faceEdgeIndices) {
     SPtr<Face> &f = addFace(std::make_shared<Face>(
@@ -101,7 +101,7 @@ void Collider::setupNeighbors() {
   }
 
   for (unsigned char i = 0; const auto &pair : edgeFaceIndices)
-    edges[i++]->setNeighbors(faces[pair[0]], faces[pair[1]]);
+    edges[i++]->setNeighbors(faces[pair[0]].get(), faces[pair[1]].get());
 
   for (const auto &face : faces)
     face->finishCreation();

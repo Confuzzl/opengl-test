@@ -272,15 +272,15 @@
     <ClCompile Include="src\world\collision\vclip\plane\feature_plane.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="voronoi_plane.cpp">
+    <ClCompile Include="src\world\collision\vclip\plane\planes-support.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\regions-vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\gl_utils.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\world\collision\simplex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -297,5 +297,6 @@
     <None Include="assets\untitled.pdn" />
     <None Include=".gitignore" />
     <None Include="assets\prism.pdn" />
+    <None Include="OpenGL Test.aps" />
   </ItemGroup>
 </Project>

@@ -8,7 +8,7 @@ export class Edge;
 export class FaceRegion;
 
 export class Face : public Feature, DifferentiableFeature {
-  SPtr<FaceRegion> region;
+  UPtr<FaceRegion> region;
 
   SPtrVector<Edge> edges;
   Vec3 normal{};
@@ -21,8 +21,9 @@ public:
   void addEdge(const SPtr<Edge> &edge);
   void finishCreation();
 
-  Vec3 getNormal();
+  Vec3 getNormal() const;
+  const SPtrVector<Edge> &getEdges() const;
 
   Collision::VClip::DPrimeState signDPrime(const Edge &e,
-                                           double l) const override;
+                                           float l) const override;
 };

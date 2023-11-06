@@ -8,24 +8,24 @@ export class Face;
 export class EdgeRegion;
 
 export class Edge : public Feature {
-  SPtr<EdgeRegion> region;
+  UPtr<EdgeRegion> region;
 
-  SPtr<Vertex> tail, head;
-  SPtr<Face> left, right;
+  const Vertex &tail, &head;
+  const Face *left, *right;
 
 public:
-  Edge(Collider &parent, const unsigned short ID, SPtr<Vertex> &tail,
-       SPtr<Vertex> &head);
+  Edge(Collider &parent, const unsigned short ID, const Vertex &tail,
+       const Vertex &head);
   ~Edge();
 
-  void setNeighbors(SPtr<Face> &left, SPtr<Face> &right);
+  void setNeighbors(Face *left, Face *right);
 
   Vec3 getProperDirectionFrom(const Face &face) const;
 
-  SPtr<Vertex> getTail();
-  SPtr<Vertex> getHead();
+  const Vertex &getTail() const;
+  const Vertex &getHead() const;
 
-  Vec3 evalAt(double l) const;
+  Vec3 evalAt(const float l) const;
 
   operator Vec3() const;
 };

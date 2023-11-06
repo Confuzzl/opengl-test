@@ -4,8 +4,8 @@ import world.collision.feature.vertex;
 import world.collision.feature.face;
 import world.collision.vclip.region.regions;
 
-Edge::Edge(Collider &parent, const unsigned short ID, SPtr<Vertex> &tail,
-           SPtr<Vertex> &head)
+Edge::Edge(Collider &parent, const unsigned short ID, const Vertex &tail,
+           const Vertex &head)
     : Feature(parent, ID), tail{tail}, head{head} {
   // std::cout << std::format("CREATING tail {} count: {} head {} count: {}\n",
   //                          (*tail).ID, tail.use_count(), (*head).ID,
@@ -13,29 +13,26 @@ Edge::Edge(Collider &parent, const unsigned short ID, SPtr<Vertex> &tail,
 }
 Edge::~Edge() = default;
 
-void Edge::setNeighbors(SPtr<Face> &left, SPtr<Face> &right) {
+void Edge::setNeighbors(Face *left, Face *right) {
   this->left = left;
   this->right = right;
 }
 
 Vec3 Edge::getProperDirectionFrom(const Face &face) const {
-  if (face == *left) {
-    return *this;
-  }
-  if (face == *right) {
+  if (face == *left)
+    return +static_cast<Vec3>(*this);
+  if (face == *right)
     return -static_cast<Vec3>(*this);
-  }
   return {};
 }
 
-SPtr<Vertex> Edge::getTail() { return tail; }
-SPtr<Vertex> Edge::getHead() { return head; }
+const Vertex &Edge::getTail() const { return tail; }
+const Vertex &Edge::getHead() const { return head; }
 
-Vec3 Edge::evalAt(double l) const {
-  return tail->asGlobalCoordinate() +
-         static_cast<Vec3>(*this) * static_cast<float>(l);
+Vec3 Edge::evalAt(const float l) const {
+  return tail.asGlobalCoordinate() + static_cast<Vec3>(*this) * l;
 }
 
 Edge::operator Vec3() const {
-  return head->getLocalCoordinate() - tail->getLocalCoordinate();
+  return head.getLocalCoordinate() - tail.getLocalCoordinate();
 }

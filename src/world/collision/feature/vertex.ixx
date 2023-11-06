@@ -8,7 +8,7 @@ export class Edge;
 export class VertexRegion;
 
 export class Vertex : public Feature, DifferentiableFeature {
-  SPtr<VertexRegion> region;
+  UPtr<VertexRegion> region;
 
   SPtrVector<Edge> neighbors;
   Vec3 localCoordinate;
@@ -19,8 +19,10 @@ public:
 
   void addNeighbor(SPtr<Edge> &neighbor);
 
+  const SPtrVector<Edge> &getNeighbors() const;
+
   Collision::VClip::DPrimeState signDPrime(const Edge &e,
-                                           double l) const override;
+                                           float l) const override;
 
   const Vec3 &getLocalCoordinate() const;
   Vec3 asGlobalCoordinate() const;

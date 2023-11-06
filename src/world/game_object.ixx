@@ -19,19 +19,22 @@ export class GameObject : public Transformable {
                                                                 RendPtr &&);
   GameObject(CollPtr collider, RendPtr render);
 
+  GameObject(const GameObject &) = delete;
+  GameObject(GameObject &&) = delete;
+  GameObject &operator=(const GameObject &) = delete;
+  GameObject &operator=(GameObject &&) = delete;
+
 public:
   const unsigned int ID;
 
-  GameObject(const GameObject &) = delete;
-  GameObject(GameObject &&) = delete;
   ~GameObject();
-
-  GameObject &operator=(const GameObject &) = delete;
-  GameObject &operator=(GameObject &&) = delete;
 
   const CollPtr &getCollider();
   const RendPtr &getRender();
 
-  static GObjPtr createGameObject(CollPtr collider, RendPtr render);
+  Collider &getCollider2();
+  Renderable &getRenderable2();
+
   static GObjPtr &createGameObject2(CollPtr collider, RendPtr render);
+  static GameObject &createGameObject3(CollPtr collider, RendPtr render);
 };

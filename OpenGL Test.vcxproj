@@ -174,6 +174,7 @@
     <ClCompile Include="src\util\memory.ixx" />
     <ClCompile Include="src\util\polyhedron.ixx" />
     <ClCompile Include="src\util\math.ixx" />
+    <ClCompile Include="src\util\regions-vertex.cpp" />
     <ClCompile Include="src\util\vector.ixx" />
     <ClCompile Include="src\world\collision\algorithms.ixx" />
     <ClCompile Include="src\world\collision\feature\differentiable_feature.ixx" />
@@ -186,12 +187,10 @@
     <ClCompile Include="src\world\collision\feature\vertex.cpp" />
     <ClCompile Include="src\world\collision\feature\vertex.ixx" />
     <ClCompile Include="src\world\collision\collider.cpp" />
-    <ClCompile Include="src\world\collision\vclip\plane\feature_plane.cpp" />
     <ClCompile Include="src\world\collision\vclip\plane\feature_plane.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\planes-fe.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\planes-support.cpp" />
     <ClCompile Include="src\world\collision\vclip\plane\planes-support.ixx" />
-    <ClCompile Include="src\world\collision\vclip\plane\planes-ve.cpp" />
     <ClCompile Include="src\world\collision\vclip\plane\planes-ve.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\planes.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\voronoi_plane.ixx" />
@@ -239,11 +238,9 @@
     <ClCompile Include="src\wrapper\gl_object.ixx" />
     <ClCompile Include="src\wrapper\gl_object.cpp" />
     <ClCompile Include="src\wrapper\vao.cpp" />
-    <ClCompile Include="src\world\collision\vclip\plane\voronoi_plane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\gl_utils.hpp" />
-    <ClInclude Include="src\world\collision\simplex.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="assets\cube.txt" />
@@ -258,6 +255,7 @@
     <None Include="assets\untitled.pdn" />
     <None Include="assets\shader\font.vert" />
     <None Include="assets\shader\default.vert" />
+    <None Include="OpenGL Test.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
