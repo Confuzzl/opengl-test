@@ -174,7 +174,9 @@
     <ClCompile Include="src\util\memory.ixx" />
     <ClCompile Include="src\util\polyhedron.ixx" />
     <ClCompile Include="src\util\math.ixx" />
-    <ClCompile Include="src\util\regions-vertex.cpp" />
+    <ClCompile Include="src\world\collision\vclip\region\regions-edge.cpp" />
+    <ClCompile Include="src\world\collision\vclip\region\regions-face.cpp" />
+    <ClCompile Include="src\world\collision\vclip\region\regions-vertex.cpp" />
     <ClCompile Include="src\util\vector.ixx" />
     <ClCompile Include="src\world\collision\algorithms.ixx" />
     <ClCompile Include="src\world\collision\feature\differentiable_feature.ixx" />

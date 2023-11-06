@@ -1,6 +1,7 @@
 export module world.collision.vclip.region.voronoi_region;
 
 import util.vector;
+import util.glm;
 import world.collision.feature.feature;
 
 export template <typename T>
@@ -13,7 +14,7 @@ protected:
   VoronoiRegion(const ParentType &parent) : parent{parent} {}
 
 public:
-  ParentType &getParent() { return parent; }
+  const ParentType &getParent() const { return parent; }
 
-  // bool &pointInRegion(const Vec3 &v) {}
+  const bool pointInRegion(const Vec3 &v) const { return true; }
 };

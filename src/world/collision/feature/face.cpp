@@ -1,5 +1,6 @@
 module world.collision.feature.face;
 
+import world.collision.feature.vertex;
 import world.collision.feature.edge;
 import world.collision.vclip.region.regions;
 
@@ -23,6 +24,7 @@ void Face::finishCreation() {
 
 Vec3 Face::getNormal() const { return normal; }
 const SPtrVector<Edge> &Face::getEdges() const { return edges; }
+const Vertex &Face::getSampleVertex() const { return edges[0]->getTail(); }
 
 Collision::VClip::DPrimeState Face::signDPrime(const Edge &e, float l) const {
   return Collision::VClip::DPrimeState::ZERO;

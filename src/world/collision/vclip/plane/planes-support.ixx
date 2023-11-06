@@ -13,4 +13,7 @@ public:
                const Face &face);
 
   Vec3 getNormal() const override;
+
+  static UPtr<SupportPlane> createPlane(const FaceRegion &region,
+                                        const Face &face);
 };

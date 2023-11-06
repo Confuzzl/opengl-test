@@ -5,7 +5,8 @@ import world.collision.feature.feature;
 import util.polyhedron;
 
 export class Edge;
-export class FaceRegion;
+class Vertex;
+class FaceRegion;
 
 export class Face : public Feature, DifferentiableFeature {
   UPtr<FaceRegion> region;
@@ -23,6 +24,7 @@ public:
 
   Vec3 getNormal() const;
   const SPtrVector<Edge> &getEdges() const;
+  const Vertex &getSampleVertex() const;
 
   Collision::VClip::DPrimeState signDPrime(const Edge &e,
                                            float l) const override;

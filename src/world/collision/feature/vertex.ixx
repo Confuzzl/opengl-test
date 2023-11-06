@@ -5,7 +5,7 @@ import world.collision.feature.feature;
 import util.polyhedron;
 
 export class Edge;
-export class VertexRegion;
+class VertexRegion;
 
 export class Vertex : public Feature, DifferentiableFeature {
   UPtr<VertexRegion> region;

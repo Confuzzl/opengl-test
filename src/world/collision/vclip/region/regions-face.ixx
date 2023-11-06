@@ -3,7 +3,14 @@ export module world.collision.vclip.region.regions:face;
 import world.collision.feature.face;
 import world.collision.vclip.region.voronoi_region;
 
+class FaceFEPlane;
+class SupportPlane;
+
 export class FaceRegion : public VoronoiRegion<Face> {
+  UPtrVector<FaceFEPlane> planes;
+  UPtr<SupportPlane> supportPlane;
+
 public:
-  using VoronoiRegion<Face>::VoronoiRegion;
+  FaceRegion(const Face &parent);
+  ~FaceRegion();
 };

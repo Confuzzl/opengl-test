@@ -35,15 +35,40 @@ public:
 };
 
 export class VertexVEPlane : public VEPlane<Edge, VertexRegion> {
-public:
+  friend UPtr<VertexVEPlane>
+  std::make_unique<VertexVEPlane, const VertexRegion &, const Vertex &,
+                   const Edge &>(const VertexRegion &, const Vertex &,
+                                 const Edge &);
+
   VertexVEPlane(const VertexRegion &region, const Vertex &vertex,
                 const Edge &edge)
       : VEPlane<Edge, VertexRegion>(region, vertex, edge, edge,
                                     &Edge::getHead) {}
+
+public:
+  static UPtr<VertexVEPlane> createPlane(const VertexRegion &region,
+                                         const Vertex &vertex,
+                                         const Edge &edge) {
+    return std::make_unique<VertexVEPlane>(region, vertex, edge);
+  }
 };
 export class EdgeVEPlane : public VEPlane<Vertex, EdgeRegion> {
-public:
+  friend UPtr<EdgeVEPlane>
+  std::make_unique<EdgeVEPlane, const EdgeRegion &, const Vertex &,
+                   const Edge &>(const EdgeRegion &, const Vertex &,
+                                 const Edge &);
+
   EdgeVEPlane(const EdgeRegion &region, const Vertex &vertex, const Edge &edge)
       : VEPlane<Vertex, EdgeRegion>(region, vertex, vertex, edge,
                                     &Edge::getTail) {}
+
+public:
+  static UPtr<EdgeVEPlane> createTailPlane(const EdgeRegion &region,
+                                           const Edge &edge) {
+    return std::make_unique<EdgeVEPlane>(region, edge.getTail(), edge);
+  }
+  static UPtr<EdgeVEPlane> createHeadPlane(const EdgeRegion &region,
+                                           const Edge &edge) {
+    return std::make_unique<EdgeVEPlane>(region, edge.getHead(), edge);
+  }
 };

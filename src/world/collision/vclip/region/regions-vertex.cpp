@@ -7,7 +7,7 @@ VertexRegion::VertexRegion(const Vertex &parent)
   const SPtrVector<Edge> &neighbors{parent.getNeighbors()};
   planes.reserve(neighbors.size());
   for (const auto &edge : neighbors) {
+    planes.emplace_back(VertexVEPlane::createPlane(*this, parent, *edge));
   }
 }
-
 VertexRegion::~VertexRegion() = default;

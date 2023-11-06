@@ -5,7 +5,7 @@ import util.polyhedron;
 
 export class Vertex;
 export class Face;
-export class EdgeRegion;
+class EdgeRegion;
 
 export class Edge : public Feature {
   UPtr<EdgeRegion> region;
@@ -24,6 +24,8 @@ public:
 
   const Vertex &getTail() const;
   const Vertex &getHead() const;
+  const Face &getLeft() const;
+  const Face &getRight() const;
 
   Vec3 evalAt(const float l) const;
 
