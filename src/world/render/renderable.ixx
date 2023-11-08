@@ -27,7 +27,7 @@ public:
              const RenCoordinateIndexList &faceVertexIndices,
              const UVList &UVs);
 
-  void writeToSharedVBO();
+  void writeToSharedVBO() const;
 };
 
 export using RendPtr = UPtr<Renderable>;

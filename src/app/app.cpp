@@ -179,37 +179,9 @@ void App::processInput() {
 void App::drawScene() {
   defaultProgram.useProgram();
   defaultProgram.setMat4("projection", scene.camera.getProjection());
-  // for (const auto &obj : scene.objects) {
-  //   defaultProgram.vao.bindEBO(Prism::ebo);
-  //   defaultProgram.vao.bindVBO(Prism::sharedVBO);
-  //   defaultProgram.setMat4("model", obj->getTransform());
-  //   defaultProgram.setMat4("view", scene.camera.getView());
 
-  //  obj->writeToVBO();
-
-  //  atlas.bindTextureUnit();
-  //  defaultProgram.vao.bindVertexArray();
-  //  glDrawElements(GL_TRIANGLES, (GLsizei)defaultProgram.vao.boundedEBO.size,
-  //                 GL_UNSIGNED_INT, 0);
-  //}
-  // for (const auto &obj : scene.gameObjects) {
-  //  auto &r = *(obj->getRender());
-  //  defaultProgram.vao.bindEBO(r.ebo);
-  //  defaultProgram.vao.bindVBO(r.sharedVBO);
-
-  //  defaultProgram.setMat4("model", obj->getTransform());
-  //  defaultProgram.setMat4("view", scene.camera.getView());
-
-  //  r.writeToSharedVBO();
-
-  //  atlas.bindTextureUnit();
-  //  defaultProgram.vao.bindVertexArray();
-  //  glDrawElements(/*GL_LINE_STRIP*/ GL_TRIANGLES,
-  //                 (GLsizei)defaultProgram.vao.boundedEBO.size,
-  //                 GL_UNSIGNED_INT, 0);
-  //}
   for (const auto &[ID, obj] : scene.objectMap) {
-    auto &r = *(obj->getRender());
+    const auto &r = obj->getRenderable();
     defaultProgram.vao.bindEBO(r.ebo);
     defaultProgram.vao.bindVBO(r.sharedVBO);
 
@@ -224,62 +196,4 @@ void App::drawScene() {
                    (GLsizei)defaultProgram.vao.boundedEBO.size, GL_UNSIGNED_INT,
                    0);
   }
-}
-void App::drawTextBottomLeft(const float x, const float y, const float scale,
-                             const std::string msg) {
-  const size_t vertexCount = 6 * msg.size();
-
-  Vector<GLuint> indices{};
-  indices.resize(vertexCount);
-  std::iota(indices.begin(), indices.end(), 0);
-
-  EBO ebo{};
-  ebo.allocateBufferObject(vertexCount * sizeof(GLuint));
-  glNamedBufferSubData(ebo.ID, 0, ebo.size, indices.data());
-
-  Vector<FontVertex> vertices{};
-  vertices.reserve(vertexCount);
-  float xOffset = x;
-  const float width = FontProgram::CHAR_WIDTH * scale,
-              height = FontProgram::CHAR_HEIGHT * scale;
-  for (const char &c : msg) {
-    TexTile tex = consolas.getTile(c);
-    for (int tri = 0; tri < 2; tri++) {
-      for (int vertex = 0; vertex < 3; vertex++) {
-        const Vec2 pos{xOffset + width * QUAD_UVS[tri][vertex][0],
-                       y + height * QUAD_UVS[tri][vertex][1]};
-        const glm::lowp_u16vec2 uv{tex.coordinates +
-                                   tex.dimensions * QUAD_UVS[tri][vertex]};
-        vertices.emplace_back(pos[0], pos[1], uv[0], uv[1]);
-      }
-    }
-
-    xOffset += width * 1;
-  }
-
-  VBO vbo{};
-  vbo.allocateBufferObject(vertexCount * FontVertex::WIDTH);
-  GLintptr offset = 0;
-  for (const FontVertex &vertex : vertices) {
-    glNamedBufferSubData(vbo.ID, offset, FontVertex::POS_WIDTH, vertex.posInfo);
-    offset += FontVertex::POS_WIDTH;
-    glNamedBufferSubData(vbo.ID, offset, FontVertex::TEX_WIDTH, vertex.texInfo);
-    offset += FontVertex::TEX_WIDTH;
-  }
-
-  fontProgram.vao.bindEBO(ebo);
-  fontProgram.vao.bindVBO(vbo);
-
-  fontProgram.useProgram();
-  fontProgram.setMat4("projection", UI_MAT);
-
-  consolas.atlas.bindTextureUnit();
-  fontProgram.vao.bindVertexArray();
-  glDrawElements(GL_TRIANGLES, (GLsizei)fontProgram.vao.boundedEBO.size,
-                 GL_UNSIGNED_INT, 0);
-}
-void App::drawTextTopLeft(const float x, const float y, const float scale,
-                          const std::string msg) {
-  drawTextBottomLeft(x, App::HEIGHT - FontProgram::CHAR_HEIGHT * scale - y,
-                     scale, msg);
 }

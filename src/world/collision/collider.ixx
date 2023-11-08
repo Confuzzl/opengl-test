@@ -14,19 +14,19 @@ export class Collider : public BasePolyhedron {
   };
 
 private:
-  SPtrVector<Vertex> vertices;
+  UPtrVector<Vertex> vertices;
   const VEIndexList &vertexEdgeIndices; // only 256 indices for edges
 
-  SPtrVector<Edge> edges;
+  UPtrVector<Edge> edges;
   const EVIndexList &edgeVertexIndices; // only 256 indices for vertices
   const EFIndexList &edgeFaceIndices;   // only 256 indices for faces
 
-  SPtrVector<Face> faces;
+  UPtrVector<Face> faces;
   const FEIndexList &faceEdgeIndices; // only 256 indices for edges
 
-  SPtr<Vertex> &addVertex(SPtr<Vertex> &&v);
-  SPtr<Edge> &addEdge(SPtr<Edge> &&e);
-  SPtr<Face> &addFace(SPtr<Face> &&f);
+  Vertex &addVertex(UPtr<Vertex> &&v);
+  Edge &addEdge(UPtr<Edge> &&e);
+  Face &addFace(UPtr<Face> &&f);
 
 public:
   static unsigned int count;
@@ -37,6 +37,7 @@ public:
            const EVIndexList &edgeVertexIndices,
            const EFIndexList &edgeFaceIndices,
            const FEIndexList &faceEdgeIndices);
+  ~Collider();
 
 protected:
   void createFeatures();

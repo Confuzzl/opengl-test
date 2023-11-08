@@ -6,33 +6,29 @@ module world.game_object;
 
 import app.app;
 import util.debug;
+import world.factory.base_factory;
 
 unsigned int GameObject::COUNT = 0;
 
 GameObject::GameObject(CollPtr collider, RendPtr render)
     : collider{std::move(collider)}, render{std::move(render)}, ID{COUNT++} {
-  appScene.gameObjects.insert(this);
+  std::cout << std::format("gameobject {} created\n", ID);
 }
 GameObject::~GameObject() {
-  appScene.gameObjects.erase(this);
+  // appScene.objectMap.erase(ID);
   std::cout << std::format("gameobject {} destroyed\n", ID);
 }
 
-const CollPtr &GameObject::getCollider() { return collider; }
-const RendPtr &GameObject::getRender() { return render; }
+Collider &GameObject::getCollider() { return *collider; }
+Renderable &GameObject::getRenderable() { return *render; }
 
-Collider &GameObject::getCollider2() { return *collider; }
-Renderable &GameObject::getRenderable2() { return *render; }
-
-GObjPtr &GameObject::createGameObject2(CollPtr collider, RendPtr render) {
-  GObjPtr ptr{std::make_unique<GameObject>(std::forward<CollPtr>(collider),
-                                           std::forward<RendPtr>(render))};
-  unsigned short ID = ptr->ID;
-  appScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
-  return appScene.objectMap.at(ID);
+GameObject &GameObject::from(const BaseFactory &factory,
+                             const Vec3List &coordinates) {
+  return from(factory.createCollidable(coordinates),
+              factory.createRenderable(coordinates));
 }
 
-GameObject &GameObject::createGameObject3(CollPtr collider, RendPtr render) {
+GameObject &GameObject::from(CollPtr collider, RendPtr render) {
   GObjPtr ptr{std::make_unique<GameObject>(std::forward<CollPtr>(collider),
                                            std::forward<RendPtr>(render))};
   unsigned short ID = ptr->ID;

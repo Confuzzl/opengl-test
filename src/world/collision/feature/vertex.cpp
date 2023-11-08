@@ -8,14 +8,14 @@ Vertex::Vertex(const Collider &parent, const unsigned short ID, const Vec3 &pos)
     : Feature(parent, ID), localCoordinate{pos} {}
 Vertex::~Vertex() = default;
 
-void Vertex::addNeighbor(SPtr<Edge> &neighbor) {
-  neighbors.emplace_back(neighbor);
+void Vertex::addNeighbor(const Edge &neighbor) {
+  neighbors.emplace_back(std::cref(neighbor));
 }
-
-const SPtrVector<Edge> &Vertex::getNeighbors() const { return neighbors; }
 void Vertex::finishCreation() {
   region = std::make_unique<VertexRegion>(*this);
 }
+
+const RefVector<const Edge> &Vertex::getNeighbors() const { return neighbors; }
 
 Collision::VClip::DPrimeState Vertex::signDPrime(const Edge &e,
                                                  const float l) const {

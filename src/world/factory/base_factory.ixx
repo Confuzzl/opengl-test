@@ -27,12 +27,12 @@ export class BaseFactory {
   const UVList defaultUVs;
 
   const unsigned int rVertexCount;
-  bool buffersInitialized = false;
-  Vector<GLuint> eboIndices{};
+  mutable bool buffersInitialized = false;
+  mutable Vector<GLuint> eboIndices{};
 
-  void initializeBuffers();
-  void initializeEBO();
-  void allocateVBO();
+  void initializeBuffers() const;
+  void initializeEBO() const;
+  void allocateVBO() const;
 
   BaseFactory(const BaseFactory &) = delete;
   BaseFactory(BaseFactory &&) = delete;
@@ -49,10 +49,11 @@ protected:
 public:
   ~BaseFactory();
 
-  EBO ebo{};
-  VBO sharedVBO{};
+  mutable EBO ebo{};
+  mutable VBO sharedVBO{};
 
-  CollPtr createCollidable(const Vec3List &coordinates);
-  RendPtr createRenderable(const Vec3List &coordinates);
-  RendPtr createRenderable(const Vec3List &coordinates, const UVList &UVs);
+  CollPtr createCollidable(const Vec3List &coordinates) const;
+  RendPtr createRenderable(const Vec3List &coordinates) const;
+  RendPtr createRenderable(const Vec3List &coordinates,
+                           const UVList &UVs) const;
 };

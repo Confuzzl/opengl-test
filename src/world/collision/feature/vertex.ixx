@@ -12,17 +12,17 @@ export class VertexRegion;
 export class Vertex : public Feature, DifferentiableFeature {
   UPtr<VertexRegion> region;
 
-  SPtrVector<Edge> neighbors;
+  RefVector<const Edge> neighbors;
   Vec3 localCoordinate;
 
 public:
   Vertex(const Collider &parent, const unsigned short ID, const Vec3 &pos);
   ~Vertex();
 
-  void addNeighbor(SPtr<Edge> &neighbor);
+  void addNeighbor(const Edge &neighbor);
   void finishCreation() override;
 
-  const SPtrVector<Edge> &getNeighbors() const;
+  const RefVector<const Edge> &getNeighbors() const;
 
   Collision::VClip::DPrimeState signDPrime(const Edge &e,
                                            const float l) const override;

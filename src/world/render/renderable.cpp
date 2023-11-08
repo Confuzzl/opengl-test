@@ -53,7 +53,7 @@ void Renderable::initializeVertexInfo() {
   }
 }
 
-void Renderable::writeToSharedVBO() {
+void Renderable::writeToSharedVBO() const {
   GLintptr offset = 0;
   for (const SimpleVertex &vertex : vertexInfo) {
     glNamedBufferSubData(sharedVBO.ID, offset, SimpleVertex::POS_WIDTH,

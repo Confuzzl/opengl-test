@@ -7,10 +7,10 @@ import world.collision.vclip.plane.support_plane;
 FaceRegion::FaceRegion(const Face &parent)
     : VoronoiRegion<Face>(parent),
       supportPlane{std::move(SupportPlane::createPlane(*this, parent))} {
-  const SPtrVector<Edge> &edges{parent.getEdges()};
+  const RefVector<const Edge> &edges{parent.getEdges()};
   planes.reserve(edges.size());
   for (const auto &edge : edges) {
-    planes.emplace_back(FaceFEPlane::createPlane(*this, *edge, parent));
+    planes.emplace_back(FaceFEPlane::createPlane(*this, edge, parent));
   }
 }
 FaceRegion::~FaceRegion() = default;

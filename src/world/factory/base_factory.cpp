@@ -22,13 +22,13 @@ BaseFactory::BaseFactory(
 }
 BaseFactory::~BaseFactory() = default;
 
-void BaseFactory::initializeBuffers() {
+void BaseFactory::initializeBuffers() const {
   buffersInitialized = true;
   initializeEBO();
   allocateVBO();
 }
 
-void BaseFactory::initializeEBO() {
+void BaseFactory::initializeEBO() const {
   eboIndices.resize(rVertexCount);
   std::iota(eboIndices.begin(), eboIndices.end(), 0);
   ebo.allocateBufferObject(rVertexCount * sizeof(GLuint));
@@ -36,21 +36,21 @@ void BaseFactory::initializeEBO() {
   std::cout << std::format("ebo {} for factory allocated and initialized\n",
                            ebo.ID);
 }
-void BaseFactory::allocateVBO() {
+void BaseFactory::allocateVBO() const {
   sharedVBO.allocateBufferObject(rVertexCount * SimpleVertex::WIDTH);
   std::cout << std::format("shared vbo {} for factory simplex allocated\n",
                            sharedVBO.ID);
 }
 
-CollPtr BaseFactory::createCollidable(const Vec3List &coordinates) {
+CollPtr BaseFactory::createCollidable(const Vec3List &coordinates) const {
   return std::make_unique<Collider>(vertexCount, faceCount, coordinates,
                                     veIndices, evIndices, efIndices, feIndices);
 }
-RendPtr BaseFactory::createRenderable(const Vec3List &coordinates) {
+RendPtr BaseFactory::createRenderable(const Vec3List &coordinates) const {
   return createRenderable(coordinates, defaultUVs);
 }
 RendPtr BaseFactory::createRenderable(const Vec3List &coordinates,
-                                      const UVList &UVs) {
+                                      const UVList &UVs) const {
   if (not buffersInitialized)
     initializeBuffers();
   return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,

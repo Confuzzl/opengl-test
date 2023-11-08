@@ -16,14 +16,10 @@ int main() {
   for (auto &v : coordinates2)
     v /= 2;
 
-  auto &go1{GameObject::createGameObject2(
-      SIMPLEX_FACTORY.createCollidable(coordinates1),
-      SIMPLEX_FACTORY.createRenderable(coordinates1))};
+  auto &go1{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
 
-  auto &go2{GameObject::createGameObject2(
-      PRISM_FACTORY.createCollidable(coordinates2),
-      PRISM_FACTORY.createRenderable(coordinates2))};
-  go2->translate({0, -2, 0});
+  auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
+  go2.translate({0, -2, 0});
 
   glLineWidth(5);
   glPolygonMode(GL_FRONT, GL_FILL);

@@ -4,10 +4,13 @@ import world.transformable;
 import world.collision.collider;
 import world.render.renderable;
 import util.memory;
+import util.polyhedron;
 
 class GameObject;
 
 export using GObjPtr = UPtr<GameObject>;
+
+export class BaseFactory;
 
 export class GameObject : public Transformable {
   static unsigned int COUNT;
@@ -29,12 +32,10 @@ public:
 
   ~GameObject();
 
-  const CollPtr &getCollider();
-  const RendPtr &getRender();
+  Collider &getCollider();
+  Renderable &getRenderable();
 
-  Collider &getCollider2();
-  Renderable &getRenderable2();
-
-  static GObjPtr &createGameObject2(CollPtr collider, RendPtr render);
-  static GameObject &createGameObject3(CollPtr collider, RendPtr render);
+  static GameObject &from(const BaseFactory &factory,
+                          const Vec3List &coordinates);
+  static GameObject &from(CollPtr collider, RendPtr render);
 };

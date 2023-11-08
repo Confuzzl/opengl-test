@@ -6,10 +6,10 @@ import world.collision.vclip.plane.vertex_ve_plane;
 
 VertexRegion::VertexRegion(const Vertex &parent)
     : VoronoiRegion<Vertex>(parent) {
-  const SPtrVector<Edge> &neighbors{parent.getNeighbors()};
+  const RefVector<const Edge> &neighbors{parent.getNeighbors()};
   planes.reserve(neighbors.size());
   for (const auto &edge : neighbors) {
-    planes.emplace_back(VertexVEPlane::createPlane(*this, parent, *edge));
+    planes.emplace_back(VertexVEPlane::createPlane(*this, parent, edge));
   }
 }
 VertexRegion::~VertexRegion() = default;

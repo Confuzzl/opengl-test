@@ -60,43 +60,44 @@ Collider::Collider(const unsigned short vertexCount,
   createFeatures();
   setupNeighbors();
 }
+Collider::~Collider() = default;
 
-SPtr<Vertex> &Collider::addVertex(SPtr<Vertex> &&v) {
+Vertex &Collider::addVertex(UPtr<Vertex> &&v) {
   // std::cout << std::format("ADDING vertex {} count: {}\n", (*v).ID,
   //                          v.use_count());
-  return vertices.emplace_back(v);
+  return *vertices.emplace_back(std::move(v));
 }
-SPtr<Edge> &Collider::addEdge(SPtr<Edge> &&e) {
+Edge &Collider::addEdge(UPtr<Edge> &&e) {
   // std::cout << std::format("ADDING edge {} count: {}\n", (*e).ID,
   //                          e.use_count());
-  return edges.emplace_back(e);
+  return *edges.emplace_back(std::move(e));
 }
-SPtr<Face> &Collider::addFace(SPtr<Face> &&f) {
+Face &Collider::addFace(UPtr<Face> &&f) {
   // std::cout << std::format("ADDING face {} count: {}\n", (*f).ID,
   //                          f.use_count());
-  return faces.emplace_back(f);
+  return *faces.emplace_back(std::move(f));
 }
 
 void Collider::createFeatures() {
   for (unsigned char i = 0; const auto &v : coordinates) {
-    addVertex(std::make_shared<Vertex>(*this, i++, v));
+    addVertex(std::make_unique<Vertex>(*this, i++, v));
   }
   for (unsigned char i = 0; const auto &pair : edgeVertexIndices) {
     unsigned char tailIndex = pair[0], headIndex = pair[1];
-    addEdge(std::make_shared<Edge>(*this, i++, *(vertices[tailIndex]),
-                                   *(vertices[headIndex])));
+    addEdge(std::make_unique<Edge>(*this, i++, *vertices[tailIndex],
+                                   *vertices[headIndex]));
   }
   for (unsigned char i = 0; const auto &face : faceEdgeIndices) {
-    SPtr<Face> &f = addFace(std::make_shared<Face>(
+    Face &f = addFace(std::make_unique<Face>(
         *this, i++, static_cast<unsigned short>(face.size())));
     for (const unsigned char &index : face)
-      f->addEdge(edges[index]);
+      f.addEdge(*edges[index]);
   }
 }
 void Collider::setupNeighbors() {
   for (unsigned char i = 0; const auto &indices : vertexEdgeIndices) {
     for (const unsigned char index : indices)
-      vertices[i]->addNeighbor(edges[index]);
+      vertices[i]->addNeighbor(*edges[index]);
     vertices[i]->finishCreation();
     i++;
   }
@@ -105,7 +106,7 @@ void Collider::setupNeighbors() {
     edges[i]->finishCreation();
     i++;
   }
-  for (const auto &face : faces) {
+  for (auto &face : faces) {
     face->finishCreation();
   }
 }

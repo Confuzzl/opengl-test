@@ -42,18 +42,11 @@ export struct App {
   ~App();
 
   void start();
-
-  void processInput();
-
-  void drawScene();
-  void drawTextBottomLeft(const float x, const float y, const float scale,
-                          const std::string msg);
-  void drawTextTopLeft(const float x, const float y, const float scale,
-                       const std::string msg);
-
+  void createWindow();
   void catchException(const std::runtime_error &e);
 
-  void createWindow();
+  void drawScene();
+  void processInput();
 };
 
 export App app{};
