@@ -7,5 +7,5 @@ export class Edge;
 export class DifferentiableFeature {
 public:
   virtual Collision::VClip::DPrimeState signDPrime(const Edge &e,
-                                                   float l) const = 0;
+                                                   const float l) const = 0;
 };

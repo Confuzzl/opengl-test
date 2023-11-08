@@ -1,11 +1,13 @@
 export module world.collision.feature.edge;
 
 import world.collision.feature.feature;
-import util.polyhedron;
+import util.memory;
+import util.glm;
 
+export class Collider;
 export class Vertex;
 export class Face;
-class EdgeRegion;
+export class EdgeRegion;
 
 export class Edge : public Feature {
   UPtr<EdgeRegion> region;
@@ -14,11 +16,12 @@ export class Edge : public Feature {
   const Face *left, *right;
 
 public:
-  Edge(Collider &parent, const unsigned short ID, const Vertex &tail,
+  Edge(const Collider &parent, const unsigned short ID, const Vertex &tail,
        const Vertex &head);
   ~Edge();
 
   void setNeighbors(Face *left, Face *right);
+  void finishCreation() override;
 
   Vec3 getProperDirectionFrom(const Face &face) const;
 

@@ -1,9 +1,10 @@
 module world.collision.feature.vertex;
 
+import world.collision.collider;
 import world.collision.feature.edge;
-import world.collision.vclip.region.regions;
+import world.collision.vclip.region.vertex_region;
 
-Vertex::Vertex(Collider &parent, const unsigned short ID, const Vec3 &pos)
+Vertex::Vertex(const Collider &parent, const unsigned short ID, const Vec3 &pos)
     : Feature(parent, ID), localCoordinate{pos} {}
 Vertex::~Vertex() = default;
 
@@ -12,8 +13,12 @@ void Vertex::addNeighbor(SPtr<Edge> &neighbor) {
 }
 
 const SPtrVector<Edge> &Vertex::getNeighbors() const { return neighbors; }
+void Vertex::finishCreation() {
+  region = std::make_unique<VertexRegion>(*this);
+}
 
-Collision::VClip::DPrimeState Vertex::signDPrime(const Edge &e, float l) const {
+Collision::VClip::DPrimeState Vertex::signDPrime(const Edge &e,
+                                                 const float l) const {
   const Vec3 el{e.evalAt(l)};
   if (el == asGlobalCoordinate())
     return Collision::VClip::DPrimeState::DEGENERATE;
@@ -25,7 +30,7 @@ Collision::VClip::DPrimeState Vertex::signDPrime(const Edge &e, float l) const {
   return Collision::VClip::DPrimeState::ZERO;
 }
 
-const Vec3 &Vertex::getLocalCoordinate() const { return localCoordinate; }
+// const Vec3 &Vertex::getLocalCoordinate() const { return localCoordinate; }
 Vec3 Vertex::asGlobalCoordinate() const {
   return localCoordinate + parent.getPosition();
 }

@@ -1,11 +1,10 @@
 export module world.collision.vclip.plane.voronoi_plane;
 
-import util.memory;
-import util.glm;
-import world.collision.vclip.region.voronoi_region;
+// import world.collision.vclip.region.voronoi_region;
 import world.collision.feature.vertex;
+import util.glm;
 
-export template <IsVoronoiRegion RegionType> class VoronoiPlane {
+export template </*IsVoronoiRegion*/ typename RegionType> class VoronoiPlane {
   VoronoiPlane(const VoronoiPlane &) = delete;
   VoronoiPlane(VoronoiPlane &&) = delete;
   VoronoiPlane &operator=(const VoronoiPlane &) = delete;

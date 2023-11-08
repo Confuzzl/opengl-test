@@ -2,11 +2,14 @@ export module world.collision.feature.face;
 
 import world.collision.feature.differentiable_feature;
 import world.collision.feature.feature;
-import util.polyhedron;
+import util.memory;
+import util.glm;
+import world.collision.algorithms;
 
+export class Collider;
+export class Vertex;
 export class Edge;
-class Vertex;
-class FaceRegion;
+export class FaceRegion;
 
 export class Face : public Feature, DifferentiableFeature {
   UPtr<FaceRegion> region;
@@ -15,17 +18,17 @@ export class Face : public Feature, DifferentiableFeature {
   Vec3 normal{};
 
 public:
-  Face(Collider &parent, const unsigned short ID,
+  Face(const Collider &parent, const unsigned short ID,
        const unsigned short edgeCount);
   ~Face();
 
   void addEdge(const SPtr<Edge> &edge);
-  void finishCreation();
+  void finishCreation() override;
 
   Vec3 getNormal() const;
   const SPtrVector<Edge> &getEdges() const;
   const Vertex &getSampleVertex() const;
 
   Collision::VClip::DPrimeState signDPrime(const Edge &e,
-                                           float l) const override;
+                                           const float l) const override;
 };

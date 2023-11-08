@@ -1,4 +1,8 @@
-module world.collision.vclip.plane.planes:support;
+module world.collision.vclip.plane.support_plane;
+
+import world.collision.feature.vertex;
+import world.collision.feature.face;
+import world.collision.vclip.region.face_region;
 
 SupportPlane::SupportPlane(const FaceRegion &region,
                            const Vertex &referencePoint, const Face &face)

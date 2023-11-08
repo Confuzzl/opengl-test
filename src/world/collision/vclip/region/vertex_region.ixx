@@ -1,9 +1,11 @@
-export module world.collision.vclip.region.regions:vertex;
+export module world.collision.vclip.region.vertex_region;
 
-import world.collision.feature.vertex;
 import world.collision.vclip.region.voronoi_region;
+// import world.collision.feature.vertex;
+import util.memory;
 
-class VertexVEPlane;
+export class Vertex;
+export class VertexVEPlane;
 
 export class VertexRegion : public VoronoiRegion<Vertex> {
   UPtrVector<VertexVEPlane> planes;

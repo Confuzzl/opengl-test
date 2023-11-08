@@ -1,6 +1,8 @@
-module world.collision.vclip.region.regions:vertex;
+module world.collision.vclip.region.vertex_region;
 
-import world.collision.vclip.plane.planes;
+import world.collision.feature.vertex;
+import world.collision.feature.edge;
+import world.collision.vclip.plane.vertex_ve_plane;
 
 VertexRegion::VertexRegion(const Vertex &parent)
     : VoronoiRegion<Vertex>(parent) {

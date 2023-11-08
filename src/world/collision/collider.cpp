@@ -97,12 +97,15 @@ void Collider::setupNeighbors() {
   for (unsigned char i = 0; const auto &indices : vertexEdgeIndices) {
     for (const unsigned char index : indices)
       vertices[i]->addNeighbor(edges[index]);
+    vertices[i]->finishCreation();
     i++;
   }
-
-  for (unsigned char i = 0; const auto &pair : edgeFaceIndices)
-    edges[i++]->setNeighbors(faces[pair[0]].get(), faces[pair[1]].get());
-
-  for (const auto &face : faces)
+  for (unsigned char i = 0; const auto &pair : edgeFaceIndices) {
+    edges[i]->setNeighbors(faces[pair[0]].get(), faces[pair[1]].get());
+    edges[i]->finishCreation();
+    i++;
+  }
+  for (const auto &face : faces) {
     face->finishCreation();
+  }
 }

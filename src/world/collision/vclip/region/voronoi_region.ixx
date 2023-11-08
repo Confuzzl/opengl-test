@@ -4,10 +4,10 @@ import util.vector;
 import util.glm;
 import world.collision.feature.feature;
 
-export template <typename T>
-concept IsVoronoiRegion = requires(T t) { t.getParent(); };
+// export template <typename T>
+// concept IsVoronoiRegion = requires(T t) { t.getParent(); };
 
-export template <IsFeature ParentType> class VoronoiRegion {
+export template </*IsFeature*/ typename ParentType> class VoronoiRegion {
   const ParentType &parent;
 
 protected:

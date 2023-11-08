@@ -4,7 +4,9 @@ module;
 
 module world.collision.feature.feature;
 
-Feature::Feature(Collider &parent, unsigned short ID)
+import world.collision.collider;
+
+Feature::Feature(const Collider &parent, unsigned short ID)
     : parent{parent}, ID{ID} {};
 
 bool Feature::operator==(const Feature &other) const {

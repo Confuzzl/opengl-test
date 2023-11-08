@@ -4,9 +4,9 @@ import world.base_polyhedron;
 import util.polyhedron;
 import <stdexcept>;
 
-class Vertex;
-class Edge;
-class Face;
+export class Vertex;
+export class Edge;
+export class Face;
 
 export class Collider : public BasePolyhedron {
   struct FeatureRelatedException : public std::runtime_error {

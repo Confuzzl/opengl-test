@@ -1,10 +1,11 @@
 module world.collision.feature.edge;
 
+import world.collision.collider;
 import world.collision.feature.vertex;
 import world.collision.feature.face;
-import world.collision.vclip.region.regions;
+import world.collision.vclip.region.edge_region;
 
-Edge::Edge(Collider &parent, const unsigned short ID, const Vertex &tail,
+Edge::Edge(const Collider &parent, const unsigned short ID, const Vertex &tail,
            const Vertex &head)
     : Feature(parent, ID), tail{tail}, head{head} {
   // std::cout << std::format("CREATING tail {} count: {} head {} count: {}\n",
@@ -17,6 +18,7 @@ void Edge::setNeighbors(Face *left, Face *right) {
   this->left = left;
   this->right = right;
 }
+void Edge::finishCreation() { region = std::make_unique<EdgeRegion>(*this); }
 
 Vec3 Edge::getProperDirectionFrom(const Face &face) const {
   if (face == *left)
@@ -36,5 +38,5 @@ Vec3 Edge::evalAt(const float l) const {
 }
 
 Edge::operator Vec3() const {
-  return head.getLocalCoordinate() - tail.getLocalCoordinate();
+  return head.asGlobalCoordinate() - tail.asGlobalCoordinate();
 }
