@@ -5,6 +5,7 @@ import world.collision.feature.feature;
 import util.memory;
 import util.glm;
 import world.collision.algorithms;
+import <stdexcept>;
 
 export class Collider;
 export class Vertex;
@@ -12,6 +13,10 @@ export class Edge;
 export class FaceRegion;
 
 export class Face : public Feature, DifferentiableFeature {
+  struct DegenerateFaceNormalException : public std::runtime_error {
+    using std::runtime_error::runtime_error;
+  };
+
   UPtr<FaceRegion> region;
 
   RefVector<const Edge> edges;

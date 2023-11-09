@@ -7,6 +7,7 @@ export module wrapper.program.base_program;
 import util.glm;
 import wrapper.gl_object;
 import wrapper.vao;
+import <stdexcept>;
 
 export class BaseProgram : public GLObject {
 public:

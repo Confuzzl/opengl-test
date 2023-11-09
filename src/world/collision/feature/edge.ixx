@@ -3,6 +3,7 @@ export module world.collision.feature.edge;
 import world.collision.feature.feature;
 import util.memory;
 import util.glm;
+import <stdexcept>;
 
 export class Collider;
 export class Vertex;
@@ -10,6 +11,11 @@ export class Face;
 export class EdgeRegion;
 
 export class Edge : public Feature {
+  struct InvalidGetProperDirectionFromArgumentException
+      : public std::runtime_error {
+    using std::runtime_error::runtime_error;
+  };
+
   UPtr<EdgeRegion> region;
 
   const Vertex &tail, &head;
@@ -20,7 +26,7 @@ public:
        const Vertex &head);
   ~Edge();
 
-  void setNeighbors(Face *left, Face *right);
+  void setNeighbors(const Face *left, const Face *right);
   void finishCreation() override;
 
   Vec3 getProperDirectionFrom(const Face &face) const;

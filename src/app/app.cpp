@@ -21,9 +21,7 @@ App::App()
       fontProgram{}, atlas{"atlas"}, consolas{"consolas1024", 64, 128} {
   std::cout << "app constructing\n";
   glfwInit();
-  frameCycle.setRate(std::min(
-      frameCycle.rate,
-      (unsigned short)glfwGetVideoMode(glfwGetPrimaryMonitor())->refreshRate));
+  frameCycle.bottleNeck(glfwGetVideoMode(glfwGetPrimaryMonitor())->refreshRate);
 
   createWindow();
 
@@ -33,7 +31,7 @@ App::App()
   try {
     atlas.initTexture();
     consolas.initAtlas();
-  } catch (const TexObject::FailedTextureLoadException &e) {
+  } catch (const std::runtime_error &e) {
     catchException(e);
   }
 
@@ -47,6 +45,16 @@ App::~App() {
 }
 
 void App::start() {
+  scene.start();
+
+  glLineWidth(5);
+  glPolygonMode(GL_FRONT, GL_FILL);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glEnable(GL_DEPTH_TEST);
+  glEnable(GL_CULL_FACE);
+  glfwSwapInterval(0);
+
   while (!glfwWindowShouldClose(window)) {
     try {
       double currTime = glfwGetTime();
@@ -99,8 +107,8 @@ static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
     app.prevY = ypos;
     app.cursorSnap = true;
   }
-  const float dx = (float)(app.prevX - xpos);
-  const float dy = (float)(app.prevY - ypos);
+  const float dx = static_cast<float>(app.prevX - xpos);
+  const float dy = static_cast<float>(app.prevY - ypos);
   app.prevX = xpos;
   app.prevY = ypos;
 
@@ -193,7 +201,7 @@ void App::drawScene() {
     atlas.bindTextureUnit();
     defaultProgram.vao.bindVertexArray();
     glDrawElements(/*GL_LINE_STRIP*/ GL_TRIANGLES,
-                   (GLsizei)defaultProgram.vao.boundedEBO.size, GL_UNSIGNED_INT,
-                   0);
+                   static_cast<GLsizei>(defaultProgram.vao.boundedEBO.size),
+                   GL_UNSIGNED_INT, 0);
   }
 }

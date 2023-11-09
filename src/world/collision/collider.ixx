@@ -13,7 +13,6 @@ export class Collider : public BasePolyhedron {
     using std::runtime_error::runtime_error;
   };
 
-private:
   UPtrVector<Vertex> vertices;
   const VEIndexList &vertexEdgeIndices; // only 256 indices for edges
 

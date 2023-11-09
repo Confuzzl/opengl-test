@@ -4,6 +4,7 @@ import world.collision.collider;
 import world.collision.feature.vertex;
 import world.collision.feature.face;
 import world.collision.vclip.region.edge_region;
+import util.debug;
 
 Edge::Edge(const Collider &parent, const unsigned short ID, const Vertex &tail,
            const Vertex &head)
@@ -14,7 +15,7 @@ Edge::Edge(const Collider &parent, const unsigned short ID, const Vertex &tail,
 }
 Edge::~Edge() = default;
 
-void Edge::setNeighbors(Face *left, Face *right) {
+void Edge::setNeighbors(const Face *left, const Face *right) {
   this->left = left;
   this->right = right;
 }
@@ -25,7 +26,9 @@ Vec3 Edge::getProperDirectionFrom(const Face &face) const {
     return +static_cast<Vec3>(*this);
   if (face == *right)
     return -static_cast<Vec3>(*this);
-  return {};
+  throw InvalidGetProperDirectionFromArgumentException{
+      std::format("FACE {} IS NEITHER A LEFT OR RIGHT FACE OF THIS EDGE {}\n",
+                  face.ID, ID)};
 }
 
 const Vertex &Edge::getTail() const { return tail; }

@@ -4,6 +4,7 @@ import world.collision.collider;
 import world.collision.feature.vertex;
 import world.collision.feature.edge;
 import world.collision.vclip.region.face_region;
+import util.debug;
 
 Face::Face(const Collider &parent, const unsigned short ID,
            const unsigned short edgeCount)
@@ -14,13 +15,13 @@ Face::~Face() = default;
 
 void Face::addEdge(const Edge &edge) { edges.emplace_back(std::cref(edge)); }
 void Face::finishCreation() {
-  // normal = glm::normalize(glm::cross(edges[0]->getProperDirectionFrom(*this),
-  //                                    edges[1]->getProperDirectionFrom(*this)));
   normal =
       glm::normalize(glm::cross(edges[0].get().getProperDirectionFrom(*this),
                                 edges[1].get().getProperDirectionFrom(*this)));
+
+  if (glm::all(glm::isnan(normal)))
+    throw DegenerateFaceNormalException{"FACE NORMAL EVALUATED TO 0 VECTOR\n"};
   region = std::make_unique<FaceRegion>(*this);
-  // std::cout << std::format("normal: {}\n", glm::to_string(normal));
 }
 
 Vec3 Face::getNormal() const { return normal; }

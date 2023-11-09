@@ -8,7 +8,8 @@ export struct UpdateCycle {
 
   UpdateCycle(const unsigned short rate);
 
-  void setRate(const unsigned short rate);
+  // void setRate(const unsigned short rate);
+  void bottleNeck(const unsigned short bottleneck);
 
   bool pastLength(const double time);
   void pushNewTime(const double newCurrTime);

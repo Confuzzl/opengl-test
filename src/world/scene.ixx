@@ -4,7 +4,6 @@ import world.camera;
 import world.game_object;
 import util.memory;
 import util.glm;
-import <unordered_set>;
 import <map>;
 import <unordered_map>;
 
@@ -18,4 +17,6 @@ export struct Scene {
   Camera camera{45};
 
   Scene();
+
+  void start();
 };
