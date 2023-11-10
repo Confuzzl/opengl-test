@@ -9,6 +9,9 @@ import util.debug;
 Edge::Edge(const Collider &parent, const unsigned short ID, const Vertex &tail,
            const Vertex &head)
     : Feature(parent, ID), tail{tail}, head{head} {
+  if (tail.asGlobalCoordinate() == head.asGlobalCoordinate())
+    throw DegenerateEdgeException{
+        std::format("EDGE {} WAS INITIALIZED WITH SAME ENDPOINTS\n", ID)};
   // std::cout << std::format("CREATING tail {} count: {} head {} count: {}\n",
   //                          (*tail).ID, tail.use_count(), (*head).ID,
   //                          head.use_count());

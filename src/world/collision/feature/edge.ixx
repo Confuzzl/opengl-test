@@ -15,6 +15,9 @@ export class Edge : public Feature {
       : public std::runtime_error {
     using std::runtime_error::runtime_error;
   };
+  struct DegenerateEdgeException : public std::runtime_error {
+    using std::runtime_error::runtime_error;
+  };
 
   UPtr<EdgeRegion> region;
 
