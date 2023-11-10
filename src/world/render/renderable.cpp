@@ -30,7 +30,7 @@ void Renderable::initializeVertexInfo() {
     const auto &uvFace = UVs[f];
 
     const auto &texture = TexTile::getRandomTexture();
-    const TexTile tex{TexTile::getTile(texture, app.atlas)};
+    const TexTile tex{TexTile::getTile(texture, *app.atlas)};
 
     for (unsigned short t = 0; t < UVs[f].size(); t++) {
       const auto &indexTri = faceVertexIndices[f][t];

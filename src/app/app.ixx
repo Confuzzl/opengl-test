@@ -4,13 +4,16 @@ module;
 
 export module app.app;
 
-import app.text.font;
-import wrapper.tex_object;
-import app.update_cycle;
 import util.glm;
-import world.scene;
-import wrapper.program.programs;
+import util.memory;
 import <stdexcept>;
+
+export class UpdateCycle;
+export class DefaultProgram;
+export class FontProgram;
+export class TexObject;
+export class Font;
+export class Scene;
 
 export struct App {
   struct FailedWindowCreationException : public std::runtime_error {
@@ -22,21 +25,21 @@ export struct App {
 
   GLFWwindow *window;
 
-  UpdateCycle loopCycle;
-  UpdateCycle updateCycle;
-  UpdateCycle frameCycle;
+  UPtr<UpdateCycle> loopCycle{std::make_unique<UpdateCycle>(0)};
+  UPtr<UpdateCycle> updateCycle{std::make_unique<UpdateCycle>(120)};
+  UPtr<UpdateCycle> frameCycle{std::make_unique<UpdateCycle>(60)};
   unsigned int seconds = 0;
 
   bool cursorSnap = false;
   double prevX = WIDTH / 2, prevY = HEIGHT / 2;
 
-  DefaultProgram defaultProgram;
-  FontProgram fontProgram;
+  UPtr<DefaultProgram> defaultProgram{std::make_unique<DefaultProgram>()};
+  UPtr<FontProgram> fontProgram{std::make_unique<FontProgram>()};
 
-  TexObject atlas;
-  Font consolas;
+  UPtr<TexObject> atlas{std::make_unique<TexObject>("atlas")};
+  UPtr<Font> consolas{std::make_unique<Font>("consolas1024", 64, 128)};
 
-  Scene scene{};
+  UPtr<Scene> scene{std::make_unique<Scene>()};
 
   App();
   ~App();
@@ -50,4 +53,3 @@ export struct App {
 };
 
 export App app{};
-export Scene &appScene = app.scene;

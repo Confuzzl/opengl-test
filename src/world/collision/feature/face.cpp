@@ -20,7 +20,11 @@ void Face::finishCreation() {
                                 edges[1].get().getProperDirectionFrom(*this)));
 
   if (glm::all(glm::isnan(normal)))
+    throw DegenerateFaceNormalException{
+        "FACE NORMAL EVALUATED TO NAN VECTOR\n"};
+  if (normal == ZERO)
     throw DegenerateFaceNormalException{"FACE NORMAL EVALUATED TO 0 VECTOR\n"};
+
   region = std::make_unique<FaceRegion>(*this);
 }
 

@@ -12,9 +12,9 @@ export struct Scene {
 
   using ObjectMap = std::map<unsigned int, UPtr<GameObject>>;
   using ObjectMap2 = std::unordered_map<unsigned int, UPtr<GameObject>>;
-  ObjectMap objectMap;
+  ObjectMap objectMap{};
 
-  Camera camera{45};
+  UPtr<Camera> camera{std::make_unique<Camera>(45.0f)};
 
   Scene();
 

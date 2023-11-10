@@ -11,10 +11,8 @@ Scene::Scene() { std::cout << "scene constructing\n"; }
 
 void Scene::start() {
   try {
-    Vec3List coordinates1{{-1, -1, +1},
-                          /*{+1, -1, -1}*/ {-1, -1, +1},
-                          {+1, +1, +1},
-                          {-1, +1, -1}};
+    Vec3List coordinates1{
+        {-1, -1, +1}, {+1, -1, -1}, {+1, +1, +1}, {-1, +1, -1}};
     for (auto &v : coordinates1)
       v /= 2;
 

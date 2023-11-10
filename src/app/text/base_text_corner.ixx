@@ -16,6 +16,10 @@ protected:
 
   BaseTextCorner(const OffsetEquation &xEquation,
                  const OffsetEquation &yEquation);
+  BaseTextCorner(const BaseTextCorner &) = delete;
+  BaseTextCorner(BaseTextCorner &&) = delete;
+  BaseTextCorner &operator=(const BaseTextCorner &) = delete;
+  BaseTextCorner &operator=(BaseTextCorner &&) = delete;
 
 private:
   const OffsetEquation &xEquation;

@@ -1,6 +1,7 @@
 export module wrapper.tex_object;
 
 import wrapper.gl_object;
+import <stdexcept>;
 
 export struct TexObject : public GLObject {
   struct FailedTextureLoadException : public std::runtime_error {

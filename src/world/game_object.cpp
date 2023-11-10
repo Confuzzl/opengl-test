@@ -5,6 +5,7 @@ module;
 module world.game_object;
 
 import app.app;
+import world.scene;
 import util.debug;
 import world.factory.base_factory;
 
@@ -15,7 +16,7 @@ GameObject::GameObject(CollPtr collider, RendPtr render)
   std::cout << std::format("gameobject {} created\n", ID);
 }
 GameObject::~GameObject() {
-  // appScene.objectMap.erase(ID);
+  // app.scene->objectMap.erase(ID);
   std::cout << std::format("gameobject {} destroyed\n", ID);
 }
 
@@ -31,7 +32,7 @@ GameObject &GameObject::from(const BaseFactory &factory,
 GameObject &GameObject::from(CollPtr collider, RendPtr render) {
   GObjPtr ptr{std::make_unique<GameObject>(std::forward<CollPtr>(collider),
                                            std::forward<RendPtr>(render))};
-  unsigned short ID = ptr->ID;
-  appScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
-  return *appScene.objectMap.at(ID);
+  unsigned int ID = ptr->ID;
+  app.scene->objectMap.emplace(std::make_pair(ID, std::move(ptr)));
+  return *app.scene->objectMap.at(ID);
 }

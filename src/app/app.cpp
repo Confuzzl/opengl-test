@@ -6,31 +6,34 @@ module;
 
 module app.app;
 
+import app.update_cycle;
+import wrapper.program.programs;
+import wrapper.tex_object;
+import app.text.font;
+import world.scene;
 import wrapper.program.vertex_formats;
-import util.glm;
-import util.vector;
-import util.debug;
 import world.render.renderable;
 import app.text.text_corners;
+import util.vector;
+import util.debug;
 
-const Mat4 App::UI_MAT{
-    glm::ortho(0.0f, (float)App::WIDTH, 0.0f, (float)App::HEIGHT)};
+const Mat4 App::UI_MAT{glm::ortho(0.0f, static_cast<float>(App::WIDTH), 0.0f,
+                                  static_cast<float>(App::HEIGHT))};
 
-App::App()
-    : loopCycle{0}, updateCycle{120}, frameCycle{60}, defaultProgram{},
-      fontProgram{}, atlas{"atlas"}, consolas{"consolas1024", 64, 128} {
+App::App() {
   std::cout << "app constructing\n";
   glfwInit();
-  frameCycle.bottleNeck(glfwGetVideoMode(glfwGetPrimaryMonitor())->refreshRate);
+  frameCycle->bottleNeck(
+      glfwGetVideoMode(glfwGetPrimaryMonitor())->refreshRate);
 
   createWindow();
 
-  defaultProgram.create();
-  fontProgram.create();
+  defaultProgram->create();
+  fontProgram->create();
 
   try {
-    atlas.initTexture();
-    consolas.initAtlas();
+    atlas->initTexture();
+    consolas->initAtlas();
   } catch (const std::runtime_error &e) {
     catchException(e);
   }
@@ -45,8 +48,9 @@ App::~App() {
 }
 
 void App::start() {
-  scene.start();
+  scene->start();
 
+  glPointSize(10);
   glLineWidth(5);
   glPolygonMode(GL_FRONT, GL_FILL);
   glEnable(GL_BLEND);
@@ -59,14 +63,14 @@ void App::start() {
     try {
       double currTime = glfwGetTime();
 
-      loopCycle.pushNewTime(currTime);
-      if (updateCycle.pastLength(currTime)) {
-        updateCycle.pushNewTime(currTime);
+      loopCycle->pushNewTime(currTime);
+      if (updateCycle->pastLength(currTime)) {
+        updateCycle->pushNewTime(currTime);
         glfwPollEvents();
         processInput();
       }
-      if (frameCycle.pastLength(currTime)) {
-        frameCycle.pushNewTime(currTime);
+      if (frameCycle->pastLength(currTime)) {
+        frameCycle->pushNewTime(currTime);
 
         glClearColor(0.5, 0.5, 0.5, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -75,25 +79,25 @@ void App::start() {
 
         Text::resetAllTextOffsets();
 
-        const auto &cam = scene.camera;
-        const auto &pos = cam.getPosition();
+        const auto &cam = app.scene->camera;
+        const Vec3 &pos = cam->getPosition();
         Text::TOP_LT.drawText(std::format("POS: {:+.3f} {:+.3f} {:+.3f}",
                                           pos[0], pos[1], pos[2]));
-        Text::TOP_LT.drawText(
-            std::format("CAM: {:+.3f} {:+.3f}", cam.getYaw(), cam.getPitch()));
+        Text::TOP_LT.drawText(std::format("CAM: {:+.3f} {:+.3f}", cam->getYaw(),
+                                          cam->getPitch()));
 
-        Text::TOP_RT.drawText(std::format("FPS: {}", frameCycle.prevCount));
+        Text::TOP_RT.drawText(std::format("FPS: {}", frameCycle->prevCount));
         Text::TOP_RT.drawText(std::format("Time: {:.2f}s", currTime));
-        Text::TOP_RT.drawText(std::format("LPS: {}", loopCycle.prevCount));
-        Text::TOP_RT.drawText(std::format("UPS: {}", updateCycle.prevCount));
+        Text::TOP_RT.drawText(std::format("LPS: {}", loopCycle->prevCount));
+        Text::TOP_RT.drawText(std::format("UPS: {}", updateCycle->prevCount));
 
         glfwSwapBuffers(window);
       }
       if (currTime - seconds >= 1) {
         seconds++;
-        loopCycle.pushCount();
-        updateCycle.pushCount();
-        frameCycle.pushCount();
+        loopCycle->pushCount();
+        updateCycle->pushCount();
+        frameCycle->pushCount();
       }
     } catch (const std::runtime_error &e) {
       catchException(e);
@@ -112,9 +116,9 @@ static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
   app.prevX = xpos;
   app.prevY = ypos;
 
-  const float magnitude = static_cast<float>(app.updateCycle.delta *
-                                             appScene.camera.getSensitivity());
-  appScene.camera.rotate(dx * magnitude, dy * magnitude);
+  const float magnitude = static_cast<float>(
+      app.updateCycle->delta * app.scene->camera->getSensitivity());
+  app.scene->camera->rotate(dx * magnitude, dy * magnitude);
 }
 // static void keyCallback(GLFWwindow *window, int key, int scancode, int
 // action,
@@ -151,57 +155,63 @@ void App::processInput() {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE))
     glfwSetWindowShouldClose(window, GL_TRUE);
 
+  Camera &cam{*app.scene->camera};
+
   {
-    scene.camera.resetVelocity();
+    cam.resetVelocity();
     const float magnitude =
-        static_cast<float>(updateCycle.delta * scene.camera.getSpeed());
+        static_cast<float>(updateCycle->delta * cam.getSpeed());
     if (glfwGetKey(window, GLFW_KEY_W))
-      scene.camera.addVelocity(scene.camera.getForward() * magnitude);
+      cam.addVelocity(cam.getForward() * magnitude);
     if (glfwGetKey(window, GLFW_KEY_A))
-      scene.camera.addVelocity(scene.camera.getRight() * -magnitude);
+      cam.addVelocity(cam.getRight() * -magnitude);
     if (glfwGetKey(window, GLFW_KEY_S))
-      scene.camera.addVelocity(scene.camera.getForward() * -magnitude);
+      cam.addVelocity(cam.getForward() * -magnitude);
     if (glfwGetKey(window, GLFW_KEY_D))
-      scene.camera.addVelocity(scene.camera.getRight() * magnitude);
+      cam.addVelocity(cam.getRight() * magnitude);
     if (glfwGetKey(window, GLFW_KEY_SPACE))
-      scene.camera.addVelocity(Y_PLUS * magnitude);
+      cam.addVelocity(Y_PLUS * magnitude);
     if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL))
-      scene.camera.addVelocity(Y_PLUS * -magnitude);
+      cam.addVelocity(Y_PLUS * -magnitude);
   }
   {
     const float magnitude =
-        static_cast<float>(updateCycle.delta * scene.camera.getSensitivity());
+        static_cast<float>(updateCycle->delta * cam.getSensitivity());
     if (glfwGetKey(window, GLFW_KEY_UP))
-      scene.camera.rotate(0, magnitude);
+      cam.rotate(0, magnitude);
     if (glfwGetKey(window, GLFW_KEY_LEFT))
-      scene.camera.rotate(magnitude, 0);
+      cam.rotate(magnitude, 0);
     if (glfwGetKey(window, GLFW_KEY_DOWN))
-      scene.camera.rotate(0, -magnitude);
+      cam.rotate(0, -magnitude);
     if (glfwGetKey(window, GLFW_KEY_RIGHT))
-      scene.camera.rotate(-magnitude, 0);
+      cam.rotate(-magnitude, 0);
   }
 
-  scene.camera.update();
+  cam.update();
 }
 
 void App::drawScene() {
-  defaultProgram.useProgram();
-  defaultProgram.setMat4("projection", scene.camera.getProjection());
+  defaultProgram->useProgram();
+  defaultProgram->setMat4("projection", app.scene->camera->getProjection());
 
-  for (const auto &[ID, obj] : scene.objectMap) {
+  for (const auto &[ID, obj] : app.scene->objectMap) {
     const auto &r = obj->getRenderable();
-    defaultProgram.vao.bindEBO(r.ebo);
-    defaultProgram.vao.bindVBO(r.sharedVBO);
+    defaultProgram->vao.bindEBO(r.ebo);
+    defaultProgram->vao.bindVBO(r.sharedVBO);
 
-    defaultProgram.setMat4("model", obj->getTransform());
-    defaultProgram.setMat4("view", scene.camera.getView());
+    defaultProgram->setMat4("model", obj->getTransform());
+    defaultProgram->setMat4("view", app.scene->camera->getView());
 
     r.writeToSharedVBO();
 
-    atlas.bindTextureUnit();
-    defaultProgram.vao.bindVertexArray();
-    glDrawElements(/*GL_LINE_STRIP*/ GL_TRIANGLES,
-                   static_cast<GLsizei>(defaultProgram.vao.boundedEBO.size),
+    atlas->bindTextureUnit();
+    defaultProgram->vao.bindVertexArray();
+    unsigned int primitive;
+    primitive = GL_POINTS;
+    // primitive = GL_LINE_STRIP;
+    //  primitive = GL_TRIANGLES;
+    glDrawElements(primitive,
+                   static_cast<GLsizei>(defaultProgram->vao.boundedEBO.size),
                    GL_UNSIGNED_INT, 0);
   }
 }
