@@ -8,19 +8,19 @@ module wrapper.program.base_program;
 import util.debug;
 import app.app;
 
-static std::string sourceToString(const std::string name) {
+static std::string sourceToString(const std::string &name) {
   std::ifstream in{name};
   return {std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>()};
 }
 
-BaseProgram::BaseProgram(const GLsizei stride, const std::string vertexSource,
+BaseProgram::BaseProgram(const GLsizei stride, const std::string &vertexSource,
                          const std::string fragmentSource)
     : vao{stride}, vertexSource{vertexSource}, fragmentSource{fragmentSource} {}
 
 BaseProgram::~BaseProgram() { deleteProgram(); }
 
 void BaseProgram::useProgram() {
-  if (!allocated)
+  if (not allocated)
     throw UnallocatedGLObjectUsageException{
         std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", ID)};
   glUseProgram(ID);
@@ -42,8 +42,8 @@ void BaseProgram::create() {
   defineVAO();
 }
 
-void BaseProgram::createShaders(const std::string vertex,
-                                const std::string fragment) {
+void BaseProgram::createShaders(const std::string &vertex,
+                                const std::string &fragment) {
   GLuint vertexID = 0, fragmentID = 0;
   try {
     createShader(GL_VERTEX_SHADER, vertexID,
@@ -65,7 +65,7 @@ void BaseProgram::createShaders(const std::string vertex,
 }
 
 void BaseProgram::createShader(const GLenum type, GLuint &ID,
-                               const std::string source, GLchar (&log)[512]) {
+                               const std::string &source, GLchar (&log)[512]) {
   GLint success = 0;
   ID = glCreateShader(type);
   std::string temp = sourceToString(source);
@@ -73,7 +73,7 @@ void BaseProgram::createShader(const GLenum type, GLuint &ID,
   glShaderSource(ID, 1, &chars, NULL);
   glCompileShader(ID);
   glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
-  if (!success) {
+  if (not success) {
     glGetShaderInfoLog(ID, 512, NULL, log);
     throw FailedShaderCompilationException{
         std::format("{} FAILED TO COMPILE\n{}\n", source, log)};

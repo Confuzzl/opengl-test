@@ -2,6 +2,7 @@ module world.transformable;
 
 Mat4 Transformable::getTransform() const { return pos * rot; }
 Vec3 Transformable::getPosition() const { return pos[3]; }
+Quat Transformable::getRotation() const { return rot; }
 Vec3 Transformable::getForward() const { return forward; }
 Vec3 Transformable::getUp() const { return up; }
 Vec3 Transformable::getRight() const { return right; }
@@ -11,6 +12,8 @@ void Transformable::translate(const Vec3 &v) { pos = glm::translate(pos, v); }
 
 void Transformable::rotate(const Vec3 &axis, const float deg) {
   rot = glm::rotate(rot, glm::radians(deg), axis);
+  // forward = rot * forward;
+
   forward = rotateAroundAxis(forward, axis, deg);
   up = rotateAroundAxis(up, axis, deg);
   right = rotateAroundAxis(right, axis, deg);

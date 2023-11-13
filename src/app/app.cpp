@@ -61,39 +61,16 @@ void App::start() {
 
   while (!glfwWindowShouldClose(window)) {
     try {
-      double currTime = glfwGetTime();
+      double currentTime = glfwGetTime();
 
-      loopCycle->pushNewTime(currTime);
-      if (updateCycle->pastLength(currTime)) {
-        updateCycle->pushNewTime(currTime);
-        glfwPollEvents();
-        processInput();
+      loopCycle->pushNewTime(currentTime);
+      if (updateCycle->pastLength(currentTime)) {
+        startUpdate(currentTime);
       }
-      if (frameCycle->pastLength(currTime)) {
-        frameCycle->pushNewTime(currTime);
-
-        glClearColor(0.5, 0.5, 0.5, 1);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        drawScene();
-
-        Text::resetAllTextOffsets();
-
-        const auto &cam = app.scene->camera;
-        const Vec3 &pos = cam->getPosition();
-        Text::TOP_LT.drawText(std::format("POS: {:+.3f} {:+.3f} {:+.3f}",
-                                          pos[0], pos[1], pos[2]));
-        Text::TOP_LT.drawText(std::format("CAM: {:+.3f} {:+.3f}", cam->getYaw(),
-                                          cam->getPitch()));
-
-        Text::TOP_RT.drawText(std::format("FPS: {}", frameCycle->prevCount));
-        Text::TOP_RT.drawText(std::format("Time: {:.2f}s", currTime));
-        Text::TOP_RT.drawText(std::format("LPS: {}", loopCycle->prevCount));
-        Text::TOP_RT.drawText(std::format("UPS: {}", updateCycle->prevCount));
-
-        glfwSwapBuffers(window);
+      if (frameCycle->pastLength(currentTime)) {
+        startFrame(currentTime);
       }
-      if (currTime - seconds >= 1) {
+      if (currentTime - seconds >= 1) {
         seconds++;
         loopCycle->pushCount();
         updateCycle->pushCount();
@@ -103,6 +80,35 @@ void App::start() {
       catchException(e);
     }
   }
+}
+void App::startUpdate(const double t) {
+  updateCycle->pushNewTime(t);
+  glfwPollEvents();
+  processInput();
+}
+void App::startFrame(const double t) {
+  frameCycle->pushNewTime(t);
+
+  glClearColor(0, 1, 1, 1);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  drawScene();
+
+  Text::resetAllTextOffsets();
+
+  const auto &cam = app.scene->camera;
+  const Vec3 &pos = cam->getPosition();
+  Text::TOP_LT.drawText(
+      std::format("POS: {:+.3f} {:+.3f} {:+.3f}", pos[0], pos[1], pos[2]));
+  Text::TOP_LT.drawText(
+      std::format("CAM: {:+.3f} {:+.3f}", cam->getYaw(), cam->getPitch()));
+
+  Text::TOP_RT.drawText(std::format("FPS: {}", frameCycle->prevCount));
+  Text::TOP_RT.drawText(std::format("Time: {:.2f}s", t));
+  Text::TOP_RT.drawText(std::format("LPS: {}", loopCycle->prevCount));
+  Text::TOP_RT.drawText(std::format("UPS: {}", updateCycle->prevCount));
+
+  glfwSwapBuffers(window);
 }
 
 static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
@@ -155,6 +161,13 @@ void App::processInput() {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE))
     glfwSetWindowShouldClose(window, GL_TRUE);
 
+  if (glfwGetKey(window, GLFW_KEY_1))
+    mainPrimitive = GL_TRIANGLES;
+  if (glfwGetKey(window, GLFW_KEY_2))
+    mainPrimitive = GL_LINE_LOOP;
+  if (glfwGetKey(window, GLFW_KEY_3))
+    mainPrimitive = GL_POINTS;
+
   Camera &cam{*app.scene->camera};
 
   {
@@ -196,8 +209,8 @@ void App::drawScene() {
 
   for (const auto &[ID, obj] : app.scene->objectMap) {
     const auto &r = obj->getRenderable();
-    defaultProgram->vao.bindEBO(r.ebo);
-    defaultProgram->vao.bindVBO(r.sharedVBO);
+    defaultProgram->vao.bindEBO(&r.ebo);
+    defaultProgram->vao.bindVBO(&r.sharedVBO);
 
     defaultProgram->setMat4("model", obj->getTransform());
     defaultProgram->setMat4("view", app.scene->camera->getView());
@@ -206,12 +219,8 @@ void App::drawScene() {
 
     atlas->bindTextureUnit();
     defaultProgram->vao.bindVertexArray();
-    unsigned int primitive;
-    primitive = GL_POINTS;
-    // primitive = GL_LINE_STRIP;
-    //  primitive = GL_TRIANGLES;
-    glDrawElements(primitive,
-                   static_cast<GLsizei>(defaultProgram->vao.boundedEBO.size),
+    glDrawElements(mainPrimitive,
+                   static_cast<GLsizei>(defaultProgram->vao.boundedEBO->size),
                    GL_UNSIGNED_INT, 0);
   }
 }

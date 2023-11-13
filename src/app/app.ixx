@@ -40,11 +40,14 @@ export struct App {
   UPtr<Font> consolas{std::make_unique<Font>("consolas1024", 64, 128)};
 
   UPtr<Scene> scene{std::make_unique<Scene>()};
+  unsigned int mainPrimitive = GL_TRIANGLES;
 
   App();
   ~App();
 
   void start();
+  void startUpdate(const double t);
+  void startFrame(const double t);
   void createWindow();
   void catchException(const std::runtime_error &e);
 

@@ -8,7 +8,7 @@ import wrapper.program.programs;
 export class BaseTextCorner {
 protected:
   using OffsetEquation =
-      std::function<float(const float, const float, const std::string)>;
+      std::function<float(const float, const float, const std::string &)>;
   static const OffsetEquation xNormal;
   static const OffsetEquation xShift;
   static const OffsetEquation yNormal;

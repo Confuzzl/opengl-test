@@ -4,6 +4,7 @@ module;
 
 module app.texture_tile;
 
+import wrapper.tex_object;
 import util.math;
 
 const std::map<std::string, glm::lowp_u16vec4> TexTile::textureDict = {
@@ -16,7 +17,7 @@ const Vector<std::string> TexTile::textureKeys = {
     std::views::keys(TexTile::textureDict).begin(),
     std::views::keys(TexTile::textureDict).end()};
 
-TexTile TexTile::getTile(const std::string name, const TexObject &texObject) {
+TexTile TexTile::getTile(const std::string &name, const TexObject &texObject) {
   float width = static_cast<float>(texObject.width),
         height = static_cast<float>(texObject.height);
   Vec4 info{textureDict.at(textureDict.contains(name) ? name : "error")};
@@ -26,8 +27,8 @@ TexTile TexTile::getTile(const std::string name, const TexObject &texObject) {
   return {info};
 }
 std::string TexTile::getRandomTexture() {
-  return TexTile::textureKeys[(unsigned int)random(
-      0, static_cast<double>(TexTile::textureDict.size()))];
+  return TexTile::textureKeys[static_cast<unsigned int>(
+      random(0.0, static_cast<double>(TexTile::textureDict.size())))];
 }
 TexTile TexTile::getRandomTile(const TexObject &texObject) {
   return getTile(getRandomTexture(), texObject);

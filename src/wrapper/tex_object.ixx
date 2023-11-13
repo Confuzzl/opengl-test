@@ -11,7 +11,7 @@ export struct TexObject : public GLObject {
   const std::string name;
   int width = 0, height = 0, channels = 0;
 
-  TexObject(const std::string name);
+  TexObject(const std::string &name);
   ~TexObject();
 
   void initTexture();

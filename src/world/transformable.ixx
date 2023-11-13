@@ -1,11 +1,15 @@
 export module world.transformable;
 
 import util.glm;
+import <optional>;
 
 export class Transformable {
 public:
+  std::optional<Transformable *> parent{std::nullopt};
+
   Mat4 getTransform() const;
   Vec3 getPosition() const;
+  Quat getRotation() const;
   Vec3 getForward() const;
   Vec3 getUp() const;
   Vec3 getRight() const;

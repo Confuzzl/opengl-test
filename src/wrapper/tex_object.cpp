@@ -9,7 +9,7 @@ module wrapper.tex_object;
 
 import util.debug;
 
-TexObject::TexObject(const std::string name) : name{name} {}
+TexObject::TexObject(const std::string &name) : name{name} {}
 TexObject::~TexObject() {
   glDeleteTextures(1, &ID);
   // std::cout << std::format("tex {} \"{}\" deleted\n", ID, name);

@@ -31,12 +31,12 @@ public:
   void create();
 
 protected:
-  BaseProgram(const GLsizei stride, const std::string vertexSource,
+  BaseProgram(const GLsizei stride, const std::string &vertexSource,
               const std::string fragmentSource);
 
-  void createShaders(const std::string vertex, const std::string fragment);
+  void createShaders(const std::string &vertex, const std::string &fragment);
 
 private:
   static void createShader(const GLenum type, GLuint &ID,
-                           const std::string source, GLchar (&log)[512]);
+                           const std::string &source, GLchar (&log)[512]);
 };
