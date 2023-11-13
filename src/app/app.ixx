@@ -15,6 +15,9 @@ export class TexObject;
 export class Font;
 export class Scene;
 
+import rendering.animation;
+import rendering.frame.keyframe;
+
 export struct App {
   struct FailedWindowCreationException : public std::runtime_error {
     using std::runtime_error::runtime_error;
@@ -41,6 +44,8 @@ export struct App {
 
   UPtr<Scene> scene{std::make_unique<Scene>()};
   unsigned int mainPrimitive = GL_TRIANGLES;
+
+  const Animation anim{{Keyframe::start()}};
 
   App();
   ~App();
