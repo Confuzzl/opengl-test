@@ -6,6 +6,7 @@ export module app.app;
 
 import util.glm;
 import util.memory;
+import util.vector;
 import <stdexcept>;
 
 export class UpdateCycle;
@@ -45,7 +46,8 @@ export struct App {
   UPtr<Scene> scene{std::make_unique<Scene>()};
   unsigned int mainPrimitive = GL_TRIANGLES;
 
-  const Animation anim{{Keyframe::start()}};
+  Animation anim{makeVector<UPtr<const Keyframe>>(Keyframe::start(),
+                                                  Keyframe::identity(10))};
 
   App();
   ~App();
@@ -57,7 +59,7 @@ export struct App {
   void catchException(const std::runtime_error &e);
 
   void drawScene();
-  void processInput();
+  // void processInput();
 };
 
 export App app{};

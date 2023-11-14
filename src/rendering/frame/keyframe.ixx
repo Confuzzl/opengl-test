@@ -10,5 +10,6 @@ export struct Keyframe : public Frame {
   Keyframe(const Mat4 &transform, const double time);
 
   static UPtr<const Keyframe> start();
+  static UPtr<const Keyframe> identity(const double time);
   static UPtr<const Keyframe> from(const Mat4 &transform, const double time);
 };

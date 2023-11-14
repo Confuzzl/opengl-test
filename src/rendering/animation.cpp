@@ -17,7 +17,12 @@ Animation::Animation(UPtrVector<const Keyframe> &&keyframes)
   length = this->keyframes.back()->time;
 }
 
-void Animation::play() { startTime = glfwGetTime(); }
+void Animation::play() {
+  if (animating)
+    return;
+  startTime = glfwGetTime();
+  animating = true;
+}
 void Animation::end() {
   pause();
   reset();
@@ -25,8 +30,15 @@ void Animation::end() {
 }
 void Animation::pause() {
   animating = false;
-  lastTime = currentTime;
-  currentTime = glfwGetTime();
+  // lastTime = currentTime;
+  // currentTime = glfwGetTime();
+}
+void Animation::resume() { animating = true; }
+void Animation::toggle() {
+  if (animating)
+    pause();
+  else
+    resume();
 }
 void Animation::reset() {
   currentTime = 0;
@@ -45,7 +57,7 @@ const Inbetween Animation::getCurrentKeyframe() {
 
   if (animating) {
     lastTime = currentTime;
-    currentTime = startTime - glfwGetTime();
+    currentTime = glfwGetTime() - startTime;
   } else {
   }
 

@@ -29,6 +29,8 @@ export struct Animation {
   void play();
   void end();
   void pause();
+  void resume();
+  void toggle();
   void reset();
 
   const Inbetween getCurrentKeyframe();
