@@ -59,7 +59,10 @@ export struct App {
   void catchException(const std::runtime_error &e);
 
   void drawScene();
-  // void processInput();
+  void processInput();
+
+  float speedMagnitude;
+  float rotateMagnitude;
 };
 
 export App app{};

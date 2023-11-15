@@ -17,6 +17,8 @@ import app.text.text_corners;
 import util.vector;
 import util.debug;
 
+import app.input.key;
+
 const Mat4 App::UI_MAT{glm::ortho(0.0f, static_cast<float>(App::WIDTH), 0.0f,
                                   static_cast<float>(App::HEIGHT))};
 
@@ -84,7 +86,7 @@ void App::start() {
 void App::startUpdate(const double t) {
   updateCycle->pushNewTime(t);
   glfwPollEvents();
-  // processInput();
+  processInput();
 }
 void App::startFrame(const double t) {
   frameCycle->pushNewTime(t);
@@ -204,7 +206,7 @@ void App::createWindow() {
 
   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   glfwSetCursorPosCallback(window, mouseCallback);
-  glfwSetKeyCallback(window, keyCallback);
+  // glfwSetKeyCallback(window, /*keyCallback*/ Key::foo);
 
   gladLoadGL();
   glViewport(0, 0, WIDTH, HEIGHT);
@@ -215,60 +217,55 @@ void App::catchException(const std::runtime_error &e) {
   glfwSetWindowShouldClose(app.window, GL_TRUE);
 }
 
-// void App::processInput() {
-//   if (glfwGetKey(window, GLFW_KEY_ESCAPE))
-//     glfwSetWindowShouldClose(window, GL_TRUE);
-//
-//   if (glfwGetKey(window, GLFW_KEY_1))
-//     mainPrimitive = GL_TRIANGLES;
-//   if (glfwGetKey(window, GLFW_KEY_2))
-//     mainPrimitive = GL_LINE_LOOP;
-//   if (glfwGetKey(window, GLFW_KEY_3))
-//     mainPrimitive = GL_POINTS;
-//
-//   if (glfwGetKey(window, GLFW_KEY_Z))
-//     anim.play();
-//   if (glfwGetKey(window, GLFW_KEY_X))
-//     anim.end();
-//   if (glfwGetKey(window, GLFW_KEY_C))
-//     anim.toggle();
-//   if (glfwGetKey(window, GLFW_KEY_V))
-//     anim.reset();
-//
-//   Camera &cam{*app.scene->camera};
-//
-//   {
-//     cam.resetVelocity();
-//     const float magnitude =
-//         static_cast<float>(updateCycle->delta * cam.getSpeed());
-//     if (glfwGetKey(window, GLFW_KEY_W))
-//       cam.addVelocity(cam.getForward() * magnitude);
-//     if (glfwGetKey(window, GLFW_KEY_A))
-//       cam.addVelocity(cam.getRight() * -magnitude);
-//     if (glfwGetKey(window, GLFW_KEY_S))
-//       cam.addVelocity(cam.getForward() * -magnitude);
-//     if (glfwGetKey(window, GLFW_KEY_D))
-//       cam.addVelocity(cam.getRight() * magnitude);
-//     if (glfwGetKey(window, GLFW_KEY_SPACE))
-//       cam.addVelocity(Y_PLUS * magnitude);
-//     if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL))
-//       cam.addVelocity(Y_PLUS * -magnitude);
-//   }
-//   {
-//     const float magnitude =
-//         static_cast<float>(updateCycle->delta * cam.getSensitivity());
-//     if (glfwGetKey(window, GLFW_KEY_UP))
-//       cam.rotate(0, magnitude);
-//     if (glfwGetKey(window, GLFW_KEY_LEFT))
-//       cam.rotate(magnitude, 0);
-//     if (glfwGetKey(window, GLFW_KEY_DOWN))
-//       cam.rotate(0, -magnitude);
-//     if (glfwGetKey(window, GLFW_KEY_RIGHT))
-//       cam.rotate(-magnitude, 0);
-//   }
-//
-//   cam.update();
-// }
+void App::processInput() {
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE))
+    glfwSetWindowShouldClose(window, GL_TRUE);
+
+  if (glfwGetKey(window, GLFW_KEY_1))
+    mainPrimitive = GL_TRIANGLES;
+  if (glfwGetKey(window, GLFW_KEY_2))
+    mainPrimitive = GL_LINE_LOOP;
+  if (glfwGetKey(window, GLFW_KEY_3))
+    mainPrimitive = GL_POINTS;
+
+  if (glfwGetKey(window, GLFW_KEY_Z))
+    anim.play();
+  if (glfwGetKey(window, GLFW_KEY_X))
+    anim.end();
+  if (glfwGetKey(window, GLFW_KEY_C))
+    anim.toggle();
+  if (glfwGetKey(window, GLFW_KEY_V))
+    anim.reset();
+
+  Camera &cam{*app.scene->camera};
+
+  speedMagnitude = static_cast<float>(updateCycle->delta * cam.getSpeed());
+  if (glfwGetKey(window, GLFW_KEY_W))
+    cam.addVelocity(cam.getForward() * speedMagnitude);
+  if (glfwGetKey(window, GLFW_KEY_A))
+    cam.addVelocity(cam.getRight() * -speedMagnitude);
+  if (glfwGetKey(window, GLFW_KEY_S))
+    cam.addVelocity(cam.getForward() * -speedMagnitude);
+  if (glfwGetKey(window, GLFW_KEY_D))
+    cam.addVelocity(cam.getRight() * speedMagnitude);
+  if (glfwGetKey(window, GLFW_KEY_SPACE))
+    cam.addVelocity(Y_PLUS * speedMagnitude);
+  if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL))
+    cam.addVelocity(Y_PLUS * -speedMagnitude);
+
+  rotateMagnitude =
+      static_cast<float>(updateCycle->delta * cam.getSensitivity());
+  if (glfwGetKey(window, GLFW_KEY_UP))
+    cam.rotate(0, rotateMagnitude);
+  if (glfwGetKey(window, GLFW_KEY_LEFT))
+    cam.rotate(rotateMagnitude, 0);
+  if (glfwGetKey(window, GLFW_KEY_DOWN))
+    cam.rotate(0, -rotateMagnitude);
+  if (glfwGetKey(window, GLFW_KEY_RIGHT))
+    cam.rotate(-rotateMagnitude, 0);
+
+  cam.update();
+}
 
 void App::drawScene() {
   defaultProgram->useProgram();

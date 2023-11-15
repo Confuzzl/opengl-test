@@ -158,6 +158,9 @@
   <ItemGroup>
     <ClCompile Include="src\app\app.ixx" />
     <ClCompile Include="src\app\app.cpp" />
+    <ClCompile Include="src\app\input\input_handler.cpp" />
+    <ClCompile Include="src\app\input\input_handler.ixx" />
+    <ClCompile Include="src\app\input\key.ixx" />
     <ClCompile Include="src\app\text\font.ixx" />
     <ClCompile Include="src\app\text\font.cpp" />
     <ClCompile Include="src\app\texture_tile.ixx" />
