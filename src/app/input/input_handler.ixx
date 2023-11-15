@@ -10,12 +10,13 @@ export class Camera;
 
 export struct InputHandler {
 private:
-  // static std::map<int, std::function<float()>> magnitudes;
-  static std::map<int, std::pair<std::function<Vec3(const Camera *)>, float>>
-      movementMaps;
-  static std::map<int, Key> keys;
+  Camera &camera;
+
+  std::map<int, Key> keys;
 
 public:
-  static void callback(GLFWwindow *window, int key, int scancode, int action,
-                       int mods);
+  InputHandler();
+
+  void callback(GLFWwindow *window, int key, int scancode, int action,
+                int mods);
 };

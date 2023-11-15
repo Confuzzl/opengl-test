@@ -134,61 +134,63 @@ static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
       app.updateCycle->delta * app.scene->camera->getSensitivity());
   app.scene->camera->rotate(dx * magnitude, dy * magnitude);
 }
-static void keyCallback(GLFWwindow *window, int key, int scancode, int action,
-                        int mods) {
-  if (key == GLFW_KEY_ESCAPE)
-    glfwSetWindowShouldClose(window, GL_TRUE);
 
-  if (key == GLFW_KEY_1 && action == GLFW_PRESS)
-    app.mainPrimitive = GL_TRIANGLES;
-  if (key == GLFW_KEY_2 && action == GLFW_PRESS)
-    app.mainPrimitive = GL_LINE_LOOP;
-  if (key == GLFW_KEY_3 && action == GLFW_PRESS)
-    app.mainPrimitive = GL_POINTS;
-
-  if (key == GLFW_KEY_Z && action == GLFW_PRESS)
-    app.anim.play();
-  if (key == GLFW_KEY_X && action == GLFW_PRESS)
-    app.anim.end();
-  if (key == GLFW_KEY_C && action == GLFW_PRESS)
-    app.anim.toggle();
-  if (key == GLFW_KEY_V && action == GLFW_PRESS)
-    app.anim.reset();
-
-  Camera &cam{*app.scene->camera};
-
-  {
-    cam.resetVelocity();
-    const float magnitude =
-        static_cast<float>(app.updateCycle->delta * cam.getSpeed());
-    if (key == GLFW_KEY_W)
-      cam.addVelocity(cam.getForward() * magnitude);
-    if (key == GLFW_KEY_A)
-      cam.addVelocity(cam.getRight() * -magnitude);
-    if (key == GLFW_KEY_S)
-      cam.addVelocity(cam.getForward() * -magnitude);
-    if (key == GLFW_KEY_D)
-      cam.addVelocity(cam.getRight() * magnitude);
-    if (key == GLFW_KEY_SPACE)
-      cam.addVelocity(Y_PLUS * magnitude);
-    if (key == GLFW_KEY_LEFT_CONTROL)
-      cam.addVelocity(Y_PLUS * -magnitude);
-  }
-  {
-    const float magnitude =
-        static_cast<float>(app.updateCycle->delta * cam.getSensitivity());
-    if (key == GLFW_KEY_UP)
-      cam.rotate(0, magnitude);
-    if (key == GLFW_KEY_LEFT)
-      cam.rotate(magnitude, 0);
-    if (key == GLFW_KEY_DOWN)
-      cam.rotate(0, -magnitude);
-    if (key == GLFW_KEY_RIGHT)
-      cam.rotate(-magnitude, 0);
-  }
-
-  cam.update();
-}
+// static void keyCallback(GLFWwindow *window, int key, int scancode, int
+// action,
+//                         int mods) {
+//   if (key == GLFW_KEY_ESCAPE)
+//     glfwSetWindowShouldClose(window, GL_TRUE);
+//
+//   if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+//     app.mainPrimitive = GL_TRIANGLES;
+//   if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+//     app.mainPrimitive = GL_LINE_LOOP;
+//   if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+//     app.mainPrimitive = GL_POINTS;
+//
+//   if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+//     app.anim.play();
+//   if (key == GLFW_KEY_X && action == GLFW_PRESS)
+//     app.anim.end();
+//   if (key == GLFW_KEY_C && action == GLFW_PRESS)
+//     app.anim.toggle();
+//   if (key == GLFW_KEY_V && action == GLFW_PRESS)
+//     app.anim.reset();
+//
+//   Camera &cam{*app.scene->camera};
+//
+//   {
+//     cam.resetVelocity();
+//     const float magnitude =
+//         static_cast<float>(app.updateCycle->delta * cam.getSpeed());
+//     if (key == GLFW_KEY_W)
+//       cam.addVelocity(cam.getForward() * magnitude);
+//     if (key == GLFW_KEY_A)
+//       cam.addVelocity(cam.getRight() * -magnitude);
+//     if (key == GLFW_KEY_S)
+//       cam.addVelocity(cam.getForward() * -magnitude);
+//     if (key == GLFW_KEY_D)
+//       cam.addVelocity(cam.getRight() * magnitude);
+//     if (key == GLFW_KEY_SPACE)
+//       cam.addVelocity(Y_PLUS * magnitude);
+//     if (key == GLFW_KEY_LEFT_CONTROL)
+//       cam.addVelocity(Y_PLUS * -magnitude);
+//   }
+//   {
+//     const float magnitude =
+//         static_cast<float>(app.updateCycle->delta * cam.getSensitivity());
+//     if (key == GLFW_KEY_UP)
+//       cam.rotate(0, magnitude);
+//     if (key == GLFW_KEY_LEFT)
+//       cam.rotate(magnitude, 0);
+//     if (key == GLFW_KEY_DOWN)
+//       cam.rotate(0, -magnitude);
+//     if (key == GLFW_KEY_RIGHT)
+//       cam.rotate(-magnitude, 0);
+//   }
+//
+//   cam.update();
+// }
 
 void App::createWindow() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
