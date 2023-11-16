@@ -1,5 +1,10 @@
 module world.transform.transformable;
 
+const Transformable Transformable::NO_PARENT{};
+
+Transformable::Transformable(const Transformable *parent) : parent{parent} {}
+
 Mat4 Transformable::getTransform() const {
-  return Translatable::transform * Rotatable::transform;
+  return parent->getTransform() * Translatable::transform *
+         Rotatable::transform;
 }

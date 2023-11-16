@@ -6,9 +6,11 @@ import util.memory;
 export class Camera;
 
 export class Player : public Transformable {
-  UPtr<Camera> camera{};
-
 public:
+  UPtr<Camera> camera{std::make_unique<Camera>(45.0f)};
+
+  float speed = 2;
+
   Player();
   ~Player();
 

@@ -10,7 +10,10 @@ import app.update_cycle;
 import wrapper.program.programs;
 import wrapper.tex_object;
 import app.text.font;
+import world.camera;
 import world.scene;
+import world.entity.player;
+import world.game_object;
 import wrapper.program.vertex_formats;
 import world.render.renderable;
 import app.text.text_corners;
@@ -98,12 +101,12 @@ void App::startFrame(const double t) {
 
   Text::resetAllTextOffsets();
 
-  const auto &cam = app.scene->camera;
-  const Vec3 &pos = cam->getPosition();
+  const Camera &cam = *app.scene->player->camera;
+  const Vec3 &pos = cam.getPosition();
   Text::TOP_LT.drawText(
       std::format("POS: {:+.3f} {:+.3f} {:+.3f}", pos[0], pos[1], pos[2]));
   Text::TOP_LT.drawText(
-      std::format("CAM: {:+.3f} {:+.3f}", cam->getYaw(), cam->getPitch()));
+      std::format("CAM: {:+.3f} {:+.3f}", cam.getYaw(), cam.getPitch()));
 
   Text::TOP_RT.drawText(std::format("FPS: {}", frameCycle->prevCount));
   Text::TOP_RT.drawText(std::format("Time: {:.2f}s", t));
@@ -130,9 +133,11 @@ static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
   app.prevX = xpos;
   app.prevY = ypos;
 
-  const float magnitude = static_cast<float>(
-      app.updateCycle->delta * app.scene->camera->getSensitivity());
-  app.scene->camera->rotate(dx * magnitude, dy * magnitude);
+  Camera &cam{*app.scene->player->camera};
+
+  const float magnitude =
+      static_cast<float>(app.updateCycle->delta * cam.getSensitivity());
+  cam.rotate(dx * magnitude, dy * magnitude);
 }
 
 // static void keyCallback(GLFWwindow *window, int key, int scancode, int
@@ -239,7 +244,7 @@ void App::processInput() {
   if (glfwGetKey(window, GLFW_KEY_V))
     anim.reset();
 
-  Camera &cam{*app.scene->camera};
+  Camera &cam{*app.scene->player->camera};
 
   speedMagnitude = static_cast<float>(updateCycle->delta * cam.getSpeed());
   if (glfwGetKey(window, GLFW_KEY_W))
@@ -270,8 +275,10 @@ void App::processInput() {
 }
 
 void App::drawScene() {
+  const Camera &cam{*scene->player->camera};
+
   defaultProgram->useProgram();
-  defaultProgram->setMat4("projection", app.scene->camera->getProjection());
+  defaultProgram->setMat4("projection", cam.getProjection());
 
   for (const auto &[ID, obj] : app.scene->objectMap) {
     const auto &r = obj->getRenderable();
@@ -279,7 +286,7 @@ void App::drawScene() {
     defaultProgram->vao.bindVBO(&r.sharedVBO);
 
     defaultProgram->setMat4("model", obj->getTransform());
-    defaultProgram->setMat4("view", app.scene->camera->getView());
+    defaultProgram->setMat4("view", cam.getView());
 
     r.writeToSharedVBO();
 

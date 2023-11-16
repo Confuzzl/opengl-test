@@ -16,7 +16,10 @@ void Camera::update() {
 }
 
 const Mat4 &Camera::getProjection() const { return projection; }
-const Mat4 &Camera::getView() const { return view; }
+const Mat4 &Camera::getView() const {
+  Vec3 eye{getPosition()};
+  return glm::lookAt(eye, eye + forward, Y_PLUS);
+}
 const Vec3 &Camera::getPosition() const { return pos; }
 float Camera::getSpeed() const { return speed; }
 const Vec3 &Camera::getVelocity() const { return velocity; }

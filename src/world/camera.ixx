@@ -1,6 +1,7 @@
 export module world.camera;
 
 import util.glm;
+import world.transform.transformable;
 
 export class Player;
 
