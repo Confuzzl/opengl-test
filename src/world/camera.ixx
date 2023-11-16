@@ -2,6 +2,8 @@ export module world.camera;
 
 import util.glm;
 
+export class Player;
+
 export class Camera {
   Mat4 projection;
   Mat4 view{1.0f};

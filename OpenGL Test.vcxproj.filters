@@ -140,7 +140,7 @@
     <ClCompile Include="src\world\game_object.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\transformable.ixx">
+    <ClCompile Include="src\world\transform\transformable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\game_object.cpp">
@@ -188,7 +188,7 @@
     <ClCompile Include="src\world\render\renderable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\transformable.cpp">
+    <ClCompile Include="src\world\transform\transformable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\wrapper\program\vertex_formats-simple.ixx">
@@ -339,6 +339,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\input\input_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\transform\translatable.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\transform\translatable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\transform\rotatable.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\transform\rotatable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

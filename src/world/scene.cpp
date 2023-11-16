@@ -1,13 +1,15 @@
 module world.scene;
 
+import world.game_object;
+import world.entity.player;
 import app.app;
 import util.debug;
 import world.factory.factories;
-import world.game_object;
 import util.polyhedron;
 import util.debug;
 
 Scene::Scene() { std::cout << "scene constructing\n"; }
+Scene::~Scene() = default;
 
 void Scene::start() {
   try {

@@ -1,6 +1,6 @@
 export module world.base_polyhedron;
 
-import world.transformable;
+import world.transform.transformable;
 import util.polyhedron;
 
 export class BasePolyhedron : public Transformable {

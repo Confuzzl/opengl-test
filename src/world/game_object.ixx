@@ -1,6 +1,6 @@
 export module world.game_object;
 
-import world.transformable;
+import world.transform.transformable;
 import world.collision.collider;
 import world.render.renderable;
 import util.memory;

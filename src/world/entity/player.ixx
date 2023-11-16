@@ -1,11 +1,12 @@
 export module world.entity.player;
 
+import world.transform.transformable;
 import util.memory;
 
 export class Camera;
 
-export class Player {
-  UPtr<Camera> camera;
+export class Player : public Transformable {
+  UPtr<Camera> camera{};
 
 public:
   Player();

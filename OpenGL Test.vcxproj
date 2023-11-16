@@ -237,8 +237,12 @@
     <ClCompile Include="src\world\game_object.cpp" />
     <ClCompile Include="src\world\scene.ixx" />
     <ClCompile Include="src\world\scene.cpp" />
-    <ClCompile Include="src\world\transformable.cpp" />
-    <ClCompile Include="src\world\transformable.ixx" />
+    <ClCompile Include="src\world\transform\rotatable.cpp" />
+    <ClCompile Include="src\world\transform\rotatable.ixx" />
+    <ClCompile Include="src\world\transform\transformable.cpp" />
+    <ClCompile Include="src\world\transform\transformable.ixx" />
+    <ClCompile Include="src\world\transform\translatable.cpp" />
+    <ClCompile Include="src\world\transform\translatable.ixx" />
     <ClCompile Include="src\wrapper\program\vertex_formats-font.cpp" />
     <ClCompile Include="src\wrapper\program\vertex_formats-font.ixx" />
     <ClCompile Include="src\wrapper\program\vertex_formats-simple.cpp" />

@@ -5,6 +5,7 @@ module;
 export module world.collision.vclip.plane.ve_plane;
 
 import world.collision.vclip.plane.feature_plane;
+import world.collision.vclip.plane.voronoi_plane;
 // import world.collision.feature.feature;
 // import world.collision.vclip.region.voronoi_region;
 import world.collision.feature.vertex;
@@ -25,9 +26,10 @@ protected:
         edgeEndMethod{std::move(edgeEndMethod)} {}
 
 public:
+  using VoronoiPlane<RegionType>::referencePoint;
+  using FeaturePlane<NeighborType, RegionType>::edge;
   Vec3 getNormal() const override {
-    return (this->referencePoint == edgeEndMethod(&(this->edge)) ? +1.0f
-                                                                 : -1.0f) *
-           static_cast<Vec3>(this->edge);
+    return (referencePoint == edgeEndMethod(&edge) ? +1.0f : -1.0f) *
+           static_cast<Vec3>(edge);
   }
 };
