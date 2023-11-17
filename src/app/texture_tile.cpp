@@ -27,8 +27,8 @@ TexTile TexTile::getTile(const std::string &name, const TexObject &texObject) {
   return {info};
 }
 std::string TexTile::getRandomTexture() {
-  return TexTile::textureKeys[static_cast<unsigned int>(
-      random(0.0, static_cast<double>(TexTile::textureDict.size())))];
+  return TexTile::textureKeys[static_cast<unsigned int>(math_util::random(
+      0.0, static_cast<double>(TexTile::textureDict.size())))];
 }
 TexTile TexTile::getRandomTile(const TexObject &texObject) {
   return getTile(getRandomTexture(), texObject);

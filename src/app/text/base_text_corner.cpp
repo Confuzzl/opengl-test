@@ -66,10 +66,10 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
     const TexTile tex = app.consolas->getTile(c);
     for (int tri = 0; tri < 2; tri++) {
       for (int vertex = 0; vertex < 3; vertex++) {
-        const Vec2 pos{xOffset + width * QUAD_UVS[tri][vertex][0],
-                       y2 + height * QUAD_UVS[tri][vertex][1]};
-        const glm::lowp_u16vec2 uv{tex.coordinates +
-                                   tex.dimensions * QUAD_UVS[tri][vertex]};
+        const Vec2 pos{xOffset + width * glm_util::QUAD_UVS[tri][vertex][0],
+                       y2 + height * glm_util::QUAD_UVS[tri][vertex][1]};
+        const glm::lowp_u16vec2 uv{
+            tex.coordinates + tex.dimensions * glm_util::QUAD_UVS[tri][vertex]};
         vertices.emplace_back(pos[0], pos[1], uv[0], uv[1]);
       }
     }

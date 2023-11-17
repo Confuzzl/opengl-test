@@ -1,9 +1,9 @@
 module world.transform.rotatable;
 
 Mat4 Rotatable::getRotation() const { return transform; }
-Vec3 Rotatable::getRelativeX() const { return rX; }
-Vec3 Rotatable::getRelativeY() const { return rY; }
-Vec3 Rotatable::getRelativeZ() const { return rZ; }
+Vec3 Rotatable::getForward() const { return forward; }
+Vec3 Rotatable::getUp() const { return up; }
+Vec3 Rotatable::getRight() const { return right; }
 
 void Rotatable::resetRotation() { transform = Mat4{1.0f}; }
 void Rotatable::setRotation(const Vec3 &axis, const float deg) {
@@ -11,8 +11,11 @@ void Rotatable::setRotation(const Vec3 &axis, const float deg) {
 }
 void Rotatable::rotate(const Vec3 &axis, const float deg) {
   transform = glm::rotate(transform, glm::radians(deg), axis);
+  forward = glm_util::rotateVector(forward, transform);
+  up = glm_util::rotateVector(up, transform);
+  right = glm_util::rotateVector(right, transform);
 }
 
-void Rotatable::rotateRX(const float deg) { rotate(rX, deg); }
-void Rotatable::rotateRY(const float deg) { rotate(rY, deg); }
-void Rotatable::rotateRZ(const float deg) { rotate(rZ, deg); }
+void Rotatable::rotateForward(const float deg) { rotate(forward, deg); }
+void Rotatable::rotateUp(const float deg) { rotate(up, deg); }
+void Rotatable::rotateRight(const float deg) { rotate(right, deg); }

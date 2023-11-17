@@ -89,7 +89,7 @@ void App::start() {
 void App::startUpdate(const double t) {
   updateCycle->pushNewTime(t);
   glfwPollEvents();
-  processInput();
+  // processInput();
 }
 void App::startFrame(const double t) {
   frameCycle->pushNewTime(t);
@@ -224,55 +224,55 @@ void App::catchException(const std::runtime_error &e) {
   glfwSetWindowShouldClose(app.window, GL_TRUE);
 }
 
-void App::processInput() {
-  if (glfwGetKey(window, GLFW_KEY_ESCAPE))
-    glfwSetWindowShouldClose(window, GL_TRUE);
-
-  if (glfwGetKey(window, GLFW_KEY_1))
-    mainPrimitive = GL_TRIANGLES;
-  if (glfwGetKey(window, GLFW_KEY_2))
-    mainPrimitive = GL_LINE_LOOP;
-  if (glfwGetKey(window, GLFW_KEY_3))
-    mainPrimitive = GL_POINTS;
-
-  if (glfwGetKey(window, GLFW_KEY_Z))
-    anim.play();
-  if (glfwGetKey(window, GLFW_KEY_X))
-    anim.end();
-  if (glfwGetKey(window, GLFW_KEY_C))
-    anim.toggle();
-  if (glfwGetKey(window, GLFW_KEY_V))
-    anim.reset();
-
-  Camera &cam{*app.scene->player->camera};
-
-  speedMagnitude = static_cast<float>(updateCycle->delta * cam.getSpeed());
-  if (glfwGetKey(window, GLFW_KEY_W))
-    cam.addVelocity(cam.getForward() * speedMagnitude);
-  if (glfwGetKey(window, GLFW_KEY_A))
-    cam.addVelocity(cam.getRight() * -speedMagnitude);
-  if (glfwGetKey(window, GLFW_KEY_S))
-    cam.addVelocity(cam.getForward() * -speedMagnitude);
-  if (glfwGetKey(window, GLFW_KEY_D))
-    cam.addVelocity(cam.getRight() * speedMagnitude);
-  if (glfwGetKey(window, GLFW_KEY_SPACE))
-    cam.addVelocity(Y_PLUS * speedMagnitude);
-  if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL))
-    cam.addVelocity(Y_PLUS * -speedMagnitude);
-
-  rotateMagnitude =
-      static_cast<float>(updateCycle->delta * cam.getSensitivity());
-  if (glfwGetKey(window, GLFW_KEY_UP))
-    cam.rotate(0, rotateMagnitude);
-  if (glfwGetKey(window, GLFW_KEY_LEFT))
-    cam.rotate(rotateMagnitude, 0);
-  if (glfwGetKey(window, GLFW_KEY_DOWN))
-    cam.rotate(0, -rotateMagnitude);
-  if (glfwGetKey(window, GLFW_KEY_RIGHT))
-    cam.rotate(-rotateMagnitude, 0);
-
-  cam.update();
-}
+// void App::processInput() {
+//   if (glfwGetKey(window, GLFW_KEY_ESCAPE))
+//     glfwSetWindowShouldClose(window, GL_TRUE);
+//
+//   if (glfwGetKey(window, GLFW_KEY_1))
+//     mainPrimitive = GL_TRIANGLES;
+//   if (glfwGetKey(window, GLFW_KEY_2))
+//     mainPrimitive = GL_LINE_LOOP;
+//   if (glfwGetKey(window, GLFW_KEY_3))
+//     mainPrimitive = GL_POINTS;
+//
+//   if (glfwGetKey(window, GLFW_KEY_Z))
+//     anim.play();
+//   if (glfwGetKey(window, GLFW_KEY_X))
+//     anim.end();
+//   if (glfwGetKey(window, GLFW_KEY_C))
+//     anim.toggle();
+//   if (glfwGetKey(window, GLFW_KEY_V))
+//     anim.reset();
+//
+//   Camera &cam{*app.scene->player->camera};
+//
+//   speedMagnitude = static_cast<float>(updateCycle->delta * cam.getSpeed());
+//   if (glfwGetKey(window, GLFW_KEY_W))
+//     cam.addVelocity(cam.getForward() * speedMagnitude);
+//   if (glfwGetKey(window, GLFW_KEY_A))
+//     cam.addVelocity(cam.getRight() * -speedMagnitude);
+//   if (glfwGetKey(window, GLFW_KEY_S))
+//     cam.addVelocity(cam.getForward() * -speedMagnitude);
+//   if (glfwGetKey(window, GLFW_KEY_D))
+//     cam.addVelocity(cam.getRight() * speedMagnitude);
+//   if (glfwGetKey(window, GLFW_KEY_SPACE))
+//     cam.addVelocity(glm_util::Y_PLUS * speedMagnitude);
+//   if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL))
+//     cam.addVelocity(glm_util::Y_PLUS * -speedMagnitude);
+//
+//   rotateMagnitude =
+//       static_cast<float>(updateCycle->delta * cam.getSensitivity());
+//   if (glfwGetKey(window, GLFW_KEY_UP))
+//     cam.rotate(0, rotateMagnitude);
+//   if (glfwGetKey(window, GLFW_KEY_LEFT))
+//     cam.rotate(rotateMagnitude, 0);
+//   if (glfwGetKey(window, GLFW_KEY_DOWN))
+//     cam.rotate(0, -rotateMagnitude);
+//   if (glfwGetKey(window, GLFW_KEY_RIGHT))
+//     cam.rotate(-rotateMagnitude, 0);
+//
+//   cam.update();
+// }
 
 void App::drawScene() {
   const Camera &cam{*scene->player->camera};

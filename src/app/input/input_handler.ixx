@@ -11,13 +11,12 @@ import <functional>;
 
 import app.app;
 import world.scene;
+import world.entity.player;
 import world.camera;
 import app.update_cycle;
 
 export struct InputHandler {
 private:
-  Camera &camera;
-
   std::map<int, Key> keys{
       {GLFW_KEY_ESCAPE,
        {[](int, int, int) { glfwSetWindowShouldClose(app.window, GL_TRUE); }}},
@@ -25,10 +24,10 @@ private:
       {GLFW_KEY_2, {[](int, int, int) { app.mainPrimitive = GL_LINE_LOOP; }}},
       {GLFW_KEY_3, {[](int, int, int) { app.mainPrimitive = GL_POINTS; }}},
       {GLFW_KEY_W, {[](int, int, int) {
-         // Camera &cam{*app.scene->camera};
-         //  cam.addVelocity(
-         //      cam.getForward() *
-         //      static_cast<float>(app.updateCycle->delta * cam.getSpeed()));
+         // Camera &cam{*app.scene->player->camera};
+         //   cam.addVelocity(
+         //       cam.getForward() *
+         //       static_cast<float>(app.updateCycle->delta * cam.getSpeed()));
        }}}};
 
 public:

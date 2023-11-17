@@ -46,8 +46,8 @@ export struct App {
   UPtr<Scene> scene{std::make_unique<Scene>()};
   unsigned int mainPrimitive = GL_TRIANGLES;
 
-  Animation anim{makeVector<UPtr<const Keyframe>>(Keyframe::start(),
-                                                  Keyframe::identity(10))};
+  Animation anim{vector_util::makeVector<UPtr<const Keyframe>>(
+      Keyframe::start(), Keyframe::identity(10))};
 
   App();
   ~App();

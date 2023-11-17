@@ -22,7 +22,7 @@ void Face::finishCreation() {
   if (glm::all(glm::isnan(normal)))
     throw DegenerateFaceNormalException{
         "FACE NORMAL EVALUATED TO NAN VECTOR\n"};
-  if (normal == ZERO)
+  if (normal == glm_util::ZERO)
     throw DegenerateFaceNormalException{"FACE NORMAL EVALUATED TO 0 VECTOR\n"};
 
   region = std::make_unique<FaceRegion>(*this);

@@ -9,6 +9,7 @@ export class Player : public Transformable {
 public:
   UPtr<Camera> camera{std::make_unique<Camera>(45.0f)};
 
+  Vec3 movementForces{};
   float speed = 2;
 
   Player();

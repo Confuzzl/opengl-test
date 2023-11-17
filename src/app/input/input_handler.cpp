@@ -28,5 +28,8 @@ void InputHandler::callback(GLFWwindow *window, int key, int scancode,
                             int action, int mods) {
   Key &k{keys.at(key)};
   k.callback(scancode, action, mods);
-  k.on = action == GLFW_PRESS;
+  if (action == GLFW_PRESS)
+    k.on = true;
+  if (action == GLFW_RELEASE)
+    k.on = false;
 }
