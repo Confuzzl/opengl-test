@@ -21,21 +21,13 @@ const Mat4 Camera::getView() const {
   Vec3 eye{getPosition()};
   return glm::lookAt(eye, eye + forward, glm_util::Y_PLUS);
 }
-// const Vec3 &Camera::getPosition() const { return pos; }
+
 float Camera::getSpeed() const { return speed; }
 const Vec3 &Camera::getVelocity() const { return velocity; }
-// const Vec3 &Camera::getForward() const { return forward; }
-// const Vec3 &Camera::getUp() const { return up; }
-// const Vec3 &Camera::getRight() const { return right; }
+
 float Camera::getSensitivity() const { return sensitivity; }
 float Camera::getYaw() const { return yaw; }
 float Camera::getPitch() const { return pitch; }
-
-// void Camera::move(const Vec3 &t) {
-//   pos += t;
-//   view = glm::translate(view, -t);
-// }
-// void Camera::setPosition(const Vec3 &t) { move(t - pos); }
 
 void Camera::rotate(const float yaw, const float pitch) {
   setRotation(this->yaw + yaw, this->pitch + pitch);
