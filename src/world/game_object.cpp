@@ -17,7 +17,6 @@ GameObject::GameObject(CollPtr collider, RendPtr render)
   std::cout << std::format("gameobject {} created\n", ID);
 }
 GameObject::~GameObject() {
-  // app.scene->objectMap.erase(ID);
   std::cout << std::format("gameobject {} destroyed\n", ID);
 }
 
@@ -37,3 +36,10 @@ GameObject &GameObject::from(CollPtr collider, RendPtr render) {
   mainScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
   return *mainScene.objectMap.at(ID);
 }
+
+// GameObject &GameObject::copy(GameObject &object) {
+//   const CollPtr &c{object.collider};
+//   const RendPtr &r{object.render};
+//
+//   return object;
+// }

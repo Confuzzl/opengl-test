@@ -25,8 +25,17 @@ void Scene::start() {
       v /= 2;
 
     auto &go1{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
-    go1.translate({5, 0, 0});
+    go1.translate({2, 0, 0});
     testObject = &go1;
+
+    auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
+    go2.translate({0, -2, 0});
+    auto &go3{GameObject::from(PRISM_FACTORY, coordinates2)};
+    go3.translate({0, 0, 2});
+    auto &go4{GameObject::from(PRISM_FACTORY, coordinates2)};
+    go4.translate({-2, 0, 0});
+    auto &go5{GameObject::from(PRISM_FACTORY, coordinates2)};
+    go5.translate({0, 0, -2});
 
     // auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
     // go2.translate({0, -2, 0});

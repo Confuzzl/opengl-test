@@ -17,4 +17,8 @@ public:
   void setForce(const double n, const Vec3 &d);
   void applyForce(const double n, const Vec3 &d);
   void resetForce();
+
+  void setVelocity(const Vec3 &v);
+  void addVelocity(const Vec3 &v);
+  void resetVelocity();
 };

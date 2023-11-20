@@ -16,17 +16,22 @@ std::map<int, InputHandler::Key> InputHandler::keys{
     {GLFW_KEY_1, {[](const double) { mainApp.mainPrimitive = GL_TRIANGLES; }}},
     {GLFW_KEY_2, {[](const double) { mainApp.mainPrimitive = GL_LINE_LOOP; }}},
     {GLFW_KEY_3, {[](const double) { mainApp.mainPrimitive = GL_POINTS; }}},
-    /*{GLFW_KEY_W,
-     {InputHandler::Key::playerMoveFunction(mainCamera.getForwardFlat(), +1)}},
+    {GLFW_KEY_W,
+     {InputHandler::Key::playerMoveFunction(
+         [] { return mainCamera.getForwardFlat(); }, +1)}},
     {GLFW_KEY_A,
-     {InputHandler::Key::playerMoveFunction(mainCamera.getRight(), -1)}},
+     {InputHandler::Key::playerMoveFunction(
+         [] { return mainCamera.getRight(); }, -1)}},
     {GLFW_KEY_S,
-     {InputHandler::Key::playerMoveFunction(mainCamera.getForwardFlat(), -1)}},
+     {InputHandler::Key::playerMoveFunction(
+         [] { return mainCamera.getForwardFlat(); }, -1)}},
     {GLFW_KEY_D,
-     {InputHandler::Key::playerMoveFunction(mainCamera.getRight(), +1)}},
-    {GLFW_KEY_SPACE, {InputHandler::Key::playerMoveFunction(glm_util::Y, +1)}},
+     {InputHandler::Key::playerMoveFunction(
+         [] { return mainCamera.getRight(); }, +1)}},
+    {GLFW_KEY_SPACE,
+     {InputHandler::Key::playerMoveFunction([] { return glm_util::Y; }, +1)}},
     {GLFW_KEY_LEFT_CONTROL,
-     {InputHandler::Key::playerMoveFunction(glm_util::Y, -1)}},*/
+     {InputHandler::Key::playerMoveFunction([] { return glm_util::Y; }, -1)}},
     {GLFW_KEY_UP, {InputHandler::Key::cameraRotateFunction(0, +1)}},
     {GLFW_KEY_LEFT, {InputHandler::Key::cameraRotateFunction(+1, 0)}},
     {GLFW_KEY_DOWN, {InputHandler::Key::cameraRotateFunction(0, -1)}},

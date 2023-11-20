@@ -12,7 +12,7 @@ export class Player : public PhysicsObject {
   Vec3 movementForces{};
 
 public:
-  float speed = 2;
+  float speed = 3;
 
   Player();
   ~Player();

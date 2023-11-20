@@ -23,7 +23,6 @@ export struct InputHandler {
     bool on = false;
     const ProcessFunction processOn;
     const ProcessFunction processOff;
-    // const std::function<void(int, int, int)> callbackOff;
 
     Key(const ProcessFunction &processOn, const ProcessFunction &processOff)
         : processOn{processOn}, processOff(processOff){};
@@ -37,10 +36,11 @@ export struct InputHandler {
       }
     }
 
-    static ProcessFunction playerMoveFunction(const Vec3 &direction,
-                                              const double m) {
-      return [direction, m](const double dt) {
-        mainPlayer.translate(direction * static_cast<float>(dt * m));
+    static ProcessFunction
+    playerMoveFunction(const std::function<Vec3()> &directionSupplier,
+                       const double m) {
+      return [directionSupplier, m](const double dt) {
+        mainPlayer.translate(directionSupplier() * static_cast<float>(dt * m));
       };
     }
 

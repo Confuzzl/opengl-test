@@ -185,7 +185,6 @@
     <ClCompile Include="src\util\memory.ixx" />
     <ClCompile Include="src\util\polyhedron.ixx" />
     <ClCompile Include="src\util\math.ixx" />
-    <ClCompile Include="src\world\collision\force_applier.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\edge_fe_plane.cpp" />
     <ClCompile Include="src\world\collision\vclip\plane\edge_fe_plane.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\edge_ve_plane.cpp" />

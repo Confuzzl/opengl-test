@@ -350,9 +350,6 @@
     <ClCompile Include="src\world\transform\rotatable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\collision\force_applier.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\world\physics\physics_object.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>

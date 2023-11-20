@@ -39,4 +39,5 @@ public:
   static GameObject &from(const BaseFactory &factory,
                           const Vec3List &coordinates);
   static GameObject &from(CollPtr collider, RendPtr render);
+  // static GameObject &copy(GameObject &object);
 };
