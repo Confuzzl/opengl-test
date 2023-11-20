@@ -4,35 +4,58 @@ module;
 
 export module app.input.input_handler;
 
-import app.input.key;
-import util.glm;
-import <map>;
-import <functional>;
-
 import app.app;
 import world.scene;
 import world.entity.player;
 import world.camera;
-import app.update_cycle;
+import util.vector;
+import util.glm;
+import util.debug;
+import <map>;
+import <functional>;
 
 export struct InputHandler {
-private:
-  std::map<int, Key> keys{
-      {GLFW_KEY_ESCAPE,
-       {[](int, int, int) { glfwSetWindowShouldClose(app.window, GL_TRUE); }}},
-      {GLFW_KEY_1, {[](int, int, int) { app.mainPrimitive = GL_TRIANGLES; }}},
-      {GLFW_KEY_2, {[](int, int, int) { app.mainPrimitive = GL_LINE_LOOP; }}},
-      {GLFW_KEY_3, {[](int, int, int) { app.mainPrimitive = GL_POINTS; }}},
-      {GLFW_KEY_W, {[](int, int, int) {
-         // Camera &cam{*app.scene->player->camera};
-         //   cam.addVelocity(
-         //       cam.getForward() *
-         //       static_cast<float>(app.updateCycle->delta * cam.getSpeed()));
-       }}}};
+  struct Key {
+    using ProcessFunction = std::function<void(const double)>;
 
-public:
-  InputHandler();
+    const static ProcessFunction NO_PROCESS;
 
-  void callback(GLFWwindow *window, int key, int scancode, int action,
-                int mods);
+    bool on = false;
+    const ProcessFunction processOn;
+    const ProcessFunction processOff;
+    // const std::function<void(int, int, int)> callbackOff;
+
+    Key(const ProcessFunction &processOn, const ProcessFunction &processOff)
+        : processOn{processOn}, processOff(processOff){};
+    Key(const ProcessFunction &processOn) : Key(processOn, NO_PROCESS) {}
+
+    void process(const double dt) const {
+      if (on) {
+        processOn(dt);
+      } else {
+        processOff(dt);
+      }
+    }
+
+    static ProcessFunction playerMoveFunction(const Vec3 &direction,
+                                              const double m) {
+      return [direction, m](const double dt) {
+        mainPlayer.translate(direction * static_cast<float>(dt * m));
+      };
+    }
+
+    static ProcessFunction cameraRotateFunction(const double a,
+                                                const double b) {
+      return [a, b](const double dt) {
+        const float sens = mainCamera.getSensitivity();
+        mainCamera.rotate(static_cast<float>(sens * dt * a),
+                          static_cast<float>(sens * dt * b));
+      };
+    }
+  };
+
+  static std::map<int, Key> keys;
+
+  static void callback(GLFWwindow *window, int key, int scancode, int action,
+                       int mods);
 };

@@ -1,8 +1,5 @@
 export module world.scene;
 
-// import world.camera;
-// import world.game_object;
-// import world.entity.player;
 import util.memory;
 import util.glm;
 import <map>;
@@ -18,7 +15,8 @@ export struct Scene {
   using ObjectMap2 = std::unordered_map<unsigned int, UPtr<GameObject>>;
   ObjectMap objectMap{};
 
-  // UPtr<Camera> camera{std::make_unique<Camera>(45.0f)};
+  GameObject *testObject;
+
   UPtr<Player> player{std::make_unique<Player>()};
 
   Scene();

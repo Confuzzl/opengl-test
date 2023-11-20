@@ -12,7 +12,8 @@ import world.factory.base_factory;
 unsigned int GameObject::COUNT = 0;
 
 GameObject::GameObject(CollPtr collider, RendPtr render)
-    : collider{std::move(collider)}, render{std::move(render)}, ID{COUNT++} {
+    : PhysicsObject(10), collider{std::move(collider)},
+      render{std::move(render)}, ID{COUNT++} {
   std::cout << std::format("gameobject {} created\n", ID);
 }
 GameObject::~GameObject() {
@@ -33,6 +34,6 @@ GameObject &GameObject::from(CollPtr collider, RendPtr render) {
   GObjPtr ptr{std::make_unique<GameObject>(std::forward<CollPtr>(collider),
                                            std::forward<RendPtr>(render))};
   unsigned int ID = ptr->ID;
-  app.scene->objectMap.emplace(std::make_pair(ID, std::move(ptr)));
-  return *app.scene->objectMap.at(ID);
+  mainScene.objectMap.emplace(std::make_pair(ID, std::move(ptr)));
+  return *mainScene.objectMap.at(ID);
 }

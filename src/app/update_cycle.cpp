@@ -25,7 +25,7 @@ void UpdateCycle::pushNewTime(const double newCurrTime) {
   currCount++;
   prevTime = currTime;
   currTime = newCurrTime;
-  delta = currTime - prevTime;
+  dt = currTime - prevTime;
 }
 void UpdateCycle::pushCount() {
   prevCount = currCount;

@@ -4,32 +4,46 @@ module;
 
 module app.input.input_handler;
 
-// import app.app;
-// import world.scene;
-// import world.camera;
-// import app.update_cycle;
+import world.game_object;
+import util.debug;
 
-// std::map<int, std::pair<std::function<Vec3(const Camera *)>, float>>
-//     InputHandler::movementMaps{{GLFW_KEY_W, {&Camera::getForward, +1.0f}}};
-// std::map<int, Key> InputHandler::keys{
-//    {GLFW_KEY_ESCAPE,
-//     {[](int, int, int) { glfwSetWindowShouldClose(app.window, GL_TRUE); }}},
-//    {GLFW_KEY_1, {[](int, int, int) { app.mainPrimitive = GL_TRIANGLES; }}},
-//    {GLFW_KEY_2, {[](int, int, int) { app.mainPrimitive = GL_LINE_LOOP; }}},
-//    {GLFW_KEY_3, {[](int, int, int) { app.mainPrimitive = GL_POINTS; }}},
-//    {GLFW_KEY_W, {[](int, int, int) {
-//       // Camera &cam{*app.scene->camera};
-//       //  cam.addVelocity(
-//       //      cam.getForward() *
-//       //      static_cast<float>(app.updateCycle->delta * cam.getSpeed()));
-//     }}}};
+const InputHandler::Key::ProcessFunction InputHandler::Key::NO_PROCESS{
+    [](const double) {}};
+
+std::map<int, InputHandler::Key> InputHandler::keys{
+    {GLFW_KEY_ESCAPE,
+     {[](const double) { glfwSetWindowShouldClose(mainApp.window, GL_TRUE); }}},
+    {GLFW_KEY_1, {[](const double) { mainApp.mainPrimitive = GL_TRIANGLES; }}},
+    {GLFW_KEY_2, {[](const double) { mainApp.mainPrimitive = GL_LINE_LOOP; }}},
+    {GLFW_KEY_3, {[](const double) { mainApp.mainPrimitive = GL_POINTS; }}},
+    /*{GLFW_KEY_W,
+     {InputHandler::Key::playerMoveFunction(mainCamera.getForwardFlat(), +1)}},
+    {GLFW_KEY_A,
+     {InputHandler::Key::playerMoveFunction(mainCamera.getRight(), -1)}},
+    {GLFW_KEY_S,
+     {InputHandler::Key::playerMoveFunction(mainCamera.getForwardFlat(), -1)}},
+    {GLFW_KEY_D,
+     {InputHandler::Key::playerMoveFunction(mainCamera.getRight(), +1)}},
+    {GLFW_KEY_SPACE, {InputHandler::Key::playerMoveFunction(glm_util::Y, +1)}},
+    {GLFW_KEY_LEFT_CONTROL,
+     {InputHandler::Key::playerMoveFunction(glm_util::Y, -1)}},*/
+    {GLFW_KEY_UP, {InputHandler::Key::cameraRotateFunction(0, +1)}},
+    {GLFW_KEY_LEFT, {InputHandler::Key::cameraRotateFunction(+1, 0)}},
+    {GLFW_KEY_DOWN, {InputHandler::Key::cameraRotateFunction(0, -1)}},
+    {GLFW_KEY_RIGHT, {InputHandler::Key::cameraRotateFunction(-1, 0)}},
+};
+
+// static const std::string modes[3]{"RELEASE", "PRESS",
+// "REPEAT"}; static double prev = 0, curr = 0;
 
 void InputHandler::callback(GLFWwindow *window, int key, int scancode,
                             int action, int mods) {
-  Key &k{keys.at(key)};
-  k.callback(scancode, action, mods);
-  if (action == GLFW_PRESS)
-    k.on = true;
-  if (action == GLFW_RELEASE)
-    k.on = false;
+  if (not keys.contains(key))
+    return;
+  // prev = curr;
+  // curr = glfwGetTime();
+  // std::cout << std::format("{}: {} ({:.5f}, {:.5f})\n",
+  //                          glfwGetKeyName(key, scancode),
+  //                          modes[action], curr, curr - prev);
+  keys.at(key).on = action;
 }

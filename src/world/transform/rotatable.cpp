@@ -4,10 +4,19 @@ Mat4 Rotatable::getRotation() const { return transform; }
 Vec3 Rotatable::getForward() const { return forward; }
 Vec3 Rotatable::getUp() const { return up; }
 Vec3 Rotatable::getRight() const { return right; }
+Vec3 Rotatable::getForwardFlat() const {
+  return glm::normalize(Vec3{forward[0], 0, forward[2]});
+};
 
-void Rotatable::resetRotation() { transform = Mat4{1.0f}; }
+void Rotatable::resetRotation() {
+  transform = Mat4{1.0f};
+  forward = glm_util::X;
+  up = glm_util::Y;
+  right = glm_util::Z;
+}
 void Rotatable::setRotation(const Vec3 &axis, const float deg) {
-  transform = glm::rotate(Mat4{1.0f}, glm::radians(deg), axis);
+  resetRotation();
+  rotate(axis, deg);
 }
 void Rotatable::rotate(const Vec3 &axis, const float deg) {
   transform = glm::rotate(transform, glm::radians(deg), axis);

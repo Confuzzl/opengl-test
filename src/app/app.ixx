@@ -4,17 +4,19 @@ module;
 
 export module app.app;
 
+import world.scene;
+import world.entity.player;
+import world.camera;
 import util.glm;
 import util.memory;
 import util.vector;
 import <stdexcept>;
 
-export class UpdateCycle;
+export struct UpdateCycle;
 export class DefaultProgram;
 export class FontProgram;
-export class TexObject;
-export class Font;
-export class Scene;
+export struct TexObject;
+export struct Font;
 
 import rendering.animation;
 import rendering.frame.keyframe;
@@ -59,10 +61,13 @@ export struct App {
   void catchException(const std::runtime_error &e);
 
   void drawScene();
-  void processInput();
+  void processInput(const double dt);
 
   float speedMagnitude;
   float rotateMagnitude;
 };
 
-export App app{};
+export App mainApp{};
+export Scene &mainScene{*mainApp.scene};
+export Player &mainPlayer{*mainScene.player};
+export Camera &mainCamera{mainPlayer.getCamera()};

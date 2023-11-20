@@ -2,8 +2,6 @@ export module app.text.base_text_corner;
 
 import <functional>;
 import <string>;
-import app.app;
-import wrapper.program.programs;
 
 export class BaseTextCorner {
 protected:

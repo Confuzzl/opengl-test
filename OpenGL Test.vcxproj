@@ -160,8 +160,6 @@
     <ClCompile Include="src\app\app.cpp" />
     <ClCompile Include="src\app\input\input_handler.cpp" />
     <ClCompile Include="src\app\input\input_handler.ixx" />
-    <ClCompile Include="src\app\input\key.cpp" />
-    <ClCompile Include="src\app\input\key.ixx" />
     <ClCompile Include="src\app\text\font.ixx" />
     <ClCompile Include="src\app\text\font.cpp" />
     <ClCompile Include="src\app\texture_tile.ixx" />
@@ -187,6 +185,7 @@
     <ClCompile Include="src\util\memory.ixx" />
     <ClCompile Include="src\util\polyhedron.ixx" />
     <ClCompile Include="src\util\math.ixx" />
+    <ClCompile Include="src\world\collision\force_applier.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\edge_fe_plane.cpp" />
     <ClCompile Include="src\world\collision\vclip\plane\edge_fe_plane.ixx" />
     <ClCompile Include="src\world\collision\vclip\plane\edge_ve_plane.cpp" />
@@ -227,6 +226,8 @@
     <ClCompile Include="src\world\factory\factories.ixx" />
     <ClCompile Include="src\world\entity\player.cpp" />
     <ClCompile Include="src\world\entity\player.ixx" />
+    <ClCompile Include="src\world\physics\physics_object.cpp" />
+    <ClCompile Include="src\world\physics\physics_object.ixx" />
     <ClCompile Include="src\world\render\renderable.cpp" />
     <ClCompile Include="src\world\render\renderable.ixx" />
     <ClCompile Include="src\world\base_polyhedron.cpp" />

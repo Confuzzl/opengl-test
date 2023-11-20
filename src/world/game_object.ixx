@@ -1,6 +1,7 @@
 export module world.game_object;
 
-import world.transform.transformable;
+// import world.transform.transformable;
+import world.physics.physics_object;
 import world.collision.collider;
 import world.render.renderable;
 import util.memory;
@@ -12,7 +13,7 @@ export using GObjPtr = UPtr<GameObject>;
 
 export class BaseFactory;
 
-export class GameObject : public Transformable {
+export class GameObject : public PhysicsObject {
   static unsigned int COUNT;
 
   CollPtr collider;

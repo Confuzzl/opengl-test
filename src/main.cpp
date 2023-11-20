@@ -4,7 +4,7 @@ import util.debug;
 import <functional>;
 
 int main() {
-  // app.start();
+  mainApp.start();
   //  Vec3 v{1, 0, 0};
   //  Mat4 transform{1.0f};
   //  std::cout << glm::to_string(transform) << "\n";

@@ -14,7 +14,7 @@ export using Mat4 = glm::mat4;
 export using Quat = glm::quat;
 
 export namespace glm_util {
-const Vec3 ZERO{0, 0, 0}, X_PLUS{1, 0, 0}, Y_PLUS{0, 1, 0}, Z_PLUS{0, 0, 1};
+const Vec3 ZERO{0, 0, 0}, X{1, 0, 0}, Y{0, 1, 0}, Z{0, 0, 1};
 const glm::lowp_u16vec2 QUAD_UVS[2][3]{{{0, 0}, {1, 0}, {1, 1}},
                                        {{0, 0}, {1, 1}, {0, 1}}};
 

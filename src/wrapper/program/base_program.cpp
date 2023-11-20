@@ -51,7 +51,7 @@ void BaseProgram::createShaders(const std::string &vertex,
     createShader(GL_FRAGMENT_SHADER, fragmentID,
                  std::format("assets/shader/{}.frag", fragment), infoLog);
   } catch (const FailedShaderCompilationException &e) {
-    app.catchException(e);
+    mainApp.catchException(e);
   }
 
   ID = glCreateProgram();

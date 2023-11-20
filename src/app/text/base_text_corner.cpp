@@ -5,12 +5,12 @@ module;
 
 module app.text.base_text_corner;
 
+import app.app;
 import wrapper.program.programs;
 import wrapper.program.vertex_formats;
 import app.texture_tile;
 import app.text.font;
 import wrapper.buffer_object;
-import app.app;
 import util.vector;
 import util.glm;
 
@@ -63,7 +63,7 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
   const float width = FontProgram::CHAR_WIDTH * scale,
               height = FontProgram::CHAR_HEIGHT * scale;
   for (const char &c : msg) {
-    const TexTile tex = app.consolas->getTile(c);
+    const TexTile tex = mainApp.consolas->getTile(c);
     for (int tri = 0; tri < 2; tri++) {
       for (int vertex = 0; vertex < 3; vertex++) {
         const Vec2 pos{xOffset + width * glm_util::QUAD_UVS[tri][vertex][0],
@@ -87,17 +87,18 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
     offset += FontVertex::TEX_WIDTH;
   }
 
-  app.fontProgram->vao.bindEBO(&ebo);
-  app.fontProgram->vao.bindVBO(&vbo);
+  mainApp.fontProgram->vao.bindEBO(&ebo);
+  mainApp.fontProgram->vao.bindVBO(&vbo);
 
-  app.fontProgram->useProgram();
-  app.fontProgram->setMat4("projection", App::UI_MAT);
+  mainApp.fontProgram->useProgram();
+  mainApp.fontProgram->setMat4("projection", App::UI_MAT);
 
-  app.consolas->atlas.bindTextureUnit();
-  app.fontProgram->vao.bindVertexArray();
-  glDrawElements(GL_TRIANGLES,
-                 static_cast<GLsizei>(app.fontProgram->vao.boundedEBO->size),
-                 GL_UNSIGNED_INT, 0);
+  mainApp.consolas->atlas.bindTextureUnit();
+  mainApp.fontProgram->vao.bindVertexArray();
+  glDrawElements(
+      GL_TRIANGLES,
+      static_cast<GLsizei>(mainApp.fontProgram->vao.boundedEBO->size),
+      GL_UNSIGNED_INT, 0);
 
   if (addToOffset)
     textOffsetY += height;
