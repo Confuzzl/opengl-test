@@ -16,27 +16,62 @@ import <functional>;
 
 export struct InputHandler {
   struct Key {
-    using ProcessFunction = std::function<void(const double)>;
+    using Callback = std::function<void(const double)>;
 
-    const static ProcessFunction NO_PROCESS;
+    static Callback NONE() {
+      return [](const double) {};
+    }
 
-    bool on = false;
-    const ProcessFunction processOn;
-    const ProcessFunction processOff;
+    bool on = false, justOn = false;
+    bool justUsed = false;
+    const Callback processOn;
+    const Callback processJustOn;
+    const Callback processOff;
+    const Callback processJustOff;
 
-    Key(const ProcessFunction &processOn, const ProcessFunction &processOff)
-        : processOn{processOn}, processOff(processOff){};
-    Key(const ProcessFunction &processOn) : Key(processOn, NO_PROCESS) {}
+    Key(const Callback &processOn, const Callback &processJustOn,
+        const Callback &processOff, const Callback &processJustOff)
+        : processOn{processOn}, processJustOn{processJustOn},
+          processOff{processOff}, processJustOff{processJustOff} {}
+    Key(const Callback &processOn, const Callback &processOff)
+        : Key(processOn, processOn, processOff, processOff){};
+    Key(const Callback &processOn) : Key(processOn, NONE()) {}
 
-    void process(const double dt) const {
-      if (on) {
+    void change(int action) {
+      switch (action) {
+      case GLFW_RELEASE: {
+        on = false;
+        justUsed = true;
+      }
+      case GLFW_PRESS: {
+        on = true;
+        justUsed = true;
+      }
+      case GLFW_REPEAT: {
+      }
+      }
+      // on = b;
+      // justOn = b;
+    }
+
+    void operator()(const double dt) {
+      if (on && justUsed) {
+        processJustOn(dt);
+        justUsed = false;
+      }
+      if (on && not justUsed) {
         processOn(dt);
-      } else {
+      }
+      if (not on && justUsed) {
+        processJustOff(dt);
+        justUsed = false;
+      }
+      if (not on && not justUsed) {
         processOff(dt);
       }
     }
 
-    static ProcessFunction
+    static Callback
     playerMoveFunction(const std::function<Vec3()> &directionSupplier,
                        const double m) {
       return [directionSupplier, m](const double dt) {
@@ -44,8 +79,7 @@ export struct InputHandler {
       };
     }
 
-    static ProcessFunction cameraRotateFunction(const double a,
-                                                const double b) {
+    static Callback cameraRotateFunction(const double a, const double b) {
       return [a, b](const double dt) {
         const float sens = mainCamera.getSensitivity();
         mainCamera.rotate(static_cast<float>(sens * dt * a),

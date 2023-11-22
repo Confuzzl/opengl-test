@@ -7,9 +7,6 @@ module app.input.input_handler;
 import world.game_object;
 import util.debug;
 
-const InputHandler::Key::ProcessFunction InputHandler::Key::NO_PROCESS{
-    [](const double) {}};
-
 std::map<int, InputHandler::Key> InputHandler::keys{
     {GLFW_KEY_ESCAPE,
      {[](const double) { glfwSetWindowShouldClose(mainApp.window, GL_TRUE); }}},
@@ -36,10 +33,11 @@ std::map<int, InputHandler::Key> InputHandler::keys{
     {GLFW_KEY_LEFT, {InputHandler::Key::cameraRotateFunction(+1, 0)}},
     {GLFW_KEY_DOWN, {InputHandler::Key::cameraRotateFunction(0, -1)}},
     {GLFW_KEY_RIGHT, {InputHandler::Key::cameraRotateFunction(-1, 0)}},
+    //{GLFW_KEY_Q,
+    // {[](const double) { std::cout << "just on\n"; },
+    //  [](const double) { std::cout << "on\n"; },
+    //  [](const double) { std::cout << "off\n"; }}},
 };
-
-// static const std::string modes[3]{"RELEASE", "PRESS",
-// "REPEAT"}; static double prev = 0, curr = 0;
 
 void InputHandler::callback(GLFWwindow *window, int key, int scancode,
                             int action, int mods) {
@@ -50,5 +48,6 @@ void InputHandler::callback(GLFWwindow *window, int key, int scancode,
   // std::cout << std::format("{}: {} ({:.5f}, {:.5f})\n",
   //                          glfwGetKeyName(key, scancode),
   //                          modes[action], curr, curr - prev);
-  keys.at(key).on = action;
+  // keys.at(key).on = action;
+  keys.at(key).change(action);
 }

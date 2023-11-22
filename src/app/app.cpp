@@ -45,7 +45,6 @@ App::App() {
 App::~App() {
   glfwDestroyWindow(window);
   glfwTerminate();
-  std::cout << "app terminated\n";
   std::cout << std::format("app terminated at {:.2f}s\n", glfwGetTime());
 }
 
@@ -163,8 +162,8 @@ void App::catchException(const std::runtime_error &e) {
 }
 
 void App::processInput(const double dt) {
-  for (const auto &[keycode, key] : InputHandler::keys) {
-    key.process(dt);
+  for (auto &[keycode, key] : InputHandler::keys) {
+    key(dt);
   }
 }
 //   if (glfwGetKey(window, GLFW_KEY_ESCAPE))
