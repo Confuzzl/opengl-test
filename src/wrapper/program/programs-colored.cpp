@@ -2,15 +2,15 @@ module;
 
 #include "util/gl_utils.hpp"
 
-module wrapper.program.programs:simple;
+module wrapper.program.programs:colored;
 
 import wrapper.program.vertex_formats;
 import util.debug;
 
-DefaultProgram::DefaultProgram()
-    : BaseProgram(SimpleVertex::WIDTH, "default", "default") {}
+ColoredProgram::ColoredProgram()
+    : BaseProgram(VertexFormats::ColTex::WIDTH, "colored", "colored") {}
 
-void DefaultProgram::defineVAO() {
+void ColoredProgram::defineVAO() {
   glCreateVertexArrays(1, &vao.ID);
 
   GLuint offset = 0;

@@ -13,7 +13,7 @@ import util.vector;
 import <stdexcept>;
 
 export struct UpdateCycle;
-export class DefaultProgram;
+export class ColoredProgram;
 export class FontProgram;
 export struct TexObject;
 export struct Font;
@@ -39,7 +39,7 @@ export struct App {
   bool cursorSnap = false;
   double prevX = WIDTH / 2, prevY = HEIGHT / 2;
 
-  UPtr<DefaultProgram> defaultProgram{std::make_unique<DefaultProgram>()};
+  UPtr<ColoredProgram> defaultProgram{std::make_unique<ColoredProgram>()};
   UPtr<FontProgram> fontProgram{std::make_unique<FontProgram>()};
 
   UPtr<TexObject> atlas{std::make_unique<TexObject>("atlas")};

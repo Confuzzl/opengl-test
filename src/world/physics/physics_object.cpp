@@ -1,6 +1,6 @@
 module world.physics.physics_object;
 
-PhysicsObject::PhysicsObject(const double mass) : mass{mass} {}
+PhysicsObject::PhysicsObject(const float mass) : mass{mass} {}
 
 void PhysicsObject::update(const double dt) {
   Vec3 acceleration{force / mass};

@@ -16,7 +16,7 @@ private:
   const RenCoordinateIndexList &faceVertexIndices;
   const UVList UVs;
 
-  Vector<SimpleVertex> vertexInfo;
+  Vector<VertexFormats::ColTex> vertexInfo;
 
   void initializeVertexInfo();
 

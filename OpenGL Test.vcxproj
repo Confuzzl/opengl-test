@@ -244,19 +244,16 @@
     <ClCompile Include="src\world\transform\transformable.ixx" />
     <ClCompile Include="src\world\transform\translatable.cpp" />
     <ClCompile Include="src\world\transform\translatable.ixx" />
-    <ClCompile Include="src\wrapper\program\vertex_formats-font.cpp" />
-    <ClCompile Include="src\wrapper\program\vertex_formats-font.ixx" />
-    <ClCompile Include="src\wrapper\program\vertex_formats-simple.cpp" />
-    <ClCompile Include="src\wrapper\program\vertex_formats-simple.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.cpp" />
     <ClCompile Include="src\wrapper\program\base_program.ixx" />
     <ClCompile Include="src\wrapper\program\base_program.cpp" />
     <ClCompile Include="src\wrapper\program\programs-font.ixx" />
     <ClCompile Include="src\wrapper\program\programs-font.cpp" />
-    <ClCompile Include="src\wrapper\program\programs-simple.ixx" />
-    <ClCompile Include="src\wrapper\program\programs-simple.cpp" />
+    <ClCompile Include="src\wrapper\program\programs-colored.ixx" />
+    <ClCompile Include="src\wrapper\program\programs-colored.cpp" />
     <ClCompile Include="src\wrapper\program\programs.ixx" />
+    <ClCompile Include="src\wrapper\program\vertex_formats.cpp" />
     <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />
     <ClCompile Include="src\wrapper\tex_object.ixx" />
     <ClCompile Include="src\wrapper\tex_object.cpp" />
@@ -274,13 +271,17 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="assets\prism.pdn" />
-    <None Include="assets\shader\default.frag" />
+    <None Include="assets\shader\col.frag" />
+    <None Include="assets\shader\col.vert" />
+    <None Include="assets\shader\coltex.frag" />
     <None Include="assets\shader\font.frag" />
+    <None Include="assets\shader\tex.frag" />
+    <None Include="assets\shader\tex.vert" />
     <None Include="assets\simplex.pdn" />
     <None Include="assets\untitled.blend" />
     <None Include="assets\untitled.pdn" />
     <None Include="assets\shader\font.vert" />
-    <None Include="assets\shader\default.vert" />
+    <None Include="assets\shader\coltex.vert" />
     <None Include="OpenGL Test.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

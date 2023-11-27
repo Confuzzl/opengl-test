@@ -113,13 +113,13 @@
     <ClCompile Include="src\wrapper\program\programs.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\programs-simple.ixx">
+    <ClCompile Include="src\wrapper\program\programs-colored.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\wrapper\program\programs-font.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\programs-simple.cpp">
+    <ClCompile Include="src\wrapper\program\programs-colored.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\wrapper\program\programs-font.cpp">
@@ -189,18 +189,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\world\transform\transformable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\wrapper\program\vertex_formats-simple.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\wrapper\program\vertex_formats-font.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\wrapper\program\vertex_formats-font.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\wrapper\program\vertex_formats-simple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\util\math.ixx">
@@ -356,6 +344,9 @@
     <ClCompile Include="src\world\physics\physics_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\wrapper\program\vertex_formats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\gl_utils.hpp">
@@ -366,9 +357,9 @@
     <Text Include="assets\cube.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shader\default.vert" />
+    <None Include="assets\shader\coltex.vert" />
     <None Include="assets\shader\font.vert" />
-    <None Include="assets\shader\default.frag" />
+    <None Include="assets\shader\coltex.frag" />
     <None Include="assets\shader\font.frag" />
     <None Include="assets\simplex.pdn" />
     <None Include="assets\untitled.blend" />
@@ -376,5 +367,9 @@
     <None Include=".gitignore" />
     <None Include="assets\prism.pdn" />
     <None Include="OpenGL Test.aps" />
+    <None Include="assets\shader\col.frag" />
+    <None Include="assets\shader\col.vert" />
+    <None Include="assets\shader\tex.frag" />
+    <None Include="assets\shader\tex.vert" />
   </ItemGroup>
 </Project>

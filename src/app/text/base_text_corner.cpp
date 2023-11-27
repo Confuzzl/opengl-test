@@ -57,19 +57,20 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
   ebo.allocateBufferObject(vertexCount * sizeof(GLuint));
   glNamedBufferSubData(ebo.ID, 0, ebo.size, indices.data());
 
-  Vector<FontVertex> vertices{};
+  Vector<VertexFormats::Font> vertices{};
   vertices.reserve(vertexCount);
 
   const float width = FontProgram::CHAR_WIDTH * scale,
               height = FontProgram::CHAR_HEIGHT * scale;
-  for (const char &c : msg) {
-    const TexTile tex = mainApp.consolas->getTile(c);
+  for (const char c : msg) {
+    const TexTile tex{mainApp.consolas->getTile(c)};
     for (int tri = 0; tri < 2; tri++) {
       for (int vertex = 0; vertex < 3; vertex++) {
         const Vec2 pos{xOffset + width * glm_util::QUAD_UVS[tri][vertex][0],
                        y2 + height * glm_util::QUAD_UVS[tri][vertex][1]};
         const glm::lowp_u16vec2 uv{
             tex.coordinates + tex.dimensions * glm_util::QUAD_UVS[tri][vertex]};
+
         vertices.emplace_back(pos[0], pos[1], uv[0], uv[1]);
       }
     }
@@ -78,13 +79,15 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
   }
 
   VBO vbo{};
-  vbo.allocateBufferObject(vertexCount * FontVertex::WIDTH);
+  vbo.allocateBufferObject(vertexCount * VertexFormats::Font::WIDTH);
   GLintptr offset = 0;
-  for (const FontVertex &vertex : vertices) {
-    glNamedBufferSubData(vbo.ID, offset, FontVertex::POS_WIDTH, vertex.posInfo);
-    offset += FontVertex::POS_WIDTH;
-    glNamedBufferSubData(vbo.ID, offset, FontVertex::TEX_WIDTH, vertex.texInfo);
-    offset += FontVertex::TEX_WIDTH;
+  for (const VertexFormats::Font &vertex : vertices) {
+    glNamedBufferSubData(vbo.ID, offset, VertexFormats::Font::POS_WIDTH,
+                         vertex.posInfo.data());
+    offset += VertexFormats::Font::POS_WIDTH;
+    glNamedBufferSubData(vbo.ID, offset, VertexFormats::Font::TEX_WIDTH,
+                         vertex.texInfo.data());
+    offset += VertexFormats::Font::TEX_WIDTH;
   }
 
   mainApp.fontProgram->vao.bindEBO(ebo);

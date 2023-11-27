@@ -10,7 +10,7 @@ export class PhysicsObject : public Transformable {
   Vec3 force{};
 
 public:
-  PhysicsObject(const double mass);
+  PhysicsObject(const float mass);
 
   void update(const double dt);
 
