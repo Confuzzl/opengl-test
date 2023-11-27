@@ -15,8 +15,8 @@ export struct VAO : public GLObject {
   VAO(const GLsizei stride);
   ~VAO();
 
-  void bindVBO(const VBO *vbo);
-  void bindEBO(const EBO *ebo);
+  void bindVBO(const VBO &vbo);
+  void bindEBO(const EBO &ebo);
 
   void bindVertexArray();
 };

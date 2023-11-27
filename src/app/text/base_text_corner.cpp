@@ -87,8 +87,8 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
     offset += FontVertex::TEX_WIDTH;
   }
 
-  mainApp.fontProgram->vao.bindEBO(&ebo);
-  mainApp.fontProgram->vao.bindVBO(&vbo);
+  mainApp.fontProgram->vao.bindEBO(ebo);
+  mainApp.fontProgram->vao.bindVBO(vbo);
 
   mainApp.fontProgram->useProgram();
   mainApp.fontProgram->setMat4("projection", App::UI_MAT);

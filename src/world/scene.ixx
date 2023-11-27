@@ -16,6 +16,7 @@ export struct Scene {
   ObjectMap objectMap{};
 
   GameObject *testObject;
+  GameObject *testObject2;
 
   UPtr<Player> player{std::make_unique<Player>()};
 

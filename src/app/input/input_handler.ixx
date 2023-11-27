@@ -18,40 +18,39 @@ export struct InputHandler {
   struct Key {
     using Callback = std::function<void(const double)>;
 
-    static Callback NONE() {
-      return [](const double) {};
-    }
+    static const Callback NONE;
 
-    bool on = false, justOn = false;
+    bool on = false;
     bool justUsed = false;
-    const Callback processOn;
-    const Callback processJustOn;
-    const Callback processOff;
-    const Callback processJustOff;
 
-    Key(const Callback &processOn, const Callback &processJustOn,
-        const Callback &processOff, const Callback &processJustOff)
-        : processOn{processOn}, processJustOn{processJustOn},
-          processOff{processOff}, processJustOff{processJustOff} {}
+    const Callback processJustOn;
+    const Callback processOn;
+    const Callback processJustOff;
+    const Callback processOff;
+
+    Key(const Callback &processJustOn, const Callback &processOn,
+        const Callback &processJustOff, const Callback &processOff)
+        : processJustOn{processJustOn}, processOn{processOn},
+          processJustOff{processJustOff}, processOff{processOff} {}
     Key(const Callback &processOn, const Callback &processOff)
         : Key(processOn, processOn, processOff, processOff){};
-    Key(const Callback &processOn) : Key(processOn, NONE()) {}
+    Key(const Callback &processOn) : Key(processOn, NONE) {}
 
     void change(int action) {
       switch (action) {
       case GLFW_RELEASE: {
         on = false;
         justUsed = true;
+        break;
       }
       case GLFW_PRESS: {
         on = true;
         justUsed = true;
+        break;
       }
       case GLFW_REPEAT: {
       }
       }
-      // on = b;
-      // justOn = b;
     }
 
     void operator()(const double dt) {
@@ -75,7 +74,8 @@ export struct InputHandler {
     playerMoveFunction(const std::function<Vec3()> &directionSupplier,
                        const double m) {
       return [directionSupplier, m](const double dt) {
-        mainPlayer.translate(directionSupplier() * static_cast<float>(dt * m));
+        mainPlayer.translate(directionSupplier() *
+                             static_cast<float>(dt * m * mainPlayer.speed));
       };
     }
 
@@ -90,6 +90,8 @@ export struct InputHandler {
 
   static std::map<int, Key> keys;
 
-  static void callback(GLFWwindow *window, int key, int scancode, int action,
-                       int mods);
+  static void keyCallback(GLFWwindow *window, int key, int scancode, int action,
+                          int mods);
+  static void mouseCallback(GLFWwindow *window, double xpos, double ypos);
+  static void scrollCallback(GLFWwindow *window, double xpos, double ypos);
 };

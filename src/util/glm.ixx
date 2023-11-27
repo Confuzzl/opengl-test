@@ -24,6 +24,8 @@ Vec3 transformVector(const Vec3 &v, const Mat4 &t);
 Vec3 translateVector(const Vec3 &v, const Mat4 &t);
 Vec3 rotateVector(const Vec3 &v, const Mat4 &t);
 
+Vec3 getScale(const Mat4 &m);
+
 Mat4 matrixFrom(const Vec3 &v);
 Mat4 matrixFrom(const Vec3 &axis, const float deg);
 Mat4 matrixFrom(const Vec3 &v, const Vec3 &axis, const float deg);

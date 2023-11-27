@@ -8,11 +8,11 @@ import util.memory;
 export class Camera;
 
 export class Player : public PhysicsObject {
-  UPtr<Camera> camera{std::make_unique<Camera>(this, 45.0f)};
+  UPtr<Camera> camera;
   Vec3 movementForces{};
 
 public:
-  float speed = 3;
+  float speed;
 
   Player();
   ~Player();

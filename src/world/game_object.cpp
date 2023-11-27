@@ -21,7 +21,9 @@ GameObject::~GameObject() {
 }
 
 Collider &GameObject::getCollider() { return *collider; }
+const Collider &GameObject::getCollider() const { return *collider; }
 Renderable &GameObject::getRenderable() { return *render; }
+const Renderable &GameObject::getRenderable() const { return *render; }
 
 GameObject &GameObject::from(const BaseFactory &factory,
                              const Vec3List &coordinates) {

@@ -34,7 +34,9 @@ public:
   ~GameObject();
 
   Collider &getCollider();
+  const Collider &getCollider() const;
   Renderable &getRenderable();
+  const Renderable &getRenderable() const;
 
   static GameObject &from(const BaseFactory &factory,
                           const Vec3List &coordinates);

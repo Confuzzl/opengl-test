@@ -17,10 +17,13 @@ Vec3 glm_util::rotateVector(const Vec3 &v, const Mat4 &t) {
   return Vec3{t * Vec4{v, 0}};
 }
 
+Vec3 glm_util::getScale(const Mat4 &m) {
+  return {glm::length(Vec3{m[0]}), glm::length(Vec3{m[1]}),
+          glm::length(Vec3{m[2]})};
+}
+
 Mat4 glm_util::matrixFrom(const Vec3 &v) {
-  Mat4 out{1.0f};
-  out = glm::translate(out, v);
-  return out;
+  return glm::translate(Mat4{1.0f}, v);
 }
 Mat4 glm_util::matrixFrom(const Vec3 &axis, const float deg) {
   Mat4 out{1.0f};
@@ -35,6 +38,7 @@ Mat4 glm_util::matrixFrom(const Vec3 &v, const Vec3 &axis, const float deg) {
 Mat4 glm_util::lerpMatrix(const Mat4 &m1, const Mat4 &m2, const double t) {
   Mat4 out{glm::mat4_cast(glm::slerp(glm::quat_cast(m1), glm::quat_cast(m2),
                                      static_cast<float>(t)))};
-  out[3] = m1[3] * static_cast<float>(1 - t) + m2[3] * static_cast<float>(t);
+  out[3] =
+      m1[3] * static_cast<float>(1 - t) + m2[3] * static_cast<float>(t); // ?
   return out;
 }

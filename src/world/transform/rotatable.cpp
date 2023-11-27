@@ -19,10 +19,11 @@ void Rotatable::setRotation(const Vec3 &axis, const float deg) {
   rotate(axis, deg);
 }
 void Rotatable::rotate(const Vec3 &axis, const float deg) {
-  transform = glm::rotate(transform, glm::radians(deg), axis);
-  forward = glm_util::rotateVector(forward, transform);
-  up = glm_util::rotateVector(up, transform);
-  right = glm_util::rotateVector(right, transform);
+  Mat4 r = glm::rotate(Mat4{1.0f}, glm::radians(deg), axis);
+  forward = glm_util::rotateVector(forward, r);
+  up = glm_util::rotateVector(up, r);
+  right = glm_util::rotateVector(right, r);
+  transform = r * transform;
 }
 
 void Rotatable::rotateForward(const float deg) { rotate(forward, deg); }

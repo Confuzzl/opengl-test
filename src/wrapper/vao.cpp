@@ -8,26 +8,21 @@ import wrapper.buffer_object;
 import util.debug;
 
 VAO::VAO(const GLsizei stride) : stride{stride} {}
-VAO::~VAO() {
-  glDeleteVertexArrays(1, &ID);
-  // std::cout << std::format("vao {} deleted\n", ID);
-}
+VAO::~VAO() { glDeleteVertexArrays(1, &ID); }
 
-void VAO::bindVBO(const VBO *vbo) {
-  if (not vbo->allocated)
+void VAO::bindVBO(const VBO &vbo) {
+  if (not vbo.allocated)
     throw UnallocatedGLObjectUsageException{
-        std::format("VBO {} WAS BINDED BEFORE ALLOCATION\n", vbo->ID)};
-  glVertexArrayVertexBuffer(ID, 0, vbo->ID, 0, stride);
-  boundedVBO = vbo;
-  // std::cout << std::format("vbo {} binded to vao {}\n", ID, this->ID);
+        std::format("VBO {} WAS BINDED BEFORE ALLOCATION\n", vbo.ID)};
+  glVertexArrayVertexBuffer(ID, 0, vbo.ID, 0, stride);
+  boundedVBO = &vbo;
 }
-void VAO::bindEBO(const EBO *ebo) {
-  if (not ebo->allocated)
+void VAO::bindEBO(const EBO &ebo) {
+  if (not ebo.allocated)
     throw UnallocatedGLObjectUsageException{
-        std::format("EBO {} WAS BINDED BEFORE ALLOCATION\n", ebo->ID)};
-  glVertexArrayElementBuffer(ID, ebo->ID);
-  boundedEBO = ebo;
-  // std::cout << std::format("ebo {} binded to vao {}\n", ID, this->ID);
+        std::format("EBO {} WAS BINDED BEFORE ALLOCATION\n", ebo.ID)};
+  glVertexArrayElementBuffer(ID, ebo.ID);
+  boundedEBO = &ebo;
 }
 
 void VAO::bindVertexArray() {

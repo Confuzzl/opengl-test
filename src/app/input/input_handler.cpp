@@ -5,7 +5,10 @@ module;
 module app.input.input_handler;
 
 import world.game_object;
+import app.update_cycle;
 import util.debug;
+
+const InputHandler::Key::Callback InputHandler::Key::NONE{[](const double) {}};
 
 std::map<int, InputHandler::Key> InputHandler::keys{
     {GLFW_KEY_ESCAPE,
@@ -33,14 +36,19 @@ std::map<int, InputHandler::Key> InputHandler::keys{
     {GLFW_KEY_LEFT, {InputHandler::Key::cameraRotateFunction(+1, 0)}},
     {GLFW_KEY_DOWN, {InputHandler::Key::cameraRotateFunction(0, -1)}},
     {GLFW_KEY_RIGHT, {InputHandler::Key::cameraRotateFunction(-1, 0)}},
-    //{GLFW_KEY_Q,
-    // {[](const double) { std::cout << "just on\n"; },
-    //  [](const double) { std::cout << "on\n"; },
-    //  [](const double) { std::cout << "off\n"; }}},
+    {GLFW_KEY_Q,
+     {[](const double) {
+        mainScene.testObject->translate({1, 0, 0});
+      },
+      InputHandler::Key::NONE,
+      [](const double) {
+        mainScene.testObject->translate({-1, 0, 0});
+      },
+      InputHandler::Key::NONE}},
 };
 
-void InputHandler::callback(GLFWwindow *window, int key, int scancode,
-                            int action, int mods) {
+void InputHandler::keyCallback(GLFWwindow *window, int key, int scancode,
+                               int action, int mods) {
   if (not keys.contains(key))
     return;
   // prev = curr;
@@ -50,4 +58,26 @@ void InputHandler::callback(GLFWwindow *window, int key, int scancode,
   //                          modes[action], curr, curr - prev);
   // keys.at(key).on = action;
   keys.at(key).change(action);
+}
+
+void InputHandler::mouseCallback(GLFWwindow *window, double xpos, double ypos) {
+  if (not mainApp.cursorSnap) {
+    mainApp.prevX = xpos;
+    mainApp.prevY = ypos;
+    mainApp.cursorSnap = true;
+  }
+  const float dx = static_cast<float>(mainApp.prevX - xpos);
+  const float dy = static_cast<float>(mainApp.prevY - ypos);
+  mainApp.prevX = xpos;
+  mainApp.prevY = ypos;
+
+  const float magnitude =
+      static_cast<float>(mainApp.updateCycle->dt * mainCamera.getSensitivity());
+  mainCamera.rotate(dx * magnitude, dy * magnitude);
+}
+
+void InputHandler::scrollCallback(GLFWwindow *window, double xpos,
+                                  double ypos) {
+  mainPlayer.speed =
+      std::fmax(0.0f, static_cast<float>(mainPlayer.speed + ypos * 0.25));
 }

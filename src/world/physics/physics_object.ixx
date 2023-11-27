@@ -4,7 +4,7 @@ import world.transform.transformable;
 import util.glm;
 
 export class PhysicsObject : public Transformable {
-  double mass;
+  float mass;
   Vec3 velocity{};
   // double acceleration;
   Vec3 force{};

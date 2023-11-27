@@ -26,14 +26,14 @@ export struct App {
     using std::runtime_error::runtime_error;
   };
 
-  static const int WIDTH = 1280, HEIGHT = 720;
+  static const unsigned int WIDTH = 1280, HEIGHT = 720;
   static const Mat4 UI_MAT;
 
   GLFWwindow *window;
 
-  UPtr<UpdateCycle> loopCycle{std::make_unique<UpdateCycle>(0)};
-  UPtr<UpdateCycle> updateCycle{std::make_unique<UpdateCycle>(120)};
-  UPtr<UpdateCycle> frameCycle{std::make_unique<UpdateCycle>(60)};
+  UPtr<UpdateCycle> loopCycle;
+  UPtr<UpdateCycle> updateCycle;
+  UPtr<UpdateCycle> frameCycle;
   unsigned int seconds = 0;
 
   bool cursorSnap = false;

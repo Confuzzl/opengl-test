@@ -22,7 +22,10 @@ import app.input.input_handler;
 const Mat4 App::UI_MAT{glm::ortho(0.0f, static_cast<float>(App::WIDTH), 0.0f,
                                   static_cast<float>(App::HEIGHT))};
 
-App::App() {
+App::App()
+    : loopCycle{std::make_unique<UpdateCycle>(0)},
+      updateCycle{std::make_unique<UpdateCycle>(120)},
+      frameCycle{std::make_unique<UpdateCycle>(60)} {
   std::cout << "app constructing\n";
   glfwInit();
   frameCycle->bottleNeck(
@@ -86,6 +89,7 @@ void App::startUpdate(const double t) {
   updateCycle->pushNewTime(t);
   glfwPollEvents();
   processInput(updateCycle->dt);
+  mainScene.testObject->update(updateCycle->dt);
 }
 void App::startFrame(const double t) {
   frameCycle->pushNewTime(t);
@@ -109,29 +113,15 @@ void App::startFrame(const double t) {
   Text::TOP_RT.drawText(std::format("LPS: {}", loopCycle->prevCount));
   Text::TOP_RT.drawText(std::format("UPS: {}", updateCycle->prevCount));
 
-  anim.getCurrentKeyframe();
-  Text::BOT_LT.drawText(std::format("start: {}", anim.startTime));
-  Text::BOT_LT.drawText(
-      std::format("time: {:+.2f} {:+.2f}", anim.currentTime, anim.lastTime));
-  Text::BOT_LT.drawText(std::format("animating: {}", anim.animating));
+  // anim.getCurrentKeyframe();
+  // Text::BOT_LT.drawText(std::format("start: {}", anim.startTime));
+  // Text::BOT_LT.drawText(
+  //     std::format("time: {:+.2f} {:+.2f}", anim.currentTime, anim.lastTime));
+  // Text::BOT_LT.drawText(std::format("animating: {}", anim.animating));
+  // Text::BOT_RT.drawText(std::format("f: {}"));
+  Text::BOT_RT.drawText(std::format("{:.2f}", mainPlayer.speed));
 
   glfwSwapBuffers(window);
-}
-
-static void mouseCallback(GLFWwindow *window, double xpos, double ypos) {
-  if (not mainApp.cursorSnap) {
-    mainApp.prevX = xpos;
-    mainApp.prevY = ypos;
-    mainApp.cursorSnap = true;
-  }
-  const float dx = static_cast<float>(mainApp.prevX - xpos);
-  const float dy = static_cast<float>(mainApp.prevY - ypos);
-  mainApp.prevX = xpos;
-  mainApp.prevY = ypos;
-
-  const float magnitude =
-      static_cast<float>(mainApp.updateCycle->dt * mainCamera.getSensitivity());
-  mainCamera.rotate(dx * magnitude, dy * magnitude);
 }
 
 void App::createWindow() {
@@ -149,8 +139,9 @@ void App::createWindow() {
   glfwMakeContextCurrent(window);
 
   glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-  glfwSetCursorPosCallback(window, mouseCallback);
-  glfwSetKeyCallback(window, InputHandler::callback);
+  glfwSetCursorPosCallback(window, InputHandler::mouseCallback);
+  glfwSetScrollCallback(window, InputHandler::scrollCallback);
+  glfwSetKeyCallback(window, InputHandler::keyCallback);
 
   gladLoadGL();
   glViewport(0, 0, WIDTH, HEIGHT);
@@ -166,54 +157,6 @@ void App::processInput(const double dt) {
     key(dt);
   }
 }
-//   if (glfwGetKey(window, GLFW_KEY_ESCAPE))
-//     glfwSetWindowShouldClose(window, GL_TRUE);
-//
-//   if (glfwGetKey(window, GLFW_KEY_1))
-//     mainPrimitive = GL_TRIANGLES;
-//   if (glfwGetKey(window, GLFW_KEY_2))
-//     mainPrimitive = GL_LINE_LOOP;
-//   if (glfwGetKey(window, GLFW_KEY_3))
-//     mainPrimitive = GL_POINTS;
-//
-//   if (glfwGetKey(window, GLFW_KEY_Z))
-//     anim.play();
-//   if (glfwGetKey(window, GLFW_KEY_X))
-//     anim.end();
-//   if (glfwGetKey(window, GLFW_KEY_C))
-//     anim.toggle();
-//   if (glfwGetKey(window, GLFW_KEY_V))
-//     anim.reset();
-//
-//   Camera &cam{*app.scene->player->camera};
-//
-//   speedMagnitude = static_cast<float>(updateCycle->delta * cam.getSpeed());
-//   if (glfwGetKey(window, GLFW_KEY_W))
-//     cam.addVelocity(cam.getForward() * speedMagnitude);
-//   if (glfwGetKey(window, GLFW_KEY_A))
-//     cam.addVelocity(cam.getRight() * -speedMagnitude);
-//   if (glfwGetKey(window, GLFW_KEY_S))
-//     cam.addVelocity(cam.getForward() * -speedMagnitude);
-//   if (glfwGetKey(window, GLFW_KEY_D))
-//     cam.addVelocity(cam.getRight() * speedMagnitude);
-//   if (glfwGetKey(window, GLFW_KEY_SPACE))
-//     cam.addVelocity(glm_util::Y_PLUS * speedMagnitude);
-//   if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL))
-//     cam.addVelocity(glm_util::Y_PLUS * -speedMagnitude);
-//
-//   rotateMagnitude =
-//       static_cast<float>(updateCycle->delta * cam.getSensitivity());
-//   if (glfwGetKey(window, GLFW_KEY_UP))
-//     cam.rotate(0, rotateMagnitude);
-//   if (glfwGetKey(window, GLFW_KEY_LEFT))
-//     cam.rotate(rotateMagnitude, 0);
-//   if (glfwGetKey(window, GLFW_KEY_DOWN))
-//     cam.rotate(0, -rotateMagnitude);
-//   if (glfwGetKey(window, GLFW_KEY_RIGHT))
-//     cam.rotate(-rotateMagnitude, 0);
-//
-//   cam.update();
-// }
 
 void App::drawScene() {
   defaultProgram->useProgram();
@@ -221,8 +164,8 @@ void App::drawScene() {
 
   for (const auto &[ID, obj] : mainScene.objectMap) {
     const auto &r{obj->getRenderable()};
-    defaultProgram->vao.bindEBO(&r.ebo);
-    defaultProgram->vao.bindVBO(&r.sharedVBO);
+    defaultProgram->vao.bindEBO(r.ebo);
+    defaultProgram->vao.bindVBO(r.sharedVBO);
 
     defaultProgram->setMat4("model", obj->getTransform());
     defaultProgram->setMat4("view", mainCamera.getView());

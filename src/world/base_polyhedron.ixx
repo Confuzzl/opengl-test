@@ -8,4 +8,7 @@ protected:
   const Vec3List coordinates;
 
   BasePolyhedron(const Vec3List &coordinates);
+
+public:
+  Vec3 getSampleVertex() const;
 };
