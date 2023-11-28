@@ -65,4 +65,8 @@ struct ColTex : public Vertex, public Colorable, public Texturable {
       : Vertex(x, y, z), Colorable(r, g, b), Texturable(u, v) {}
 };
 } // namespace _3D
+
+template <typename T>
+concept IsVertexFormat =
+    requires(T t) { []<std::size_t n>(Vertex<n> &) {}(t); };
 } // namespace VertexFormats

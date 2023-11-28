@@ -5,6 +5,8 @@ module;
 
 module wrapper.program.programs;
 
+import wrapper.program.vertex_formats;
+import app.app;
 import util.debug;
 
 std::string Programs::Base::errorLog{"NONE"};
@@ -28,7 +30,7 @@ void Programs::Base::useProgram() {
 void Programs::Base::setVec3(const char *name, const Vec3 vec) {
   glUniform3fv(glGetUniformLocation(ID, name), 1, glm::value_ptr(vec));
 }
-void Programs::Base::setMat4(const char *name, const glm::mat4 matrix) {
+void Programs::Base::setMat4(const char *name, const Mat4 matrix) {
   glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE,
                      glm::value_ptr(matrix));
 }
@@ -76,8 +78,108 @@ void Programs::Base::createShader(const GLenum type, GLuint &ID,
   if (not success) {
     GLint logSize = 0;
     glGetShaderiv(ID, GL_INFO_LOG_LENGTH, &logSize);
-    glGetShaderInfoLog(ID, 512, NULL, log);
+    errorLog.resize(logSize);
+    glGetShaderInfoLog(ID, 512, NULL, errorLog.data());
     throw FailedShaderCompilationException{
         std::format("{} FAILED TO COMPILE\n{}\n", source, errorLog)};
   }
+}
+
+Programs::Col::Col() : Base(VertexFormats::_3D::Colored::WIDTH, "col", "col") {}
+void Programs::Col::defineVAO() {
+  glCreateVertexArrays(1, &vao.ID);
+
+  GLuint offset = 0, index = 0;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 3, GL_FLOAT, GL_FALSE, offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  offset += 3 * sizeof(GLfloat);
+  index++;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 3, GL_UNSIGNED_BYTE, GL_TRUE,
+                            offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  std::cout << std::format("COL SHADER VAO {} DEFINED\n", vao.ID);
+  vao.markAsAllocated();
+}
+
+Programs::Tex::Tex()
+    : Base(VertexFormats::_3D::Textured::WIDTH, "tex", "tex") {}
+void Programs::Tex::defineVAO() {
+  glCreateVertexArrays(1, &vao.ID);
+
+  GLuint offset = 0, index = 0;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 3, GL_FLOAT, GL_FALSE, offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  offset += 3 * sizeof(GLubyte);
+  index++;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 2, GL_UNSIGNED_SHORT, GL_FALSE,
+                            offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  std::cout << std::format("TEX SHADER VAO {} DEFINED\n", vao.ID);
+  vao.markAsAllocated();
+}
+
+Programs::ColTex::ColTex()
+    : Base(VertexFormats::_3D::ColTex::WIDTH, "coltex", "coltex") {}
+void Programs::ColTex::defineVAO() {
+  glCreateVertexArrays(1, &vao.ID);
+
+  GLuint offset = 0, index = 0;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 3, GL_FLOAT, GL_FALSE, offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  offset += 3 * sizeof(GLfloat);
+  index++;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 3, GL_UNSIGNED_BYTE, GL_TRUE,
+                            offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  offset += 3 * sizeof(GLubyte);
+  index++;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 2, GL_UNSIGNED_SHORT, GL_FALSE,
+                            offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  std::cout << std::format("COLTEX SHADER VAO {} DEFINED\n", vao.ID);
+  vao.markAsAllocated();
+}
+
+Programs::Font::Font()
+    : Base(VertexFormats::_2D::Font::WIDTH, "font", "font") {}
+void Programs::Font::defineVAO() {
+  glCreateVertexArrays(1, &vao.ID);
+
+  GLuint offset = 0, index = 0;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 2, GL_FLOAT, GL_FALSE, offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  offset += 2 * sizeof(GLfloat);
+  index++;
+
+  glEnableVertexArrayAttrib(vao.ID, index);
+  glVertexArrayAttribFormat(vao.ID, index, 2, GL_UNSIGNED_SHORT, GL_FALSE,
+                            offset);
+  glVertexArrayAttribBinding(vao.ID, index, 0);
+
+  std::cout << std::format("FONT SHADER VAO {} DEFINED\n", vao.ID);
+  vao.markAsAllocated();
 }

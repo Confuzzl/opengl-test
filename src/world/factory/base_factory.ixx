@@ -12,7 +12,7 @@ import util.memory;
 import wrapper.buffer_object;
 import world.game_object;
 import world.collision.collider;
-import world.render.renderable;
+import rendering.renderable;
 
 export class BaseFactory {
   const unsigned short vertexCount;

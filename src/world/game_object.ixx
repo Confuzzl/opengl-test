@@ -3,7 +3,7 @@ export module world.game_object;
 // import world.transform.transformable;
 import world.physics.physics_object;
 import world.collision.collider;
-import world.render.renderable;
+import rendering.renderable;
 import util.memory;
 import util.polyhedron;
 

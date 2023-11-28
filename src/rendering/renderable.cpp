@@ -3,7 +3,7 @@ module;
 #include "util/gl_utils.hpp"
 #include <limits>
 
-module world.render.renderable;
+module rendering.renderable;
 
 import app.app;
 import app.texture_tile;
@@ -56,13 +56,16 @@ void Renderable::initializeVertexInfo() {
 void Renderable::writeToSharedVBO() const {
   GLintptr offset = 0;
   for (const VertexFormats::_3D::ColTex &vertex : vertexInfo) {
-    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::_3D::ColTex::POS_WIDTH,
+    glNamedBufferSubData(sharedVBO.ID, offset,
+                         VertexFormats::_3D::ColTex::POS_WIDTH,
                          vertex.posInfo.data());
     offset += VertexFormats::_3D::ColTex::POS_WIDTH;
-    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::_3D::ColTex::COL_WIDTH,
+    glNamedBufferSubData(sharedVBO.ID, offset,
+                         VertexFormats::_3D::ColTex::COL_WIDTH,
                          vertex.colInfo.data());
     offset += VertexFormats::_3D::ColTex::COL_WIDTH;
-    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::_3D::ColTex::TEX_WIDTH,
+    glNamedBufferSubData(sharedVBO.ID, offset,
+                         VertexFormats::_3D::ColTex::TEX_WIDTH,
                          vertex.texInfo.data());
     offset += VertexFormats::_3D::ColTex::TEX_WIDTH;
   }

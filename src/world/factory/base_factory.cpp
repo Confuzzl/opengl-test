@@ -6,7 +6,7 @@ module;
 module world.factory.base_factory;
 
 import world.collision.collider;
-import world.render.renderable;
+import rendering.renderable;
 import wrapper.program.vertex_formats;
 import util.debug;
 

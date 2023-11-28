@@ -11,8 +11,7 @@ import wrapper.program.programs;
 import wrapper.tex_object;
 import app.text.font;
 import world.game_object;
-import wrapper.program.vertex_formats;
-import world.render.renderable;
+import rendering.renderable;
 import app.text.text_corners;
 import util.vector;
 import util.debug;
@@ -33,7 +32,7 @@ App::App()
 
   createWindow();
 
-  defaultProgram->create();
+  colTexProgram->create();
   fontProgram->create();
 
   try {
@@ -159,23 +158,23 @@ void App::processInput(const double dt) {
 }
 
 void App::drawScene() {
-  defaultProgram->useProgram();
-  defaultProgram->setMat4("projection", mainCamera.getProjection());
+  colTexProgram->useProgram();
+  colTexProgram->setMat4("projection", mainCamera.getProjection());
 
   for (const auto &[ID, obj] : mainScene.objectMap) {
     const auto &r{obj->getRenderable()};
-    defaultProgram->vao.bindEBO(r.ebo);
-    defaultProgram->vao.bindVBO(r.sharedVBO);
+    colTexProgram->vao.bindEBO(r.ebo);
+    colTexProgram->vao.bindVBO(r.sharedVBO);
 
-    defaultProgram->setMat4("model", obj->getTransform());
-    defaultProgram->setMat4("view", mainCamera.getView());
+    colTexProgram->setMat4("model", obj->getTransform());
+    colTexProgram->setMat4("view", mainCamera.getView());
 
     r.writeToSharedVBO();
 
     atlas->bindTextureUnit();
-    defaultProgram->vao.bindVertexArray();
+    colTexProgram->vao.bindVertexArray();
     glDrawElements(mainPrimitive,
-                   static_cast<GLsizei>(defaultProgram->vao.boundedEBO->size),
+                   static_cast<GLsizei>(colTexProgram->vao.boundedEBO->size),
                    GL_UNSIGNED_INT, 0);
   }
 }

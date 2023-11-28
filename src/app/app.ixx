@@ -7,14 +7,13 @@ export module app.app;
 import world.scene;
 import world.entity.player;
 import world.camera;
+import wrapper.program.programs;
 import util.glm;
 import util.memory;
 import util.vector;
 import <stdexcept>;
 
 export struct UpdateCycle;
-export class ColoredProgram;
-export class FontProgram;
 export struct TexObject;
 export struct Font;
 
@@ -39,8 +38,8 @@ export struct App {
   bool cursorSnap = false;
   double prevX = WIDTH / 2, prevY = HEIGHT / 2;
 
-  UPtr<ColoredProgram> defaultProgram{std::make_unique<ColoredProgram>()};
-  UPtr<FontProgram> fontProgram{std::make_unique<FontProgram>()};
+  UPtr<Programs::ColTex> colTexProgram{std::make_unique<Programs::ColTex>()};
+  UPtr<Programs::Font> fontProgram{std::make_unique<Programs::Font>()};
 
   UPtr<TexObject> atlas{std::make_unique<TexObject>("atlas")};
   UPtr<Font> consolas{std::make_unique<Font>("consolas1024", 64, 128)};

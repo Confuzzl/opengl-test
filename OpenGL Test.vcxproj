@@ -172,6 +172,7 @@
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\rendering\animation.cpp" />
     <ClCompile Include="src\rendering\animation.ixx" />
+    <ClCompile Include="src\rendering\base_renderable.ixx" />
     <ClCompile Include="src\rendering\frame\frame.cpp" />
     <ClCompile Include="src\rendering\frame\frame.ixx" />
     <ClCompile Include="src\rendering\frame\inbetween.cpp" />
@@ -227,8 +228,8 @@
     <ClCompile Include="src\world\entity\player.ixx" />
     <ClCompile Include="src\world\physics\physics_object.cpp" />
     <ClCompile Include="src\world\physics\physics_object.ixx" />
-    <ClCompile Include="src\world\render\renderable.cpp" />
-    <ClCompile Include="src\world\render\renderable.ixx" />
+    <ClCompile Include="src\rendering\renderable.cpp" />
+    <ClCompile Include="src\rendering\renderable.ixx" />
     <ClCompile Include="src\world\base_polyhedron.cpp" />
     <ClCompile Include="src\world\base_polyhedron.ixx" />
     <ClCompile Include="src\world\camera.ixx" />
@@ -246,12 +247,7 @@
     <ClCompile Include="src\world\transform\translatable.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.cpp" />
-    <ClCompile Include="src\wrapper\program\base_program.ixx" />
-    <ClCompile Include="src\wrapper\program\base_program.cpp" />
-    <ClCompile Include="src\wrapper\program\programs-font.ixx" />
-    <ClCompile Include="src\wrapper\program\programs-font.cpp" />
-    <ClCompile Include="src\wrapper\program\programs-colored.ixx" />
-    <ClCompile Include="src\wrapper\program\programs-colored.cpp" />
+    <ClCompile Include="src\wrapper\program\programs.cpp" />
     <ClCompile Include="src\wrapper\program\programs.ixx" />
     <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />
     <ClCompile Include="src\wrapper\tex_object.ixx" />

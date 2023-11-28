@@ -16,7 +16,7 @@ export struct TexTile {
   glm::lowp_u16vec2 dimensions;
 
   static TexTile getTile(const std::string &name, const TexObject &texObject);
-  static std::string getRandomTexture();
+  static std::string &getRandomTexture();
   static TexTile getRandomTile(const TexObject &texObject);
 
   TexTile(const glm::lowp_u16vec4 info);

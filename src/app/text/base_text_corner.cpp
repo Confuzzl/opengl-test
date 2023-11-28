@@ -18,13 +18,13 @@ const BaseTextCorner::OffsetEquation BaseTextCorner::xNormal =
     [](const float x, const float, const std::string &) { return x; };
 const BaseTextCorner::OffsetEquation BaseTextCorner::xShift =
     [](const float x, const float scale, const std::string &msg) {
-      return App::WIDTH - msg.size() * FontProgram::CHAR_WIDTH * scale - x;
+      return App::WIDTH - msg.size() * Programs::Font::CHAR_WIDTH * scale - x;
     };
 const BaseTextCorner::OffsetEquation BaseTextCorner::yNormal =
     [](const float y, const float, const std::string &) { return y; };
 const BaseTextCorner::OffsetEquation BaseTextCorner::yShift =
     [](const float y, const float scale, const std::string &msg) {
-      return App::HEIGHT - FontProgram::CHAR_HEIGHT * scale - y;
+      return App::HEIGHT - Programs::Font::CHAR_HEIGHT * scale - y;
     };
 
 BaseTextCorner::BaseTextCorner(const OffsetEquation &xEquation,
@@ -60,8 +60,8 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
   Vector<VertexFormats::_2D::Font> vertices{};
   vertices.reserve(vertexCount);
 
-  const float width = FontProgram::CHAR_WIDTH * scale,
-              height = FontProgram::CHAR_HEIGHT * scale;
+  const float width = Programs::Font::CHAR_WIDTH * scale,
+              height = Programs::Font::CHAR_HEIGHT * scale;
   for (const char c : msg) {
     const TexTile tex{mainApp.consolas->getTile(c)};
     for (int tri = 0; tri < 2; tri++) {

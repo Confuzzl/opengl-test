@@ -1,4 +1,4 @@
-export module world.render.renderable;
+export module rendering.renderable;
 
 import world.base_polyhedron;
 import util.polyhedron;

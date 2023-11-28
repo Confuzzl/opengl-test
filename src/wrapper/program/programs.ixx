@@ -4,9 +4,6 @@ module;
 
 export module wrapper.program.programs;
 
-export import :colored;
-export import :font;
-
 import wrapper.gl_object;
 import wrapper.vao;
 import util.glm;
@@ -18,10 +15,9 @@ struct Base : public GLObject {
     using std::runtime_error::runtime_error;
   };
 
-  // GLchar infoLog[512]{};
   static std::string errorLog;
   VAO vao;
-  std::string vertexSource, fragmentSource;
+  const std::string vertexSource, fragmentSource;
 
   ~Base();
 
@@ -41,5 +37,24 @@ private:
   static void createShader(const GLenum type, GLuint &ID,
                            const std::string &source);
   void createShaders(const std::string &vertex, const std::string &fragment);
+};
+
+struct Col : public Base {
+  Col();
+  void defineVAO() override;
+};
+struct Tex : public Base {
+  Tex();
+  void defineVAO() override;
+};
+struct ColTex : public Base {
+  ColTex();
+  void defineVAO() override;
+};
+struct Font : public Base {
+  static constexpr int CHAR_WIDTH = 16, CHAR_HEIGHT = 32;
+
+  Font();
+  void defineVAO() override;
 };
 } // namespace Programs
