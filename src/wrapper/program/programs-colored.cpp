@@ -8,7 +8,7 @@ import wrapper.program.vertex_formats;
 import util.debug;
 
 ColoredProgram::ColoredProgram()
-    : BaseProgram(VertexFormats::ColTex::WIDTH, "colored", "colored") {}
+    : BaseProgram(VertexFormats::_3D::ColTex::WIDTH, "coltex", "coltex") {}
 
 void ColoredProgram::defineVAO() {
   glCreateVertexArrays(1, &vao.ID);

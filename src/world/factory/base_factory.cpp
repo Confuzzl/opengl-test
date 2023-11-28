@@ -37,7 +37,7 @@ void BaseFactory::initializeEBO() const {
                            ebo.ID);
 }
 void BaseFactory::allocateVBO() const {
-  sharedVBO.allocateBufferObject(rVertexCount * VertexFormats::ColTex::WIDTH);
+  sharedVBO.allocateBufferObject(rVertexCount * VertexFormats::_3D::ColTex::WIDTH);
   std::cout << std::format("shared vbo {} for factory simplex allocated\n",
                            sharedVBO.ID);
 }

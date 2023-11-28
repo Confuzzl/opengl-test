@@ -55,15 +55,15 @@ void Renderable::initializeVertexInfo() {
 
 void Renderable::writeToSharedVBO() const {
   GLintptr offset = 0;
-  for (const VertexFormats::ColTex &vertex : vertexInfo) {
-    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::ColTex::POS_WIDTH,
+  for (const VertexFormats::_3D::ColTex &vertex : vertexInfo) {
+    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::_3D::ColTex::POS_WIDTH,
                          vertex.posInfo.data());
-    offset += VertexFormats::ColTex::POS_WIDTH;
-    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::ColTex::COL_WIDTH,
+    offset += VertexFormats::_3D::ColTex::POS_WIDTH;
+    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::_3D::ColTex::COL_WIDTH,
                          vertex.colInfo.data());
-    offset += VertexFormats::ColTex::COL_WIDTH;
-    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::ColTex::TEX_WIDTH,
+    offset += VertexFormats::_3D::ColTex::COL_WIDTH;
+    glNamedBufferSubData(sharedVBO.ID, offset, VertexFormats::_3D::ColTex::TEX_WIDTH,
                          vertex.texInfo.data());
-    offset += VertexFormats::ColTex::TEX_WIDTH;
+    offset += VertexFormats::_3D::ColTex::TEX_WIDTH;
   }
 }

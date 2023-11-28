@@ -7,7 +7,7 @@ module wrapper.program.programs:font;
 import wrapper.program.vertex_formats;
 import util.debug;
 
-FontProgram::FontProgram() : BaseProgram(VertexFormats::Font::WIDTH, "font", "font") {}
+FontProgram::FontProgram() : BaseProgram(VertexFormats::_2D::Font::WIDTH, "font", "font") {}
 
 void FontProgram::defineVAO() {
   glCreateVertexArrays(1, &vao.ID);

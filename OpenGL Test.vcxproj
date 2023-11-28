@@ -253,7 +253,6 @@
     <ClCompile Include="src\wrapper\program\programs-colored.ixx" />
     <ClCompile Include="src\wrapper\program\programs-colored.cpp" />
     <ClCompile Include="src\wrapper\program\programs.ixx" />
-    <ClCompile Include="src\wrapper\program\vertex_formats.cpp" />
     <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />
     <ClCompile Include="src\wrapper\tex_object.ixx" />
     <ClCompile Include="src\wrapper\tex_object.cpp" />

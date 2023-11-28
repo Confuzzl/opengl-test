@@ -5,47 +5,64 @@ module;
 export module wrapper.program.vertex_formats;
 
 import <array>;
-
-// export import :simple;
-// export import :font;
+import <concepts>;
 
 export namespace VertexFormats {
 template <std::size_t n> struct Vertex {
   static constexpr GLsizeiptr POS_WIDTH = n * sizeof(GLfloat);
+
   std::array<GLfloat, n> posInfo;
-  Base3(GLfloat pos...) : posInfo{{pos...}} {}
-};
-namespace _2D {}
-namespace _3D {}
-struct Base3 {
-  static constexpr GLsizeiptr POS_WIDTH = 3 * sizeof(GLfloat);
 
-  std::array<GLfloat, 3> posInfo;
-
-  Base3(GLfloat x, GLfloat y, GLfloat z);
+  template <std::same_as<GLfloat>... Args>
+  Vertex(Args... pos) : posInfo{{pos...}} {}
 };
-struct Col : virtual public Base3 {
+struct Colorable {
   static constexpr GLsizeiptr COL_WIDTH = 3 * sizeof(GLubyte);
-  static constexpr GLsizeiptr WIDTH = POS_WIDTH + COL_WIDTH;
 
   std::array<GLubyte, 3> colInfo;
 
-  Col(GLfloat x, GLfloat y, GLfloat z, GLubyte r, GLubyte g, GLubyte b);
+  Colorable(GLubyte r, GLubyte g, GLubyte b) : colInfo{{r, g, b}} {}
 };
-struct Tex : virtual public Base3 {
-  static const GLsizeiptr TEX_WIDTH = 2 * sizeof(GLushort);
-  static constexpr GLsizeiptr WIDTH = POS_WIDTH + TEX_WIDTH;
+struct Texturable {
+  static constexpr GLsizeiptr TEX_WIDTH = 2 * sizeof(GLushort);
 
   std::array<GLushort, 2> texInfo;
 
-  Tex(GLfloat x, GLfloat y, GLfloat z, GLushort u, GLushort v);
+  Texturable(GLushort u, GLushort v) : texInfo{{u, v}} {}
 };
-struct ColTex : public Col, public Tex {
-  static constexpr GLsizeiptr WIDTH = POS_WIDTH + COL_WIDTH + TEX_WIDTH;
+
+namespace _2D {
+using Vertex = VertexFormats::Vertex<2>;
+struct Font : public Vertex, public Texturable {
+  static constexpr GLsizeiptr WIDTH = Vertex::POS_WIDTH + Texturable::TEX_WIDTH;
+
+  Font(GLfloat x, GLfloat y, GLushort u, GLushort v)
+      : Vertex(x, y), Texturable(u, v) {}
+};
+} // namespace _2D
+
+namespace _3D {
+using Vertex = VertexFormats::Vertex<3>;
+struct Colored : virtual public Vertex, public Colorable {
+  static constexpr GLsizeiptr WIDTH = Vertex::POS_WIDTH + Colorable::COL_WIDTH;
+
+  Colored(GLfloat x, GLfloat y, GLfloat z, GLubyte r, GLubyte g, GLubyte b)
+      : Vertex(x, y, z), Colorable(r, g, b) {}
+};
+
+struct Textured : virtual public Vertex, public Texturable {
+  static constexpr GLsizeiptr WIDTH = Vertex::POS_WIDTH + Texturable::TEX_WIDTH;
+
+  Textured(GLfloat x, GLfloat y, GLfloat z, GLushort u, GLushort v)
+      : Vertex(x, y, z), Texturable(u, v) {}
+};
+struct ColTex : public Vertex, public Colorable, public Texturable {
+  static constexpr GLsizeiptr WIDTH =
+      Vertex::POS_WIDTH + Colorable::COL_WIDTH + Texturable::TEX_WIDTH;
 
   ColTex(GLfloat x, GLfloat y, GLfloat z, GLubyte r, GLubyte g, GLubyte b,
-         GLushort u, GLushort v);
+         GLushort u, GLushort v)
+      : Vertex(x, y, z), Colorable(r, g, b), Texturable(u, v) {}
 };
-
-using Font = Tex;
+} // namespace _3D
 } // namespace VertexFormats
