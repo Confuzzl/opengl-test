@@ -1,48 +1,69 @@
+module;
+
+#include "util/gl_utils.hpp"
+
 export module rendering.base_renderable;
 
-// import util.memory;
 import world.base_polyhedron;
 import wrapper.program.vertex_formats;
 import wrapper.buffer_object;
+import util.rendering;
 import util.polyhedron;
 
-export template <VertexFormats::IsVertexFormat VertexType>
+export template </*VertexFormats::IsVertexFormat*/ typename VertexType>
 class BaseRenderable : public BasePolyhedron {
-  Vector<VertexType> vertexInfo;
-
+public:
   const EBO &ebo;
   const VBO &vbo;
 
-  BaseRenderable(const EBO &ebo, const VBO &vbo, const Vec3List &coordinates)
-      : BasePolyhedron(coordinates), ebo{ebo}, vbo{vbo} {}
+  const render::IndexList &indexList;
 
-  void initializeVertexInfo() {
-    for (unsigned short f = 0; f < UVs.size(); f++) {
+  Vector<VertexType> vertexInfo;
+
+  void writeToVBO() const { GLintptr offset = 0; }
+
+protected:
+  BaseRenderable(const EBO &ebo, const VBO &vbo, const Vec3List &coordinates,
+                 const render::IndexList &indexList)
+      : BasePolyhedron(coordinates), ebo{ebo}, vbo{vbo}, indexList{indexList} {
+    initialize();
+  }
+
+  virtual bool exceptionCondition() = 0;
+
+  virtual void specializeFaceInfo(const unsigned short f) = 0;
+  virtual void specializeTriInfo(const unsigned short f,
+                                 const unsigned short t) = 0;
+  virtual void specializeVertexInfo(unsigned short f, unsigned short t,
+                                    unsigned short v) = 0;
+
+  void initialize() {
+    vertexInfo.reserve(coordinates.size());
+    for (unsigned short f = 0; f < indexList.size(); f++) {
       initializeFaceInfo(f);
     }
   }
-  void initializeFaceInfo(unsigned short f) {
-    const auto &indexFace = faceVertexIndices[f];
+
+  void initializeFaceInfo(const unsigned short f) {
+    // const auto &indexFace = posList[f];
     specializeFaceInfo(f);
-    for (unsigned short t = 0; t < UVs[f].size(); t++) {
+    for (unsigned short t = 0; t < indexList[f].size(); t++) {
       initializeTriInfo(f, t);
     }
   }
-  virtual void specializeFaceInfo(unsigned short f) = 0;
-  void initializeTriInfo(unsigned short f, unsigned short t) {
-    const auto &indexTri = faceVertexIndices[f][t];
+
+  void initializeTriInfo(const unsigned short f, const unsigned short t) {
+    // const auto &indexTri = posList[f][t];
     specializeTriInfo(f, t);
-    for (unsigned short v = 0; v < UVs[f][t].size(); v++) {
+    for (unsigned short v = 0; v < indexList[f][t].size(); v++) {
       initializeVertexInfo(f, t, v);
     }
   }
-  virtual void specializeTriInfo(unsigned short f, unsigned short t) = 0;
-  void initializeVertexInfo(unsigned short f, unsigned short t,
-                            unsigned short v) {
-    const unsigned short &indexVertex = faceVertexIndices[f][t][v];
-    const Vec3 &pos = coordinates[indexVertex];
+
+  void initializeVertexInfo(const unsigned short f, const unsigned short t,
+                            const unsigned short v) {
+    const unsigned short &vertexIndex = indexList[f][t][v];
+    const Vec3 &pos = coordinates[vertexIndex];
     specializeVertexInfo(f, t, v);
   }
-  virtual void specializeVertexInfo(unsigned short f, unsigned short t,
-                                    unsigned short v) = 0;
 };

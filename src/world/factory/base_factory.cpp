@@ -14,7 +14,7 @@ BaseFactory::BaseFactory(
     const unsigned short vertexCount, const unsigned short faceCount,
     const VEIndexList &veIndices, const EVIndexList &evIndices,
     const EFIndexList &efIndices, const FEIndexList &feIndices,
-    const RenCoordinateIndexList &fvIndices, const UVList &defaultUVs,
+    const render::IndexList &fvIndices, const render::TexList &defaultUVs,
     const unsigned int rVertexCount)
     : vertexCount{vertexCount}, faceCount{faceCount}, veIndices{veIndices},
       evIndices{evIndices}, efIndices{efIndices}, feIndices{feIndices},
@@ -37,7 +37,8 @@ void BaseFactory::initializeEBO() const {
                            ebo.ID);
 }
 void BaseFactory::allocateVBO() const {
-  sharedVBO.allocateBufferObject(rVertexCount * VertexFormats::_3D::ColTex::WIDTH);
+  sharedVBO.allocateBufferObject(rVertexCount *
+                                 VertexFormats::_3D::ColTex::WIDTH);
   std::cout << std::format("shared vbo {} for factory simplex allocated\n",
                            sharedVBO.ID);
 }
@@ -50,7 +51,7 @@ RendPtr BaseFactory::createRenderable(const Vec3List &coordinates) const {
   return createRenderable(coordinates, defaultUVs);
 }
 RendPtr BaseFactory::createRenderable(const Vec3List &coordinates,
-                                      const UVList &UVs) const {
+                                      const render::TexList &UVs) const {
   if (not buffersInitialized)
     initializeBuffers();
   return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,

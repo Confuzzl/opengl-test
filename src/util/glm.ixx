@@ -20,7 +20,7 @@ const glm::lowp_u16vec2 QUAD_UVS[2][3]{{{0, 0}, {1, 0}, {1, 1}},
 
 Vec3 rotateAroundAxis(const Vec3 &v, const Vec3 &axis, const float deg);
 
-Vec3 transformVector(const Vec3 &v, const Mat4 &t);
+// Vec3 transformVector(const Vec3 &v, const Mat4 &t);
 Vec3 translateVector(const Vec3 &v, const Mat4 &t);
 Vec3 rotateVector(const Vec3 &v, const Mat4 &t);
 

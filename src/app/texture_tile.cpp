@@ -26,7 +26,7 @@ TexTile TexTile::getTile(const std::string &name, const TexObject &texObject) {
   info *= Vec4{TEXEL_RANGE};
   return {info};
 }
-std::string &TexTile::getRandomTexture() {
+const std::string &TexTile::getRandomTexture() {
   return TexTile::textureKeys[static_cast<unsigned int>(math_util::random(
       0.0, static_cast<double>(TexTile::textureDict.size())))];
 }

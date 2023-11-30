@@ -8,6 +8,7 @@ export class Collider;
 export class Renderable;
 
 import util.polyhedron;
+import util.rendering;
 import util.memory;
 import wrapper.buffer_object;
 import world.game_object;
@@ -23,8 +24,8 @@ export class BaseFactory {
   const EFIndexList efIndices;
   const FEIndexList feIndices;
 
-  const RenCoordinateIndexList fvIndices;
-  const UVList defaultUVs;
+  const render::IndexList fvIndices;
+  const render::TexList defaultUVs;
 
   const unsigned int rVertexCount;
   mutable bool buffersInitialized = false;
@@ -43,7 +44,8 @@ protected:
   BaseFactory(const unsigned short vertexCount, const unsigned short faceCount,
               const VEIndexList &veIndices, const EVIndexList &evIndices,
               const EFIndexList &efIndices, const FEIndexList &feIndices,
-              const RenCoordinateIndexList &fvIndices, const UVList &defaultUVs,
+              const render::IndexList &fvIndices,
+              const render::TexList &defaultUVs,
               const unsigned int rVertexCount);
 
 public:
@@ -55,5 +57,5 @@ public:
   CollPtr createCollidable(const Vec3List &coordinates) const;
   RendPtr createRenderable(const Vec3List &coordinates) const;
   RendPtr createRenderable(const Vec3List &coordinates,
-                           const UVList &UVs) const;
+                           const render::TexList &UVs) const;
 };

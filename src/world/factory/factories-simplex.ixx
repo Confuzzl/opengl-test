@@ -2,6 +2,7 @@ export module world.factory.factories:simplex;
 
 import world.factory.base_factory;
 import util.polyhedron;
+import util.rendering;
 
 export class SimplexFactory : public BaseFactory {
 public:
@@ -11,11 +12,11 @@ public:
                     EVIndexList{{0, 1}, {1, 2}, {2, 0}, {2, 3}, {0, 3}, {1, 3}},
                     EFIndexList{{0, 2}, {0, 3}, {0, 1}, {1, 3}, {2, 1}, {3, 2}},
                     FEIndexList{{0, 1, 2}, {2, 3, 4}, {0, 4, 5}, {1, 5, 3}},
-                    RenCoordinateIndexList{
+                    render::IndexList{
                         {{0, 1, 2}}, {{0, 2, 3}}, {{1, 0, 3}}, {{2, 1, 3}}},
-                    UVList{{{{{0, 0}, {1, 0}, {0.5, 1}}}},
-                           {{{{0, 0}, {1, 0}, {0.5, 1}}}},
-                           {{{{0, 0}, {1, 0}, {0.5, 1}}}},
-                           {{{{0, 0}, {1, 0}, {0.5, 1}}}}},
+                    render::TexList{{{{{0, 0}, {1, 0}, {0.5, 1}}}},
+                                    {{{{0, 0}, {1, 0}, {0.5, 1}}}},
+                                    {{{{0, 0}, {1, 0}, {0.5, 1}}}},
+                                    {{{{0, 0}, {1, 0}, {0.5, 1}}}}},
                     12) {}
 };

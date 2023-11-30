@@ -12,8 +12,8 @@ import util.debug;
 
 Renderable::Renderable(const EBO &ebo, const VBO &sharedVBO,
                        const Vec3List &coordinates,
-                       const RenCoordinateIndexList &faceVertexIndices,
-                       const UVList &UVs)
+                       const render::IndexList &faceVertexIndices,
+                       const render::TexList &UVs)
     : BasePolyhedron(coordinates), ebo{ebo}, sharedVBO{sharedVBO},
       faceVertexIndices{faceVertexIndices}, UVs{UVs} {
   if (faceVertexIndices.size() != UVs.size())

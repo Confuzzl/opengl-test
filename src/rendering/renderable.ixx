@@ -2,6 +2,7 @@ export module rendering.renderable;
 
 import world.base_polyhedron;
 import util.polyhedron;
+import util.rendering;
 import wrapper.program.vertex_formats;
 import wrapper.buffer_object;
 import <stdexcept>;
@@ -13,8 +14,8 @@ public:
   };
 
 private:
-  const RenCoordinateIndexList &faceVertexIndices;
-  const UVList UVs;
+  const render::IndexList faceVertexIndices;
+  const render::TexList UVs;
 
   Vector<VertexFormats::_3D::ColTex> vertexInfo;
 
@@ -24,8 +25,8 @@ public:
   const EBO &ebo;
   const VBO &sharedVBO;
   Renderable(const EBO &ebo, const VBO &sharedVBO, const Vec3List &coordinates,
-             const RenCoordinateIndexList &faceVertexIndices,
-             const UVList &UVs);
+             const render::IndexList &faceVertexIndices,
+             const render::TexList &UVs);
 
   void writeToSharedVBO() const;
 };
