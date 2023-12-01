@@ -14,12 +14,12 @@ BaseFactory::BaseFactory(
     const unsigned short vertexCount, const unsigned short faceCount,
     const VEIndexList &veIndices, const EVIndexList &evIndices,
     const EFIndexList &efIndices, const FEIndexList &feIndices,
-    const render::IndexList &fvIndices, const render::TexList &defaultUVs,
-    const unsigned int rVertexCount)
+    const render::IndexList &defaultIndexList,
+    const render::TexList &defaultTexList, const unsigned int rVertexCount)
     : vertexCount{vertexCount}, faceCount{faceCount}, veIndices{veIndices},
       evIndices{evIndices}, efIndices{efIndices}, feIndices{feIndices},
-      fvIndices{fvIndices}, defaultUVs{defaultUVs}, rVertexCount{rVertexCount} {
-}
+      defaultIndexList{defaultIndexList}, defaultTexList{defaultTexList},
+      rVertexCount{rVertexCount} {}
 BaseFactory::~BaseFactory() = default;
 
 void BaseFactory::initializeBuffers() const {
@@ -48,12 +48,25 @@ CollPtr BaseFactory::createCollidable(const Vec3List &coordinates) const {
                                     veIndices, evIndices, efIndices, feIndices);
 }
 RendPtr BaseFactory::createRenderable(const Vec3List &coordinates) const {
-  return createRenderable(coordinates, defaultUVs);
+  return createRenderable(coordinates, defaultTexList);
 }
 RendPtr BaseFactory::createRenderable(const Vec3List &coordinates,
-                                      const render::TexList &UVs) const {
+                                      const render::TexList &texList) const {
   if (not buffersInitialized)
     initializeBuffers();
-  return std::make_unique<Renderable>(ebo, sharedVBO, coordinates, fvIndices,
-                                      UVs);
+  return std::make_unique<Renderable>(ebo, sharedVBO, coordinates,
+                                      defaultIndexList, texList);
+}
+
+UPtr<RenderableCol> BaseFactory::renCol(const Vec3List &coordinates) const {
+  return renCol(coordinates, defaultColList);
+}
+UPtr<RenderableCol> BaseFactory::renCol(const Vec3List &coordinates,
+                                        const render::ColList &colList) const {
+  if (not buffersInitialized)
+    initializeBuffers();
+  UPtr<RenderableCol> out{std::make_unique<RenderableCol>(
+      ebo, sharedVBO, coordinates, defaultIndexList, colList)};
+  out->finishConstruction();
+  return out;
 }

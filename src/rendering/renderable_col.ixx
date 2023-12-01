@@ -14,7 +14,7 @@ export class RenderableCol
                 const render::IndexList &indexList,
                 const render::ColList &colList);
 
-  bool exceptionCondition();
+  bool exceptionCondition() override;
 
   void specializeFaceInfo(const unsigned short f) override;
   void specializeTriInfo(const unsigned short f,

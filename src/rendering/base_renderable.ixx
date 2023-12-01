@@ -22,6 +22,13 @@ public:
 
   void writeToVBO() const { GLintptr offset = 0; }
 
+  void finishConstruction() {
+    vertexInfo.reserve(coordinates.size());
+    for (unsigned short f = 0; f < indexList.size(); f++) {
+      initializeFaceInfo(f);
+    }
+  }
+
 protected:
   BaseRenderable(const EBO &ebo, const VBO &vbo, const Vec3List &coordinates,
                  const render::IndexList &indexList)
@@ -37,13 +44,6 @@ protected:
   virtual void specializeVertexInfo(const unsigned short f,
                                     const unsigned short t,
                                     const unsigned short v) = 0;
-
-  void initialize() {
-    vertexInfo.reserve(coordinates.size());
-    for (unsigned short f = 0; f < indexList.size(); f++) {
-      initializeFaceInfo(f);
-    }
-  }
 
   void initializeFaceInfo(const unsigned short f) {
     // const auto &indexFace = posList[f];

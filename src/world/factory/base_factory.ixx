@@ -15,6 +15,9 @@ import world.game_object;
 import world.collision.collider;
 import rendering.renderable;
 
+// import rendering.base_renderable;
+import rendering.renderable_col;
+
 export class BaseFactory {
   const unsigned short vertexCount;
   const unsigned short faceCount;
@@ -24,8 +27,9 @@ export class BaseFactory {
   const EFIndexList efIndices;
   const FEIndexList feIndices;
 
-  const render::IndexList fvIndices;
-  const render::TexList defaultUVs;
+  const render::IndexList defaultIndexList;
+  const render::ColList defaultColList;
+  const render::TexList defaultTexList;
 
   const unsigned int rVertexCount;
   mutable bool buffersInitialized = false;
@@ -44,8 +48,8 @@ protected:
   BaseFactory(const unsigned short vertexCount, const unsigned short faceCount,
               const VEIndexList &veIndices, const EVIndexList &evIndices,
               const EFIndexList &efIndices, const FEIndexList &feIndices,
-              const render::IndexList &fvIndices,
-              const render::TexList &defaultUVs,
+              const render::IndexList &defaultIndexList,
+              const render::TexList &defaultTexList,
               const unsigned int rVertexCount);
 
 public:
@@ -57,5 +61,9 @@ public:
   CollPtr createCollidable(const Vec3List &coordinates) const;
   RendPtr createRenderable(const Vec3List &coordinates) const;
   RendPtr createRenderable(const Vec3List &coordinates,
-                           const render::TexList &UVs) const;
+                           const render::TexList &texList) const;
+
+  UPtr<RenderableCol> renCol(const Vec3List &coordinates) const;
+  UPtr<RenderableCol> renCol(const Vec3List &coordinates,
+                             const render::ColList &colList) const;
 };
