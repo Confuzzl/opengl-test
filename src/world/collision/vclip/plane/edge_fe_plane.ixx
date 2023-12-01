@@ -11,12 +11,12 @@ export class Face;
 export class EdgeRegion;
 
 export class EdgeFEPlane : public FEPlane<Face, EdgeRegion> {
+  bool reversed;
+
   friend UPtr<EdgeFEPlane>
   std::make_unique<EdgeFEPlane, const EdgeRegion &, const Edge &, const Face &,
                    bool>(const EdgeRegion &, const Edge &, const Face &,
                          bool &&);
-
-  bool reversed;
 
   EdgeFEPlane(const EdgeRegion &region, const Edge &edge, const Face &face,
               const bool reversed);

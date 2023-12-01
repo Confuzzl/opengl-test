@@ -26,7 +26,7 @@ protected:
   BaseRenderable(const EBO &ebo, const VBO &vbo, const Vec3List &coordinates,
                  const render::IndexList &indexList)
       : BasePolyhedron(coordinates), ebo{ebo}, vbo{vbo}, indexList{indexList} {
-    initialize();
+    // initialize(); call in factory after ctor
   }
 
   virtual bool exceptionCondition() = 0;
@@ -34,8 +34,9 @@ protected:
   virtual void specializeFaceInfo(const unsigned short f) = 0;
   virtual void specializeTriInfo(const unsigned short f,
                                  const unsigned short t) = 0;
-  virtual void specializeVertexInfo(unsigned short f, unsigned short t,
-                                    unsigned short v) = 0;
+  virtual void specializeVertexInfo(const unsigned short f,
+                                    const unsigned short t,
+                                    const unsigned short v) = 0;
 
   void initialize() {
     vertexInfo.reserve(coordinates.size());

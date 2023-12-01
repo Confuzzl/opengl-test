@@ -27,23 +27,24 @@ export class Collider : public BasePolyhedron {
   Edge &addEdge(UPtr<Edge> &&e);
   Face &addFace(UPtr<Face> &&f);
 
-  friend std::make_unique<
-      Collider, unsigned short, unsigned short, const Vec3List &,
+  friend UPtr<Collider>
+  std::make_unique<Collider, const unsigned short &, const unsigned short &,
+                   const Vec3List &, const VEIndexList &, const EVIndexList &,
+                   const EFIndexList &, const FEIndexList &>(
+      const unsigned short &, const unsigned short &, const Vec3List &,
       const VEIndexList &, const EVIndexList &, const EFIndexList &,
-      const FEIndexList &>(unsigned short &&, unsigned short &&,
-                           const Vec3List &, const VEIndexList &,
-                           const EVIndexList &, const EFIndexList &,
-                           const FEIndexList &);
-
-public:
-  static unsigned int count;
-  const unsigned int ID;
+      const FEIndexList &);
 
   Collider(const unsigned short vertexCount, const unsigned short faceCount,
            const Vec3List &coordinates, const VEIndexList &vertexEdgeIndices,
            const EVIndexList &edgeVertexIndices,
            const EFIndexList &edgeFaceIndices,
            const FEIndexList &faceEdgeIndices);
+
+public:
+  static unsigned int count;
+  const unsigned int ID;
+
   ~Collider();
 
 protected:

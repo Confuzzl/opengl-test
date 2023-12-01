@@ -10,12 +10,12 @@ export class Face;
 export class FaceRegion;
 
 export class SupportPlane : public VoronoiPlane<FaceRegion> {
+  const Face &face;
+
   friend UPtr<SupportPlane>
   std::make_unique<SupportPlane, const FaceRegion &, const Vertex &,
                    const Face &>(const FaceRegion &, const Vertex &,
                                  const Face &);
-
-  const Face &face;
 
   SupportPlane(const FaceRegion &region, const Vertex &referencePoint,
                const Face &face);

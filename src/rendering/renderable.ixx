@@ -21,12 +21,18 @@ private:
 
   void initializeVertexInfo();
 
-public:
-  const EBO &ebo;
-  const VBO &sharedVBO;
+  friend UPtr<Renderable>
+  std::make_unique<Renderable, EBO &, VBO &, const Vec3List &,
+                   const render::IndexList &, const render::TexList &>(
+      EBO &, VBO &, const Vec3List &, const render::IndexList &,
+      const render::TexList &);
   Renderable(const EBO &ebo, const VBO &sharedVBO, const Vec3List &coordinates,
              const render::IndexList &faceVertexIndices,
              const render::TexList &UVs);
+
+public:
+  const EBO &ebo;
+  const VBO &sharedVBO;
 
   void writeToSharedVBO() const;
 };

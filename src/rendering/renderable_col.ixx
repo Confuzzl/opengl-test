@@ -14,10 +14,11 @@ export class RenderableCol
                 const render::IndexList &indexList,
                 const render::ColList &colList);
 
-  bool exceptionCondition() { return indexList.size() != colList.size(); }
+  bool exceptionCondition();
 
-  void specializeFaceInfo(const unsigned short f) {}
-  void specializeTriInfo(const unsigned short f, const unsigned short t) {}
-  void specializeVertexInfo(unsigned short f, unsigned short t,
-                            unsigned short v) {}
+  void specializeFaceInfo(const unsigned short f) override;
+  void specializeTriInfo(const unsigned short f,
+                         const unsigned short t) override;
+  void specializeVertexInfo(const unsigned short f, const unsigned short t,
+                            const unsigned short v) override;
 };

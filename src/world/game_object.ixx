@@ -19,8 +19,8 @@ export class GameObject : public PhysicsObject {
   CollPtr collider;
   RendPtr render;
 
-  friend GObjPtr std::make_unique<GameObject, CollPtr, RendPtr>(CollPtr &&,
-                                                                RendPtr &&);
+  friend GObjPtr
+  std::make_unique<GameObject /*, CollPtr, RendPtr*/>(CollPtr &&, RendPtr &&);
   GameObject(CollPtr collider, RendPtr render);
 
   GameObject(const GameObject &) = delete;
