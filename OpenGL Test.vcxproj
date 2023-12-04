@@ -180,6 +180,7 @@
     <ClCompile Include="src\rendering\frame\keyframe.cpp" />
     <ClCompile Include="src\rendering\frame\keyframe.ixx" />
     <ClCompile Include="src\rendering\frame\renderable_col.cpp" />
+    <ClCompile Include="src\rendering\renderable_col.cpp" />
     <ClCompile Include="src\rendering\renderable_col.ixx" />
     <ClCompile Include="src\util\debug.ixx" />
     <ClCompile Include="src\util\glm.cpp" />
