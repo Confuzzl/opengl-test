@@ -49,6 +49,7 @@ protected:
               const VEIndexList &veIndices, const EVIndexList &evIndices,
               const EFIndexList &efIndices, const FEIndexList &feIndices,
               const render::IndexList &defaultIndexList,
+              const render::ColList &defaultColList,
               const render::TexList &defaultTexList,
               const unsigned int rVertexCount);
 

@@ -15,11 +15,12 @@ BaseFactory::BaseFactory(
     const VEIndexList &veIndices, const EVIndexList &evIndices,
     const EFIndexList &efIndices, const FEIndexList &feIndices,
     const render::IndexList &defaultIndexList,
+    const render::ColList &defaultColList,
     const render::TexList &defaultTexList, const unsigned int rVertexCount)
     : vertexCount{vertexCount}, faceCount{faceCount}, veIndices{veIndices},
       evIndices{evIndices}, efIndices{efIndices}, feIndices{feIndices},
-      defaultIndexList{defaultIndexList}, defaultTexList{defaultTexList},
-      rVertexCount{rVertexCount} {}
+      defaultIndexList{defaultIndexList}, defaultColList{defaultColList},
+      defaultTexList{defaultTexList}, rVertexCount{rVertexCount} {}
 BaseFactory::~BaseFactory() = default;
 
 void BaseFactory::initializeBuffers() const {
