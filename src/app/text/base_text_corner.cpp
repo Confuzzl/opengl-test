@@ -64,12 +64,12 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
               height = Programs::Font::CHAR_HEIGHT * scale;
   for (const char c : msg) {
     const TexTile tex{mainApp.consolas->getTile(c)};
-    for (int tri = 0; tri < 2; tri++) {
+    for (int triFromList = 0; triFromList < 2; triFromList++) {
       for (int vertex = 0; vertex < 3; vertex++) {
-        const Vec2 pos{xOffset + width * glm_util::QUAD_UVS[tri][vertex][0],
-                       y2 + height * glm_util::QUAD_UVS[tri][vertex][1]};
+        const Vec2 pos{xOffset + width * glm_util::QUAD_UVS[triFromList][vertex][0],
+                       y2 + height * glm_util::QUAD_UVS[triFromList][vertex][1]};
         const glm::lowp_u16vec2 uv{
-            tex.coordinates + tex.dimensions * glm_util::QUAD_UVS[tri][vertex]};
+            tex.coordinates + tex.dimensions * glm_util::QUAD_UVS[triFromList][vertex]};
 
         vertices.emplace_back(pos[0], pos[1], uv[0], uv[1]);
       }

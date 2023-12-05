@@ -24,37 +24,22 @@ export using TexTri = RenTri<Tex>;
 export using TexFace = RenFace<Tex>;
 export using TexList = Vector<TexFace>;
 
-export template <typename VertexType>
-RenTri<VertexType> tri(VertexType a, VertexType b, VertexType c) {
-  return {a, b, c};
-}
-
-export template <typename T> RenTri<T> tri(const std::initializer_list<T> &t) {
-  static_assert(t.size() == 3);
-  return {t};
+export template <typename T> RenTri<T> triFromList(const Vector<T> &t) {
+  return {t[0], t[1], t[2]};
 }
 
 export template <typename VertexType>
-Vector<RenFace<VertexType>> fromFace(const std::size_t n,
-                                     const RenFace<VertexType> &face) {
-  Vector<RenFace<VertexType>> out{};
-  out.reserve(n);
-  for (std::size_t i = 0; i < n; i++)
-    out.emplace_back(face);
-  return out;
+RenFace<VertexType> fromTris(const Vector<Vector<VertexType>> &tris) {
+  return vector_util::mapVector<Vector<VertexType>, RenTri<VertexType>>(
+      tris, [](const auto &triList) { return triFromList(triList); });
 }
 
-export /*template <typename VertexType>*/
-    RenFace<int>
-    fromTris(const Vector<std::initializer_list<int>> &tris) {
-  RenFace<int> out;
-  out.reserve(tris.size());
-  for (const auto tri : tris) {
-    out.emplace_back(render::tri(tri));
-  }
-  const auto a =
-      std::ranges::views::transform(tris, [](const auto &e) { return e });
-  return out;
+export template <typename VertexType>
+Vector<RenFace<VertexType>> fromFace(const unsigned int n,
+                                     const Vector<Vector<VertexType>> &tris) {
+  using namespace vector_util;
+  const RenFace<VertexType> face = fromTris(tris);
+  return vector_util::mapVector<unsigned int, RenFace<VertexType>>(
+      vector_util::range(0, n), [&face](const unsigned int &) { return face; });
 }
-
 } // namespace render

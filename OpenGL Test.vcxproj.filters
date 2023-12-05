@@ -338,7 +338,7 @@
     <ClCompile Include="src\rendering\renderable_col.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\frame\renderable_col.cpp">
+    <ClCompile Include="src\rendering\renderable_col.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
