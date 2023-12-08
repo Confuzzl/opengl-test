@@ -1,8 +1,8 @@
-export module rendering.animation;
+export module rendering.anim.animation;
 
 import util.memory;
-import rendering.frame.keyframe;
-import rendering.frame.inbetween;
+import rendering.anim.frame.keyframe;
+import rendering.anim.frame.inbetween;
 import util.glm;
 import <stdexcept>;
 

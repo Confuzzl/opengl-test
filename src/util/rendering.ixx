@@ -4,9 +4,36 @@ import util.glm;
 import util.vector;
 import <ranges>;
 import <algorithm>;
+import <stdexcept>;
 
 export namespace render {
-export template <typename T> using RenTri = Array<T, 3>;
+// export template <typename T> using RenTri = Array<T, 3>;
+
+export template <typename T> struct RenTri {
+  const T a, b, c;
+
+  RenTri(const T &a, const T &b, const T &c) : a{a}, b{b}, c{c} {}
+  RenTri(const T &n) : RenTri<T>(n, n, n) {}
+
+  RenTri(const RenTri<T> &) = default;
+  RenTri(RenTri<T> &&) = default;
+  RenTri<T> &operator=(const RenTri<T> &) = default;
+  RenTri<T> &operator=(RenTri<T> &&) = default;
+
+  const T &operator[](const unsigned char i) const {
+    switch (i) {
+    case 0:
+      return a;
+    case 1:
+      return b;
+    case 2:
+      return c;
+    default:
+      throw std::out_of_range{"INVALID TRI INDEX"};
+    }
+  }
+};
+
 export template <typename T> using RenFace = Vector<RenTri<T>>;
 
 export using Index = unsigned short;
@@ -24,22 +51,17 @@ export using TexTri = RenTri<Tex>;
 export using TexFace = RenFace<Tex>;
 export using TexList = Vector<TexFace>;
 
-export template <typename T> RenTri<T> triFromList(const Vector<T> &t) {
-  return {t[0], t[1], t[2]};
+export template <typename VertexType>
+RenFace<VertexType> repeatTris(const unsigned int n,
+                               const RenTri<VertexType> &tri) {
+  return vector_util::mapVectorRange<RenTri<VertexType>>(
+      0, n, [&tri](const unsigned int &) { return tri; });
 }
 
 export template <typename VertexType>
-RenFace<VertexType> fromTris(const Vector<Vector<VertexType>> &tris) {
-  return vector_util::mapVector<Vector<VertexType>, RenTri<VertexType>>(
-      tris, [](const auto &triList) { return triFromList(triList); });
-}
-
-export template <typename VertexType>
-Vector<RenFace<VertexType>> fromFace(const unsigned int n,
-                                     const Vector<Vector<VertexType>> &tris) {
-  using namespace vector_util;
-  const RenFace<VertexType> face = fromTris(tris);
-  return vector_util::mapVector<unsigned int, RenFace<VertexType>>(
-      vector_util::range(0, n), [&face](const unsigned int &) { return face; });
+Vector<RenFace<VertexType>> repeatFaces(const unsigned int n,
+                                        const RenFace<VertexType> &face) {
+  return vector_util::mapVectorRange<RenFace<VertexType>>(
+      0, n, [&face](const unsigned int &) { return face; });
 }
 } // namespace render

@@ -36,3 +36,7 @@ TexTile TexTile::getRandomTile(const TexObject &texObject) {
 
 TexTile::TexTile(const glm::lowp_u16vec4 info)
     : coordinates{info[0], info[1]}, dimensions{info[2], info[3]} {}
+
+TexTile::IntUV TexTile::globalIntUV(const Vec2 &uv) const {
+  return coordinates + static_cast<IntUV>(static_cast<Vec2>(dimensions) * uv);
+}

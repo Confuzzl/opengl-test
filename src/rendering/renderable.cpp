@@ -35,7 +35,7 @@ void Renderable::initializeVertexInfo() {
     for (unsigned short t = 0; t < UVs[f].size(); t++) {
       const auto &indexTri = faceVertexIndices[f][t];
       const auto &uvTri = UVs[f][t];
-      for (unsigned short v = 0; v < UVs[f][t].size(); v++) {
+      for (unsigned char v = 0; v < 3; v++) {
         const unsigned short &indexVertex = faceVertexIndices[f][t][v];
         const Vec2 &uvVertex = UVs[f][t][v];
 

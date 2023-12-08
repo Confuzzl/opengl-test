@@ -18,9 +18,11 @@ public:
 private:
   bool exceptionCondition() override;
 
-  void specializeFaceInfo(const unsigned short f) override;
-  void specializeTriInfo(const unsigned short f,
-                         const unsigned short t) override;
-  void specializeVertexInfo(const unsigned short f, const unsigned short t,
-                            const unsigned short v) override;
+  void specializeConstruction() override;
+
+  // void specializeFaceInfo(const unsigned short f) override;
+  // void specializeTriInfo(const unsigned short f,
+  //                        const unsigned short t) override;
+  // void specializeVertexInfo(const unsigned short f, const unsigned short t,
+  //                           const unsigned short v) override;
 };

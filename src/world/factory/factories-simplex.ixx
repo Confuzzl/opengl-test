@@ -15,15 +15,15 @@ public:
             FEIndexList{{0, 1, 2}, {2, 3, 4}, {0, 4, 5}, {1, 5, 3}},
             render::IndexList{
                 {{0, 1, 2}}, {{0, 2, 3}}, {{1, 0, 3}}, {{2, 1, 3}}},
-            render::fromFace<render::Col>(
+            render::repeatFaces<render::Col>(
                 4,
                 {
                     {{255, 255, 255}, {255, 255, 255}, {255, 255, 255}},
                 }),
-            render::fromFace<render::Tex>(4,
-                                          {
-                                              {{0, 0}, {1, 0}, {0.5, 1}},
-                                          }),
+            render::repeatFaces<render::Tex>(4,
+                                             {
+                                                 {{0, 0}, {1, 0}, {0.5, 1}},
+                                             }),
             // render::TexList{
             //     render::TexFace{render::TexTri{{{0, 0}, {1, 0}, {0.5, 1}}}},
             //     render::TexFace{render::TexTri{{{0, 0}, {1, 0}, {0.5, 1}}}},

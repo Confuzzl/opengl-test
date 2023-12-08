@@ -17,8 +17,8 @@ export struct UpdateCycle;
 export struct TexObject;
 export struct Font;
 
-import rendering.animation;
-import rendering.frame.keyframe;
+import rendering.anim.animation;
+import rendering.anim.frame.keyframe;
 
 export struct App {
   struct FailedWindowCreationException : public std::runtime_error {

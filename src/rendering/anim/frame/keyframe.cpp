@@ -1,4 +1,4 @@
-module rendering.frame.keyframe;
+module rendering.anim.frame.keyframe;
 
 Keyframe::Keyframe(const Mat4 &transform, const double time)
     : Frame(transform), time{time} {}

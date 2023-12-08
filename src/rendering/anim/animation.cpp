@@ -4,7 +4,7 @@ module;
 #include <algorithm>
 #include <ranges>
 
-module rendering.animation;
+module rendering.anim.animation;
 
 import util.debug;
 

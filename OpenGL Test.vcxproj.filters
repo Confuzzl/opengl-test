@@ -272,28 +272,28 @@
     <ClCompile Include="src\util\glm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\animation.ixx">
+    <ClCompile Include="src\rendering\anim\animation.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\frame\keyframe.ixx">
+    <ClCompile Include="src\rendering\anim\frame\keyframe.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\animation.cpp">
+    <ClCompile Include="src\rendering\anim\animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\frame\frame.ixx">
+    <ClCompile Include="src\rendering\anim\frame\frame.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\frame\inbetween.ixx">
+    <ClCompile Include="src\rendering\anim\frame\inbetween.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\frame\inbetween.cpp">
+    <ClCompile Include="src\rendering\anim\frame\inbetween.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\frame\keyframe.cpp">
+    <ClCompile Include="src\rendering\anim\frame\keyframe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\frame\frame.cpp">
+    <ClCompile Include="src\rendering\anim\frame\frame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\app\input\input_handler.ixx">
@@ -339,6 +339,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\renderable_col.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\renderable_tex.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\renderable_tex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

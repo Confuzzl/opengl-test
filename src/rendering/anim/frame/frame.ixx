@@ -1,4 +1,4 @@
-export module rendering.frame.frame;
+export module rendering.anim.frame.frame;
 
 import util.glm;
 

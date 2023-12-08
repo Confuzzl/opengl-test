@@ -1,4 +1,4 @@
-module rendering.frame.inbetween;
+module rendering.anim.frame.inbetween;
 
 import util.glm;
 

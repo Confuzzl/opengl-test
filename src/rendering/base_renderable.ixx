@@ -24,9 +24,7 @@ public:
 
   void finishConstruction() {
     vertexInfo.reserve(coordinates.size());
-    for (unsigned short f = 0; f < indexList.size(); f++) {
-      initializeFaceInfo(f);
-    }
+    specializeConstruction();
   }
 
 protected:
@@ -38,33 +36,33 @@ protected:
 
   virtual bool exceptionCondition() = 0;
 
-  virtual void specializeFaceInfo(const unsigned short f) = 0;
-  virtual void specializeTriInfo(const unsigned short f,
-                                 const unsigned short t) = 0;
-  virtual void specializeVertexInfo(const unsigned short f,
-                                    const unsigned short t,
-                                    const unsigned short v) = 0;
+  virtual void specializeConstruction() = 0;
 
-  void initializeFaceInfo(const unsigned short f) {
-    // const auto &indexFace = posList[f];
-    specializeFaceInfo(f);
-    for (unsigned short t = 0; t < indexList[f].size(); t++) {
-      initializeTriInfo(f, t);
-    }
-  }
+  // virtual void specializeFaceInfo(const unsigned short f) = 0;
+  // virtual void specializeTriInfo(const unsigned short f,
+  //                                const unsigned short t) = 0;
+  // virtual void specializeVertexInfo(const unsigned short f,
+  //                                   const unsigned short t,
+  //                                   const unsigned short v) = 0;
 
-  void initializeTriInfo(const unsigned short f, const unsigned short t) {
-    // const auto &indexTri = posList[f][t];
-    specializeTriInfo(f, t);
-    for (unsigned short v = 0; v < indexList[f][t].size(); v++) {
-      initializeVertexInfo(f, t, v);
-    }
-  }
+  // void initializeFaceInfo(const unsigned short f) {
+  //   specializeFaceInfo(f);
+  //   for (unsigned short t = 0; t < indexList[f].size(); t++) {
+  //     initializeTriInfo(f, t);
+  //   }
+  // }
 
-  void initializeVertexInfo(const unsigned short f, const unsigned short t,
-                            const unsigned short v) {
-    const unsigned short &vertexIndex = indexList[f][t][v];
-    const Vec3 &pos = coordinates[vertexIndex];
-    specializeVertexInfo(f, t, v);
-  }
+  // void initializeTriInfo(const unsigned short f, const unsigned short t) {
+  //   specializeTriInfo(f, t);
+  //   for (unsigned char v = 0; v < 3; v++) {
+  //     initializeVertexInfo(f, t, v);
+  //   }
+  // }
+
+  // void initializeVertexInfo(const unsigned short f, const unsigned short t,
+  //                           const unsigned char v) {
+  //   const unsigned short vertexIndex = indexList[f][t][v];
+  //   const Vec3 &pos = coordinates[vertexIndex];
+  //   specializeVertexInfo(f, t, v);
+  // }
 };

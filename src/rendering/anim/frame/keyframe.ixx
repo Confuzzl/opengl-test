@@ -1,6 +1,6 @@
-export module rendering.frame.keyframe;
+export module rendering.anim.frame.keyframe;
 
-import rendering.frame.frame;
+import rendering.anim.frame.frame;
 import util.memory;
 import util.glm;
 

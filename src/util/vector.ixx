@@ -37,4 +37,10 @@ Vector<Out> mapVector(const Vector<In> &in,
     out.emplace_back(map(i));
   return out;
 }
+
+template <typename Out>
+Vector<Out> mapVectorRange(const unsigned int a, const unsigned int b,
+                           const std::function<Out(const unsigned int &)> map) {
+  return mapVector<unsigned int, Out>(range(a, b), map);
+}
 } // namespace vector_util
