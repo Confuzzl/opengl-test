@@ -181,6 +181,8 @@
     <ClCompile Include="src\rendering\anim\frame\keyframe.ixx" />
     <ClCompile Include="src\rendering\renderable_col.cpp" />
     <ClCompile Include="src\rendering\renderable_col.ixx" />
+    <ClCompile Include="src\rendering\renderable_coltex.cpp" />
+    <ClCompile Include="src\rendering\renderable_coltex.ixx" />
     <ClCompile Include="src\rendering\renderable_tex.cpp" />
     <ClCompile Include="src\rendering\renderable_tex.ixx" />
     <ClCompile Include="src\util\debug.ixx" />
@@ -252,6 +254,7 @@
     <ClCompile Include="src\world\transform\translatable.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.cpp" />
+    <ClCompile Include="src\wrapper\program\global_programs.ixx" />
     <ClCompile Include="src\wrapper\program\programs.cpp" />
     <ClCompile Include="src\wrapper\program\programs.ixx" />
     <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />

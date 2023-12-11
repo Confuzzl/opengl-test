@@ -27,10 +27,10 @@ void Programs::Base::useProgram() {
   glUseProgram(ID);
 }
 
-void Programs::Base::setVec3(const char *name, const Vec3 vec) {
+void Programs::Base::setVec3(const char *name, const Vec3 vec) const {
   glUniform3fv(glGetUniformLocation(ID, name), 1, glm::value_ptr(vec));
 }
-void Programs::Base::setMat4(const char *name, const Mat4 matrix) {
+void Programs::Base::setMat4(const char *name, const Mat4 matrix) const {
   glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE,
                      glm::value_ptr(matrix));
 }

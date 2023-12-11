@@ -10,9 +10,13 @@ import wrapper.buffer_object;
 import util.rendering;
 import util.polyhedron;
 
+import wrapper.program.programs;
+
 export template </*VertexFormats::IsVertexFormat*/ typename VertexType>
 class BaseRenderable : public BasePolyhedron {
 public:
+  const Programs::Base &program;
+
   const EBO &ebo;
   const VBO &vbo;
 
@@ -20,49 +24,27 @@ public:
 
   Vector<VertexType> vertexInfo;
 
-  void writeToVBO() const { GLintptr offset = 0; }
+  void writeToVBO() const {
+    GLintptr offset = 0;
+    for (const auto &vertex : vertexInfo) {
+      vertex.writeVertexTo(offset, vbo.ID);
+    }
+  }
 
   void finishConstruction() {
     vertexInfo.reserve(coordinates.size());
+
     specializeConstruction();
   }
 
 protected:
-  BaseRenderable(const EBO &ebo, const VBO &vbo, const Vec3List &coordinates,
+  BaseRenderable(const Programs::Base &program, const EBO &ebo, const VBO &vbo,
+                 const Vec3List &coordinates,
                  const render::IndexList &indexList)
-      : BasePolyhedron(coordinates), ebo{ebo}, vbo{vbo}, indexList{indexList} {
-    // initialize(); call in factory after ctor
-  }
+      : BasePolyhedron(coordinates), program{program}, ebo{ebo}, vbo{vbo},
+        indexList{indexList} {}
 
   virtual bool exceptionCondition() = 0;
 
   virtual void specializeConstruction() = 0;
-
-  // virtual void specializeFaceInfo(const unsigned short f) = 0;
-  // virtual void specializeTriInfo(const unsigned short f,
-  //                                const unsigned short t) = 0;
-  // virtual void specializeVertexInfo(const unsigned short f,
-  //                                   const unsigned short t,
-  //                                   const unsigned short v) = 0;
-
-  // void initializeFaceInfo(const unsigned short f) {
-  //   specializeFaceInfo(f);
-  //   for (unsigned short t = 0; t < indexList[f].size(); t++) {
-  //     initializeTriInfo(f, t);
-  //   }
-  // }
-
-  // void initializeTriInfo(const unsigned short f, const unsigned short t) {
-  //   specializeTriInfo(f, t);
-  //   for (unsigned char v = 0; v < 3; v++) {
-  //     initializeVertexInfo(f, t, v);
-  //   }
-  // }
-
-  // void initializeVertexInfo(const unsigned short f, const unsigned short t,
-  //                           const unsigned char v) {
-  //   const unsigned short vertexIndex = indexList[f][t][v];
-  //   const Vec3 &pos = coordinates[vertexIndex];
-  //   specializeVertexInfo(f, t, v);
-  // }
 };

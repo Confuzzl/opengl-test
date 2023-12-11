@@ -71,3 +71,42 @@ UPtr<RenderableCol> BaseFactory::renCol(const Vec3List &coordinates,
   out->finishConstruction();
   return out;
 }
+
+UPtr<RenderableTex> BaseFactory::renTex(const Vec3List &coordinates) const {
+  return renTex(coordinates, defaultTexList);
+}
+UPtr<RenderableTex> BaseFactory::renTex(const Vec3List &coordinates,
+                                        const render::TexList &texList) const {
+  if (not buffersInitialized)
+    initializeBuffers();
+  UPtr<RenderableTex> out{std::make_unique<RenderableTex>(
+      ebo, sharedVBO, coordinates, defaultIndexList, texList)};
+  out->finishConstruction();
+  return out;
+}
+
+UPtr<RenderableColTex>
+BaseFactory::renColTex(const Vec3List &coordinates) const {
+  return renColTex(coordinates, defaultColList, defaultTexList);
+}
+UPtr<RenderableColTex>
+BaseFactory::renColTex(const Vec3List &coordinates,
+                       const render::ColList &colList) const {
+  return renColTex(coordinates, colList, defaultTexList);
+}
+UPtr<RenderableColTex>
+BaseFactory::renColTex(const Vec3List &coordinates,
+                       const render::TexList &texList) const {
+  return renColTex(coordinates, defaultColList, texList);
+}
+UPtr<RenderableColTex>
+BaseFactory::renColTex(const Vec3List &coordinates,
+                       const render::ColList &colList,
+                       const render::TexList &texList) const {
+  if (not buffersInitialized)
+    initializeBuffers();
+  UPtr<RenderableColTex> out{std::make_unique<RenderableColTex>(
+      ebo, sharedVBO, coordinates, defaultIndexList, colList, texList)};
+  out->finishConstruction();
+  return out;
+}

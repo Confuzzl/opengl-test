@@ -18,6 +18,8 @@ import util.debug;
 
 import app.input.input_handler;
 
+import wrapper.program.global_programs;
+
 const Mat4 App::UI_MAT{glm::ortho(0.0f, static_cast<float>(App::WIDTH), 0.0f,
                                   static_cast<float>(App::HEIGHT))};
 
@@ -34,6 +36,8 @@ App::App()
 
   colTexProgram->create();
   fontProgram->create();
+
+  Programs::createAll();
 
   try {
     atlas->initTexture();

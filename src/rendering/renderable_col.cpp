@@ -1,11 +1,17 @@
+module;
+
+#include "util/gl_utils.hpp"
+
 module rendering.renderable_col;
+
+import wrapper.program.global_programs;
 
 RenderableCol::RenderableCol(const EBO &ebo, const VBO &vbo,
                              const Vec3List &coordinates,
                              const render::IndexList &indexList,
                              const render::ColList &colList)
-    : BaseRenderable<VertexFormats::_3D::Colored>(ebo, vbo, coordinates,
-                                                  indexList),
+    : BaseRenderable<VertexFormats::_3D::Colored>(Programs::COL_PROGRAM, ebo,
+                                                  vbo, coordinates, indexList),
       colList{colList} {}
 
 bool RenderableCol::exceptionCondition() {
@@ -20,7 +26,9 @@ void RenderableCol::specializeConstruction() {
       for (auto v = 0; v < 3; v++) {
         const render::Index indexVertex = indexTri[v];
         const Vec3 &coordinate = coordinates[indexVertex];
+
         const render::Col &colVertex = colList[f][t][v];
+
         vertexInfo.emplace_back(VertexFormats::_3D::Colored{
             coordinate[0], coordinate[1], coordinate[2], colVertex[0],
             colVertex[1], colVertex[2]});

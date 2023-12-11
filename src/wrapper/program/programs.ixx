@@ -23,8 +23,8 @@ struct Base : public GLObject {
 
   void useProgram();
 
-  void setVec3(const char *name, const Vec3 vec);
-  void setMat4(const char *name, const Mat4 matrix);
+  void setVec3(const char *name, const Vec3 vec) const;
+  void setMat4(const char *name, const Mat4 matrix) const;
 
   virtual void defineVAO() = 0;
   void create();
