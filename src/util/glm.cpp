@@ -41,4 +41,4 @@ Mat4 glm_util::lerpMatrix(const Mat4 &m1, const Mat4 &m2, const double t) {
   out[3] =
       m1[3] * static_cast<float>(1 - t) + m2[3] * static_cast<float>(t); // ?
   return out;
-}
+};

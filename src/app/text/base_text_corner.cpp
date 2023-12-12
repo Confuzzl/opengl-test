@@ -7,6 +7,7 @@ module app.text.base_text_corner;
 
 import app.app;
 import wrapper.program.programs;
+import wrapper.program.global_programs;
 import wrapper.program.vertex_formats;
 import app.texture_tile;
 import app.text.font;
@@ -66,10 +67,12 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
     const TexTile tex{mainApp.consolas->getTile(c)};
     for (int triFromList = 0; triFromList < 2; triFromList++) {
       for (int vertex = 0; vertex < 3; vertex++) {
-        const Vec2 pos{xOffset + width * glm_util::QUAD_UVS[triFromList][vertex][0],
-                       y2 + height * glm_util::QUAD_UVS[triFromList][vertex][1]};
-        const glm::lowp_u16vec2 uv{
-            tex.coordinates + tex.dimensions * glm_util::QUAD_UVS[triFromList][vertex]};
+        const Vec2 pos{
+            xOffset + width * glm_util::QUAD_UVS[triFromList][vertex][0],
+            y2 + height * glm_util::QUAD_UVS[triFromList][vertex][1]};
+        const glm::lowp_u16vec2 uv{tex.coordinates +
+                                   tex.dimensions *
+                                       glm_util::QUAD_UVS[triFromList][vertex]};
 
         vertices.emplace_back(pos[0], pos[1], uv[0], uv[1]);
       }
@@ -90,17 +93,17 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
     offset += VertexFormats::_2D::Font::TEX_WIDTH;
   }
 
-  mainApp.fontProgram->vao.bindEBO(ebo);
-  mainApp.fontProgram->vao.bindVBO(vbo);
+  Programs::FONT_PROGRAM.vao.bindEBO(ebo);
+  Programs::FONT_PROGRAM.vao.bindVBO(vbo);
 
-  mainApp.fontProgram->useProgram();
-  mainApp.fontProgram->setMat4("projection", App::UI_MAT);
+  Programs::FONT_PROGRAM.useProgram();
+  Programs::FONT_PROGRAM.setMat4("projection", App::UI_MAT);
 
   mainApp.consolas->atlas.bindTextureUnit();
-  mainApp.fontProgram->vao.bindVertexArray();
+  Programs::FONT_PROGRAM.vao.bindVertexArray();
   glDrawElements(
       GL_TRIANGLES,
-      static_cast<GLsizei>(mainApp.fontProgram->vao.boundedEBO->size),
+      static_cast<GLsizei>(Programs::FONT_PROGRAM.vao.boundedEBO->size),
       GL_UNSIGNED_INT, 0);
 
   if (addToOffset)

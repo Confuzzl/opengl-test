@@ -185,10 +185,12 @@
     <ClCompile Include="src\rendering\renderable_coltex.ixx" />
     <ClCompile Include="src\rendering\renderable_tex.cpp" />
     <ClCompile Include="src\rendering\renderable_tex.ixx" />
+    <ClCompile Include="src\shaders\shaders.ixx" />
     <ClCompile Include="src\util\debug.ixx" />
     <ClCompile Include="src\util\glm.cpp" />
     <ClCompile Include="src\util\glm.ixx" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\util\gl_types.ixx" />
     <ClCompile Include="src\util\memory.ixx" />
     <ClCompile Include="src\util\polyhedron.ixx" />
     <ClCompile Include="src\util\math.ixx" />

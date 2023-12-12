@@ -19,8 +19,6 @@ struct Base : public GLObject {
   VAO vao;
   const std::string vertexSource, fragmentSource;
 
-  ~Base();
-
   void useProgram();
 
   void setVec3(const char *name, const Vec3 vec) const;
@@ -29,9 +27,13 @@ struct Base : public GLObject {
   virtual void defineVAO() = 0;
   void create();
 
-protected:
   Base(const GLsizei stride, const std::string &vertexSource,
        const std::string &fragmentSource);
+  ~Base();
+  // Base(const Base &) = default;
+  // Base(Base &&) = default;
+  // Base &operator=(const Base &) = default;
+  // Base &operator=(Base &&) = default;
 
 private:
   static void createShader(const GLenum type, GLuint &ID,

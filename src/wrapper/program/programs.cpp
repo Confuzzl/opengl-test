@@ -13,7 +13,9 @@ std::string Programs::Base::errorLog{"NONE"};
 
 Programs::Base::Base(const GLsizei stride, const std::string &vertexSource,
                      const std::string &fragmentSource)
-    : vao{stride}, vertexSource{vertexSource}, fragmentSource{fragmentSource} {}
+    : vao{stride}, vertexSource{vertexSource}, fragmentSource{fragmentSource} {
+  std::cout << std::format("AAAAAAAA {} {}\n", vertexSource, fragmentSource);
+}
 
 Programs::Base::~Base() {
   glDeleteProgram(ID);
@@ -68,6 +70,7 @@ void Programs::Base::createShaders(const std::string &vertex,
 
 void Programs::Base::createShader(const GLenum type, GLuint &ID,
                                   const std::string &source) {
+  std::cout << std::format("ATTEMPING TO COMPILE {}\n", source);
   GLint success = 0;
   ID = glCreateShader(type);
   std::string temp = sourceToString(source);

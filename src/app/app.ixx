@@ -38,8 +38,8 @@ export struct App {
   bool cursorSnap = false;
   double prevX = WIDTH / 2, prevY = HEIGHT / 2;
 
-  UPtr<Programs::ColTex> colTexProgram{std::make_unique<Programs::ColTex>()};
-  UPtr<Programs::Font> fontProgram{std::make_unique<Programs::Font>()};
+  // UPtr<Programs::ColTex> colTexProgram{std::make_unique<Programs::ColTex>()};
+  // UPtr<Programs::Font> fontProgram{std::make_unique<Programs::Font>()};
 
   UPtr<TexObject> atlas{std::make_unique<TexObject>("atlas")};
   UPtr<Font> consolas{std::make_unique<Font>("consolas1024", 64, 128)};

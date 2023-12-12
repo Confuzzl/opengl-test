@@ -34,8 +34,8 @@ App::App()
 
   createWindow();
 
-  colTexProgram->create();
-  fontProgram->create();
+  // Programs::COLTEX_PROGRAM.create();
+  // Programs::FONT_PROGRAM.create();
 
   Programs::createAll();
 
@@ -162,23 +162,24 @@ void App::processInput(const double dt) {
 }
 
 void App::drawScene() {
-  colTexProgram->useProgram();
-  colTexProgram->setMat4("projection", mainCamera.getProjection());
+  Programs::COLTEX_PROGRAM.useProgram();
+  Programs::COLTEX_PROGRAM.setMat4("projection", mainCamera.getProjection());
 
   for (const auto &[ID, obj] : mainScene.objectMap) {
     const auto &r{obj->getRenderable()};
-    colTexProgram->vao.bindEBO(r.ebo);
-    colTexProgram->vao.bindVBO(r.sharedVBO);
+    Programs::COLTEX_PROGRAM.vao.bindEBO(r.ebo);
+    Programs::COLTEX_PROGRAM.vao.bindVBO(r.sharedVBO);
 
-    colTexProgram->setMat4("model", obj->getTransform());
-    colTexProgram->setMat4("view", mainCamera.getView());
+    Programs::COLTEX_PROGRAM.setMat4("model", obj->getTransform());
+    Programs::COLTEX_PROGRAM.setMat4("view", mainCamera.getView());
 
     r.writeToSharedVBO();
 
     atlas->bindTextureUnit();
-    colTexProgram->vao.bindVertexArray();
-    glDrawElements(mainPrimitive,
-                   static_cast<GLsizei>(colTexProgram->vao.boundedEBO->size),
-                   GL_UNSIGNED_INT, 0);
+    Programs::COLTEX_PROGRAM.vao.bindVertexArray();
+    glDrawElements(
+        mainPrimitive,
+        static_cast<GLsizei>(Programs::COLTEX_PROGRAM.vao.boundedEBO->size),
+        GL_UNSIGNED_INT, 0);
   }
 }
