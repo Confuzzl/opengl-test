@@ -13,9 +13,7 @@ std::string Programs::Base::errorLog{"NONE"};
 
 Programs::Base::Base(const GLsizei stride, const std::string &vertexSource,
                      const std::string &fragmentSource)
-    : vao{stride}, vertexSource{vertexSource}, fragmentSource{fragmentSource} {
-  std::cout << std::format("AAAAAAAA {} {}\n", vertexSource, fragmentSource);
-}
+    : vao{stride}, vertexSource{vertexSource}, fragmentSource{fragmentSource} {}
 
 Programs::Base::~Base() {
   glDeleteProgram(ID);

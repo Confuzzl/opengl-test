@@ -9,7 +9,10 @@ ColTex COLTEX_PROGRAM;
 Font FONT_PROGRAM;
 
 void createAll() {
-  COL_PROGRAM = Col{};
+  COL_PROGRAM = {};
+  TEX_PROGRAM = {};
+  COLTEX_PROGRAM = {};
+  FONT_PROGRAM = {};
   COL_PROGRAM.create();
   TEX_PROGRAM.create();
   COLTEX_PROGRAM.create();

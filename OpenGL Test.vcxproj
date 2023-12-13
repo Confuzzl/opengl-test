@@ -185,6 +185,7 @@
     <ClCompile Include="src\rendering\renderable_coltex.ixx" />
     <ClCompile Include="src\rendering\renderable_tex.cpp" />
     <ClCompile Include="src\rendering\renderable_tex.ixx" />
+    <ClCompile Include="src\shaders\shaders.cpp" />
     <ClCompile Include="src\shaders\shaders.ixx" />
     <ClCompile Include="src\util\debug.ixx" />
     <ClCompile Include="src\util\glm.cpp" />

@@ -8,18 +8,23 @@ import wrapper.gl_object;
 import wrapper.vao;
 import util.glm;
 import <stdexcept>;
+import <typeindex>;
 
 export namespace Shaders {
+struct VertexAttribute {
+  unsigned char n;
+  std::type_index type;
+
+  VertexAttribute(const unsigned char n, std::type_index &&type)
+      : n{n}, type{type} {}
+};
+
 struct ShaderProgram : public GLObject {
   struct FailedShaderCompilationException : public std::runtime_error {
     using std::runtime_error::runtime_error;
   };
 
-  static std::string errorLog;
   VAO vao;
-  const std::string vertexSource, fragmentSource;
-
-  ~ShaderProgram();
 
   void useProgram();
 
@@ -29,11 +34,21 @@ struct ShaderProgram : public GLObject {
   void defineVAO();
   void create();
 
-protected:
-  ShaderProgram(const GLsizei stride, const std::string &vertexSource,
-                const std::string &fragmentSource);
+  ShaderProgram(const std::string &vertexSource,
+                const std::string &fragmentSource,
+                const std::initializer_list<VertexAttribute> &attributes);
+  ~ShaderProgram();
 
 private:
+  static std::string errorLog;
+
+  std::string vertexSource;
+  std::string fragmentSource;
+  std::initializer_list<VertexAttribute> vertexAttributes;
+
+  static GLsizei vertexAttributesWidth(
+      const std::initializer_list<VertexAttribute> &vertexAttributes);
+
   static void createShader(const GLenum type, GLuint &ID,
                            const std::string &source);
   void createShaders(const std::string &vertex, const std::string &fragment);

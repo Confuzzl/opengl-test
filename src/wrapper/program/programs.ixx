@@ -17,7 +17,7 @@ struct Base : public GLObject {
 
   static std::string errorLog;
   VAO vao;
-  const std::string vertexSource, fragmentSource;
+  std::string vertexSource, fragmentSource;
 
   void useProgram();
 
