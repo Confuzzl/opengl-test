@@ -4,7 +4,7 @@ module;
 #include <fstream>
 #include <numeric>
 
-module shaders.shaders;
+module shaders;
 
 import app.app;
 import util.glm;
@@ -12,23 +12,9 @@ import util.debug;
 
 std::string Shaders::ShaderProgram::errorLog{"NONE"};
 
-Shaders::ShaderProgram::ShaderProgram(
-    const std::string &vertexSource, const std::string &fragmentSource,
-    const std::initializer_list<VertexAttribute> &vertexAttributes)
-    : vao{vertexAttributesWidth(vertexAttributes)}, vertexSource{vertexSource},
-      fragmentSource{fragmentSource}, vertexAttributes(vertexAttributes) {}
 Shaders::ShaderProgram::~ShaderProgram() {
   glDeleteProgram(ID);
   std::cout << "shader program deleted\n";
-}
-
-GLsizei Shaders::ShaderProgram::vertexAttributesWidth(
-    const std::initializer_list<VertexAttribute> &attributes) {
-  GLsizei width = 0;
-  for (const auto &attribute : attributes)
-    width += attribute.n * sizeof(attribute.type);
-  std::cout << width << "\n";
-  return width;
 }
 
 void Shaders::ShaderProgram::useProgram() {

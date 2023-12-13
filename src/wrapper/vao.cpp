@@ -7,7 +7,7 @@ module wrapper.vao;
 import wrapper.buffer_object;
 import util.debug;
 
-VAO::VAO(const GLsizei stride) : stride{stride} {}
+// VAO::VAO(const GLsizei stride) : stride{stride} {}
 VAO::~VAO() { glDeleteVertexArrays(1, &ID); }
 
 void VAO::bindVBO(const VBO &vbo) {

@@ -6,6 +6,7 @@ export module wrapper.program.programs;
 
 import wrapper.gl_object;
 import wrapper.vao;
+import wrapper.program.vertex_formats;
 import util.glm;
 import <stdexcept>;
 
@@ -17,7 +18,8 @@ struct Base : public GLObject {
 
   static std::string errorLog;
   VAO vao;
-  std::string vertexSource, fragmentSource;
+  // std::string vertexSource, fragmentSource;
+  const char *vertexSource, *fragmentSource;
 
   void useProgram();
 
@@ -27,13 +29,11 @@ struct Base : public GLObject {
   virtual void defineVAO() = 0;
   void create();
 
-  Base(const GLsizei stride, const std::string &vertexSource,
-       const std::string &fragmentSource);
+  constexpr Base(const GLsizei stride, const char *vertexSource,
+                 const char *fragmentSource)
+      : vao{stride}, vertexSource{vertexSource},
+        fragmentSource{fragmentSource} {}
   ~Base();
-  // Base(const Base &) = default;
-  // Base(Base &&) = default;
-  // Base &operator=(const Base &) = default;
-  // Base &operator=(Base &&) = default;
 
 private:
   static void createShader(const GLenum type, GLuint &ID,
@@ -42,21 +42,22 @@ private:
 };
 
 struct Col : public Base {
-  Col();
+  constexpr Col() : Base(VertexFormats::_3D::Colored::WIDTH, "col", "col") {}
   void defineVAO() override;
 };
 struct Tex : public Base {
-  Tex();
+  constexpr Tex() : Base(VertexFormats::_3D::Textured::WIDTH, "tex", "tex") {}
   void defineVAO() override;
 };
 struct ColTex : public Base {
-  ColTex();
+  constexpr ColTex()
+      : Base(VertexFormats::_3D::ColTex::WIDTH, "coltex", "coltex") {}
   void defineVAO() override;
 };
 struct Font : public Base {
   static constexpr int CHAR_WIDTH = 16, CHAR_HEIGHT = 32;
 
-  Font();
+  constexpr Font() : Base(VertexFormats::_2D::Font::WIDTH, "font", "font") {}
   void defineVAO() override;
 };
 } // namespace Programs

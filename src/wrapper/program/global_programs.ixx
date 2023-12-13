@@ -3,16 +3,12 @@ export module wrapper.program.global_programs;
 import wrapper.program.programs;
 
 export namespace Programs {
-Col COL_PROGRAM;
-Tex TEX_PROGRAM;
-ColTex COLTEX_PROGRAM;
-Font FONT_PROGRAM;
+constinit Col COL_PROGRAM{};
+constinit Tex TEX_PROGRAM{};
+constinit ColTex COLTEX_PROGRAM{};
+constinit Font FONT_PROGRAM{};
 
 void createAll() {
-  COL_PROGRAM = {};
-  TEX_PROGRAM = {};
-  COLTEX_PROGRAM = {};
-  FONT_PROGRAM = {};
   COL_PROGRAM.create();
   TEX_PROGRAM.create();
   COLTEX_PROGRAM.create();

@@ -11,13 +11,15 @@ import util.debug;
 
 std::string Programs::Base::errorLog{"NONE"};
 
-Programs::Base::Base(const GLsizei stride, const std::string &vertexSource,
-                     const std::string &fragmentSource)
-    : vao{stride}, vertexSource{vertexSource}, fragmentSource{fragmentSource} {}
+// constexpr Programs::Base::Base(const GLsizei stride,
+//                                const std::string &vertexSource,
+//                                const std::string &fragmentSource)
+//     : vao{stride}, vertexSource{vertexSource}, fragmentSource{fragmentSource}
+//     {}
 
 Programs::Base::~Base() {
   glDeleteProgram(ID);
-  std::cout << "shader program deleted\n";
+  std::cout << std::format("SHADER PROGRAM {} DELETED\n", ID);
 }
 
 void Programs::Base::useProgram() {
@@ -86,7 +88,8 @@ void Programs::Base::createShader(const GLenum type, GLuint &ID,
   }
 }
 
-Programs::Col::Col() : Base(VertexFormats::_3D::Colored::WIDTH, "col", "col") {}
+// constexpr Programs::Col::Col()
+//     : Base(VertexFormats::_3D::Colored::WIDTH, "col", "col") {}
 void Programs::Col::defineVAO() {
   glCreateVertexArrays(1, &vao.ID);
 
@@ -108,8 +111,8 @@ void Programs::Col::defineVAO() {
   vao.markAsAllocated();
 }
 
-Programs::Tex::Tex()
-    : Base(VertexFormats::_3D::Textured::WIDTH, "tex", "tex") {}
+// constexpr Programs::Tex::Tex()
+//     : Base(VertexFormats::_3D::Textured::WIDTH, "tex", "tex") {}
 void Programs::Tex::defineVAO() {
   glCreateVertexArrays(1, &vao.ID);
 
@@ -131,8 +134,8 @@ void Programs::Tex::defineVAO() {
   vao.markAsAllocated();
 }
 
-Programs::ColTex::ColTex()
-    : Base(VertexFormats::_3D::ColTex::WIDTH, "coltex", "coltex") {}
+// constexpr Programs::ColTex::ColTex()
+//     : Base(VertexFormats::_3D::ColTex::WIDTH, "coltex", "coltex") {}
 void Programs::ColTex::defineVAO() {
   glCreateVertexArrays(1, &vao.ID);
 
@@ -162,8 +165,8 @@ void Programs::ColTex::defineVAO() {
   vao.markAsAllocated();
 }
 
-Programs::Font::Font()
-    : Base(VertexFormats::_2D::Font::WIDTH, "font", "font") {}
+// constexpr Programs::Font::Font()
+//     : Base(VertexFormats::_2D::Font::WIDTH, "font", "font") {}
 void Programs::Font::defineVAO() {
   glCreateVertexArrays(1, &vao.ID);
 

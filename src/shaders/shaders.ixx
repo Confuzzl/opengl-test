@@ -2,7 +2,7 @@ module;
 
 #include "util/gl_utils.hpp"
 
-export module shaders.shaders;
+export module shaders;
 
 import wrapper.gl_object;
 import wrapper.vao;
@@ -14,10 +14,9 @@ export namespace Shaders {
 struct VertexAttribute {
   unsigned char n;
   std::type_index type;
-
-  VertexAttribute(const unsigned char n, std::type_index &&type)
-      : n{n}, type{type} {}
 };
+
+constinit VertexAttribute a{1, typeid(int)};
 
 struct ShaderProgram : public GLObject {
   struct FailedShaderCompilationException : public std::runtime_error {
@@ -34,20 +33,27 @@ struct ShaderProgram : public GLObject {
   void defineVAO();
   void create();
 
-  ShaderProgram(const std::string &vertexSource,
-                const std::string &fragmentSource,
-                const std::initializer_list<VertexAttribute> &attributes);
+  constexpr ShaderProgram(
+      const char *vertexSource, const char *fragmentSource,
+      const std::initializer_list<VertexAttribute> &attributes)
+      : vao{vertexAttributesWidth(vertexAttributes)},
+        vertexSource{vertexSource}, fragmentSource{fragmentSource},
+        vertexAttributes(attributes) {}
   ~ShaderProgram();
 
 private:
   static std::string errorLog;
 
-  std::string vertexSource;
-  std::string fragmentSource;
+  const char *vertexSource, *fragmentSource;
   std::initializer_list<VertexAttribute> vertexAttributes;
 
-  static GLsizei vertexAttributesWidth(
-      const std::initializer_list<VertexAttribute> &vertexAttributes);
+  static constexpr GLsizei vertexAttributesWidth(
+      const std::initializer_list<VertexAttribute> &attributes) {
+    GLsizei width = 0;
+    for (const auto &attribute : attributes)
+      width += attribute.n * sizeof(attribute.type);
+    return width;
+  }
 
   static void createShader(const GLenum type, GLuint &ID,
                            const std::string &source);

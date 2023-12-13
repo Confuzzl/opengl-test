@@ -8,11 +8,11 @@ import wrapper.gl_object;
 import wrapper.buffer_object;
 
 export struct VAO : public GLObject {
-  const VBO *boundedVBO;
-  const EBO *boundedEBO;
-  GLsizei stride;
+  const VBO *boundedVBO = nullptr;
+  const EBO *boundedEBO = nullptr;
+  GLsizei stride = -1;
 
-  VAO(const GLsizei stride);
+  constexpr VAO(const GLsizei stride) : stride{stride} {}
   ~VAO();
 
   void bindVBO(const VBO &vbo);
