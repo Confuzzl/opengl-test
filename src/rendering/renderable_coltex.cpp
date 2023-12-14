@@ -7,15 +7,16 @@ module rendering.renderable_coltex;
 import app.texture_tile;
 import app.app;
 
-import wrapper.program.global_programs;
+// import wrapper.program.global_programs;
+import shaders.global;
 
 RenderableColTex::RenderableColTex(const EBO &ebo, const VBO &vbo,
                                    const Vec3List &coordinates,
                                    const render::IndexList &indexList,
                                    const render::ColList &colList,
                                    const render::TexList &texList)
-    : BaseRenderable<VertexFormats::_3D::ColTex>(Programs::COLTEX_PROGRAM, ebo,
-                                                 vbo, coordinates, indexList),
+    : BaseRenderable<VertexFormats::_3D::ColTex>(Shaders::_3D::COLTEX, ebo, vbo,
+                                                 coordinates, indexList),
       colList{colList}, texList{texList} {}
 
 bool RenderableColTex::exceptionCondition() {

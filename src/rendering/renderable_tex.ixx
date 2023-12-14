@@ -1,7 +1,7 @@
 export module rendering.renderable_tex;
 
 import rendering.base_renderable;
-import wrapper.program.vertex_formats;
+import shaders.vertex_formats;
 import wrapper.buffer_object;
 import util.rendering;
 import util.polyhedron;

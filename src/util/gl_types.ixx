@@ -18,3 +18,6 @@ export const std::map<std::type_index, unsigned int> typeToMacro{
 export template <typename T> unsigned int macroOf() {
   return typeToMacro.at(typeid(T));
 }
+export unsigned int macroOf(const std::type_info &typeInfo) {
+  return typeToMacro.at(typeInfo);
+}

@@ -3,7 +3,7 @@ export module rendering.renderable;
 import world.base_polyhedron;
 import util.polyhedron;
 import util.rendering;
-import wrapper.program.vertex_formats;
+import shaders.vertex_formats;
 import wrapper.buffer_object;
 import <stdexcept>;
 

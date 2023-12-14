@@ -2,7 +2,7 @@ module;
 
 #include "util/gl_utils.hpp"
 
-export module wrapper.program.vertex_formats;
+export module shaders.vertex_formats;
 
 import <array>;
 import <concepts>;

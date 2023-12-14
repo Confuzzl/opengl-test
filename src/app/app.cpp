@@ -7,18 +7,17 @@ module;
 module app.app;
 
 import app.update_cycle;
-import wrapper.program.programs;
+// import wrapper.program.programs;
 import wrapper.tex_object;
 import app.text.font;
 import world.game_object;
 import rendering.renderable;
 import app.text.text_corners;
+import shaders.global;
 import util.vector;
 import util.debug;
 
 import app.input.input_handler;
-
-import wrapper.program.global_programs;
 
 const Mat4 App::UI_MAT{glm::ortho(0.0f, static_cast<float>(App::WIDTH), 0.0f,
                                   static_cast<float>(App::HEIGHT))};
@@ -34,10 +33,10 @@ App::App()
 
   createWindow();
 
-  // Programs::COLTEX_PROGRAM.create();
-  // Programs::FONT_PROGRAM.create();
+  // Shaders::_3D::COLTEX.create();
+  // Shaders::_2D::FONT.create();
 
-  Programs::createAll();
+  Shaders::createAll();
 
   try {
     atlas->initTexture();
@@ -162,24 +161,24 @@ void App::processInput(const double dt) {
 }
 
 void App::drawScene() {
-  Programs::COLTEX_PROGRAM.useProgram();
-  Programs::COLTEX_PROGRAM.setMat4("projection", mainCamera.getProjection());
+  Shaders::_3D::COLTEX.useProgram();
+  Shaders::_3D::COLTEX.setMat4("projection", mainCamera.getProjection());
 
   for (const auto &[ID, obj] : mainScene.objectMap) {
     const auto &r{obj->getRenderable()};
-    Programs::COLTEX_PROGRAM.vao.bindEBO(r.ebo);
-    Programs::COLTEX_PROGRAM.vao.bindVBO(r.sharedVBO);
+    Shaders::_3D::COLTEX.vao.bindEBO(r.ebo);
+    Shaders::_3D::COLTEX.vao.bindVBO(r.sharedVBO);
 
-    Programs::COLTEX_PROGRAM.setMat4("model", obj->getTransform());
-    Programs::COLTEX_PROGRAM.setMat4("view", mainCamera.getView());
+    Shaders::_3D::COLTEX.setMat4("model", obj->getTransform());
+    Shaders::_3D::COLTEX.setMat4("view", mainCamera.getView());
 
     r.writeToSharedVBO();
 
     atlas->bindTextureUnit();
-    Programs::COLTEX_PROGRAM.vao.bindVertexArray();
+    Shaders::_3D::COLTEX.vao.bindVertexArray();
     glDrawElements(
         mainPrimitive,
-        static_cast<GLsizei>(Programs::COLTEX_PROGRAM.vao.boundedEBO->size),
+        static_cast<GLsizei>(Shaders::_3D::COLTEX.vao.boundedEBO->size),
         GL_UNSIGNED_INT, 0);
   }
 }

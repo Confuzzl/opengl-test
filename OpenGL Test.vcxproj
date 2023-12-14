@@ -258,9 +258,6 @@
     <ClCompile Include="src\world\transform\translatable.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.cpp" />
-    <ClCompile Include="src\wrapper\program\global_programs.ixx" />
-    <ClCompile Include="src\wrapper\program\programs.cpp" />
-    <ClCompile Include="src\wrapper\program\programs.ixx" />
     <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />
     <ClCompile Include="src\wrapper\tex_object.ixx" />
     <ClCompile Include="src\wrapper\tex_object.cpp" />

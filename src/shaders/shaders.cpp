@@ -10,8 +10,6 @@ module shaders;
 // import util.glm;
 // import util.debug;
 //
-std::string Shaders::ShaderProgram::errorLog{"NONE"};
-//
 // Shaders::ShaderProgram::~ShaderProgram() {
 //   glDeleteProgram(ID);
 //   std::cout << "shader program deleted\n";

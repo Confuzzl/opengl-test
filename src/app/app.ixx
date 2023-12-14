@@ -7,7 +7,7 @@ export module app.app;
 import world.scene;
 import world.entity.player;
 import world.camera;
-import wrapper.program.programs;
+// import wrapper.program.programs;
 import util.glm;
 import util.memory;
 import util.vector;
@@ -39,7 +39,8 @@ export struct App {
   double prevX = WIDTH / 2, prevY = HEIGHT / 2;
 
   // UPtr<Programs::ColTex> colTexProgram{std::make_unique<Programs::ColTex>()};
-  // UPtr<Programs::Font> fontProgram{std::make_unique<Programs::Font>()};
+  // UPtr<Shaders::_2D::FONT>
+  // fontProgram{std::make_unique<Shaders::_2D::FONT>()};
 
   UPtr<TexObject> atlas{std::make_unique<TexObject>("atlas")};
   UPtr<Font> consolas{std::make_unique<Font>("consolas1024", 64, 128)};

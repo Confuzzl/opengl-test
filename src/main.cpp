@@ -3,5 +3,7 @@ import util.debug;
 
 import shaders.global;
 
-int main() { /*mainApp.start();*/
+int main() {
+  mainApp.start();
+  // Shaders::createAll();
 }

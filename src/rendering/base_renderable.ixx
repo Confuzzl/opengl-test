@@ -5,17 +5,18 @@ module;
 export module rendering.base_renderable;
 
 import world.base_polyhedron;
-import wrapper.program.vertex_formats;
+import shaders.vertex_formats;
 import wrapper.buffer_object;
 import util.rendering;
 import util.polyhedron;
 
-import wrapper.program.programs;
+// import wrapper.program.programs;
+import shaders;
 
 export template </*VertexFormats::IsVertexFormat*/ typename VertexType>
 class BaseRenderable : public BasePolyhedron {
 public:
-  const Programs::Base &program;
+  const /*Programs::Base*/ Shaders::ShaderProgram &program;
 
   const EBO &ebo;
   const VBO &vbo;
@@ -38,8 +39,8 @@ public:
   }
 
 protected:
-  BaseRenderable(const Programs::Base &program, const EBO &ebo, const VBO &vbo,
-                 const Vec3List &coordinates,
+  BaseRenderable(const /*Programs::Base*/ Shaders::ShaderProgram &program,
+                 const EBO &ebo, const VBO &vbo, const Vec3List &coordinates,
                  const render::IndexList &indexList)
       : BasePolyhedron(coordinates), program{program}, ebo{ebo}, vbo{vbo},
         indexList{indexList} {}

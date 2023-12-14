@@ -10,16 +10,31 @@ import wrapper.vao;
 import app.app;
 import util.glm;
 import util.debug;
+import util.gl_types;
+import <typeinfo>;
 import <stdexcept>;
-import <typeindex>;
+
+std::string sourceToString(const std::string &name) {
+  std::ifstream in{name};
+  return std::string{std::istreambuf_iterator<char>(in),
+                     std::istreambuf_iterator<char>()};
+}
+
+template <typename... Attributes>
+constexpr GLsizei vertexAttributesWidth(Attributes &&...attributes) {
+  GLsizei width = 0;
+  ((width += attributes.width()), ...);
+  return width;
+}
 
 export namespace Shaders {
 template <typename T> struct VertexAttribute {
   const unsigned char n;
-  T typevar = 0;
+  const GLboolean normalize;
+  constexpr unsigned char width() { return n * sizeof(T); }
 };
 
-struct ShaderProgram : public GLObject {
+template <typename... Attributes> struct ShaderProgram : public GLObject {
   struct FailedShaderCompilationException : public std::runtime_error {
     using std::runtime_error::runtime_error;
   };
@@ -47,52 +62,62 @@ struct ShaderProgram : public GLObject {
 
   VAO vao;
 
-  template <typename... Attributes>
   constexpr ShaderProgram(const char *vertexSource, const char *fragmentSource,
                           Attributes &&...attributes)
       : vao{vertexAttributesWidth(attributes...)}, vertexSource{vertexSource},
-        fragmentSource{fragmentSource} {}
+        fragmentSource{fragmentSource},
+        attributes{std::make_tuple(attributes...)} {}
   ~ShaderProgram() {
     glDeleteProgram(ID);
-    std::cout << "shader program deleted\n";
+    std::cout << std::format("SHADER PROGRAM {} DELETED\n", ID);
   }
 
 private:
-  static std::string errorLog;
-
   const char *vertexSource, *fragmentSource;
 
-  template <typename... Attributes>
-  static constexpr GLsizei vertexAttributesWidth(Attributes &&...attributes) {
-    GLsizei width = 0;
-    ((width += attributes.n * sizeof(attributes.typevar)), ...);
-    return width;
+  std::tuple<Attributes...> attributes;
+  template <typename T>
+  void handleAttribute(const Shaders::VertexAttribute<T> &attr, GLuint &offset,
+                       GLuint &index) {
+    glEnableVertexArrayAttrib(vao.ID, index);
+    glVertexArrayAttribFormat(vao.ID, index, attr.n, macroOf<T>(),
+                              attr.normalize, offset);
+    glVertexArrayAttribBinding(vao.ID, index, 0);
+    offset += attr.n * sizeof(T);
+    index++;
+  }
+  void defineVAO() {
+    GLuint offset = 0, index = 0;
+    std::apply(
+        [this, &offset, &index](auto &&...args) {
+          ((this->handleAttribute(args, offset, index)), ...);
+        },
+        attributes);
   }
 
-  void defineVAO() {}
-
-  static std::string sourceToString(const std::string &name) {
-    std::ifstream in{name};
-    return {std::istreambuf_iterator<char>(in),
-            std::istreambuf_iterator<char>()};
-  }
   static void createShader(const GLenum type, GLuint &ID,
                            const std::string &source) {
     std::cout << std::format("ATTEMPING TO COMPILE {}\n", source);
     GLint success = 0;
     ID = glCreateShader(type);
+
     std::string temp = sourceToString(source);
     const char *chars = temp.c_str();
     glShaderSource(ID, 1, &chars, NULL);
+
     glCompileShader(ID);
     glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
+
     if (not success) {
-      GLint logSize = 0;
-      glGetShaderiv(ID, GL_INFO_LOG_LENGTH, &logSize);
-      errorLog.resize(logSize);
-      glGetShaderInfoLog(ID, 512, NULL, errorLog.data());
+      // std::string errorLog = "";
+      // GLchar err[512]{};
+
+      // GLint logSize = 0;
+      // glGetShaderiv(ID, GL_INFO_LOG_LENGTH, &logSize);
+      // errorLog.resize(logSize);
+      // glGetShaderInfoLog(ID, logSize, NULL, errorLog.data());
       throw FailedShaderCompilationException{
-          std::format("{} FAILED TO COMPILE\n{}\n", source, errorLog)};
+          std::format("{} FAILED TO COMPILE\n", source)};
     }
   }
   void createShaders(const std::string &vertex, const std::string &fragment) {

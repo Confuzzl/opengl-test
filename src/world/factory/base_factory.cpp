@@ -7,7 +7,7 @@ module world.factory.base_factory;
 
 import world.collision.collider;
 import rendering.renderable;
-import wrapper.program.vertex_formats;
+import shaders.vertex_formats;
 import util.debug;
 
 BaseFactory::BaseFactory(

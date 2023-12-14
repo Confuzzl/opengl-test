@@ -6,9 +6,10 @@ module;
 module app.text.base_text_corner;
 
 import app.app;
-import wrapper.program.programs;
-import wrapper.program.global_programs;
-import wrapper.program.vertex_formats;
+// import wrapper.program.programs;
+// import wrapper.program.global_programs;
+import shaders.global;
+import shaders.vertex_formats;
 import app.texture_tile;
 import app.text.font;
 import wrapper.buffer_object;
@@ -19,13 +20,14 @@ const BaseTextCorner::OffsetEquation BaseTextCorner::xNormal =
     [](const float x, const float, const std::string &) { return x; };
 const BaseTextCorner::OffsetEquation BaseTextCorner::xShift =
     [](const float x, const float scale, const std::string &msg) {
-      return App::WIDTH - msg.size() * Programs::Font::CHAR_WIDTH * scale - x;
+      return App::WIDTH -
+             msg.size() * Shaders::_2D::FontProgram::CHAR_WIDTH * scale - x;
     };
 const BaseTextCorner::OffsetEquation BaseTextCorner::yNormal =
     [](const float y, const float, const std::string &) { return y; };
 const BaseTextCorner::OffsetEquation BaseTextCorner::yShift =
     [](const float y, const float scale, const std::string &msg) {
-      return App::HEIGHT - Programs::Font::CHAR_HEIGHT * scale - y;
+      return App::HEIGHT - Shaders::_2D::FontProgram::CHAR_HEIGHT * scale - y;
     };
 
 BaseTextCorner::BaseTextCorner(const OffsetEquation &xEquation,
@@ -61,8 +63,8 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
   Vector<VertexFormats::_2D::Font> vertices{};
   vertices.reserve(vertexCount);
 
-  const float width = Programs::Font::CHAR_WIDTH * scale,
-              height = Programs::Font::CHAR_HEIGHT * scale;
+  const float width = Shaders::_2D::FontProgram::CHAR_WIDTH * scale,
+              height = Shaders::_2D::FontProgram::CHAR_HEIGHT * scale;
   for (const char c : msg) {
     const TexTile tex{mainApp.consolas->getTile(c)};
     for (int triFromList = 0; triFromList < 2; triFromList++) {
@@ -93,18 +95,17 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
     offset += VertexFormats::_2D::Font::TEX_WIDTH;
   }
 
-  Programs::FONT_PROGRAM.vao.bindEBO(ebo);
-  Programs::FONT_PROGRAM.vao.bindVBO(vbo);
+  Shaders::_2D::FONT.vao.bindEBO(ebo);
+  Shaders::_2D::FONT.vao.bindVBO(vbo);
 
-  Programs::FONT_PROGRAM.useProgram();
-  Programs::FONT_PROGRAM.setMat4("projection", App::UI_MAT);
+  Shaders::_2D::FONT.useProgram();
+  Shaders::_2D::FONT.setMat4("projection", App::UI_MAT);
 
   mainApp.consolas->atlas.bindTextureUnit();
-  Programs::FONT_PROGRAM.vao.bindVertexArray();
-  glDrawElements(
-      GL_TRIANGLES,
-      static_cast<GLsizei>(Programs::FONT_PROGRAM.vao.boundedEBO->size),
-      GL_UNSIGNED_INT, 0);
+  Shaders::_2D::FONT.vao.bindVertexArray();
+  glDrawElements(GL_TRIANGLES,
+                 static_cast<GLsizei>(Shaders::_2D::FONT.vao.boundedEBO->size),
+                 GL_UNSIGNED_INT, 0);
 
   if (addToOffset)
     textOffsetY += height;
