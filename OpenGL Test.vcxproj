@@ -188,6 +188,7 @@
     <ClCompile Include="src\shaders\shaders_global.ixx" />
     <ClCompile Include="src\shaders\shaders.cpp" />
     <ClCompile Include="src\shaders\shaders.ixx" />
+    <ClCompile Include="src\shaders\vertex_formats.ixx" />
     <ClCompile Include="src\util\debug.ixx" />
     <ClCompile Include="src\util\glm.cpp" />
     <ClCompile Include="src\util\glm.ixx" />
@@ -239,8 +240,6 @@
     <ClCompile Include="src\world\entity\player.ixx" />
     <ClCompile Include="src\world\physics\physics_object.cpp" />
     <ClCompile Include="src\world\physics\physics_object.ixx" />
-    <ClCompile Include="src\rendering\renderable.cpp" />
-    <ClCompile Include="src\rendering\renderable.ixx" />
     <ClCompile Include="src\world\base_polyhedron.cpp" />
     <ClCompile Include="src\world\base_polyhedron.ixx" />
     <ClCompile Include="src\world\camera.ixx" />
@@ -258,7 +257,6 @@
     <ClCompile Include="src\world\transform\translatable.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.ixx" />
     <ClCompile Include="src\wrapper\buffer_object.cpp" />
-    <ClCompile Include="src\wrapper\program\vertex_formats.ixx" />
     <ClCompile Include="src\wrapper\tex_object.ixx" />
     <ClCompile Include="src\wrapper\tex_object.cpp" />
     <ClCompile Include="src\wrapper\vao.ixx" />
