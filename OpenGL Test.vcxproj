@@ -185,10 +185,12 @@
     <ClCompile Include="src\rendering\renderable_coltex.ixx" />
     <ClCompile Include="src\rendering\renderable_tex.cpp" />
     <ClCompile Include="src\rendering\renderable_tex.ixx" />
-    <ClCompile Include="src\shaders\shaders_global.ixx" />
+    <ClCompile Include="src\rendering\rendering.ixx" />
+    <ClCompile Include="src\rendering\shaders\shaders_global.ixx" />
     <ClCompile Include="src\shaders\shaders.cpp" />
-    <ClCompile Include="src\shaders\shaders.ixx" />
-    <ClCompile Include="src\shaders\vertex_formats.ixx" />
+    <ClCompile Include="src\rendering\shaders\shaders.ixx" />
+    <ClCompile Include="src\rendering\vertex_formats_base.ixx" />
+    <ClCompile Include="src\rendering\vertex_formats_types.ixx" />
     <ClCompile Include="src\util\debug.ixx" />
     <ClCompile Include="src\util\glm.cpp" />
     <ClCompile Include="src\util\glm.ixx" />

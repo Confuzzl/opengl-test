@@ -3,7 +3,7 @@ module;
 #include "util/gl_utils.hpp"
 #include <fstream>
 
-export module shaders;
+export module rendering.shaders;
 
 import wrapper.gl_object;
 import wrapper.vao;
@@ -34,12 +34,13 @@ template <typename T> struct VertexAttribute {
   constexpr unsigned char width() { return n * sizeof(T); }
 };
 
-template <typename... Attributes> struct ShaderProgram : public GLObject {
+template <typename VertexFormat, typename... Attributes>
+struct ShaderProgram : public GLObject {
   struct FailedShaderCompilationException : public std::runtime_error {
     using std::runtime_error::runtime_error;
   };
 
-  void useProgram() {
+  void useProgram() const {
     if (not allocated)
       throw UnallocatedGLObjectUsageException{
           std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", ID)};
@@ -78,7 +79,7 @@ private:
   std::tuple<Attributes...> attributes;
   template <typename T>
   void handleAttribute(const Shaders::VertexAttribute<T> &attr, GLuint &offset,
-                       GLuint &index) {
+                       GLuint &index) const {
     glEnableVertexArrayAttrib(vao.ID, index);
     glVertexArrayAttribFormat(vao.ID, index, attr.n, macroOf<T>(),
                               attr.normalize, offset);
@@ -86,7 +87,7 @@ private:
     offset += attr.n * sizeof(T);
     index++;
   }
-  void defineVAO() {
+  void defineVAO() const {
     GLuint offset = 0, index = 0;
     std::apply(
         [this, &offset, &index](auto &&...args) {
@@ -96,7 +97,7 @@ private:
   }
 
   static void createShader(const GLenum type, GLuint &ID,
-                           const std::string &source) {
+                           const std::string &source) const {
     std::cout << std::format("ATTEMPING TO COMPILE {}\n", source);
     GLint success = 0;
     ID = glCreateShader(type);

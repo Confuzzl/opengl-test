@@ -11,9 +11,9 @@ import app.update_cycle;
 import wrapper.tex_object;
 import app.text.font;
 import world.game_object;
-import rendering.renderable;
+// import rendering.renderable;
 import app.text.text_corners;
-import shaders.global;
+import rendering.shaders.global;
 import util.vector;
 import util.debug;
 
@@ -115,12 +115,6 @@ void App::startFrame(const double t) {
   Text::TOP_RT.drawText(std::format("LPS: {}", loopCycle->prevCount));
   Text::TOP_RT.drawText(std::format("UPS: {}", updateCycle->prevCount));
 
-  // anim.getCurrentKeyframe();
-  // Text::BOT_LT.drawText(std::format("start: {}", anim.startTime));
-  // Text::BOT_LT.drawText(
-  //     std::format("time: {:+.2f} {:+.2f}", anim.currentTime, anim.lastTime));
-  // Text::BOT_LT.drawText(std::format("animating: {}", anim.animating));
-  // Text::BOT_RT.drawText(std::format("f: {}"));
   Text::BOT_RT.drawText(std::format("{:.2f}", mainPlayer.speed));
 
   glfwSwapBuffers(window);

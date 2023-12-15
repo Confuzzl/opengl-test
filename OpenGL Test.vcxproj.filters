@@ -101,12 +101,6 @@
     <ClCompile Include="src\wrapper\tex_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\vertex_formats.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\wrapper\program\programs.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\world\scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -323,15 +317,6 @@
     <ClCompile Include="src\rendering\base_renderable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\renderable.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\wrapper\program\programs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\rendering.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -353,10 +338,7 @@
     <ClCompile Include="src\rendering\renderable_coltex.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\wrapper\program\global_programs.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shaders\shaders.ixx">
+    <ClCompile Include="src\rendering\shaders\shaders.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\util\gl_types.ixx">
@@ -365,7 +347,16 @@
     <ClCompile Include="src\shaders\shaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\shaders\shaders_global.ixx">
+    <ClCompile Include="src\rendering\shaders\shaders_global.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\vertex_formats_base.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\vertex_formats_types.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\rendering\rendering.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
