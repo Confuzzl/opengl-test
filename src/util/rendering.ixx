@@ -7,8 +7,6 @@ import <algorithm>;
 import <stdexcept>;
 
 export namespace render {
-// export template <typename T> using RenTri = Array<T, 3>;
-
 export template <typename T> struct RenTri {
   const T a, b, c;
 

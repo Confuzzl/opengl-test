@@ -4,7 +4,7 @@ export module world.game_object;
 import world.physics.physics_object;
 import world.collision.collider;
 // import rendering.renderable;
-import rendering.shaders.global;
+import rendering.shaders;
 import util.memory;
 import util.polyhedron;
 

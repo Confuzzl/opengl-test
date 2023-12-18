@@ -6,10 +6,8 @@ module;
 module app.text.base_text_corner;
 
 import app.app;
-// import wrapper.program.programs;
-// import wrapper.program.global_programs;
 import rendering.shaders.global;
-import rendering.shaders.vertex_formats;
+import rendering.vertex_formats.types;
 import app.texture_tile;
 import app.text.font;
 import wrapper.buffer_object;

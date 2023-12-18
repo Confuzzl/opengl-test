@@ -2,6 +2,7 @@ export module world.scene;
 
 import util.memory;
 import util.glm;
+import <typeindex>;
 import <map>;
 import <unordered_map>;
 

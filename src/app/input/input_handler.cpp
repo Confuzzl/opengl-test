@@ -6,16 +6,28 @@ module app.input.input_handler;
 
 import world.game_object;
 import app.update_cycle;
+import util.gl_types;
 import util.debug;
 
 const InputHandler::Key::Callback InputHandler::Key::NONE{[](const double) {}};
 
+void InputHandler::processInput(const double dt) {
+  for (auto &[keycode, key] : keys)
+    key(dt);
+}
+
 std::map<int, InputHandler::Key> InputHandler::keys{
     {GLFW_KEY_ESCAPE,
      {[](const double) { glfwSetWindowShouldClose(mainApp.window, GL_TRUE); }}},
-    {GLFW_KEY_1, {[](const double) { mainApp.mainPrimitive = GL_TRIANGLES; }}},
-    {GLFW_KEY_2, {[](const double) { mainApp.mainPrimitive = GL_LINE_LOOP; }}},
-    {GLFW_KEY_3, {[](const double) { mainApp.mainPrimitive = GL_POINTS; }}},
+    {GLFW_KEY_1, {[](const double) {
+       mainApp.renderingHandler.primitive = GLPrimitive::TRIANGLES;
+     }}},
+    {GLFW_KEY_2, {[](const double) {
+       mainApp.renderingHandler.primitive = GLPrimitive::LINE_LOOP;
+     }}},
+    {GLFW_KEY_3, {[](const double) {
+       mainApp.renderingHandler.primitive = GLPrimitive::POINTS;
+     }}},
     {GLFW_KEY_W,
      {InputHandler::Key::playerMoveFunction(
          [] { return mainCamera.getForwardFlat(); }, +1)}},

@@ -20,6 +20,8 @@ export struct Font;
 import rendering.anim.animation;
 import rendering.anim.frame.keyframe;
 
+import app.rendering_handler;
+
 export struct App {
   struct FailedWindowCreationException : public std::runtime_error {
     using std::runtime_error::runtime_error;
@@ -46,25 +48,22 @@ export struct App {
   UPtr<Font> consolas{std::make_unique<Font>("consolas1024", 64, 128)};
 
   UPtr<Scene> scene{std::make_unique<Scene>()};
-  unsigned int mainPrimitive = GL_TRIANGLES;
 
-  Animation anim{vector_util::makeVector<UPtr<const Keyframe>>(
-      Keyframe::start(), Keyframe::identity(10))};
+  RenderingHandler renderingHandler{};
+
+  // Animation anim{vector_util::makeVector<UPtr<const Keyframe>>(
+  //     Keyframe::start(), Keyframe::identity(10))};
 
   App();
   ~App();
 
-  void start();
-  void startUpdate(const double t);
-  void startFrame(const double t);
   void createWindow();
   void catchException(const std::runtime_error &e);
 
-  void drawScene();
+  void start();
+  void startUpdate(const double t);
   void processInput(const double dt);
-
-  float speedMagnitude;
-  float rotateMagnitude;
+  void startFrame(const double t);
 };
 
 export App mainApp{};

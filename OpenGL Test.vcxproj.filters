@@ -314,28 +314,7 @@
     <ClCompile Include="src\world\physics\physics_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\base_renderable.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\rendering.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\renderable_col.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\renderable_col.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\renderable_tex.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\renderable_tex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\renderable_coltex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\rendering\renderable_coltex.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\rendering\shaders\shaders.ixx">
@@ -356,7 +335,10 @@
     <ClCompile Include="src\rendering\vertex_formats_types.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\rendering\rendering.ixx">
+    <ClCompile Include="src\app\rendering_handler.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\app\rendering_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

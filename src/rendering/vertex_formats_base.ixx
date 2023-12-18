@@ -6,14 +6,6 @@ export module rendering.vertex_formats;
 
 import <array>;
 
-template <typename T, std::size_t n>
-void writeData(GLintptr &offset, const GLuint vboID,
-               const std::array<T, n> &info) {
-  const auto size = n * sizeof(T);
-  glNamedBufferSubData(vboID, offset, size, info.data());
-  offset += size;
-}
-
 export namespace VertexFormats {
 template <std::size_t n> struct Vertex {
   static constexpr GLsizeiptr POS_WIDTH = n * sizeof(GLfloat);

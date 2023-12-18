@@ -24,10 +24,5 @@ public:
                                              {
                                                  {{0, 0}, {1, 0}, {0.5, 1}},
                                              }),
-            // render::TexList{
-            //     render::TexFace{render::TexTri{{{0, 0}, {1, 0}, {0.5, 1}}}},
-            //     render::TexFace{render::TexTri{{{0, 0}, {1, 0}, {0.5, 1}}}},
-            //     render::TexFace{render::TexTri{{{0, 0}, {1, 0}, {0.5, 1}}}},
-            //     render::TexFace{render::TexTri{{{0, 0}, {1, 0}, {0.5, 1}}}}},
             12) {}
 };

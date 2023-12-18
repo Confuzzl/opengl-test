@@ -76,7 +76,7 @@ struct ShaderProgram : public GLObject {
 private:
   const char *vertexSource, *fragmentSource;
 
-  std::tuple<Attributes...> attributes;
+  const std::tuple<Attributes...> attributes;
   template <typename T>
   void handleAttribute(const Shaders::VertexAttribute<T> &attr, GLuint &offset,
                        GLuint &index) const {
@@ -96,8 +96,8 @@ private:
         attributes);
   }
 
-  static void createShader(const GLenum type, GLuint &ID,
-                           const std::string &source) const {
+  void compileShader(const GLenum type, GLuint &ID,
+                     const std::string &source) const {
     std::cout << std::format("ATTEMPING TO COMPILE {}\n", source);
     GLint success = 0;
     ID = glCreateShader(type);
@@ -124,10 +124,10 @@ private:
   void createShaders(const std::string &vertex, const std::string &fragment) {
     GLuint vertexID = 0, fragmentID = 0;
     try {
-      createShader(GL_VERTEX_SHADER, vertexID,
-                   std::format("assets/shader/{}.vert", vertex));
-      createShader(GL_FRAGMENT_SHADER, fragmentID,
-                   std::format("assets/shader/{}.frag", fragment));
+      compileShader(GL_VERTEX_SHADER, vertexID,
+                    std::format("assets/shader/{}.vert", vertex));
+      compileShader(GL_FRAGMENT_SHADER, fragmentID,
+                    std::format("assets/shader/{}.frag", fragment));
     } catch (const FailedShaderCompilationException &e) {
       mainApp.catchException(e);
     }
