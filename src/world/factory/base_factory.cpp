@@ -32,15 +32,15 @@ void BaseFactory::initializeEBO() const {
   eboIndices.resize(rVertexCount);
   std::iota(eboIndices.begin(), eboIndices.end(), 0);
   ebo.allocateBufferObject(rVertexCount * sizeof(GLuint));
-  glNamedBufferSubData(ebo.ID, 0, ebo.size, eboIndices.data());
+  glNamedBufferSubData(ebo.GLid, 0, ebo.size, eboIndices.data());
   std::cout << std::format("ebo {} for factory allocated and initialized\n",
-                           ebo.ID);
+                           ebo.GLid);
 }
 void BaseFactory::allocateVBO() const {
   sharedVBO.allocateBufferObject(rVertexCount *
                                  VertexFormats::_3D::ColTex::WIDTH);
   std::cout << std::format("shared vbo {} for factory simplex allocated\n",
-                           sharedVBO.ID);
+                           sharedVBO.GLid);
 }
 
 CollPtr BaseFactory::createCollidable(const Vec3List &coordinates) const {

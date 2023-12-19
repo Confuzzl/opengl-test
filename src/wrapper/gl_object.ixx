@@ -11,7 +11,7 @@ export struct GLObject {
     using std::runtime_error::runtime_error;
   };
 
-  GLuint ID = 0;
+  GLuint GLid = 0;
   bool allocated = false;
   void markAsAllocated();
 };

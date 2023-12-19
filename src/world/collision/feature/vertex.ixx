@@ -16,7 +16,7 @@ export class Vertex : public Feature, DifferentiableFeature {
   Vec3 localCoordinate;
 
 public:
-  Vertex(const Collider &parent, const unsigned short ID, const Vec3 &pos);
+  Vertex(const Collider &parent, const unsigned short GLid, const Vec3 &pos);
   ~Vertex();
 
   void addNeighbor(const Edge &neighbor);

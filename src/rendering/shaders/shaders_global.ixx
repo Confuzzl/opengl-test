@@ -9,35 +9,35 @@ import rendering.vertex_formats.types;
 
 export namespace Shaders::_2D {
 struct FontProgram
-    : public ShaderProgram<VertexFormats::_2D::Font, VertexAttribute<GLfloat>,
-                           VertexAttribute<GLushort>> {
+    : public Specialized<VertexFormats::_2D::Font, VertexAttribute<GLfloat>,
+                         VertexAttribute<GLushort>> {
   static constexpr int CHAR_WIDTH = 16, CHAR_HEIGHT = 32;
 
   constexpr FontProgram()
-      : ShaderProgram("font", "font", {2, GL_FALSE}, {2, GL_FALSE}) {}
+      : Specialized("font", "font", {2, GL_FALSE}, {2, GL_FALSE}) {}
 };
 constinit FontProgram FONT{};
 } // namespace Shaders::_2D
 
 export namespace Shaders::_3D {
-constinit ShaderProgram<VertexFormats::_3D::Col, VertexAttribute<GLfloat>,
-                        VertexAttribute<GLubyte>>
+constinit Specialized<VertexFormats::_3D::Col, VertexAttribute<GLfloat>,
+                      VertexAttribute<GLubyte>>
     COL{
         "col",
         "col",
         {3, GL_FALSE},
         {3, GL_TRUE},
     };
-constinit ShaderProgram<VertexFormats::_3D::Tex, VertexAttribute<GLfloat>,
-                        VertexAttribute<GLushort>>
+constinit Specialized<VertexFormats::_3D::Tex, VertexAttribute<GLfloat>,
+                      VertexAttribute<GLushort>>
     TEX{
         "tex",
         "tex",
         {3, GL_FALSE},
         {2, GL_FALSE},
     };
-constinit ShaderProgram<VertexFormats::_3D::ColTex, VertexAttribute<GLfloat>,
-                        VertexAttribute<GLubyte>, VertexAttribute<GLushort>>
+constinit Specialized<VertexFormats::_3D::ColTex, VertexAttribute<GLfloat>,
+                      VertexAttribute<GLubyte>, VertexAttribute<GLushort>>
     COLTEX{
         "coltex",
         "coltex",

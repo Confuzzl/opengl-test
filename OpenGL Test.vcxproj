@@ -180,6 +180,7 @@
     <ClCompile Include="src\rendering\anim\frame\inbetween.ixx" />
     <ClCompile Include="src\rendering\anim\frame\keyframe.cpp" />
     <ClCompile Include="src\rendering\anim\frame\keyframe.ixx" />
+    <ClCompile Include="src\rendering\polyhedron\rendering_base.ixx" />
     <ClCompile Include="src\rendering\shaders\shaders_global.ixx" />
     <ClCompile Include="src\shaders\shaders.cpp" />
     <ClCompile Include="src\rendering\shaders\shaders.ixx" />

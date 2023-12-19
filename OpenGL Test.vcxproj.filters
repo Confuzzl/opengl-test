@@ -341,6 +341,9 @@
     <ClCompile Include="src\app\rendering_handler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\rendering\polyhedron\rendering_base.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\gl_utils.hpp">

@@ -4,8 +4,8 @@ import world.collision.collider;
 import world.collision.feature.edge;
 import world.collision.vclip.region.vertex_region;
 
-Vertex::Vertex(const Collider &parent, const unsigned short ID, const Vec3 &pos)
-    : Feature(parent, ID), localCoordinate{pos} {}
+Vertex::Vertex(const Collider &parent, const unsigned short GLid, const Vec3 &pos)
+    : Feature(parent, GLid), localCoordinate{pos} {}
 Vertex::~Vertex() = default;
 
 void Vertex::addNeighbor(const Edge &neighbor) {

@@ -34,43 +34,45 @@ template <typename T> struct VertexAttribute {
   constexpr unsigned char width() { return n * sizeof(T); }
 };
 
+struct Base : public GLObject {
+  void useProgram() const {
+    if (not allocated)
+      throw UnallocatedGLObjectUsageException{
+          std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", GLid)};
+    glUseProgram(GLid);
+  }
+
+  void setVec3(const char *name, const Vec3 &vec) const {
+    glUniform3fv(glGetUniformLocation(GLid, name), 1, glm::value_ptr(vec));
+  }
+  void setMat4(const char *name, const Mat4 &matrix) const {
+    glUniformMatrix4fv(glGetUniformLocation(GLid, name), 1, GL_FALSE,
+                       glm::value_ptr(matrix));
+  }
+};
+
 template <typename VertexFormat, typename... Attributes>
-struct ShaderProgram : public GLObject {
+struct Specialized : public Base {
   struct FailedShaderCompilationException : public std::runtime_error {
     using std::runtime_error::runtime_error;
   };
 
-  void useProgram() const {
-    if (not allocated)
-      throw UnallocatedGLObjectUsageException{
-          std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", ID)};
-    glUseProgram(ID);
-  }
-
-  void setVec3(const char *name, const Vec3 vec) const {
-    glUniform3fv(glGetUniformLocation(ID, name), 1, glm::value_ptr(vec));
-  }
-  void setMat4(const char *name, const Mat4 matrix) const {
-    glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE,
-                       glm::value_ptr(matrix));
-  }
-
   void create() {
-    ID = glCreateProgram();
+    GLid = glCreateProgram();
     createShaders(vertexSource, fragmentSource);
     defineVAO();
   }
 
   VAO vao;
 
-  constexpr ShaderProgram(const char *vertexSource, const char *fragmentSource,
-                          Attributes &&...attributes)
+  constexpr Specialized(const char *vertexSource, const char *fragmentSource,
+                        Attributes &&...attributes)
       : vao{vertexAttributesWidth(attributes...)}, vertexSource{vertexSource},
         fragmentSource{fragmentSource},
         attributes{std::make_tuple(attributes...)} {}
-  ~ShaderProgram() {
-    glDeleteProgram(ID);
-    std::cout << std::format("SHADER PROGRAM {} DELETED\n", ID);
+  ~Specialized() {
+    glDeleteProgram(GLid);
+    std::cout << std::format("SHADER PROGRAM {} DELETED\n", GLid);
   }
 
 private:
@@ -80,10 +82,10 @@ private:
   template <typename T>
   void handleAttribute(const Shaders::VertexAttribute<T> &attr, GLuint &offset,
                        GLuint &index) const {
-    glEnableVertexArrayAttrib(vao.ID, index);
-    glVertexArrayAttribFormat(vao.ID, index, attr.n, macroOf<T>(),
+    glEnableVertexArrayAttrib(vao.GLid, index);
+    glVertexArrayAttribFormat(vao.GLid, index, attr.n, macroOf<T>(),
                               attr.normalize, offset);
-    glVertexArrayAttribBinding(vao.ID, index, 0);
+    glVertexArrayAttribBinding(vao.GLid, index, 0);
     offset += attr.n * sizeof(T);
     index++;
   }
@@ -110,13 +112,6 @@ private:
     glGetShaderiv(ID, GL_COMPILE_STATUS, &success);
 
     if (not success) {
-      // std::string errorLog = "";
-      // GLchar err[512]{};
-
-      // GLint logSize = 0;
-      // glGetShaderiv(ID, GL_INFO_LOG_LENGTH, &logSize);
-      // errorLog.resize(logSize);
-      // glGetShaderInfoLog(ID, logSize, NULL, errorLog.data());
       throw FailedShaderCompilationException{
           std::format("{} FAILED TO COMPILE\n", source)};
     }
@@ -131,9 +126,9 @@ private:
     } catch (const FailedShaderCompilationException &e) {
       mainApp.catchException(e);
     }
-    glAttachShader(ID, vertexID);
-    glAttachShader(ID, fragmentID);
-    glLinkProgram(ID);
+    glAttachShader(GLid, vertexID);
+    glAttachShader(GLid, fragmentID);
+    glLinkProgram(GLid);
     glDeleteShader(vertexID);
     glDeleteShader(fragmentID);
 

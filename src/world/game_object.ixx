@@ -8,38 +8,45 @@ import rendering.shaders;
 import util.memory;
 import util.polyhedron;
 
+import <map>;
+
 export class BaseFactory;
 
-export template <typename VertexFormat, typename... Attributes>
-class GameObject : public PhysicsObject {
-  static unsigned int COUNT;
-  const Shaders::ShaderProgram<VertexFormat, Attributes...> &program;
+class BaseGameObject;
 
+export struct GameObjectSystem {
+  static unsigned int COUNT;
+  std::map<unsigned int, UPtr<BaseGameObject>> objects;
+};
+
+class BaseGameObject : public PhysicsObject {
+public:
+  static unsigned int COUNT;
+  const unsigned int ID;
+
+  BaseGameObject(CollPtr collider)
+      : PhysicsObject(1), ID{COUNT++}, collider{std::move(collider)} {}
+
+  Collider &getCollider();
+  const Collider &getCollider() const;
+
+private:
   CollPtr collider;
+};
+
+export template <typename VertexFormat, typename... Attributes>
+class GameObject : public BaseGameObject {
+  static unsigned int COUNT;
+  const Shaders::Specialized<VertexFormat, Attributes...> &program;
+
   // RendPtr render;
 
   // friend GObjPtr std::make_unique<GameObject, CollPtr, RendPtr>(CollPtr &&,
   //                                                               RendPtr &&);
 
-  GameObject(CollPtr collider /*, RendPtr render*/);
+  GameObject(CollPtr collider, RendPtr render);
+  ;
 
-  GameObject(const GameObject &) = delete;
-  GameObject(GameObject &&) = delete;
-  GameObject &operator=(const GameObject &) = delete;
-  GameObject &operator=(GameObject &&) = delete;
-
-public:
-  const unsigned int ID;
-
-  ~GameObject();
-
-  Collider &getCollider();
-  const Collider &getCollider() const;
-  // Renderable &getRenderable();
-  // const Renderable &getRenderable() const;
-
-  static GameObject &from(const BaseFactory &factory,
-                          const Vec3List &coordinates);
-  // static GameObject &from(CollPtr collider, RendPtr render);
-  //  static GameObject &copy(GameObject &object);
+  // static GameObject &from(const BaseFactory &factory,
+  //                         const Vec3List &coordinates);
 };

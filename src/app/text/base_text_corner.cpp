@@ -56,7 +56,7 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
 
   EBO ebo{};
   ebo.allocateBufferObject(vertexCount * sizeof(GLuint));
-  glNamedBufferSubData(ebo.ID, 0, ebo.size, indices.data());
+  glNamedBufferSubData(ebo.GLid, 0, ebo.size, indices.data());
 
   Vector<VertexFormats::_2D::Font> vertices{};
   vertices.reserve(vertexCount);
@@ -85,10 +85,10 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
   vbo.allocateBufferObject(vertexCount * VertexFormats::_2D::Font::WIDTH);
   GLintptr offset = 0;
   for (const VertexFormats::_2D::Font &vertex : vertices) {
-    glNamedBufferSubData(vbo.ID, offset, VertexFormats::_2D::Font::POS_WIDTH,
+    glNamedBufferSubData(vbo.GLid, offset, VertexFormats::_2D::Font::POS_WIDTH,
                          vertex.posInfo.data());
     offset += VertexFormats::_2D::Font::POS_WIDTH;
-    glNamedBufferSubData(vbo.ID, offset, VertexFormats::_2D::Font::TEX_WIDTH,
+    glNamedBufferSubData(vbo.GLid, offset, VertexFormats::_2D::Font::TEX_WIDTH,
                          vertex.texInfo.data());
     offset += VertexFormats::_2D::Font::TEX_WIDTH;
   }
