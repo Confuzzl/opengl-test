@@ -20,31 +20,36 @@ constinit FontProgram FONT{};
 } // namespace Shaders::_2D
 
 export namespace Shaders::_3D {
-constinit Specialized<VertexFormats::_3D::Col, VertexAttribute<GLfloat>,
-                      VertexAttribute<GLubyte>>
-    COL{
-        "col",
-        "col",
-        {3, GL_FALSE},
-        {3, GL_TRUE},
-    };
-constinit Specialized<VertexFormats::_3D::Tex, VertexAttribute<GLfloat>,
-                      VertexAttribute<GLushort>>
-    TEX{
-        "tex",
-        "tex",
-        {3, GL_FALSE},
-        {2, GL_FALSE},
-    };
-constinit Specialized<VertexFormats::_3D::ColTex, VertexAttribute<GLfloat>,
-                      VertexAttribute<GLubyte>, VertexAttribute<GLushort>>
-    COLTEX{
-        "coltex",
-        "coltex",
-        VertexAttribute<GLfloat>{3, GL_FALSE},
-        VertexAttribute<GLubyte>{3, GL_TRUE},
-        VertexAttribute<GLushort>{2, GL_FALSE},
-    };
+using ColProgram =
+    Specialized<VertexFormats::_3D::Col, VertexAttribute<GLfloat>,
+                VertexAttribute<GLubyte>>;
+constinit ColProgram COL{
+    "col",
+    "col",
+    {3, GL_FALSE},
+    {3, GL_TRUE},
+};
+
+using TexProgram =
+    Specialized<VertexFormats::_3D::Tex, VertexAttribute<GLfloat>,
+                VertexAttribute<GLushort>>;
+constinit TexProgram TEX{
+    "tex",
+    "tex",
+    {3, GL_FALSE},
+    {2, GL_FALSE},
+};
+
+using ColTexProgram =
+    Specialized<VertexFormats::_3D::ColTex, VertexAttribute<GLfloat>,
+                VertexAttribute<GLubyte>, VertexAttribute<GLushort>>;
+constinit ColTexProgram COLTEX{
+    "coltex",
+    "coltex",
+    VertexAttribute<GLfloat>{3, GL_FALSE},
+    VertexAttribute<GLubyte>{3, GL_TRUE},
+    VertexAttribute<GLushort>{2, GL_FALSE},
+};
 }; // namespace Shaders::_3D
 
 export namespace Shaders {

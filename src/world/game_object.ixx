@@ -5,48 +5,57 @@ import world.physics.physics_object;
 import world.collision.collider;
 // import rendering.renderable;
 import rendering.shaders;
+import rendering.shaders.global;
+
 import util.memory;
 import util.polyhedron;
 
 import <map>;
 
-export class BaseFactory;
+// export class BaseFactory;
 
-class BaseGameObject;
+export namespace GameObject {
+class Base;
 
-export struct GameObjectSystem {
+struct System {
   static unsigned int COUNT;
-  std::map<unsigned int, UPtr<BaseGameObject>> objects;
+  std::map<unsigned int, UPtr<Base>> objects;
 };
 
-class BaseGameObject : public PhysicsObject {
+class Base : public PhysicsObject {
 public:
   static unsigned int COUNT;
   const unsigned int ID;
 
-  BaseGameObject(CollPtr collider)
-      : PhysicsObject(1), ID{COUNT++}, collider{std::move(collider)} {}
+  Base(CollPtr collider)
+      : PhysicsObject(1), ID{COUNT++}, collider{std::move(collider)} {};
 
-  Collider &getCollider();
-  const Collider &getCollider() const;
+  Collider &getCollider() { return *collider; };
+  const Collider &getCollider() const { return *collider; };
 
 private:
   CollPtr collider;
 };
 
-export template <typename VertexFormat, typename... Attributes>
-class GameObject : public BaseGameObject {
+// template <typename VertexFormat, typename... Attributes>
+class Specialized : public Base {
   static unsigned int COUNT;
-  const Shaders::Specialized<VertexFormat, Attributes...> &program;
+  // const Shaders::Specialized<VertexFormat, Attributes...> &program;
+  Shaders::Base &program;
 
   // RendPtr render;
 
   // friend GObjPtr std::make_unique<GameObject, CollPtr, RendPtr>(CollPtr &&,
   //                                                               RendPtr &&);
 
-  GameObject(CollPtr collider, RendPtr render);
-  ;
+  Specialized(CollPtr collider);
 
   // static GameObject &from(const BaseFactory &factory,
   //                         const Vec3List &coordinates);
 };
+
+// template <> Specialized from<Shaders::_2D::FontProgram>() {}
+// template <> Specialized from<Shaders::_3D::ColProgram>() {}
+// template <> Specialized from<Shaders::_3D::TexProgram>() {}
+// template <> Specialized from<Shaders::_3D::ColTexProgram>() {}
+} // namespace GameObject

@@ -35,6 +35,10 @@ template <typename T> struct VertexAttribute {
 };
 
 struct Base : public GLObject {
+  VAO vao;
+
+  constexpr Base(const GLsizei stride) : vao{stride} {}
+
   void useProgram() const {
     if (not allocated)
       throw UnallocatedGLObjectUsageException{
@@ -63,11 +67,9 @@ struct Specialized : public Base {
     defineVAO();
   }
 
-  VAO vao;
-
   constexpr Specialized(const char *vertexSource, const char *fragmentSource,
                         Attributes &&...attributes)
-      : vao{vertexAttributesWidth(attributes...)}, vertexSource{vertexSource},
+      : Base(vertexAttributesWidth(attributes...)), vertexSource{vertexSource},
         fragmentSource{fragmentSource},
         attributes{std::make_tuple(attributes...)} {}
   ~Specialized() {
