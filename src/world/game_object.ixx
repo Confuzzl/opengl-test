@@ -4,6 +4,7 @@ export module world.game_object;
 import world.physics.physics_object;
 import world.collision.collider;
 // import rendering.renderable;
+import rendering.base;
 import rendering.shaders;
 import rendering.shaders.global;
 
@@ -35,27 +36,6 @@ public:
 
 private:
   CollPtr collider;
+  UPtr<Renderable::Base> render;
 };
-
-// template <typename VertexFormat, typename... Attributes>
-class Specialized : public Base {
-  static unsigned int COUNT;
-  // const Shaders::Specialized<VertexFormat, Attributes...> &program;
-  Shaders::Base &program;
-
-  // RendPtr render;
-
-  // friend GObjPtr std::make_unique<GameObject, CollPtr, RendPtr>(CollPtr &&,
-  //                                                               RendPtr &&);
-
-  Specialized(CollPtr collider);
-
-  // static GameObject &from(const BaseFactory &factory,
-  //                         const Vec3List &coordinates);
-};
-
-// template <> Specialized from<Shaders::_2D::FontProgram>() {}
-// template <> Specialized from<Shaders::_3D::ColProgram>() {}
-// template <> Specialized from<Shaders::_3D::TexProgram>() {}
-// template <> Specialized from<Shaders::_3D::ColTexProgram>() {}
 } // namespace GameObject
