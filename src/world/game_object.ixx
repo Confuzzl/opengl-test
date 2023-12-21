@@ -19,8 +19,7 @@ export namespace GameObject {
 class Base;
 
 struct System {
-  static unsigned int COUNT;
-  std::map<unsigned int, UPtr<Base>> objects;
+  std::map<unsigned int, UPtr<Base>> objects{};
 };
 
 class Base : public PhysicsObject {
@@ -28,11 +27,10 @@ public:
   static unsigned int COUNT;
   const unsigned int ID;
 
-  Base(CollPtr collider)
-      : PhysicsObject(1), ID{COUNT++}, collider{std::move(collider)} {};
+  Base(CollPtr collider, UPtr<Renderable::Base> render);
 
-  Collider &getCollider() { return *collider; };
-  const Collider &getCollider() const { return *collider; };
+  Collider &getCollider();
+  const Collider &getCollider() const;
 
 private:
   CollPtr collider;

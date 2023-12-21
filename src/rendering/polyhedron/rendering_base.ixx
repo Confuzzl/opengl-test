@@ -6,7 +6,8 @@ import rendering.vertex_formats.types;
 import wrapper.buffer_object;
 import util.polyhedron;
 
-import <unordered_set>;
+// import <unordered_set>;
+import <map>;
 import util.rendering;
 import util.memory;
 
@@ -14,27 +15,33 @@ export namespace Renderable {
 struct Base;
 
 struct System {
-  static std::unordered_set<Ref<Base>> entities;
+  static std::map<unsigned int, Base *> entities;
 };
 
 struct Base : BasePolyhedron {
 public:
-  const Shaders::Base &program;
+  static unsigned int COUNT;
+  const unsigned int ID;
+
+  Shaders::Base &program;
 
   const EBO &ebo;
   const VBO &vbo;
+
+  virtual void writeToVBO() const = 0;
 
 private:
   const render::IndexList faceVertexIndices;
 
 protected:
-  Base(const Shaders::Base &program, const EBO &ebo, const VBO &vbo,
+  Base(Shaders::Base &program, const EBO &ebo, const VBO &vbo,
        const Vec3List &coordinates);
 };
-template <typename VertexFormat> struct Specialized : public Base {
+template <VertexFormats::writable VertexFormat>
+struct Specialized : public Base {
   Vector<VertexFormat> vertexInfo;
 
 public:
-  void writeToVBO() const;
+  void writeToVBO() const override;
 };
 } // namespace Renderable

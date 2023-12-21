@@ -10,8 +10,11 @@ import world.entity.player;
 import world.camera;
 import app.update_cycle;
 import app.text.text_corners;
+import wrapper.tex_object;
 import util.glm;
 import util.debug;
+
+import rendering.base;
 
 void RenderingHandler::renderFrame(const double t) {
   glClearColor(0, 1, 1, 1);
@@ -40,4 +43,22 @@ void RenderingHandler::renderText(const double t) {
 
   Text::BOT_RT.drawText(std::format("{:.2f}", mainPlayer.speed));
 }
-void RenderingHandler::renderScene(const double t) {}
+void RenderingHandler::renderScene(const double t) {
+  for (const auto &[ID, obj] : Renderable::System::entities) {
+    const Renderable::Base &render = *obj;
+    Shaders::Base &program = render.program;
+    program.useProgram();
+
+    program.vao.bindEBO(render.ebo);
+    program.vao.bindVBO(render.vbo);
+
+    program.setMat4("projection", mainCamera.getProjection());
+
+    render.writeToVBO();
+    mainApp.atlas->bindTextureUnit();
+    program.vao.bindVertexArray();
+    glDrawElements(primitive,
+                   static_cast<GLsizei>(program.vao.boundedEBO->size),
+                   GLNumeric::UINT, 0);
+  }
+}

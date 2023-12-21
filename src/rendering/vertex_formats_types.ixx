@@ -16,6 +16,11 @@ void writeData(GLintptr &offset, const GLuint vboID,
 }
 
 export namespace VertexFormats {
+template <typename T>
+concept writable = requires(T t, GLintptr &offset, const GLuint vboID) {
+  t.writeVertexTo(offset, vboID);
+};
+
 namespace _2D {
 struct Font : public Vertex<2>, public Texturable {
   static constexpr GLsizeiptr WIDTH = Vertex::POS_WIDTH + Texturable::TEX_WIDTH;
@@ -29,9 +34,7 @@ struct Font : public Vertex<2>, public Texturable {
   }
 };
 } // namespace _2D
-} // namespace VertexFormats
 
-export namespace VertexFormats {
 namespace _3D {
 struct Col : public Vertex<3>, public Colorable {
   static constexpr GLsizeiptr WIDTH = POS_WIDTH + COL_WIDTH;
