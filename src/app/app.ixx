@@ -7,7 +7,6 @@ export module app.app;
 import world.scene;
 import world.entity.player;
 import world.camera;
-// import wrapper.program.programs;
 import util.glm;
 import util.memory;
 import util.vector;

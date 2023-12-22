@@ -44,7 +44,7 @@ void RenderingHandler::renderText(const double t) {
   Text::BOT_RT.drawText(std::format("{:.2f}", mainPlayer.speed));
 }
 void RenderingHandler::renderScene(const double t) {
-  for (const auto &[ID, obj] : Renderable::System::entities) {
+  for (const auto &[ID, obj] : Renderable::System::objects) {
     const Renderable::Base &render = *obj;
     Shaders::Base &program = render.program;
     program.useProgram();

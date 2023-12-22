@@ -7,10 +7,15 @@ export module rendering.shaders;
 
 import wrapper.gl_object;
 import wrapper.vao;
+
+// import rendering.vertex_formats.types;
+
 import app.app;
+
 import util.glm;
 import util.debug;
 import util.gl_types;
+
 import <typeinfo>;
 import <stdexcept>;
 

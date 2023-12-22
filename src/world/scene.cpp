@@ -1,6 +1,6 @@
 module world.scene;
 
-import world.game_object;
+// import world.game_object;
 import world.entity.player;
 import app.app;
 import util.debug;
@@ -24,21 +24,21 @@ void Scene::start() {
     for (auto &v : coordinates2)
       v /= 2;
 
-    auto &go1{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
-    go1.translate({2, 0, 0});
-    testObject = &go1;
+    // auto &go1{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
+    // go1.translate({2, 0, 0});
+    // testObject = &go1;
 
-    auto &aaa{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
-    aaa.translate({3, 0, 0});
+    // auto &aaa{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
+    // aaa.translate({3, 0, 0});
 
-    auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
-    go2.translate({0, -2, 0});
-    auto &go3{GameObject::from(PRISM_FACTORY, coordinates2)};
-    go3.translate({0, 0, 2});
-    auto &go4{GameObject::from(PRISM_FACTORY, coordinates2)};
-    go4.translate({-2, 0, 0});
-    auto &go5{GameObject::from(PRISM_FACTORY, coordinates2)};
-    go5.translate({0, 0, -2});
+    // auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
+    // go2.translate({0, -2, 0});
+    // auto &go3{GameObject::from(PRISM_FACTORY, coordinates2)};
+    // go3.translate({0, 0, 2});
+    // auto &go4{GameObject::from(PRISM_FACTORY, coordinates2)};
+    // go4.translate({-2, 0, 0});
+    // auto &go5{GameObject::from(PRISM_FACTORY, coordinates2)};
+    // go5.translate({0, 0, -2});
 
     // auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
     // go2.translate({0, -2, 0});

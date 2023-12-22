@@ -1,9 +1,7 @@
 export module world.game_object;
 
-// import world.transform.transformable;
 import world.physics.physics_object;
 import world.collision.collider;
-// import rendering.renderable;
 import rendering.base;
 import rendering.shaders;
 import rendering.shaders.global;
@@ -13,13 +11,11 @@ import util.polyhedron;
 
 import <map>;
 
-// export class BaseFactory;
-
 export namespace GameObject {
 class Base;
 
 struct System {
-  std::map<unsigned int, UPtr<Base>> objects{};
+  static std::map<unsigned int, UPtr<Base>> objects;
 };
 
 class Base : public PhysicsObject {

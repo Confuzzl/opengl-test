@@ -7,17 +7,15 @@ module;
 module app.app;
 
 import app.update_cycle;
-// import wrapper.program.programs;
 import wrapper.tex_object;
 import app.text.font;
-import world.game_object;
-// import rendering.renderable;
-import app.text.text_corners;
+
 import rendering.shaders.global;
-import util.vector;
-import util.debug;
 
 import app.input.input_handler;
+
+import util.vector;
+import util.debug;
 
 const Mat4 App::UI_MAT{glm::ortho(0.0f, static_cast<float>(App::WIDTH), 0.0f,
                                   static_cast<float>(App::HEIGHT))};
@@ -33,9 +31,6 @@ App::App()
 
   createWindow();
 
-  // Shaders::_3D::COLTEX.create();
-  // Shaders::_2D::FONT.create();
-
   Shaders::createAll();
 
   try {
@@ -45,7 +40,7 @@ App::App()
     catchException(e);
   }
 
-  std::cout << "app finished constructing\n";
+  std::cout << "APP FINISHED CONSTRUCTING\n";
 }
 App::~App() {
   glfwDestroyWindow(window);
@@ -89,9 +84,7 @@ void App::start() {
 }
 void App::startUpdate(const double t) {
   updateCycle->pushNewTime(t);
-  glfwPollEvents();
   InputHandler::processInput(updateCycle->dt);
-  mainScene.testObject->update(updateCycle->dt);
 }
 void App::startFrame(const double t) {
   frameCycle->pushNewTime(t);

@@ -4,6 +4,10 @@ module;
 
 module rendering.base;
 
+std::map<unsigned int, Renderable::Base *> Renderable::System::objects{};
+
+unsigned int Renderable::Base::COUNT = 0;
+
 Renderable::Base::Base(Shaders::Base &program, const EBO &ebo, const VBO &vbo,
                        const Vec3List &coordinates)
     : BasePolyhedron(coordinates), ID{COUNT++}, program{program}, ebo{ebo},

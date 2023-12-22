@@ -4,18 +4,18 @@ import world.base_polyhedron;
 import rendering.shaders;
 import rendering.vertex_formats.types;
 import wrapper.buffer_object;
-import util.polyhedron;
 
-// import <unordered_set>;
-import <map>;
+import util.polyhedron;
 import util.rendering;
 import util.memory;
+
+import <map>;
 
 export namespace Renderable {
 struct Base;
 
 struct System {
-  static std::map<unsigned int, Base *> entities;
+  static std::map<unsigned int, Base *> objects;
 };
 
 struct Base : BasePolyhedron {
@@ -42,6 +42,8 @@ struct Specialized : public Base {
   Vector<VertexFormat> vertexInfo;
 
 public:
+  using Base::Base;
+
   void writeToVBO() const override;
 };
 } // namespace Renderable

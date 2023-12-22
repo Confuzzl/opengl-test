@@ -4,7 +4,6 @@ module;
 
 module app.input.input_handler;
 
-import world.game_object;
 import app.update_cycle;
 import util.gl_types;
 import util.debug;
@@ -12,6 +11,7 @@ import util.debug;
 const InputHandler::Key::Callback InputHandler::Key::NONE{[](const double) {}};
 
 void InputHandler::processInput(const double dt) {
+  glfwPollEvents();
   for (auto &[keycode, key] : keys)
     key(dt);
 }
@@ -48,28 +48,14 @@ std::map<int, InputHandler::Key> InputHandler::keys{
     {GLFW_KEY_LEFT, {InputHandler::Key::cameraRotateFunction(+1, 0)}},
     {GLFW_KEY_DOWN, {InputHandler::Key::cameraRotateFunction(0, -1)}},
     {GLFW_KEY_RIGHT, {InputHandler::Key::cameraRotateFunction(-1, 0)}},
-    {GLFW_KEY_Q,
-     {[](const double) {
-        mainScene.testObject->translate({1, 0, 0});
-      },
-      InputHandler::Key::NONE,
-      [](const double) {
-        mainScene.testObject->translate({-1, 0, 0});
-      },
-      InputHandler::Key::NONE}},
 };
 
 void InputHandler::keyCallback(GLFWwindow *window, int key, int scancode,
                                int action, int mods) {
-  if (not keys.contains(key))
+  const auto iterator = keys.find(key);
+  if (iterator == keys.end())
     return;
-  // prev = curr;
-  // curr = glfwGetTime();
-  // std::cout << std::format("{}: {} ({:.5f}, {:.5f})\n",
-  //                          glfwGetKeyName(key, scancode),
-  //                          modes[action], curr, curr - prev);
-  // keys.at(key).on = action;
-  keys.at(key).change(action);
+  iterator->second.change(action);
 }
 
 void InputHandler::mouseCallback(GLFWwindow *window, double xpos, double ypos) {
