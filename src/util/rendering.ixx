@@ -11,12 +11,12 @@ export template <typename T> struct RenTri {
   const T a, b, c;
 
   RenTri(const T &a, const T &b, const T &c) : a{a}, b{b}, c{c} {}
-  RenTri(const T &n) : RenTri<T>(n, n, n) {}
+  RenTri(const T &n) : RenTri(n, n, n) {}
 
-  RenTri(const RenTri<T> &) = default;
-  RenTri(RenTri<T> &&) = default;
-  RenTri<T> &operator=(const RenTri<T> &) = default;
-  RenTri<T> &operator=(RenTri<T> &&) = default;
+  // constexpr RenTri(const RenTri<T> &) = default;
+  //  RenTri(RenTri<T> &&) = default;
+  //  RenTri<T> &operator=(const RenTri<T> &) = default;
+  //  RenTri<T> &operator=(RenTri<T> &&) = default;
 
   const T &operator[](const unsigned char i) const {
     switch (i) {

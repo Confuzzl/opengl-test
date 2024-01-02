@@ -24,7 +24,7 @@ App::App()
     : loopCycle{std::make_unique<UpdateCycle>(0)},
       updateCycle{std::make_unique<UpdateCycle>(120)},
       frameCycle{std::make_unique<UpdateCycle>(60)} {
-  std::cout << "app constructing\n";
+  println("APP CONSTRUCTING");
   glfwInit();
   frameCycle->bottleNeck(
       glfwGetVideoMode(glfwGetPrimaryMonitor())->refreshRate);
@@ -40,12 +40,12 @@ App::App()
     catchException(e);
   }
 
-  std::cout << "APP FINISHED CONSTRUCTING\n";
+  println("APP FINISHED CONSTRUCTING");
 }
 App::~App() {
   glfwDestroyWindow(window);
   glfwTerminate();
-  std::cout << std::format("app terminated at {:.2f}s\n", glfwGetTime());
+  println("app terminated at {:.2f}s", glfwGetTime());
 }
 
 void App::start() {

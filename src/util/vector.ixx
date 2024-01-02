@@ -17,11 +17,11 @@ template <typename T, typename... Args> Vector<T> makeVector(Args &&...args) {
   return out;
 }
 
-template <typename T, typename F>
-T fromRange(
-    const std::ranges::transform_view<std::ranges::ref_view<T>, F> &range) {
-  return T{range.begin(), range.end()};
-}
+// template <typename T, typename F>
+// constexpr T fromRange(
+//     const std::ranges::transform_view<std::ranges::ref_view<T>, F> &range) {
+//   return T{range.begin(), range.end()};
+// }
 
 Vector<unsigned int> range(const unsigned int a, const unsigned int b) {
   const auto iotaRange{std::ranges::views::iota(a, b)};

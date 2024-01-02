@@ -1,10 +1,10 @@
 module world.scene;
 
-// import world.game_object;
+import world.game_object;
 import world.entity.player;
 import app.app;
 import util.debug;
-import world.factory.factories;
+import factory.global;
 import util.polyhedron;
 import util.debug;
 
@@ -23,6 +23,9 @@ void Scene::start() {
                           {+1, -1, -1}, {-1, -1, -1}};
     for (auto &v : coordinates2)
       v /= 2;
+
+    auto &go1 =
+        GameObject::from<VertexFormats::_3D::Tex>(Factory::PRISM, coordinates2);
 
     // auto &go1{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
     // go1.translate({2, 0, 0});

@@ -6,6 +6,7 @@ module app.texture_tile;
 
 import wrapper.tex_object;
 import util.math;
+import app.app;
 
 const std::map<std::string, glm::lowp_u16vec4> TexTile::textureDict = {
     {"error", {0, 0, 16, 16}},         {"debug_1", {16, 0, 16, 16}},

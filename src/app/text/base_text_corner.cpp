@@ -101,9 +101,9 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
 
   mainApp.consolas->atlas.bindTextureUnit();
   Shaders::_2D::FONT.vao.bindVertexArray();
-  glDrawElements(GL_TRIANGLES,
+  glDrawElements(GLPrimitive::TRIANGLES,
                  static_cast<GLsizei>(Shaders::_2D::FONT.vao.boundedEBO->size),
-                 GL_UNSIGNED_INT, 0);
+                 GLNumeric::UINT, 0);
 
   if (addToOffset)
     textOffsetY += height;

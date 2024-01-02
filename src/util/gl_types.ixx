@@ -33,13 +33,19 @@ export enum GLNumeric : unsigned int {
   FLOAT = GL_FLOAT,
 };
 
-export const std::map<std::type_index, GLNumeric> typeToMacro{
-    {typeid(GLbyte), GLNumeric::BYTE},   {typeid(GLubyte), GLNumeric::UBYTE},
-    {typeid(GLshort), GLNumeric::SHORT}, {typeid(GLushort), GLNumeric::USHORT},
-    {typeid(GLint), GLNumeric::INT},     {typeid(GLuint), GLNumeric::UINT},
-    {typeid(GLfloat), GLNumeric::FLOAT},
+const std::map<std::type_index, GLNumeric> typeToMacro() {
+  static std::map<std::type_index, GLNumeric> map{
+      {typeid(GLbyte), GLNumeric::BYTE},
+      {typeid(GLubyte), GLNumeric::UBYTE},
+      {typeid(GLshort), GLNumeric::SHORT},
+      {typeid(GLushort), GLNumeric::USHORT},
+      {typeid(GLint), GLNumeric::INT},
+      {typeid(GLuint), GLNumeric::UINT},
+      {typeid(GLfloat), GLNumeric::FLOAT},
+  };
+  return map;
 };
 
 export template <typename T> unsigned int macroOf() {
-  return typeToMacro.at(typeid(T));
+  return typeToMacro().at(typeid(T));
 }

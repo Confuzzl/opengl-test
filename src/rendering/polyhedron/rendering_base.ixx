@@ -12,13 +12,13 @@ import util.memory;
 import <map>;
 
 export namespace Renderable {
-struct Base;
+struct Polyhedron;
 
 struct System {
-  static std::map<unsigned int, Base *> objects;
+  static std::map<unsigned int, Polyhedron *> objects;
 };
 
-struct Base : BasePolyhedron {
+struct Polyhedron : BasePolyhedron {
 public:
   static unsigned int COUNT;
   const unsigned int ID;
@@ -34,16 +34,23 @@ private:
   const render::IndexList faceVertexIndices;
 
 protected:
-  Base(Shaders::Base &program, const EBO &ebo, const VBO &vbo,
-       const Vec3List &coordinates);
+  Polyhedron(Shaders::Base &program, const EBO &ebo, const VBO &vbo,
+             const Vec3List &coordinates);
 };
+
 template <VertexFormats::writable VertexFormat>
-struct Specialized : public Base {
+struct Drawable : public Polyhedron {
   Vector<VertexFormat> vertexInfo;
 
 public:
-  using Base::Base;
+  Drawable(Shaders::Base &program, const EBO &ebo, const VBO &vbo,
+           const Vec3List &coordinates, Vector<VertexFormat> &&vertexInfo)
+      : Polyhedron(program, ebo, vbo, coordinates), vertexInfo{vertexInfo} {}
 
-  void writeToVBO() const override;
+  void writeToVBO() const override {
+    GLintptr offset = 0;
+    for (const auto &vertex : vertexInfo)
+      vertex.writeVertexTo(offset, vbo.GLid);
+  }
 };
 } // namespace Renderable

@@ -45,7 +45,7 @@ void RenderingHandler::renderText(const double t) {
 }
 void RenderingHandler::renderScene(const double t) {
   for (const auto &[ID, obj] : Renderable::System::objects) {
-    const Renderable::Base &render = *obj;
+    const Renderable::Polyhedron &render = *obj;
     Shaders::Base &program = render.program;
     program.useProgram();
 

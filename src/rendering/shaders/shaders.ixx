@@ -8,8 +8,6 @@ export module rendering.shaders;
 import wrapper.gl_object;
 import wrapper.vao;
 
-// import rendering.vertex_formats.types;
-
 import app.app;
 
 import util.glm;
@@ -21,12 +19,11 @@ import <stdexcept>;
 
 std::string sourceToString(const std::string &name) {
   std::ifstream in{name};
-  return std::string{std::istreambuf_iterator<char>(in),
-                     std::istreambuf_iterator<char>()};
+  return {std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>()};
 }
 
 template <typename... Attributes>
-constexpr GLsizei vertexAttributesWidth(Attributes &&...attributes) {
+static constexpr GLsizei vertexAttributesWidth(Attributes &&...attributes) {
   GLsizei width = 0;
   ((width += attributes.width()), ...);
   return width;
@@ -44,20 +41,10 @@ struct Base : public GLObject {
 
   constexpr Base(const GLsizei stride) : vao{stride} {}
 
-  void useProgram() const {
-    if (not allocated)
-      throw UnallocatedGLObjectUsageException{
-          std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", GLid)};
-    glUseProgram(GLid);
-  }
+  void useProgram() const;
 
-  void setVec3(const char *name, const Vec3 &vec) const {
-    glUniform3fv(glGetUniformLocation(GLid, name), 1, glm::value_ptr(vec));
-  }
-  void setMat4(const char *name, const Mat4 &matrix) const {
-    glUniformMatrix4fv(glGetUniformLocation(GLid, name), 1, GL_FALSE,
-                       glm::value_ptr(matrix));
-  }
+  void setVec3(const char *name, const Vec3 &vec) const;
+  void setMat4(const char *name, const Mat4 &matrix) const;
 };
 
 template <typename VertexFormat, typename... Attributes>
@@ -70,6 +57,7 @@ struct Specialized : public Base {
     GLid = glCreateProgram();
     createShaders(vertexSource, fragmentSource);
     defineVAO();
+    vao.markAsAllocated();
   }
 
   constexpr Specialized(const char *vertexSource, const char *fragmentSource,
@@ -107,7 +95,7 @@ private:
 
   void compileShader(const GLenum type, GLuint &ID,
                      const std::string &source) const {
-    std::cout << std::format("ATTEMPING TO COMPILE {}\n", source);
+    println("ATTEMPING TO COMPILE {}", source);
     GLint success = 0;
     ID = glCreateShader(type);
 
@@ -122,6 +110,7 @@ private:
       throw FailedShaderCompilationException{
           std::format("{} FAILED TO COMPILE\n", source)};
     }
+    println("{} COMPILED SUCCESSFULLY", source);
   }
   void createShaders(const std::string &vertex, const std::string &fragment) {
     GLuint vertexID = 0, fragmentID = 0;
