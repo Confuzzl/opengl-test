@@ -193,7 +193,7 @@
     <ClCompile Include="src\rendering\shaders\shaders.ixx" />
     <ClCompile Include="src\rendering\vertex_formats_base.ixx" />
     <ClCompile Include="src\rendering\vertex_formats_types.ixx" />
-    <ClCompile Include="src\util\debug.ixx" />
+    <ClCompile Include="src\util\debugging.ixx" />
     <ClCompile Include="src\util\glm.cpp" />
     <ClCompile Include="src\util\glm.ixx" />
     <ClCompile Include="src\main.cpp" />

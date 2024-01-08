@@ -38,9 +38,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\debug.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\glm.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -357,6 +354,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\collision\broad\aabb.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\debugging.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

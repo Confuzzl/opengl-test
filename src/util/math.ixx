@@ -1,6 +1,7 @@
 export module util.math;
 
 import <random>;
+import <concepts>;
 
 export namespace math_util {
 std::random_device rd;
@@ -9,8 +10,12 @@ std::mt19937 mt{rd()};
 template <typename T>
 concept subscriptable = requires(T t) { t[0]; };
 
+template <std::floating_point T> T random(const T min, const double max) {
+  return std::uniform_real_distribution<T>{min, max}(mt);
+}
+
 double random(const double min, const double max) {
-  return std::uniform_real_distribution<double>{min, max}(mt);
+  return std::uniform_real_distribution{min, max}(mt);
 }
 
 template <template <typename> typename comparator, subscriptable T>
