@@ -1,7 +1,6 @@
 module;
 
 #include "util/gl_utils.hpp"
-#include <numeric>
 
 module app.text.base_text_corner;
 
@@ -13,6 +12,7 @@ import app.text.font;
 import wrapper.buffer_object;
 import util.vector;
 import util.glm;
+import util.debug;
 
 const BaseTextCorner::OffsetEquation BaseTextCorner::xNormal =
     [](const float x, const float, const std::string &) { return x; };
@@ -48,14 +48,13 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
   const float x2 = xEquation(x, scale, msg),
               y2 = yEquation(y + textOffsetY, scale, msg);
   float xOffset = x2;
-  const size_t vertexCount = 6 * msg.size();
+  const GLuint vertexCount = 6 * static_cast<GLuint>(msg.size());
 
-  Vector<GLuint> indices{};
-  indices.resize(vertexCount);
-  std::iota(indices.begin(), indices.end(), 0);
+  Vector<GLuint> indices = vector_util::range(0u, vertexCount);
 
   EBO ebo{};
   ebo.allocateBufferObject(vertexCount * sizeof(GLuint));
+  Shaders::_2D::FONT.vao.bindEBO(ebo);
   glNamedBufferSubData(ebo.GLid, 0, ebo.size, indices.data());
 
   Vector<VertexFormats::_2D::Font> vertices{};
@@ -83,18 +82,11 @@ void BaseTextCorner::drawText(const float x, const float y, const float scale,
 
   VBO vbo{};
   vbo.allocateBufferObject(vertexCount * VertexFormats::_2D::Font::WIDTH);
+  Shaders::_2D::FONT.vao.bindVBO(vbo);
   GLintptr offset = 0;
   for (const VertexFormats::_2D::Font &vertex : vertices) {
-    glNamedBufferSubData(vbo.GLid, offset, VertexFormats::_2D::Font::POS_WIDTH,
-                         vertex.posInfo.data());
-    offset += VertexFormats::_2D::Font::POS_WIDTH;
-    glNamedBufferSubData(vbo.GLid, offset, VertexFormats::_2D::Font::TEX_WIDTH,
-                         vertex.texInfo.data());
-    offset += VertexFormats::_2D::Font::TEX_WIDTH;
+    vertex.writeVertexTo(offset, vbo.GLid);
   }
-
-  Shaders::_2D::FONT.vao.bindEBO(ebo);
-  Shaders::_2D::FONT.vao.bindVBO(vbo);
 
   Shaders::_2D::FONT.useProgram();
   Shaders::_2D::FONT.setMat4("projection", App::UI_MAT);

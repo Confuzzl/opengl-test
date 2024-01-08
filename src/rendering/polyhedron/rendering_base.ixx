@@ -30,6 +30,8 @@ public:
 
   virtual void writeToVBO() const = 0;
 
+  ~Polyhedron();
+
 private:
   const render::IndexList faceVertexIndices;
 
@@ -54,3 +56,5 @@ public:
   }
 };
 } // namespace Renderable
+
+export using RendPtr = UPtr<Renderable::Polyhedron>;

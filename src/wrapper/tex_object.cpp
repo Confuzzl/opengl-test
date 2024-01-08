@@ -27,7 +27,7 @@ void TexObject::initTexture() {
   if (not data) {
     stbi_image_free(data);
     throw FailedTextureLoadException{
-        std::format("TEXTURE {} FAILED TO LOAD\n", name)};
+        std::format("TEXTURE {} FAILED TO LOAD", name)};
   }
   glTextureStorage2D(GLid, 1, GL_RGBA8, width, height);
   glTextureSubImage2D(GLid, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE,
@@ -41,6 +41,6 @@ void TexObject::initTexture() {
 void TexObject::bindTextureUnit() {
   if (not allocated)
     throw UnallocatedGLObjectUsageException{
-        "TEXTURE WAS BOUND BEFORE INITIALIZATION\n"};
+        "TEXTURE WAS BOUND BEFORE INITIALIZATION"};
   glBindTextureUnit(0, GLid);
 }

@@ -4,6 +4,7 @@ import <vector>;
 import <array>;
 import <ranges>;
 import <functional>;
+import <concepts>;
 
 export template <typename T> using Vector = std::vector<T>;
 export template <typename T> using Vector2D = std::vector<std::vector<T>>;
@@ -23,7 +24,7 @@ template <typename T, typename... Args> Vector<T> makeVector(Args &&...args) {
 //   return T{range.begin(), range.end()};
 // }
 
-Vector<unsigned int> range(const unsigned int a, const unsigned int b) {
+template <std::integral T> Vector<T> range(const T a, const T b) {
   const auto iotaRange{std::ranges::views::iota(a, b)};
   return {iotaRange.begin(), iotaRange.end()};
 }

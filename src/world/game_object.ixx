@@ -28,23 +28,22 @@ public:
   static unsigned int COUNT;
   const unsigned int ID;
 
-  Base(CollPtr collider, UPtr<Renderable::Polyhedron> render);
+  Base(CollPtr collider, RendPtr render);
+  ~Base();
 
   Collider &getCollider();
   const Collider &getCollider() const;
 
 private:
   CollPtr collider;
-  UPtr<Renderable::Polyhedron> render;
+  RendPtr render;
 };
 
 template <VertexFormats::writable VertexFormat>
 Base &from(const Factory::Base &factory, const Vec3List &coordinates) {
-  const auto collider = Factory::createCollidable(factory, coordinates);
-  const auto render =
-      Factory::createRenderable<VertexFormat>(factory, coordinates);
-  UPtr<Base> object =
-      std::make_unique<Base>(std::move(collider), std::move(render));
+  UPtr<Base> object = std::make_unique<Base>(
+      Factory::createCollidable(factory, coordinates),
+      Factory::createRenderable<VertexFormat>(factory, coordinates));
   return *object;
 }
 } // namespace GameObject

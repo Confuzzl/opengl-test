@@ -84,7 +84,8 @@ private:
     offset += attr.n * sizeof(T);
     index++;
   }
-  void defineVAO() const {
+  void defineVAO() {
+    glCreateVertexArrays(1, &vao.GLid);
     GLuint offset = 0, index = 0;
     std::apply(
         [this, &offset, &index](auto &&...args) {
@@ -108,7 +109,7 @@ private:
 
     if (not success) {
       throw FailedShaderCompilationException{
-          std::format("{} FAILED TO COMPILE\n", source)};
+          std::format("{} FAILED TO COMPILE", source)};
     }
     println("{} COMPILED SUCCESSFULLY", source);
   }

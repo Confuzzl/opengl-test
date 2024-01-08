@@ -17,6 +17,8 @@ import app.input.input_handler;
 import util.vector;
 import util.debug;
 
+import util.gl_types;
+
 const Mat4 App::UI_MAT{glm::ortho(0.0f, static_cast<float>(App::WIDTH), 0.0f,
                                   static_cast<float>(App::HEIGHT))};
 
@@ -48,6 +50,15 @@ App::~App() {
   println("app terminated at {:.2f}s", glfwGetTime());
 }
 
+static void APIENTRY debugCallback(GLenum source, GLenum type, GLuint id,
+                                   GLenum severity, GLsizei length,
+                                   const GLchar *message,
+                                   const void *userParam) {
+  if (severity == GL_DEBUG_SEVERITY_NOTIFICATION)
+    return;
+  println("{} {}", severityString(severity), message);
+}
+
 void App::start() {
   scene->start();
 
@@ -58,6 +69,10 @@ void App::start() {
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_CULL_FACE);
+
+  glEnable(GL_DEBUG_OUTPUT);
+  glDebugMessageCallback(debugCallback, 0);
+
   glfwSwapInterval(0);
 
   while (!glfwWindowShouldClose(window)) {
@@ -115,6 +130,6 @@ void App::createWindow() {
 }
 
 void App::catchException(const std::runtime_error &e) {
-  std::cout << e.what();
+  println(e.what());
   glfwSetWindowShouldClose(mainApp.window, GL_TRUE);
 }

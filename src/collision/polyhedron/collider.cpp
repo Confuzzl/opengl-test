@@ -18,39 +18,39 @@ Collider::Collider(const unsigned short vertexCount,
       faceEdgeIndices{faceEdgeIndices}, ID{count++} {
   if (vertexCount > 256)
     throw FeatureRelatedException{
-        std::format("VERTEX COUNT ({}) EXCEEDS 256\n", vertexCount)};
+        std::format("VERTEX COUNT ({}) EXCEEDS 256", vertexCount)};
   if (coordinates.size() != vertexCount)
     throw FeatureRelatedException{std::format(
-        "COORDINATE SIZE DOES NOT EQUAL POLYHEDRON VERTEX COUNT ({} != {})\n",
+        "COORDINATE SIZE DOES NOT EQUAL POLYHEDRON VERTEX COUNT ({} != {})",
         coordinates.size(), vertexCount)};
   if (vertexEdgeIndices.size() != vertexCount)
     throw FeatureRelatedException{std::format(
-        "VERTEX-EDGE INDICES COUNT DOES NOT EQUAL VERTEX COUNT ({} != {})\n",
+        "VERTEX-EDGE INDICES COUNT DOES NOT EQUAL VERTEX COUNT ({} != {})",
         vertexEdgeIndices.size(), vertexCount)};
 
   if (edgeVertexIndices.size() != edgeFaceIndices.size())
     throw FeatureRelatedException{
         std::format("EDGE-VERTEX INDICES COUNT DOES NOT EQUAL EDGE-FACE "
-                    "INDICES COUNT ({} != {})\n",
+                    "INDICES COUNT ({} != {})",
                     edgeVertexIndices.size(), edgeFaceIndices.size())};
   if (edgeVertexIndices.size() > 256)
     throw FeatureRelatedException{
         std::format("EDGE COUNT OF EDGE-VERTEX INDICES ({}) EXCEEDS EDGE INDEX "
-                    "RANGE (256)\n",
+                    "RANGE (256)",
                     edgeVertexIndices.size())};
   if (edgeFaceIndices.size() > 256)
     throw FeatureRelatedException{std::format(
-        "EDGE COUNT OF EDGE-FACE INDICES ({}) EXCEEDS EDGE INDEX RANGE (256)\n",
+        "EDGE COUNT OF EDGE-FACE INDICES ({}) EXCEEDS EDGE INDEX RANGE (256)",
         edgeFaceIndices.size())};
 
   if (faceEdgeIndices.size() > 256)
     throw FeatureRelatedException{std::format(
-        "FACE COUNT OF FACE-EDGE INDICES ({}) EXCEEDS FACE INDEX RANGE (256)\n",
+        "FACE COUNT OF FACE-EDGE INDICES ({}) EXCEEDS FACE INDEX RANGE (256)",
         faceEdgeIndices.size())};
   if (faceEdgeIndices.size() != faceCount)
     throw FeatureRelatedException{
         std::format("FACE COUNT OF FACE-EDGE INDICES DOES NOT EQUAL FACE COUNT "
-                    "({} != {})\n",
+                    "({} != {})",
                     faceEdgeIndices.size(), faceCount)};
 
   vertices.reserve(coordinates.size());

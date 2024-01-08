@@ -8,6 +8,8 @@ import <map>;
 import <typeinfo>;
 import <typeindex>;
 
+import <string>;
+
 export enum GLPrimitive : unsigned int {
   POINTS = GL_POINTS,
   LINE_STRIP = GL_LINE_STRIP,
@@ -33,8 +35,8 @@ export enum GLNumeric : unsigned int {
   FLOAT = GL_FLOAT,
 };
 
-const std::map<std::type_index, GLNumeric> typeToMacro() {
-  static std::map<std::type_index, GLNumeric> map{
+const auto typeToMacro() {
+  const static std::map<std::type_index, GLNumeric> map{
       {typeid(GLbyte), GLNumeric::BYTE},
       {typeid(GLubyte), GLNumeric::UBYTE},
       {typeid(GLshort), GLNumeric::SHORT},
@@ -45,6 +47,16 @@ const std::map<std::type_index, GLNumeric> typeToMacro() {
   };
   return map;
 };
+
+export const std::string severityString(const GLenum severity) {
+  const static std::map<GLenum, std::string> map{
+      {GL_DEBUG_SEVERITY_HIGH, "SEVERITY HIGH"},
+      {GL_DEBUG_SEVERITY_MEDIUM, "SEVERITY MEDIUM"},
+      {GL_DEBUG_SEVERITY_LOW, "SEVERITY LOW"},
+      {GL_DEBUG_SEVERITY_NOTIFICATION, "SEVERITY NOTIFICATION"},
+  };
+  return map.at(severity);
+}
 
 export template <typename T> unsigned int macroOf() {
   return typeToMacro().at(typeid(T));

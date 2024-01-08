@@ -4,18 +4,16 @@ module;
 
 module wrapper.buffer_object;
 
+import util.debug;
+
 template <typename T> BufferObject<T>::~BufferObject() {
   glDeleteBuffers(1, &GLid);
-  // std::cout << std::format("buffer object {} deleted\n", ID);
 }
 template <typename T>
 void BufferObject<T>::allocateBufferObject(const GLsizeiptr size) {
   this->size = size;
   glCreateBuffers(1, &GLid);
-  glNamedBufferStorage(
-      GLid, size, NULL,
-      GL_DYNAMIC_STORAGE_BIT); // factories possibly initialized before?
-  // std::cout << std::format("buffer object {} allocated\n", ID);
+  glNamedBufferStorage(GLid, size, NULL, GL_DYNAMIC_STORAGE_BIT);
   markAsAllocated();
 }
 

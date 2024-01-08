@@ -5,7 +5,7 @@ import util.polyhedron;
 import util.rendering;
 
 export namespace Factory {
-class Simplex : Base {
+class Simplex : public Base {
 public:
   Simplex()
       : Base(4, 4, VEIndexList{{0, 2, 4}, {0, 1, 5}, {1, 2, 3}, {3, 4, 5}},

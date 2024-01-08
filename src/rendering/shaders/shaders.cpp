@@ -7,7 +7,7 @@ module rendering.shaders;
 void Shaders::Base::useProgram() const {
   if (not allocated)
     throw UnallocatedGLObjectUsageException{
-        std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION\n", GLid)};
+        std::format("PROGRAM {} WAS BOUND BEFORE INITIALIZATION", GLid)};
   glUseProgram(GLid);
 }
 

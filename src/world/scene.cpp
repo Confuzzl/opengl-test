@@ -8,7 +8,10 @@ import factory.global;
 import util.polyhedron;
 import util.debug;
 
-Scene::Scene() { std::cout << "scene constructing\n"; }
+import rendering.factory;
+import rendering.vertex_formats.types;
+
+Scene::Scene() { println("SCENE CONSTRUCTING"); }
 Scene::~Scene() = default;
 
 void Scene::start() {
@@ -24,27 +27,9 @@ void Scene::start() {
     for (auto &v : coordinates2)
       v /= 2;
 
-    auto &go1 =
-        GameObject::from<VertexFormats::_3D::Tex>(Factory::PRISM, coordinates2);
-
-    // auto &go1{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
-    // go1.translate({2, 0, 0});
-    // testObject = &go1;
-
-    // auto &aaa{GameObject::from(SIMPLEX_FACTORY, coordinates1)};
-    // aaa.translate({3, 0, 0});
-
-    // auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
-    // go2.translate({0, -2, 0});
-    // auto &go3{GameObject::from(PRISM_FACTORY, coordinates2)};
-    // go3.translate({0, 0, 2});
-    // auto &go4{GameObject::from(PRISM_FACTORY, coordinates2)};
-    // go4.translate({-2, 0, 0});
-    // auto &go5{GameObject::from(PRISM_FACTORY, coordinates2)};
-    // go5.translate({0, 0, -2});
-
-    // auto &go2{GameObject::from(PRISM_FACTORY, coordinates2)};
-    // go2.translate({0, -2, 0});
+    auto &go1 = GameObject::from<VertexFormats::_3D::Col>(Factory::SIMPLEX,
+                                                          coordinates1);
+    go1.translate({5, 0, 0});
   } catch (const std::runtime_error &e) {
     mainApp.catchException(e);
   }
