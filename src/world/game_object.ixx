@@ -41,9 +41,10 @@ private:
 
 template <VertexFormats::writable VertexFormat>
 Base &from(const Factory::Base &factory, const Vec3List &coordinates) {
-  UPtr<Base> object = std::make_unique<Base>(
-      Factory::createCollidable(factory, coordinates),
-      Factory::createRenderable<VertexFormat>(factory, coordinates));
+  auto collider = Factory::createCollidable(factory, coordinates);
+  auto render = Factory::createRenderable<VertexFormat>(factory, coordinates);
+  UPtr<Base> object =
+      std::make_unique<Base>(std::move(collider), std::move(render));
   return *object;
 }
 } // namespace GameObject

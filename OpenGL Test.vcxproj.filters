@@ -356,7 +356,7 @@
     <ClCompile Include="src\collision\broad\aabb.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\debugging.ixx">
+    <ClCompile Include="src\util\debug.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
