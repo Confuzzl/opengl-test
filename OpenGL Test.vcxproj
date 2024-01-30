@@ -123,6 +123,7 @@
       <ShowIncludes>false</ShowIncludes>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <PreprocessToFile>false</PreprocessToFile>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +143,7 @@
       <ShowIncludes>false</ShowIncludes>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessToFile>false</PreprocessToFile>
+      <EnableModules>false</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

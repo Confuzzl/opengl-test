@@ -26,7 +26,7 @@ export struct App {
     using std::runtime_error::runtime_error;
   };
 
-  static const unsigned int WIDTH = 1280, HEIGHT = 720;
+  static constexpr unsigned int WIDTH = 1280, HEIGHT = 720;
   static const Mat4 UI_MAT;
 
   GLFWwindow *window;
